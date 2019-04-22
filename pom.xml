@@ -37,4 +37,7 @@
         </plugins>
     </build> 
 
+	<modules>
+		<module>trucking-data-simulator</module>
+	</modules>
 </project>
