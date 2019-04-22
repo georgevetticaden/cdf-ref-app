@@ -4,6 +4,7 @@
  	<groupId>cloudera.cdf.refapp</groupId>
   	<artifactId>cdf-ref-app</artifactId>
   	<version>1.0.0-SNAPSHOT</version>
+  	<packaging>pom</packaging>
 
 	<build>
 		<finalName>cdf-ref-app</finalName>
