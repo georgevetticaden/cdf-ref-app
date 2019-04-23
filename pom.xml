@@ -5,6 +5,24 @@
   	<artifactId>cdf-ref-app</artifactId>
   	<version>1.0.0-SNAPSHOT</version>
   	<packaging>pom</packaging>
+  	
+	<properties>
+		<!-- <schema.registry.version>0.5.4.3.3.0.0-165</schema.registry.version>  -->
+		<schema.registry.version>0.7.0.3.4.0.0-155</schema.registry.version> 
+		<kafka.version>2.0.0.3.0.3.0-231</kafka.version>
+        <junit.version>4.5</junit.version>
+        <log4j2.version>2.6.2</log4j2.version>
+	</properties>  	
+	
+	
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>	
+	</dependencies>
 
 	<build>
 		<finalName>cdf-ref-app</finalName>
@@ -36,8 +54,43 @@
 		        
         </plugins>
     </build> 
+    
+	<repositories>
+		<repository>
+			<id>github-releases</id>
+			<url>http://oss.sonatype.org/content/repositories/github-releases/</url>
+		</repository>
+		<repository>
+			<id>clojars.org</id>
+			<url>http://clojars.org/repo</url>
+		</repository>
+        <repository>
+            <id>hortonworks</id>
+            <url>http://repo.hortonworks.com/content/repositories/releases/</url>
+        </repository>	
+       <!-- Need to add the followign public repo because of jetty 6.1.26.hwx compilation error -->		
+		<repository>
+			<id>hortonworks-public</id>
+			<name>Hortonworks Public</name>
+			<url>http://repo.hortonworks.com/content/groups/public/</url>
+		</repository>      
+		
+		<repository>
+            <id>hortonworks.repo</id>
+            <url>http://nexus-private.hortonworks.com/nexus/content/groups/public/</url>
+            <name>Hortonworks Repo</name>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>		
+           	
+	</repositories>    	    
 
 	<modules>
 		<module>trucking-data-simulator</module>
+		<module>csp-trucking-data-schema</module>
 	</modules>
 </project>

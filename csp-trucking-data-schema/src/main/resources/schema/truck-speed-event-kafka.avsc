@@ -1,0 +1,16 @@
+{
+   "type" : "record",
+   "namespace" : "hortonworks.hdf.schema.refapp.trucking",
+   "name" : "TruckSpeedEventEnriched",
+   "fields" : [
+      { "name" : "eventTime" , "type" : "string" },
+      { "name" : "eventTimeLong" , "type" : "long", "default": 0 },
+      { "name" : "eventSource" , "type" : "string" },
+      { "name" : "truckId" , "type" : "int" },
+      { "name" : "driverId" , "type" : "int"},
+      { "name" : "driverName" , "type" : "string"},
+      { "name" : "routeId" , "type" : "int"},
+      { "name" : "route" , "type" : "string"},
+      { "name" : "speed" , "type" : "int"}
+   ]
+}
