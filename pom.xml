@@ -92,5 +92,6 @@
 	<modules>
 		<module>trucking-data-simulator</module>
 		<module>csp-trucking-schema</module>
+		<module>csp-trucking-kafka</module>
 	</modules>
 </project>
