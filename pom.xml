@@ -7,9 +7,12 @@
   	<packaging>pom</packaging>
   	
 	<properties>
-		<!-- <schema.registry.version>0.5.4.3.3.0.0-165</schema.registry.version>  -->
 		<schema.registry.version>0.7.0.3.4.0.0-155</schema.registry.version> 
-		<kafka.version>2.0.0.3.0.3.0-231</kafka.version>
+		<!-- HDP Kafka Version. Commenting out so CDK version is used -->
+		<!-- <kafka.version>2.0.0.3.0.3.0-231</kafka.version> -->
+		
+		<!-- Kafka version from CDK 4.0 -->
+		<kafka.version>2.1.0-kafka-4.0.0</kafka.version> 
         <junit.version>4.5</junit.version>
         <log4j2.version>2.6.2</log4j2.version>
 	</properties>  	
@@ -64,6 +67,10 @@
 			<id>clojars.org</id>
 			<url>http://clojars.org/repo</url>
 		</repository>
+    	<repository>
+      		<id>cloudera</id>
+      		<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+    	</repository>
         <repository>
             <id>hortonworks</id>
             <url>http://repo.hortonworks.com/content/repositories/releases/</url>
