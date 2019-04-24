@@ -1,6 +1,6 @@
 {
    "type" : "record",
-   "namespace" : "hortonworks.hdf.schema.refapp.trucking",
+   "namespace" : "cloudera.cdf.csp.schema.refapp.trucking",
    "name" : "TruckGeoEvent",
    "fields" : [
       { "name" : "eventTime" , "type" : "string" },

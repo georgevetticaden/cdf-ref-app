@@ -7,12 +7,16 @@
   	<packaging>pom</packaging>
   	
 	<properties>
+	
+		<!-- Schema Registry Version. TODO: Need to update to CSP version once its in cloudera repo -->
 		<schema.registry.version>0.7.0.3.4.0.0-155</schema.registry.version> 
+		
 		<!-- HDP Kafka Version. Commenting out so CDK version is used -->
 		<!-- <kafka.version>2.0.0.3.0.3.0-231</kafka.version> -->
 		
 		<!-- Kafka version from CDK 4.0 -->
 		<kafka.version>2.1.0-kafka-4.0.0</kafka.version> 
+		
         <junit.version>4.5</junit.version>
         <log4j2.version>2.6.2</log4j2.version>
 	</properties>  	

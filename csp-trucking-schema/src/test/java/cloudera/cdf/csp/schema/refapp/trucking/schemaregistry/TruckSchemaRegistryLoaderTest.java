@@ -1,4 +1,4 @@
-package cloudera.cdf.csp.refapp.trucking.schema;
+package cloudera.cdf.csp.schema.refapp.trucking.schemaregistry;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +20,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.junit.Before;
 import org.junit.Test;
+
+import cloudera.cdf.csp.schema.refapp.trucking.schemaregistry.TruckSchemaConfig;
+import cloudera.cdf.csp.schema.refapp.trucking.schemaregistry.TruckSchemaRegistryLoader;
 
 import com.hortonworks.registries.schemaregistry.SchemaBranch;
 import com.hortonworks.registries.schemaregistry.SchemaCompatibility;

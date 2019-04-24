@@ -11,7 +11,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.header.Header;
 
-import cloudera.cdf.csp.refapp.trucking.schema.TruckSchemaConfig;
+import cloudera.cdf.csp.schema.refapp.trucking.schemaregistry.TruckSchemaConfig;
 import cloudera.cdf.refapp.trucking.simulator.domain.SecurityType;
 import cloudera.cdf.refapp.trucking.simulator.domain.transport.EventSourceType;
 import cloudera.cdf.refapp.trucking.simulator.domain.transport.MobileEyeEvent;

@@ -1,4 +1,4 @@
-package cloudera.cdf.csp.refapp.trucking.schema;
+package cloudera.cdf.csp.schema.refapp.trucking.schemaregistry;
 
 public  final class TruckSchemaConfig {
 	
