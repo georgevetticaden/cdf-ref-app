@@ -38,6 +38,7 @@ public class DriverAverageSpeedConsumer extends BaseConsumerClient {
 	
 	public void consume() {
 		try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs)) {
+			LOGGER.info("Starting driver-average-speed-consumer..");
             consumer.subscribe(Collections.singleton(DRIVER_AVG_SPEED_TOPIC));
             while (true) {
                 final ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofSeconds(1));

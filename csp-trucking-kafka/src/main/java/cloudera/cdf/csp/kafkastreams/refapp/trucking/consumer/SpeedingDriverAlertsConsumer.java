@@ -37,6 +37,7 @@ public class SpeedingDriverAlertsConsumer extends BaseConsumerClient {
 	
 	public void consume() {
 		try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs)) {
+			LOGGER.info("Starting speeding-driver-alerts-consumer..");
             consumer.subscribe(Collections.singleton(TEMP_TRUCK_STREAMS_TOPIC));
             while (true) {
                 final ConsumerRecords<String, String> consumerRecords = consumer.poll(Duration.ofSeconds(1));
