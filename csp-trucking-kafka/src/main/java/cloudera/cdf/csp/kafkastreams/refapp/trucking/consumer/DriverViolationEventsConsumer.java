@@ -49,7 +49,9 @@ public class DriverViolationEventsConsumer extends BaseConsumerClient {
                 	LOGGER.info("Key["+record.key()+"],temp value is: " + recordValue);
                 }
             }
-        }		
+        } catch (Exception e) {
+        	LOGGER.error(e.getMessage(), e);
+        }
 	}
 
 }
