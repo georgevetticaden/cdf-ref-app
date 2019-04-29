@@ -92,7 +92,7 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
 			final Callback callback = new MyProducerCallback();
 			Iterable<Header> kafkaHeaders = createKafkaHeaderWithSchema(TruckSchemaConfig.KAFKA_RAW_TRUCK_SPEED_EVENT_SCHEMA_NAME);
 			ProducerRecord<String, String> data = new ProducerRecord<String, String>(this.topicName, null, driverId, eventToPass, kafkaHeaders);
-			logger.debug("Truck Speed Kafka Record with Header is: " + data);
+			logger.debug("Truck Speed Kafka Record with Header is : " + data);
 			kafkaProducer.send(data, callback);			
 		} catch (Exception e) {
 			logger.error("Error sending csv geo event[" + eventToPass + "] to  Kafka topic["+this.topicName+"]", e);
