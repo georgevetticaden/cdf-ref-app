@@ -1814,7 +1814,7 @@ Use ConsumeKafkaRecord do the following
                             <id>4987be64-af9e-3926-0000-000000000000</id>
                             <parentGroupId>472eccd0-3f7a-34c8-0000-000000000000</parentGroupId>
                             <position>
-<x>948.683349609377</x>
+<x>881.7264404296895</x>
 <y>343.8782943512781</y>
                             </position>
                             <bundle>
@@ -2771,7 +2771,7 @@ Use ConsumeKafkaRecord do the following
 <properties>
     <entry>
         <key>bootstrap.servers</key>
-        <value>j-dps-connected-dp11.field.hortonworks.com:6667,j-dps-connected-dp12.field.hortonworks.com:6667,j-dps-connected-dp13.field.hortonworks.com:6667</value>
+        <value>vett10-secure-cdh5.field.hortonworks.com:9092,vett10-secure-cdh6.field.hortonworks.com:9092,vett10-secure-cdh7.field.hortonworks.com:9092</value>
     </entry>
     <entry>
         <key>topic</key>
@@ -3024,7 +3024,7 @@ Use ConsumeKafkaRecord do the following
 <properties>
     <entry>
         <key>bootstrap.servers</key>
-        <value>j-dps-connected-dp11.field.hortonworks.com:6667,j-dps-connected-dp12.field.hortonworks.com:6667,j-dps-connected-dp13.field.hortonworks.com:6667</value>
+        <value>vett10-secure-cdh5.field.hortonworks.com:9092,vett10-secure-cdh6.field.hortonworks.com:9092,vett10-secure-cdh7.field.hortonworks.com:9092</value>
     </entry>
     <entry>
         <key>topic</key>
@@ -3277,7 +3277,7 @@ Use ConsumeKafkaRecord do the following
 <properties>
     <entry>
         <key>bootstrap.servers</key>
-        <value>j-dps-connected-dp11.field.hortonworks.com:6667,j-dps-connected-dp12.field.hortonworks.com:6667,j-dps-connected-dp13.field.hortonworks.com:6667</value>
+        <value>vett10-secure-cdh5.field.hortonworks.com:9092,vett10-secure-cdh6.field.hortonworks.com:9092,vett10-secure-cdh7.field.hortonworks.com:9092</value>
     </entry>
     <entry>
         <key>topic</key>
@@ -3530,7 +3530,7 @@ Use ConsumeKafkaRecord do the following
 <properties>
     <entry>
         <key>bootstrap.servers</key>
-        <value>j-dps-connected-dp11.field.hortonworks.com:6667,j-dps-connected-dp12.field.hortonworks.com:6667,j-dps-connected-dp13.field.hortonworks.com:6667</value>
+        <value>vett10-secure-cdh5.field.hortonworks.com:9092,vett10-secure-cdh6.field.hortonworks.com:9092,vett10-secure-cdh7.field.hortonworks.com:9092</value>
     </entry>
     <entry>
         <key>topic</key>
@@ -3638,5 +3638,5 @@ Use ConsumeKafkaRecord do the following
             <variables/>
         </processGroups>
     </snippet>
-    <timestamp>04/30/2019 16:56:58 UTC</timestamp>
+    <timestamp>05/01/2019 00:30:35 UTC</timestamp>
 </template>
