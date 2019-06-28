@@ -57,7 +57,7 @@ public class TruckSchemaRegistryLoader {
 	}
 	
 	/**
-	 * Loads the schema registry with all data required for the HDF Trucking Reference Application
+	 * Loads the schema registry with all data required for the CDF Trucking Reference Application
 	 */
 	public void loadSchemaRegistry() {
 		try {
