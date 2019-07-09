@@ -105,5 +105,6 @@
 		<module>csp-trucking-schema</module>
 		<module>csp-trucking-kafka</module>
 		<module>cfm-trucking-nifi</module>
+		<module>csp-trucking-flink</module>
 	</modules>
 </project>
