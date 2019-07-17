@@ -197,6 +197,92 @@ else
     --replication-factor 2 \
     --partitions 3 \
     --topic gateway-speed-raw-sensor;      
+    
+     	/usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic gateway-freightliner-sensors;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic gateway-tata-sensors;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic gateway-mack-sensors;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic gateway-benz-sensors;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-tata-speed;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-tata-geo;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-mack-speed;
+        
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-mack-geo;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-freightliner-speed;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-freightliner-geo;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-benz-speed;
+
+        /usr/bin/kafka-topics \
+        --create \
+        --zookeeper $1 \
+        --replication-factor 2 \
+        --partitions 3 \
+        --topic syndicate-benz-geo;
+       	    
        	
 				
 fi
