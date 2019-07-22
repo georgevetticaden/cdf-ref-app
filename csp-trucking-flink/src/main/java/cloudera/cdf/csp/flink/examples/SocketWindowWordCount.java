@@ -8,17 +8,24 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 public class SocketWindowWordCount {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SocketWindowWordCount.class);
+			
     public static void main(String[] args) throws Exception {
 
+    	LOG.info("About to start the Modifieid SocketWindowWordCount App");
+    	
         // the port to connect to
         final int port;
         try {
             final ParameterTool params = ParameterTool.fromArgs(args);
             port = params.getInt("port");
         } catch (Exception e) {
-            System.err.println("No port specified. Please run 'SocketWindowWordCount --port <port>'");
+            System.err.println("No port specified. Modified. Please run 'SocketWindowWordCount --port <port>'");
             return;
         }
 
@@ -33,6 +40,7 @@ public class SocketWindowWordCount {
             .flatMap(new FlatMapFunction<String, WordWithCount>() {
                 @Override
                 public void flatMap(String value, Collector<WordWithCount> out) {
+                	LOG.info("Line retrieved from socket is: " + value);
                     for (String word : value.split("\\s")) {
                         out.collect(new WordWithCount(word, 1L));
                     }
@@ -43,7 +51,9 @@ public class SocketWindowWordCount {
             .reduce(new ReduceFunction<WordWithCount>() {
                 @Override
                 public WordWithCount reduce(WordWithCount a, WordWithCount b) {
-                    return new WordWithCount(a.word, a.count + b.count);
+                	WordWithCount wordWithCount = new WordWithCount(a.word, a.count + b.count);
+                	LOG.info("Calling reduce, wordWithCount is: " + wordWithCount);
+                    return wordWithCount ;
                 }
             });
 
