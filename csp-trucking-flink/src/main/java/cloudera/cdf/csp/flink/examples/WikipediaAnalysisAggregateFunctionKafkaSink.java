@@ -2,10 +2,12 @@ package cloudera.cdf.csp.flink.examples;
 
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -20,13 +22,23 @@ import org.slf4j.LoggerFactory;
 public class WikipediaAnalysisAggregateFunctionKafkaSink {
 
 	private static final Logger LOG = LoggerFactory.getLogger(WikipediaAnalysisAggregateFunctionKafkaSink.class);
-	private static final String KAFKA_TOPIC_FLINK_SINK = "flink-test-sink";
-	private static final String KAFKA_BROKER_LIST = "ec2-54-213-148-193.us-west-2.compute.amazonaws.com:6667,ec2-18-236-246-247.us-west-2.compute.amazonaws.com:6667,ec2-52-43-50-103.us-west-2.compute.amazonaws.com:6667";
-	private static final String KAFKA_PRODUCER_NAME = "flink-app-wikipedia-analysis";
-	
+
     public static void main(String[] args) throws Exception {
 
     	LOG.info("starting wiki job..");
+    	
+
+        final ParameterTool params = ParameterTool.fromArgs(args);
+        
+        final String kafkaTopicName = params.get("kafka-topic-name");
+        final String kafkaBootstrapUrl = params.get("kafka-bootstrap-url");
+        final String kafkaProducerName = params.get("kafka-producer-name");
+            
+        if(StringUtils.isEmpty(kafkaTopicName) || StringUtils.isEmpty(kafkaBootstrapUrl) || StringUtils.isEmpty(kafkaProducerName)) {
+            System.err.println("No kafkaTopicName or kafkaBootstrapUrl or kafkaProducerName specified. Please run 'WikipediaAnalysisAggregateFunctionKafkaSink --kafka-topic-name <kafkaTopicName --kafka-bootstrap-url <kafkaBootstrapUrl> --kafka-producer-name <kafkaProducerName> '");
+            return;
+        }
+        
     	StreamExecutionEnvironment see = StreamExecutionEnvironment.getExecutionEnvironment();
     	
     	DataStream<WikipediaEditEvent> edits = see.addSource(new WikipediaEditsSource());
@@ -50,7 +62,7 @@ public class WikipediaAnalysisAggregateFunctionKafkaSink {
                 return tuple.toString();
             }
         })
-        .addSink(new FlinkKafkaProducer(KAFKA_TOPIC_FLINK_SINK,  new SimpleStringSchema(), createKafkaProducerConfig()));
+        .addSink(new FlinkKafkaProducer(kafkaTopicName, new SimpleStringSchema(), createKafkaProducerConfig(kafkaBootstrapUrl, kafkaProducerName)));
     	
     	
     	result.print();
@@ -60,9 +72,9 @@ public class WikipediaAnalysisAggregateFunctionKafkaSink {
 
     }
 
-	private static Properties createKafkaProducerConfig() {
+	private static Properties createKafkaProducerConfig(String brokerUrl, String producerName) {
         Properties props = new Properties();
-        props.put("bootstrap.servers", KAFKA_BROKER_LIST);
+        props.put("bootstrap.servers", brokerUrl);
 
         props.put("acks", "1");
         
@@ -72,7 +84,7 @@ public class WikipediaAnalysisAggregateFunctionKafkaSink {
 //        props.put("value.serializer", 
 //                "org.apache.kafka.common.serialization.StringSerializer");   
         
-        props.put(CommonClientConfigs.CLIENT_ID_CONFIG, KAFKA_PRODUCER_NAME);
+        props.put(CommonClientConfigs.CLIENT_ID_CONFIG, producerName);
         return props;
 	}
     
