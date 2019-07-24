@@ -17,7 +17,11 @@ import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+/**
+ * Cloudera Streaming Analytics (CSA) Reference application for Flink as part of Cloudera DataFlow Platform (CDF)
+ * @author gvetticaden
+ *
+ */
 public class TruckingStreamingAnalticsFlinkRefApp {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TruckingStreamingAnalticsFlinkRefApp.class);
