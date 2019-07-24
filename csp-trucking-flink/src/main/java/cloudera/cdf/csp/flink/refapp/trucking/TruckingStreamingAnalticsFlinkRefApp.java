@@ -3,6 +3,7 @@ package cloudera.cdf.csp.flink.refapp.trucking;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
@@ -46,10 +47,30 @@ public class TruckingStreamingAnalticsFlinkRefApp {
     	DataStream<ObjectNode> geoSpeedJoinedStream = joinStreams(geoStream,
 				speedStream);
 		
-    	//print the joined streams
-		geoSpeedJoinedStream.print();
+		/* filter the the joinStream */
+		DataStream<ObjectNode> filteredStream =  filterStream(geoSpeedJoinedStream);
+		
+    	//print the filtered joined stream
+		filteredStream.print();		
     	
     	see.execute();
+	}
+
+
+
+	private static DataStream<ObjectNode> filterStream(DataStream<ObjectNode> geoSpeedJoinedStream) {
+		FilterFunction<ObjectNode> filter = new FilterFunction<ObjectNode>() {
+
+			private static final long serialVersionUID = -8965164867642656170L;
+
+			@Override
+			public boolean filter(ObjectNode joinedStream) throws Exception {
+				String eventType = joinedStream.get("value").get("eventType").asText();
+				return !"Normal".equals(eventType);
+			}
+		};
+		DataStream<ObjectNode> filteredGeoStream = geoSpeedJoinedStream.filter(filter).name("Filtered Stream for Violation Events");
+		return filteredGeoStream;
 	}
 
 
@@ -61,7 +82,7 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 		DataStream<ObjectNode> geoSpeedJoinedStream = geoStream.keyBy(keySelector)
     			 .intervalJoin(speedStream.keyBy(keySelector))
     			 .between(Time.milliseconds(0), Time.milliseconds(1500))
-    			 .process(processJoinFunction);
+    			 .process(processJoinFunction).name("Stream Join using Interval Join");
 		return geoSpeedJoinedStream;
 	}
 
