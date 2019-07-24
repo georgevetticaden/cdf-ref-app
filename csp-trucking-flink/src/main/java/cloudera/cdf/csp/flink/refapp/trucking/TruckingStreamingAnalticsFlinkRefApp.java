@@ -26,44 +26,77 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 	
 	public static void main(String[] args) throws Exception {
         final ParameterTool params = ParameterTool.fromArgs(args);
-        
   
-        if(StringUtils.isEmpty(params.get("bootstrap.servers")) ) {
-            LOG.error("No  kafkaBootstrapUrl  specified. Please run 'TruckingStreamingAnalticsRefApp  --bootstrap.servers <kafkaBootstrapUrl>  '");
-            return;
-        }        
+        validateArgs(params);        
 
-    	StreamExecutionEnvironment see = StreamExecutionEnvironment.getExecutionEnvironment();
-    	see.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+    	StreamExecutionEnvironment see = createFlinkExecutionEnv();
     	
         //create Geo Stream Source
-    	FlinkKafkaConsumer<ObjectNode> geoStreamSource = constructGeoEventSource(params.getProperties());
-    	geoStreamSource.setStartFromLatest();
-    	DataStream<ObjectNode> geoStream = see.addSource(geoStreamSource, "TruckGeoStream");
+    	DataStream<ObjectNode> geoStream = createGeoStreamSource(params, see);
     	
     	/* create the Speed Stream Source */
-    	FlinkKafkaConsumer<ObjectNode> speedStreamSource = constructSpeedEventSource(params.getProperties());
-    	speedStreamSource.setStartFromLatest();
-    	DataStream<ObjectNode> speedStream = see.addSource(speedStreamSource, "SpeedGeoStream");
-    	
-    	//print the geoStream and speedStream
-    	//geoStream.print();
-    	//speedStream.print();
+    	DataStream<ObjectNode> speedStream = createSpeedStreamSource(params, see);
     	
 		
 		/* join the streams */
-    	KeySelector<ObjectNode, Integer> keySelector = createKeySelector();
+    	DataStream<ObjectNode> geoSpeedJoinedStream = joinStreams(geoStream,
+				speedStream);
+		
+    	//print the joined streams
+		geoSpeedJoinedStream.print();
+    	
+    	see.execute();
+	}
+
+
+
+	private static DataStream<ObjectNode> joinStreams(
+			DataStream<ObjectNode> geoStream, DataStream<ObjectNode> speedStream) {
+		KeySelector<ObjectNode, Integer> keySelector = createKeySelector();
     	ProcessJoinFunction<ObjectNode, ObjectNode, ObjectNode > processJoinFunction = createProcessJoinFunction();
 		DataStream<ObjectNode> geoSpeedJoinedStream = geoStream.keyBy(keySelector)
     			 .intervalJoin(speedStream.keyBy(keySelector))
     			 .between(Time.milliseconds(0), Time.milliseconds(1500))
     			 .process(processJoinFunction);
-		
-		geoSpeedJoinedStream.print();
-    	
-    	see.execute();
-    	
-        
+		return geoSpeedJoinedStream;
+	}
+
+
+
+	private static DataStream<ObjectNode> createSpeedStreamSource(final ParameterTool params,
+			StreamExecutionEnvironment see) {
+		FlinkKafkaConsumer<ObjectNode> speedStreamSource = constructSpeedEventSource(params.getProperties());
+    	speedStreamSource.setStartFromLatest();
+    	DataStream<ObjectNode> speedStream = see.addSource(speedStreamSource, "SpeedGeoStream");
+		return speedStream;
+	}
+
+
+
+	private static DataStream<ObjectNode> createGeoStreamSource(final ParameterTool params,
+			StreamExecutionEnvironment see) {
+		FlinkKafkaConsumer<ObjectNode> geoStreamSource = constructGeoEventSource(params.getProperties());
+    	geoStreamSource.setStartFromLatest();
+    	DataStream<ObjectNode> geoStream = see.addSource(geoStreamSource, "TruckGeoStream");
+		return geoStream;
+	}
+
+
+
+	private static StreamExecutionEnvironment createFlinkExecutionEnv() {
+		StreamExecutionEnvironment see = StreamExecutionEnvironment.getExecutionEnvironment();
+    	see.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+		return see;
+	}
+
+
+
+	private static void validateArgs(final ParameterTool params) {
+		if(StringUtils.isEmpty(params.get("bootstrap.servers")) ) {
+			String errMsg = "No  kafkaBootstrapUrl  specified. Please run 'TruckingStreamingAnalticsRefApp  --bootstrap.servers <kafkaBootstrapUrl>  '";
+            LOG.error(errMsg);
+            throw new RuntimeException(errMsg);
+        }
 	}
 
 
