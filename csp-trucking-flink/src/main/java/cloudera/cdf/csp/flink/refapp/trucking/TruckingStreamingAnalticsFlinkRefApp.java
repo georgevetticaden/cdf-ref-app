@@ -1,12 +1,16 @@
 package cloudera.cdf.csp.flink.refapp.trucking;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.api.common.functions.FilterFunction;
+import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.utils.ParameterTool;
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -17,6 +21,7 @@ import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrderness
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer;
 import org.apache.flink.streaming.util.serialization.JSONKeyValueDeserializationSchema;
 import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
@@ -34,7 +39,10 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TruckingStreamingAnalticsFlinkRefApp.class);
 	private static final String SOURCE_GEO_STREAM_TOPIC = "syndicate-geo-event-json";	
-	private static final String SOURCE_SPEED_STREAM_TOPIC = "syndicate-speed-event-json";	
+	private static final String SOURCE_SPEED_STREAM_TOPIC = "syndicate-speed-event-json";
+	private static final String SINK_ALERTS_SPEEDING_DRIVER_TOPIC= "alerts-speeding-drivers";
+	
+	protected static final double HIGH_SPEED = 80;	
 	
 	public static void main(String[] args) throws Exception {
         final ParameterTool params = ParameterTool.fromArgs(args);
@@ -66,10 +74,24 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 					  .window(TumblingEventTimeWindows.of(Time.minutes(3)))
 					  .aggregate(new DriverAverageSpeedAggregateFunction());
 							  
+		/* Filter for Speeding Drivers */
+		DataStream<DriverSpeedAvgValue> filteredSpeedingDrivers = filterStreamForSpeedingDrivers(driverAvgSpeedStream);
 		
-    	//print the driverAverageSpeedStream
-		driverAvgSpeedStream.print();		
+		
+		/* Publish Speeding Drivers to Kafka Topic */
+		DataStream<String> filteredSpeedingDriversString = filteredSpeedingDrivers.map(new MapFunction<DriverSpeedAvgValue, String>() {
+
+			private static final long serialVersionUID = -6828758780853422014L;
+
+			@Override
+			public String map(DriverSpeedAvgValue value) throws Exception {
+				return new ObjectMapper().writeValueAsString(value);
+			}
+		});
+		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params.getProperties())).name("Kafka Speeding Drivers Alert");
     	
+		filteredSpeedingDriversString.print();
+		
     	see.execute();
 	}
 
@@ -103,6 +125,19 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 		return filteredGeoStream;
 	}
 
+	private static DataStream<DriverSpeedAvgValue> filterStreamForSpeedingDrivers(DataStream<DriverSpeedAvgValue> driverSpeedAverageStream) {
+		FilterFunction<DriverSpeedAvgValue> filter = new FilterFunction<DriverSpeedAvgValue>() {
+
+			private static final long serialVersionUID = -6594353756761484254L;
+
+			@Override
+			public boolean filter(DriverSpeedAvgValue value) throws Exception {
+				return value.getSpeed_avg() > HIGH_SPEED;
+			}
+		};
+		DataStream<DriverSpeedAvgValue> highSpeedingDriversStreams = driverSpeedAverageStream.filter(filter).name("Filtering Stream for Speeding Drivers");
+		return highSpeedingDriversStreams;
+	}	
 
 
 	private static DataStream<ObjectNode> joinStreams(
@@ -122,7 +157,7 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 			StreamExecutionEnvironment see) {
 		FlinkKafkaConsumer<ObjectNode> speedStreamSource = constructSpeedEventSource(params.getProperties());
     	speedStreamSource.setStartFromLatest();
-    	DataStream<ObjectNode> speedStream = see.addSource(speedStreamSource, "SpeedGeoStream");
+    	DataStream<ObjectNode> speedStream = see.addSource(speedStreamSource, "Kafka SpeedGeoStream");
 		return speedStream;
 	}
 
@@ -132,7 +167,7 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 			StreamExecutionEnvironment see) {
 		FlinkKafkaConsumer<ObjectNode> geoStreamSource = constructGeoEventSource(params.getProperties());
     	geoStreamSource.setStartFromLatest();
-    	DataStream<ObjectNode> geoStream = see.addSource(geoStreamSource, "TruckGeoStream");
+    	DataStream<ObjectNode> geoStream = see.addSource(geoStreamSource, "Kafka TruckGeoStream");
 		return geoStream;
 	}
 
@@ -213,5 +248,13 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 
 		FlinkKafkaConsumer<ObjectNode> geoSource = new FlinkKafkaConsumer<ObjectNode>(SOURCE_GEO_STREAM_TOPIC, jsonDeserializer, props);
 		return geoSource;
+	}
+	
+	public static  FlinkKafkaProducer<String> constructSpeedingDriversKafkaSink(Properties props) {
+		
+		//add additional Kafka properties
+		props.put("client.id", "flink-streaming-analytics-app");
+		FlinkKafkaProducer<String> flinkKafkaProducer = new FlinkKafkaProducer<String>(SINK_ALERTS_SPEEDING_DRIVER_TOPIC, new SimpleStringSchema(), props);
+		return flinkKafkaProducer;
 	}
 }
