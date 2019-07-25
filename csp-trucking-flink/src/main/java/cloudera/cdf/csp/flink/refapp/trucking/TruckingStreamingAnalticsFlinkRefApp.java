@@ -1,5 +1,6 @@
 package cloudera.cdf.csp.flink.refapp.trucking;
 
+import java.sql.Timestamp;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,13 +11,19 @@ import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.Obje
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks;
 import org.apache.flink.streaming.api.functions.co.ProcessJoinFunction;
+import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.streaming.util.serialization.JSONKeyValueDeserializationSchema;
 import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cloudera.cdf.csp.flink.refapp.trucking.aggregrator.DriverAverageSpeedAggregateFunction;
+import cloudera.cdf.csp.flink.refapp.trucking.aggregrator.DriverSpeedAvgValue;
 
 /**
  * Cloudera Streaming Analytics (CSA) Reference application for Flink as part of Cloudera DataFlow Platform (CDF)
@@ -50,13 +57,36 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 		/* filter the the joinStream */
 		DataStream<ObjectNode> filteredStream =  filterStream(geoSpeedJoinedStream);
 		
-    	//print the filtered joined stream
-		filteredStream.print();		
+			
+		/* Calculate average speed of driver */
+		KeySelector<ObjectNode, Integer> keySelector = createKeySelector();
+		DataStream<DriverSpeedAvgValue> driverAvgSpeedStream = filteredStream
+					  .assignTimestampsAndWatermarks(createTimestampAndWatermarkAssigner2())
+					  .keyBy(keySelector)
+					  .window(TumblingEventTimeWindows.of(Time.minutes(3)))
+					  .aggregate(new DriverAverageSpeedAggregateFunction());
+							  
+		
+    	//print the driverAverageSpeedStream
+		driverAvgSpeedStream.print();		
     	
     	see.execute();
 	}
 
 
+	
+	private static AssignerWithPeriodicWatermarks<ObjectNode> createTimestampAndWatermarkAssigner2() {
+		return new BoundedOutOfOrdernessTimestampExtractor<ObjectNode> (Time.seconds(5)) {
+
+			private static final long serialVersionUID = -7309986872515747306L;
+
+			@Override
+			public long extractTimestamp(ObjectNode element) {
+				long eventTime =  element.get("value").get("eventTimeLong").longValue();
+				return eventTime;
+			}
+		};
+	}
 
 	private static DataStream<ObjectNode> filterStream(DataStream<ObjectNode> geoSpeedJoinedStream) {
 		FilterFunction<ObjectNode> filter = new FilterFunction<ObjectNode>() {
