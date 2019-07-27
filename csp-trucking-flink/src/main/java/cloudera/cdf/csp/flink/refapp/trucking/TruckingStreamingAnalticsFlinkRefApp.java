@@ -92,7 +92,7 @@ public class TruckingStreamingAnalticsFlinkRefApp {
     	
 		filteredSpeedingDriversString.print();
 		
-    	see.execute();
+    	see.execute("Trucking Streaming Anlaytics Flink App");
 	}
 
 
