@@ -59,7 +59,7 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 		/* join the streams */
     	DataStream<ObjectNode> geoSpeedJoinedStream = joinStreams(geoStream,
 				speedStream);
-
+    	
 		/* Calculate average speed of driver */
 		KeySelector<ObjectNode, Integer> keySelector = createKeySelector();
 		DataStream<DriverSpeedAvgValue> driverAvgSpeedStream = geoSpeedJoinedStream
@@ -82,8 +82,9 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 			}
 		});		
 		
-		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params.getProperties())).name("Kafka Speeding Drivers Alert");
 		filteredSpeedingDriversString.print();
+		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params.getProperties())).name("Kafka Speeding Drivers Alert");
+		
 
     	see.execute("Trucking Streaming Anlaytics Flink App");
 	}
@@ -126,7 +127,7 @@ public class TruckingStreamingAnalticsFlinkRefApp {
     	ProcessJoinFunction<ObjectNode, ObjectNode, ObjectNode > processJoinFunction = createProcessJoinFunction();
 		DataStream<ObjectNode> geoSpeedJoinedStream = geoStream.keyBy(keySelector)
     			 .intervalJoin(speedStream.keyBy(keySelector))
-    			 .between(Time.milliseconds(0), Time.milliseconds(1500))
+    			 .between(Time.milliseconds(-500), Time.milliseconds(500))
     			 .process(processJoinFunction).name("Stream Join using Interval Join");
 		return geoSpeedJoinedStream;
 	}
