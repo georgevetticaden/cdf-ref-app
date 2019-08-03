@@ -1,7 +1,5 @@
 package cloudera.cdf.csp.flink.refapp.trucking;
 
-import java.sql.Timestamp;
-import java.util.Optional;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
@@ -61,14 +59,10 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 		/* join the streams */
     	DataStream<ObjectNode> geoSpeedJoinedStream = joinStreams(geoStream,
 				speedStream);
-		
-		/* filter the the joinStream */
-		DataStream<ObjectNode> filteredStream =  filterStream(geoSpeedJoinedStream);
-		
-			
+
 		/* Calculate average speed of driver */
 		KeySelector<ObjectNode, Integer> keySelector = createKeySelector();
-		DataStream<DriverSpeedAvgValue> driverAvgSpeedStream = filteredStream
+		DataStream<DriverSpeedAvgValue> driverAvgSpeedStream = geoSpeedJoinedStream
 					  .assignTimestampsAndWatermarks(createTimestampAndWatermarkAssigner2())
 					  .keyBy(keySelector)
 					  .window(TumblingEventTimeWindows.of(Time.minutes(3)))
@@ -76,7 +70,6 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 							  
 		/* Filter for Speeding Drivers */
 		DataStream<DriverSpeedAvgValue> filteredSpeedingDrivers = filterStreamForSpeedingDrivers(driverAvgSpeedStream);
-		
 		
 		/* Publish Speeding Drivers to Kafka Topic */
 		DataStream<String> filteredSpeedingDriversString = filteredSpeedingDrivers.map(new MapFunction<DriverSpeedAvgValue, String>() {
@@ -87,11 +80,11 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 			public String map(DriverSpeedAvgValue value) throws Exception {
 				return new ObjectMapper().writeValueAsString(value);
 			}
-		});
-		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params.getProperties())).name("Kafka Speeding Drivers Alert");
-    	
-		filteredSpeedingDriversString.print();
+		});		
 		
+		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params.getProperties())).name("Kafka Speeding Drivers Alert");
+		filteredSpeedingDriversString.print();
+
     	see.execute("Trucking Streaming Anlaytics Flink App");
 	}
 
@@ -110,20 +103,7 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 		};
 	}
 
-	private static DataStream<ObjectNode> filterStream(DataStream<ObjectNode> geoSpeedJoinedStream) {
-		FilterFunction<ObjectNode> filter = new FilterFunction<ObjectNode>() {
 
-			private static final long serialVersionUID = -8965164867642656170L;
-
-			@Override
-			public boolean filter(ObjectNode joinedStream) throws Exception {
-				String eventType = joinedStream.get("value").get("eventType").asText();
-				return !"Normal".equals(eventType);
-			}
-		};
-		DataStream<ObjectNode> filteredGeoStream = geoSpeedJoinedStream.filter(filter).name("Filtered Stream for Violation Events");
-		return filteredGeoStream;
-	}
 
 	private static DataStream<DriverSpeedAvgValue> filterStreamForSpeedingDrivers(DataStream<DriverSpeedAvgValue> driverSpeedAverageStream) {
 		FilterFunction<DriverSpeedAvgValue> filter = new FilterFunction<DriverSpeedAvgValue>() {
@@ -202,7 +182,6 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 					ObjectNode speedStream,
 					ProcessJoinFunction<ObjectNode, ObjectNode, ObjectNode>.Context context,
 					Collector<ObjectNode> collector) throws Exception {
-				//LOG.info("In Process element, geoStream is: " + geoStream + " and speedStream is: " + speedStream);
 				geoStream.put("speed", speedStream.get("value").get("speed").asInt());
 				collector.collect(geoStream);
 				
@@ -228,33 +207,57 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 
 	private static FlinkKafkaConsumer<ObjectNode> constructSpeedEventSource(
 			Properties props) {
-		//add additional Kafka properties
-		props.put("group.id", "flink-truck-analytics-speed-consumer");
+		
+		//Create new properties object and add additional props
+		Properties speedEventSourceProps = new Properties();
+		speedEventSourceProps.putAll(props);
+		speedEventSourceProps.put("group.id", "flink-truck-speed-consumer");
 		
 		//create json deserializer. TODO: Replace when SR Integration is complete
 		JSONKeyValueDeserializationSchema jsonDeserializer = new JSONKeyValueDeserializationSchema(true);
 
-		FlinkKafkaConsumer<ObjectNode> speedSource = new FlinkKafkaConsumer<ObjectNode>(SOURCE_SPEED_STREAM_TOPIC, jsonDeserializer, props);
+		FlinkKafkaConsumer<ObjectNode> speedSource = new FlinkKafkaConsumer<ObjectNode>(SOURCE_SPEED_STREAM_TOPIC, jsonDeserializer, speedEventSourceProps);
 		return speedSource;
 	}
 
 	private static FlinkKafkaConsumer<ObjectNode> constructGeoEventSource(Properties props) {
 		
-		//add additional Kafka properties
-		props.put("group.id", "flink-truck-analytics-geo-consumer");
+		//Create new properties object and add additional props
+		Properties geoEventSourceProps = new Properties();
+		geoEventSourceProps.putAll(props);
+		geoEventSourceProps.put("group.id", "flink-truck-geo-consumer");
 		
 		//create json deserializer. TODO: Replace when SR Integration is complete
 		JSONKeyValueDeserializationSchema jsonDeserializer = new JSONKeyValueDeserializationSchema(true);
 
-		FlinkKafkaConsumer<ObjectNode> geoSource = new FlinkKafkaConsumer<ObjectNode>(SOURCE_GEO_STREAM_TOPIC, jsonDeserializer, props);
+		FlinkKafkaConsumer<ObjectNode> geoSource = new FlinkKafkaConsumer<ObjectNode>(SOURCE_GEO_STREAM_TOPIC, jsonDeserializer, geoEventSourceProps);
 		return geoSource;
 	}
 	
 	public static  FlinkKafkaProducer<String> constructSpeedingDriversKafkaSink(Properties props) {
 		
-		//add additional Kafka properties
-		props.put("client.id", "flink-streaming-analytics-app");
-		FlinkKafkaProducer<String> flinkKafkaProducer = new FlinkKafkaProducer<String>(SINK_ALERTS_SPEEDING_DRIVER_TOPIC, new SimpleStringSchema(), props);
+		//Create new properties object and add additional props
+		Properties speedingDriversSinkProps = new Properties();	
+		speedingDriversSinkProps.putAll(props);
+		speedingDriversSinkProps.put("client.id", "flink-truck-alerts-producer");
+
+		FlinkKafkaProducer<String> flinkKafkaProducer = new FlinkKafkaProducer<String>(SINK_ALERTS_SPEEDING_DRIVER_TOPIC, new SimpleStringSchema(), speedingDriversSinkProps);
 		return flinkKafkaProducer;
 	}
+	
+	/* Not using for now */
+	private static DataStream<ObjectNode> filterStream(DataStream<ObjectNode> geoSpeedJoinedStream) {
+		FilterFunction<ObjectNode> filter = new FilterFunction<ObjectNode>() {
+
+			private static final long serialVersionUID = -8965164867642656170L;
+
+			@Override
+			public boolean filter(ObjectNode joinedStream) throws Exception {
+				String eventType = joinedStream.get("value").get("eventType").asText();
+				return !"Normal".equals(eventType);
+			}
+		};
+		DataStream<ObjectNode> filteredGeoStream = geoSpeedJoinedStream.filter(filter).name("Filtered Stream for Violation Events");
+		return filteredGeoStream;
+	}	
 }
