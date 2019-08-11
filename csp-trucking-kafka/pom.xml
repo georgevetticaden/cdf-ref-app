@@ -83,6 +83,13 @@
             <artifactId>argparse4j</artifactId>
             <version>0.7.0</version>
         </dependency>	
+        
+        <!-- Libraries for SMM End to End Latency Interceptors -->    
+        <dependency>
+            <groupId>com.hortonworks.smm</groupId>
+            <artifactId>monitoring-interceptors</artifactId>
+            <version>${smm.monitoring.interceptors.version}</version>
+        </dependency>           
              	
 		        
     </dependencies>
