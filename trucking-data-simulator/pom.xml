@@ -315,7 +315,14 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>amazon-kinesis-client</artifactId>
             <version>${aws.kinesis.version}</version>
-        </dependency>		
+        </dependency>	
+        
+        <!-- Libraries for SMM End to End Latency Interceptors -->    
+        <dependency>
+            <groupId>com.hortonworks.smm</groupId>
+            <artifactId>monitoring-interceptors</artifactId>
+            <version>${smm.monitoring.interceptors.version}</version>
+        </dependency>        	
 
 	</dependencies>	
   

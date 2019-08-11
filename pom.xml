@@ -17,6 +17,8 @@
 		<!-- Kafka version from CDK 4.0 -->
 		<kafka.version>2.1.0-kafka-4.0.0</kafka.version> 
 		
+		<!-- SMM Interceptors Versions -->
+		<smm.monitoring.interceptors.version>2.1.0.2.0.0.0-94</smm.monitoring.interceptors.version>
         <junit.version>4.5</junit.version>
         <log4j2.version>2.6.2</log4j2.version>
 	</properties>  	
