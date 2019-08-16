@@ -23,6 +23,7 @@ public class DriverViolationEventsConsumer extends BaseConsumerClient {
 
 	public DriverViolationEventsConsumer(Map<String, Object> configs) {
 		super(configs);
+		LOGGER.info("Kafka Configs is: " + this.configs);
 
 	}
 

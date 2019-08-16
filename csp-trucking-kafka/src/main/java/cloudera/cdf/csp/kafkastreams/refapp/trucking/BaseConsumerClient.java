@@ -46,7 +46,12 @@ public abstract class BaseConsumerClient {
         if("SASL_PLAINTEXT".equals(configMap.get("security.protocol"))) {
 		 	props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");  
 		 	props.put("sasl.kerberos.service.name", "kafka");        	
+        } else if("SASL_SSL".equals(configMap.get("security.protocol"))) {
+    		props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
+    		props.put("sasl.kerberos.service.name", "kafka");       
+    		props.put("ssl.truststore.location", configMap.get("ssl.truststore.location"));
         }
+
         
         /* Configure Serdes */
         configureSerdes(props, configMap);
@@ -127,7 +132,14 @@ public abstract class BaseConsumerClient {
 				.type(String.class)
 				.help("Either PLAINTEXT or SASL_PLAINTEXT");
 		
-
+		parser.addArgument("--ssl.truststore.location").action(store())
+		.required(false)
+		.setDefault(" ")
+		.type(String.class)
+		.help("Location of Kafka Trust STore when SSL is enabled");		
+		
+		
+		
 
 		return parser;
 	}
