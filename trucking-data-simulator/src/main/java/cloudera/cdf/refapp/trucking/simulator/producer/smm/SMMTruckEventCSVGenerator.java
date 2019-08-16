@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -49,11 +50,33 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
         System.out.println("Topic name is" + topicName);
              
 		 
-        /* If talking to secure Kafka cluster, set security protocol as "SASL_PLAINTEXT */
+        /* If talking to secure Kafka cluster, set right security protocol */
 		if(SecurityType.SECURE.equals(securityType)) {
-		 	props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");  
+			
+			/* Get the security protocl being used */
+			String securityProtocol = System.getProperty("security.protocol");
+			if(StringUtils.isEmpty(securityProtocol)) {
+				String errMsg = "security.protocol in JVM is required";
+				logger.error(errMsg);
+				throw new RuntimeException(errMsg);
+			}
+		 	props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, securityProtocol);
 		 	props.put("sasl.kerberos.service.name", "kafka");
-
+		 	
+		 	/* If SASL_SSL, keystore location is rquired */
+		 	String keyStoreLocation= "";
+		 	if("SASL_SSL".equals(securityProtocol)) {
+		 		keyStoreLocation = System.getProperty("ssl.truststore.location");;
+				if(StringUtils.isEmpty(keyStoreLocation)) {
+					String errMsg = "ssl.truststore.location in JVM is required if using security protocol SASL_SSL";
+					logger.error(errMsg);
+					throw new RuntimeException(errMsg);
+				}
+					
+			 	props.put("ssl.truststore.location", keyStoreLocation); 		
+		 	}
+		 	
+		 	logger.info("Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ keyStoreLocation +"]");
 		}
  
         try {		
