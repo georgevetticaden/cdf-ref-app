@@ -64,19 +64,28 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
 		 	props.put("sasl.kerberos.service.name", "kafka");
 		 	
 		 	/* If SASL_SSL, keystore location is rquired */
-		 	String keyStoreLocation= "";
+		 	String trustStoreLocation=  "";
+		 	String trustStorePassword = "";
 		 	if("SASL_SSL".equals(securityProtocol)) {
-		 		keyStoreLocation = System.getProperty("ssl.truststore.location");;
-				if(StringUtils.isEmpty(keyStoreLocation)) {
+		 		trustStoreLocation = System.getProperty("ssl.truststore.location");
+				if(StringUtils.isEmpty(trustStoreLocation)) {
 					String errMsg = "ssl.truststore.location in JVM is required if using security protocol SASL_SSL";
 					logger.error(errMsg);
 					throw new RuntimeException(errMsg);
 				}
+				
+				trustStorePassword = System.getProperty("ssl.truststore.password");
+				if(StringUtils.isEmpty(trustStorePassword)) {
+					String errMsg = "ssl.truststore.password in JVM is required if using security protocol SASL_SSL";
+					logger.error(errMsg);
+					throw new RuntimeException(errMsg);
+				}				
 					
-			 	props.put("ssl.truststore.location", keyStoreLocation); 		
+			 	props.put("ssl.truststore.location", trustStoreLocation); 	
+			 	props.put("ssl.truststore.password", trustStorePassword); 
 		 	}
 		 	
-		 	logger.info("Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ keyStoreLocation +"]");
+		 	logger.info("Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ trustStoreLocation +"]");
 		}
  
         try {		
