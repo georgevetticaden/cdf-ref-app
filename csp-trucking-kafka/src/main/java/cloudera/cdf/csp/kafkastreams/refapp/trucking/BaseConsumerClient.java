@@ -50,6 +50,7 @@ public abstract class BaseConsumerClient {
     		props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
     		props.put("sasl.kerberos.service.name", "kafka");       
     		props.put("ssl.truststore.location", configMap.get("ssl.truststore.location"));
+    		props.put("ssl.truststore.password", configMap.get("ssl.truststore.password"));
         }
 
         
@@ -136,9 +137,14 @@ public abstract class BaseConsumerClient {
 		.required(false)
 		.setDefault(" ")
 		.type(String.class)
-		.help("Location of Kafka Trust STore when SSL is enabled");		
+		.help("Location of Kafka Trust STore when SASL_SSL is enabled");		
 		
 		
+		parser.addArgument("--ssl.truststore.password").action(store())
+		.required(false)
+		.setDefault(" ")
+		.type(String.class)
+		.help("TrustStore password");			
 		
 
 		return parser;
