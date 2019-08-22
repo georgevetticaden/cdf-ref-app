@@ -38,7 +38,7 @@ createAvroConsumer() {
                 --schema.registry.url $schemaRegistryUrl \
                 --security.protocol $securityProtocol \
                 --ssl.truststore.location $truststoreLocation \
-                --ssl.truststore.password $truststorePassword \                
+                --ssl.truststore.password $truststorePassword \
                 --topics $1 \
                 --groupId $2 \
                 --clientId $3 \
