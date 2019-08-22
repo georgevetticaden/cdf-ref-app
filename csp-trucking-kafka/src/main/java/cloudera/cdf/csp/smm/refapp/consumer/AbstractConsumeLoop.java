@@ -129,10 +129,15 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
         
         
         /* If talking to secure Kafka cluster, set security protocol as "SASL_PLAINTEXT */
-        if("SASL_PLAINTEXT".equals(result.getString("security.protocol"))) {
+        if("SASL_PLAINTEXT".equals(result.get("security.protocol"))) {
 		 	props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");  
 		 	props.put("sasl.kerberos.service.name", "kafka");        	
-        }
+        } else if("SASL_SSL".equals(result.get("security.protocol"))) {
+    		props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
+    		props.put("sasl.kerberos.service.name", "kafka");       
+    		props.put("ssl.truststore.location", result.get("ssl.truststore.location"));
+    		props.put("ssl.truststore.password", result.get("ssl.truststore.password"));
+        }        
 		
 		return props;
 	}
@@ -190,6 +195,19 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
 				.setDefault("PLAINTEXT")
 				.type(String.class)
 				.help("Either PLAINTEXT or SASL_PLAINTEXT");
+		
+		parser.addArgument("--ssl.truststore.location").action(store())
+		.required(false)
+		.setDefault(" ")
+		.type(String.class)
+		.help("Location of Kafka Trust STore when SASL_SSL is enabled");		
+		
+		
+		parser.addArgument("--ssl.truststore.password").action(store())
+		.required(false)
+		.setDefault(" ")
+		.type(String.class)
+		.help("TrustStore password");		
 		
 
 
