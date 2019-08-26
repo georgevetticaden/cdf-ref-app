@@ -36,8 +36,8 @@ import cloudera.cdf.csp.flink.refapp.trucking.aggregrator.DriverSpeedAvgValue;
 public class TruckingStreamingAnalticsFlinkRefApp {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TruckingStreamingAnalticsFlinkRefApp.class);
-	private static final String SOURCE_GEO_STREAM_TOPIC = "syndicate-geo-event-json";	
-	private static final String SOURCE_SPEED_STREAM_TOPIC = "syndicate-speed-event-json";
+	private static final String SOURCE_GEO_STREAM_TOPIC = "CDFClusterScottsdale__syndicate-geo-event-json";	
+	private static final String SOURCE_SPEED_STREAM_TOPIC = "CDFClusterScottsdale__syndicate-speed-event-json";
 	private static final String SINK_ALERTS_SPEEDING_DRIVER_TOPIC= "alerts-speeding-drivers";
 	
 	protected static final double HIGH_SPEED = 80;	
