@@ -59,7 +59,7 @@ public class TruckingStreamingAnalticsFlinkRefApp {
 		/* join the streams */
     	DataStream<ObjectNode> geoSpeedJoinedStream = joinStreams(geoStream,
 				speedStream);
-    	
+    	    	
 		/* Calculate average speed of driver */
 		KeySelector<ObjectNode, Integer> keySelector = createKeySelector();
 		DataStream<DriverSpeedAvgValue> driverAvgSpeedStream = geoSpeedJoinedStream
