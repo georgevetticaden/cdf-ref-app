@@ -37,6 +37,7 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
 	protected  final KafkaConsumer<K, V> consumer;
 	protected  final List<String> topics;
 	protected final String clientId;
+	
 
 	private CountDownLatch shutdownLatch = new CountDownLatch(1);
 	
@@ -138,6 +139,7 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
     		props.put("ssl.truststore.location", result.get("ssl.truststore.location"));
     		props.put("ssl.truststore.password", result.get("ssl.truststore.password"));
         }        
+
 		
 		return props;
 	}
@@ -208,6 +210,12 @@ public abstract class AbstractConsumeLoop<K extends Serializable, V> implements 
 		.setDefault(" ")
 		.type(String.class)
 		.help("TrustStore password");		
+		
+		parser.addArgument("--pause.period").action(store())
+		.required(false)
+		.setDefault(0)
+		.type(Integer.class)
+		.help("The pause period for demos in ms");			
 		
 
 

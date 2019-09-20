@@ -20,10 +20,13 @@ public class LoggerStringEventWithInterceptorConsumer extends AbstractConsumeLoo
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoggerStringEventWithInterceptorConsumer.class);	
-
-	public LoggerStringEventWithInterceptorConsumer(Properties configs, List<String> topics) {
+	private Integer pausePeriod = 0;
+	
+	public LoggerStringEventWithInterceptorConsumer(Properties configs, List<String> topics, Integer pausePeriod) {
 		super(configs, topics);
-		// TODO Auto-generated constructor stub
+		if(pausePeriod != null)
+			this.pausePeriod = pausePeriod;
+		logger.info("Pause Period passed is: " + pausePeriod);
 	}
 
 	@Override
@@ -31,7 +34,13 @@ public class LoggerStringEventWithInterceptorConsumer extends AbstractConsumeLoo
 		
 		logger.info("C : {}, Record received partition : {}, key : {}, value : {}, offset : {}",
 				clientId, record.partition(), record.key(), record.value(), record.offset());
-		//sleep(5000);
+		
+		if(pausePeriod != 0) {
+			logger.info("Sleeping for " + pausePeriod + " ms");
+			sleep(pausePeriod);
+			logger.info("Waking up from pause");
+		}
+		
 		
 	}
 
@@ -44,10 +53,13 @@ public class LoggerStringEventWithInterceptorConsumer extends AbstractConsumeLoo
 		try {
 			Namespace result = parser.parseArgs(args);
 			List<String> topics = Arrays.asList(result.getString("topics").split(","));
+	        
+	        Integer pausePeriod = result.getInt("pause.period");
+	        	
 			Properties configs = getConsumerConfigs(result);
 			/* Configure the end to end latency producer interceptors */
 			configs.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.hortonworks.smm.kafka.monitoring.interceptors.MonitoringConsumerInterceptor");			
-			final LoggerStringEventWithInterceptorConsumer consumer = new LoggerStringEventWithInterceptorConsumer(configs, topics);
+			final LoggerStringEventWithInterceptorConsumer consumer = new LoggerStringEventWithInterceptorConsumer(configs, topics, pausePeriod);
 			consumer.run();
 			
 			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
