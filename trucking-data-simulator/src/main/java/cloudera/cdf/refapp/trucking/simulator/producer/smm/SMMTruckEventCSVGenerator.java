@@ -68,21 +68,21 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
 		 	String trustStorePassword = "";
 		 	if("SASL_SSL".equals(securityProtocol)) {
 		 		trustStoreLocation = System.getProperty("ssl.truststore.location");
-				if(StringUtils.isEmpty(trustStoreLocation)) {
+				trustStorePassword = System.getProperty("ssl.truststore.password");
+
+				/* If Protocol is SASL_SSL, truststore is required but not truststore password for clients unless client mutual auth is enabled */
+				if(StringUtils.isNotEmpty(trustStoreLocation) ) {
+					props.put("ssl.truststore.location", trustStoreLocation); 	
+				} else {
 					String errMsg = "ssl.truststore.location in JVM is required if using security protocol SASL_SSL";
 					logger.error(errMsg);
 					throw new RuntimeException(errMsg);
 				}
 				
-				trustStorePassword = System.getProperty("ssl.truststore.password");
-				if(StringUtils.isEmpty(trustStorePassword)) {
-					String errMsg = "ssl.truststore.password in JVM is required if using security protocol SASL_SSL";
-					logger.error(errMsg);
-					throw new RuntimeException(errMsg);
-				}				
-					
-			 	props.put("ssl.truststore.location", trustStoreLocation); 	
-			 	props.put("ssl.truststore.password", trustStorePassword); 
+				if(StringUtils.isNotEmpty(trustStorePassword)) {
+				 	props.put("ssl.truststore.password", trustStorePassword); 
+				} 				
+			 	
 		 	}
 		 	
 		 	logger.info("Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ trustStoreLocation +"]");
