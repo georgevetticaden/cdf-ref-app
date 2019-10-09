@@ -83,7 +83,7 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
 				 	props.put("ssl.truststore.password", trustStorePassword); 
 				} 				
 			 	
-		 	}
+		 	} 
 		 	
 		 	logger.info("Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ trustStoreLocation +"]");
 		}
