@@ -85,7 +85,17 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
 			 	
 		 	} 
 		 	
-		 	logger.info("Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ trustStoreLocation +"]");
+		 	/* Get the SASL Mechanism 
+		 	 * This was introduced with LDAP Based Auth
+		 	 * IF PLAIN, then it means LDAP based auth and if GSSAPI, then it means kerorized based auth
+		 	 * if not set, then it defaults to what the broker is configured to do which is Kerborized based auth
+		 	 */
+		 	String saslMechanism = System.getProperty("sasl.mechanism");
+		 	if(StringUtils.isNotEmpty(saslMechanism)) {
+		 		props.put("sasl.mechanism", saslMechanism);
+		 	}
+		 	
+		 	logger.info("Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ trustStoreLocation +"], sasl.mechanism["+ saslMechanism +"]");
 		}
  
         try {		
