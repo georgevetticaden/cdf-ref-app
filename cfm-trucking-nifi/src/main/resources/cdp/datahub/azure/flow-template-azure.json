@@ -1,10 +1,10 @@
 {
-  "name": "mkohs-flow-cli-az3",
+  "name": "gvetticaden-flow-cli-az3",
   "azure": {
     "encryptStorage": false
   },
   "workloadAnalytics": true,
-  "environmentName": "mkohs-azure-dev",
+  "environmentName": "gvetticaden-azure-env-1",
   "instanceGroups": [
     {
       "nodeCount": 1,
@@ -12,7 +12,7 @@
       "type": "GATEWAY",
       "azure": {
         "availabilitySet": {
-          "name": "mkohs-flow-cli-az3-mkohs-flow-cli-az3-as",
+          "name": "gvetticaden-flow-cli-az3-gvetticaden-flow-cli-az3-as",
           "faultDomainCount": 2,
           "updateDomainCount": 20
         }
@@ -23,7 +23,7 @@
           "encrypted": false,
           "managedDisk": true
         },
-        "instanceType": "Standard_D3_v2",
+        "instanceType": "Standard_D4s_v3",
         "rootVolume": {
           "size": 50
         },
@@ -45,7 +45,7 @@
       "type": "CORE",
       "azure": {
         "availabilitySet": {
-          "name": "mkohs-flow-cli-az3-mkohs-flow-cli-az3-as",
+          "name": "gvetticaden-flow-cli-az3-gvetticaden-flow-cli-az3-as",
           "faultDomainCount": 2,
           "updateDomainCount": 20
         }
@@ -56,7 +56,7 @@
           "encrypted": false,
           "managedDisk": true
         },
-        "instanceType": "Standard_D3_v2",
+        "instanceType": "Standard_D4s_v3",
         "rootVolume": {
           "size": 50
         },
@@ -78,7 +78,7 @@
       "type": "CORE",
       "azure": {
         "availabilitySet": {
-          "name": "mkohs-flow-cli-az3-mkohs-flow-cli-az3-as",
+          "name": "gvetticaden-flow-cli-az3-gvetticaden-flow-cli-az3-as",
           "faultDomainCount": 2,
           "updateDomainCount": 20
         }
@@ -89,7 +89,7 @@
           "encrypted": false,
           "managedDisk": true
         },
-        "instanceType": "Standard_D12_v2",
+        "instanceType": "Standard_D8s_v3",
         "rootVolume": {
           "size": 150
         },
@@ -149,7 +149,7 @@
     "validateBlueprint": false
   },
   "sdx": {
-    "name": "mkohs-azure-dl"
+    "name": "gvetticaden-azure-env-1-dl"
   },
   "tags": {
     "userDefined": {}
