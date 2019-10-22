@@ -1,0 +1,162 @@
+{
+  "name": "nifi-3-cdpd-flow-cluster",
+  "workloadAnalytics": true,
+  "environmentName": "gvetticaden-env-3-london",
+  "instanceGroups": [
+    {
+      "nodeCount": 3,
+      "name": "nifimaster",
+      "type": "CORE",
+      "recoveryMode": "MANUAL",
+      "template": {
+        "instanceType": "m5.8xlarge",
+        "rootVolume": {
+          "size": 500
+        },
+        "attachedVolumes": [
+          {
+            "size": 500,
+            "count": 4,
+            "type": "gp2"
+          }
+        ]
+      },
+      "recipeNames": []
+    },
+    {
+      "nodeCount": 3,
+      "name": "zk",
+      "type": "CORE",
+      "recoveryMode": "MANUAL",
+      "template": {
+        "instanceType": "m5.xlarge",
+        "rootVolume": {
+          "size": 100
+        },
+        "attachedVolumes": [
+          {
+            "size": 500,
+            "count": 1,
+            "type": "st1"
+          }
+        ]
+      },
+      "recipeNames": []
+    },
+    {
+      "nodeCount": 1,
+      "name": "gateway",
+      "type": "GATEWAY",
+      "recoveryMode": "MANUAL",
+      "template": {
+        "instanceType": "m5.2xlarge",
+        "rootVolume": {
+          "size": 100
+        },
+        "attachedVolumes": [
+          {
+            "size": 500,
+            "count": 1,
+            "type": "st1"
+          }
+        ]
+      },
+      "recipeNames": [
+        "download-nifi-csds"
+      ]
+    }
+  ],
+  "image": {
+    "catalog": "cloudbreak-default",
+    "id": "747da6ee-e4e5-4fb3-6762-216ce7ac1bf4"
+  },
+  "network": {
+    "aws": {
+      "subnetId": "subnet-0328f9be1e0676a37"
+    }
+  },
+  "cluster": {
+    "userName": "",
+    "password": "",
+    "databases": [],
+    "cloudStorage": {
+      "aws": {
+        "s3Guard": {
+          "dynamoTableName": "vett-cdp"
+        }
+      },
+      "locations": [
+        {
+          "type": "DEFAULT_FS",
+          "value": "s3a://vett-cdp/vett-data-lake-1-london/nifi-3-cdpd-flow-cluster"
+        },
+        {
+          "type": "HIVE_METASTORE_WAREHOUSE",
+          "value": "s3a://vett-cdp/vett-data-lake-1-london/warehouse/tablespace/managed/hive"
+        },
+        {
+          "type": "HIVE_METASTORE_EXTERNAL_WAREHOUSE",
+          "value": "s3a://vett-cdp/vett-data-lake-1-london/warehouse/tablespace/external/hive"
+        },
+        {
+          "type": "HIVE_REPLICA_WAREHOUSE",
+          "value": "s3a://vett-cdp/vett-data-lake-1-london/hive_replica_functions_dir"
+        }
+      ],
+      "identities": [
+        {
+          "s3": {
+            "instanceProfile": "arn:aws:iam::315627065446:instance-profile/VETT-DATALAKE_LOG_ROLE"
+          },
+          "type": "LOG"
+        }
+      ]
+    },
+    "cm": {
+      "repository": {
+        "version": "7.x.0-1526374",
+        "baseUrl": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/cloudera-repos/s3/build/1526374/cm7/7.x.0/redhat7/yum/"
+      },
+      "products": [
+        {
+          "name": "CDH",
+          "version": "7.0.2-1.cdh7.0.2.p0.1525455",
+          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/cloudera-cdh7-parcels/s3/build/1525455/cdh/7.x/parcels/"
+        },
+        {
+          "name": "SCHEMAREGISTRY",
+          "version": "0.8.0.3.0.0.0-53",
+          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CSP/centos7/3.x/BUILDS/3.0.0.0-53/tars/parcel/"
+        },
+        {
+          "name": "CFM",
+          "version": "2.0.0.0",
+          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/"
+        },
+        {
+          "name": "STREAMS_MESSAGING_MANAGER",
+          "version": "2.1.0.3.0.0.0-53",
+          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CSP/centos7/3.x/BUILDS/3.0.0.0-53/tars/parcel/"
+        }
+      ],      
+      "enableAutoTls": true
+    },
+    "exposedServices": [
+      "ALL"
+    ],
+    "blueprintName": "nifi-final",
+    "validateBlueprint": false
+  },
+  "sdx": {
+    "name": "vett-data-lake-3-london"
+  },
+  "tags": {
+    "userDefined": {}
+  },
+  "inputs": {
+    "nifi_csd_file_name": "NIFI-1.10.0.2.0.0.0-44.jar",
+    "nifi_csd_url": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/NIFI-1.10.0.2.0.0.0-44.jar",
+    "nifi_registry_csd_file_name": "NIFIREGISTRY-0.5.0.2.0.0.0-44.jar",
+    "nifi_registry_csd_url": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/NIFIREGISTRY-0.5.0.2.0.0.0-44.jar"
+  }
+}

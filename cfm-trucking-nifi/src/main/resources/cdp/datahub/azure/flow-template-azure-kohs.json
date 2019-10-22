@@ -1,0 +1,159 @@
+{
+  "name": "gvetticaden-flow-cli-az3",
+  "azure": {
+    "encryptStorage": false
+  },
+  "workloadAnalytics": true,
+  "environmentName": "gvetticaden-azure-env-1",
+  "instanceGroups": [
+    {
+      "nodeCount": 1,
+      "name": "gateway",
+      "type": "GATEWAY",
+      "azure": {
+        "availabilitySet": {
+          "name": "gvetticaden-flow-cli-az3-gvetticaden-flow-cli-az3-as",
+          "faultDomainCount": 2,
+          "updateDomainCount": 20
+        }
+      },
+      "recoveryMode": "MANUAL",
+      "template": {
+        "azure": {
+          "encrypted": false,
+          "managedDisk": true
+        },
+        "instanceType": "Standard_D4s_v3",
+        "rootVolume": {
+          "size": 50
+        },
+        "attachedVolumes": [
+          {
+            "size": 100,
+            "count": 1,
+            "type": "Standard_LRS"
+          }
+        ],
+        "cloudPlatform": "AZURE"
+      },
+      "recipeNames": [],
+      "cloudPlatform": "AZURE"
+    },
+    {
+      "nodeCount": 3,
+      "name": "zk",
+      "type": "CORE",
+      "azure": {
+        "availabilitySet": {
+          "name": "gvetticaden-flow-cli-az3-gvetticaden-flow-cli-az3-as",
+          "faultDomainCount": 2,
+          "updateDomainCount": 20
+        }
+      },
+      "recoveryMode": "MANUAL",
+      "template": {
+        "azure": {
+          "encrypted": false,
+          "managedDisk": true
+        },
+        "instanceType": "Standard_D4s_v3",
+        "rootVolume": {
+          "size": 50
+        },
+        "attachedVolumes": [
+          {
+            "size": 100,
+            "count": 1,
+            "type": "Standard_LRS"
+          }
+        ],
+        "cloudPlatform": "AZURE"
+      },
+      "recipeNames": [],
+      "cloudPlatform": "AZURE"
+    },
+    {
+      "nodeCount": 3,
+      "name": "nifimaster",
+      "type": "CORE",
+      "azure": {
+        "availabilitySet": {
+          "name": "gvetticaden-flow-cli-az3-gvetticaden-flow-cli-az3-as",
+          "faultDomainCount": 2,
+          "updateDomainCount": 20
+        }
+      },
+      "recoveryMode": "MANUAL",
+      "template": {
+        "azure": {
+          "encrypted": false,
+          "managedDisk": true
+        },
+        "instanceType": "Standard_D8s_v3",
+        "rootVolume": {
+          "size": 150
+        },
+        "attachedVolumes": [
+          {
+            "size": 500,
+            "count": 4,
+            "type": "Standard_LRS"
+          }
+        ],
+        "cloudPlatform": "AZURE"
+      },
+      "recipeNames": [],
+      "cloudPlatform": "AZURE"
+    }
+  ],
+  "image": {
+    "catalog": "cloudbreak-dev",
+    "id": "c4fc0c6a-748d-415f-4a66-3ff0210879cf"
+  },
+  "network": {
+    "azure": {
+      "subnetId": "altus-systest.external.eastus2"
+    }
+  },
+  "cluster": {
+    "userName": "",
+    "password": "",
+    "databases": [],
+    "cm": {
+      "repository": {
+        "version": "7.x.0-1526374",
+        "baseUrl": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/cloudera-repos/s3/build/1526374/cm7/7.x.0/redhat7/yum/"
+      },
+      "products": [
+        {
+          "name": "CFM",
+          "version": "2.0.0.0",
+          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/",
+          "csd": [
+            "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/NIFI-1.10.0.2.0.0.0-44.jar",
+            "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/NIFIREGISTRY-0.5.0.2.0.0.0-44.jar"
+          ]
+        },
+        {
+          "name": "CDH",
+          "version": "7.0.2-1.cdh7.0.2.p0.1525455",
+          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/cloudera-cdh7-parcels/s3/build/1525455/cdh/7.x/parcels/"
+        }
+      ],
+      "enableAutoTls": true
+    },
+    "exposedServices": [
+      "ALL"
+    ],
+    "blueprintName": "nifi-final",
+    "validateBlueprint": false
+  },
+  "sdx": {
+    "name": "gvetticaden-azure-env-1-dl"
+  },
+  "tags": {
+    "userDefined": {}
+  },
+  "inputs": {},
+  "cloudPlatform": "AZURE"
+}
