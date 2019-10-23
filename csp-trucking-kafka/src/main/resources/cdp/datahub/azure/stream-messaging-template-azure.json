@@ -1,16 +1,29 @@
 {
-  "name": "kafka-3-cdpd-streaming-cluster",
+  "name": "gvetticaden-stream-messaging-cli-az3",
+  "azure": {
+    "encryptStorage": false
+  },  
   "workloadAnalytics": true,
-  "environmentName": "gvetticaden-env-3-london",
+  "environmentName": "gvetticaden-azure-env-1",
   "instanceGroups": [
     {
       "nodeCount": 3,
       "name": "quorum",
       "type": "CORE",
+      "azure": {
+        "availabilitySet": {
+          "name": "gvetticaden-stream-messaging-cli-az3-gvetticaden-stream-messaging-cli-az3-as",
+          "faultDomainCount": 2,
+          "updateDomainCount": 20
+        }
+      },      
       "recoveryMode": "MANUAL",
       "template": {
-        "aws": {},
-        "instanceType": "m5.xlarge",
+        "azure": {
+          "encrypted": false,
+          "managedDisk": true
+        },
+        "instanceType": "Standard_D4s_v3",
         "rootVolume": {
           "size": 50
         },
@@ -18,21 +31,32 @@
           {
             "size": 100,
             "count": 1,
-            "type": "standard"
+            "type": "Standard_LRS"
           }
         ],
-        "cloudPlatform": "AWS"
+        "cloudPlatform": "AZURE"
       },
-      "recipeNames": []
+      "recipeNames": [],
+      "cloudPlatform": "AZURE"
     },
     {
       "nodeCount": 1,
       "name": "master",
       "type": "GATEWAY",
+      "azure": {
+        "availabilitySet": {
+          "name": "gvetticaden-stream-messaging-cli-az3-gvetticaden-stream-messaging-cli-az3-as",
+          "faultDomainCount": 2,
+          "updateDomainCount": 20
+        }
+      },      
       "recoveryMode": "MANUAL",
       "template": {
-        "aws": {},
-        "instanceType": "m5.xlarge",
+        "azure": {
+          "encrypted": false,
+          "managedDisk": true
+        },
+        "instanceType": "Standard_D4s_v3",
         "rootVolume": {
           "size": 80
         },
@@ -40,23 +64,34 @@
           {
             "size": 100,
             "count": 1,
-            "type": "standard"
+            "type": "Standard_LRS"
           }
         ],
-        "cloudPlatform": "AWS"
+        "cloudPlatform": "AZURE"
       },
       "recipeNames": [
         "kafka-3-cdpd-streaming-cluster"
-      ]
+      ],
+      "cloudPlatform": "AZURE"
     },
     {
       "nodeCount": 3,
       "name": "broker",
       "type": "CORE",
+      "azure": {
+        "availabilitySet": {
+          "name": "gvetticaden-stream-messaging-cli-az3-gvetticaden-stream-messaging-cli-az3-as",
+          "faultDomainCount": 2,
+          "updateDomainCount": 20
+        }
+      },      
       "recoveryMode": "MANUAL",
       "template": {
-        "aws": {},
-        "instanceType": "m5.2xlarge",
+        "azure": {
+          "encrypted": false,
+          "managedDisk": true
+        },
+        "instanceType": "Standard_D8s_v3",
         "rootVolume": {
           "size": 50
         },
@@ -64,54 +99,26 @@
           {
             "size": 500,
             "count": 1,
-            "type": "st1"
+            "type": "Standard_LRS"
           }
         ],
-        "cloudPlatform": "AWS"
+        "cloudPlatform": "AZURE"
       },
-      "recipeNames": []
+      "recipeNames": [],
+      "cloudPlatform": "AZURE"
     }
   ],
   "image": {
-    "catalog": "cloudbreak-default",
-    "id": "5fa3c3cb-8f62-b285-9ea3-4b08fc54b675"
+    "catalog": "cloudbreak-dev",
+    "id": "c4fc0c6a-748d-415f-4a66-3ff0210879cf"
   },
   "network": {
-    "aws": {
-      "subnetId": "subnet-0328f9be1e0676a37"
+    "azure": {
+      "subnetId": "altus-systest.external.eastus2"
     }
   },
   "cluster": {
     "databases": [],
-    "cloudStorage": {
-      "aws": {
-        "s3Guard": {
-          "dynamoTableName": "vett-cdp"
-        }
-      },
-      "locations": [
-        {
-          "type": "HIVE_METASTORE_WAREHOUSE",
-          "value": "s3a://vett-cdp/vett-data-lake-1-london/warehouse/tablespace/managed/hive"
-        },
-        {
-          "type": "HIVE_METASTORE_EXTERNAL_WAREHOUSE",
-          "value": "s3a://vett-cdp/vett-data-lake-1-london/warehouse/tablespace/external/hive"
-        },
-        {
-          "type": "HIVE_REPLICA_WAREHOUSE",
-          "value": "s3a://vett-cdp/vett-data-lake-1-london/hive_replica_functions_dir"
-        }
-      ],
-      "identities": [
-        {
-          "s3": {
-            "instanceProfile": "arn:aws:iam::315627065446:instance-profile/VETT-DATALAKE_LOG_ROLE"
-          },
-          "type": "LOG"
-        }
-      ]
-    },
     "cm": {
       "repository": {
         "version": "7.x.0-1526374",
@@ -143,10 +150,11 @@
     "validateBlueprint": false
   },
   "sdx": {
-    "name": "vett-data-lake-3-london"
+    "name": "gvetticaden-azure-env-1-dl"
   },
   "tags": {
     "userDefined": {}
   },
-  "inputs": {}
+  "inputs": {},
+  "cloudPlatform": "AZURE"  
 }

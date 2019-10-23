@@ -116,8 +116,6 @@
     }
   },
   "cluster": {
-    "userName": "",
-    "password": "",
     "databases": [],
     "cm": {
       "repository": {
