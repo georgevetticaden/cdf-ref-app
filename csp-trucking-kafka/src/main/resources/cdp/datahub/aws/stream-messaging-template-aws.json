@@ -1,11 +1,11 @@
 {
-  "name": "kafka-3-cdpd-streaming-cluster",
+  "name": "gvetticaden-messaging-1",
   "workloadAnalytics": true,
-  "environmentName": "gvetticaden-env-3-london",
+  "environmentName": "gvetticaden-env-1-paris",
   "instanceGroups": [
     {
       "nodeCount": 3,
-      "name": "quorum",
+      "name": "broker",
       "type": "CORE",
       "recoveryMode": "MANUAL",
       "template": {
@@ -32,9 +32,9 @@
       "recoveryMode": "MANUAL",
       "template": {
         "aws": {},
-        "instanceType": "m5.xlarge",
+        "instanceType": "m5.2xlarge",
         "rootVolume": {
-          "size": 80
+          "size": 50
         },
         "attachedVolumes": [
           {
@@ -45,40 +45,16 @@
         ],
         "cloudPlatform": "AWS"
       },
-      "recipeNames": [
-        "kafka-3-cdpd-streaming-cluster"
-      ]
-    },
-    {
-      "nodeCount": 3,
-      "name": "broker",
-      "type": "CORE",
-      "recoveryMode": "MANUAL",
-      "template": {
-        "aws": {},
-        "instanceType": "m5.2xlarge",
-        "rootVolume": {
-          "size": 50
-        },
-        "attachedVolumes": [
-          {
-            "size": 500,
-            "count": 1,
-            "type": "st1"
-          }
-        ],
-        "cloudPlatform": "AWS"
-      },
       "recipeNames": []
     }
   ],
   "image": {
-    "catalog": "cloudbreak-default",
-    "id": "5fa3c3cb-8f62-b285-9ea3-4b08fc54b675"
+    "catalog": "dim-qe",
+    "id": "de43f9c2-240c-4888-4a23-420cd99ed6ea"
   },
   "network": {
     "aws": {
-      "subnetId": "subnet-0328f9be1e0676a37"
+      "subnetId": "subnet-062047ad389a47e3f"
     }
   },
   "cluster": {
@@ -90,6 +66,10 @@
         }
       },
       "locations": [
+        {
+          "type": "DEFAULT_FS",
+          "value": "s3a://vett-cdp/vett-data-lake-1-london/gvetticaden-messaging-1"
+        },
         {
           "type": "HIVE_METASTORE_WAREHOUSE",
           "value": "s3a://vett-cdp/vett-data-lake-1-london/warehouse/tablespace/managed/hive"
@@ -114,24 +94,29 @@
     },
     "cm": {
       "repository": {
-        "version": "7.x.0-1526374",
-        "baseUrl": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/cloudera-repos/s3/build/1526374/cm7/7.x.0/redhat7/yum/"
+        "version": "7.x.0",
+        "baseUrl": "http://cloudera-build-us-west-1.vpc.cloudera.com/s3/build/1545838/cm7/7.x.0/redhat7/yum/"
       },
       "products": [
         {
+          "name": "CFM",
+          "version": "2.0.0.0",
+          "parcel": "http://s3.amazonaws.com/dev.hortonworks.com/CFM/centos7/2.x/BUILDS/2.0.0.0-58/tars/parcel"
+        },
+        {
           "name": "SCHEMAREGISTRY",
-          "version": "0.8.0.3.0.0.0-53",
-          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CSP/centos7/3.x/BUILDS/3.0.0.0-53/tars/parcel/"
+          "version": "0.8.0.3.0.0.0-69",
+          "parcel": "http://s3.amazonaws.com/dev.hortonworks.com/CSP/centos7/3.x/BUILDS/3.0.0.0-69/tars/parcel"
         },
         {
           "name": "CDH",
-          "version": "7.0.2-1.cdh7.0.2.p0.1525455",
-          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/cloudera-cdh7-parcels/s3/build/1525455/cdh/7.x/parcels/"
+          "version": "7.0.2-1.cdh7.0.2.p0.1541062",
+          "parcel": "http://cloudera-build-us-west-1.vpc.cloudera.com/s3/build/1541062/cdh/7.x/parcels/"
         },
         {
           "name": "STREAMS_MESSAGING_MANAGER",
-          "version": "2.1.0.3.0.0.0-53",
-          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CSP/centos7/3.x/BUILDS/3.0.0.0-53/tars/parcel/"
+          "version": "2.1.0.3.0.0.0-69",
+          "parcel": "http://s3.amazonaws.com/dev.hortonworks.com/CSP/centos7/3.x/BUILDS/3.0.0.0-69/tars/parcel"
         }
       ],
       "enableAutoTls": true
@@ -139,11 +124,11 @@
     "exposedServices": [
       "ALL"
     ],
-    "blueprintName": "kafka-3-cdpd-streaming-cluster",
+    "blueprintName": "bence-a3",
     "validateBlueprint": false
   },
   "sdx": {
-    "name": "vett-data-lake-3-london"
+    "name": "vett-data-lake-1-paris"
   },
   "tags": {
     "userDefined": {}

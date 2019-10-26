@@ -1,7 +1,7 @@
 {
-  "name": "nifi-3-cdpd-flow-cluster",
+  "name": "gvetticaden-flow-1-custom",
   "workloadAnalytics": true,
-  "environmentName": "gvetticaden-env-3-london",
+  "environmentName": "gvetticaden-env-1-paris",
   "instanceGroups": [
     {
       "nodeCount": 3,
@@ -9,15 +9,15 @@
       "type": "CORE",
       "recoveryMode": "MANUAL",
       "template": {
-        "instanceType": "m5.8xlarge",
+        "instanceType": "m5.2xlarge",
         "rootVolume": {
-          "size": 500
+          "size": 150
         },
         "attachedVolumes": [
           {
             "size": 500,
             "count": 4,
-            "type": "gp2"
+            "type": "standard"
           }
         ]
       },
@@ -31,13 +31,13 @@
       "template": {
         "instanceType": "m5.xlarge",
         "rootVolume": {
-          "size": 100
+          "size": 150
         },
         "attachedVolumes": [
           {
-            "size": 500,
+            "size": 100,
             "count": 1,
-            "type": "st1"
+            "type": "standard"
           }
         ]
       },
@@ -49,21 +49,19 @@
       "type": "GATEWAY",
       "recoveryMode": "MANUAL",
       "template": {
-        "instanceType": "m5.2xlarge",
+        "instanceType": "m5.xlarge",
         "rootVolume": {
-          "size": 100
+          "size": 50
         },
         "attachedVolumes": [
           {
-            "size": 500,
+            "size": 100,
             "count": 1,
-            "type": "st1"
+            "type": "standard"
           }
         ]
       },
-      "recipeNames": [
-        "download-nifi-csds"
-      ]
+      "recipeNames": []
     }
   ],
   "image": {
@@ -72,12 +70,10 @@
   },
   "network": {
     "aws": {
-      "subnetId": "subnet-0328f9be1e0676a37"
+      "subnetId": "subnet-062047ad389a47e3f"
     }
   },
   "cluster": {
-    "userName": "",
-    "password": "",
     "databases": [],
     "cloudStorage": {
       "aws": {
@@ -88,7 +84,7 @@
       "locations": [
         {
           "type": "DEFAULT_FS",
-          "value": "s3a://vett-cdp/vett-data-lake-1-london/nifi-3-cdpd-flow-cluster"
+          "value": "s3a://vett-cdp/vett-data-lake-1-london/gvetticaden-flow-1"
         },
         {
           "type": "HIVE_METASTORE_WAREHOUSE",
@@ -124,21 +120,15 @@
           "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/cloudera-cdh7-parcels/s3/build/1525455/cdh/7.x/parcels/"
         },
         {
-          "name": "SCHEMAREGISTRY",
-          "version": "0.8.0.3.0.0.0-53",
-          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CSP/centos7/3.x/BUILDS/3.0.0.0-53/tars/parcel/"
-        },
-        {
           "name": "CFM",
           "version": "2.0.0.0",
-          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/"
-        },
-        {
-          "name": "STREAMS_MESSAGING_MANAGER",
-          "version": "2.1.0.3.0.0.0-53",
-          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CSP/centos7/3.x/BUILDS/3.0.0.0-53/tars/parcel/"
+          "parcel": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/",
+          "csd": [
+            "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/kohs/NIFI-1.10.0.2.0.0.0-44.jar",
+            "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/NIFIREGISTRY-0.5.0.2.0.0.0-44.jar"
+          ]
         }
-      ],      
+      ],
       "enableAutoTls": true
     },
     "exposedServices": [
@@ -148,15 +138,12 @@
     "validateBlueprint": false
   },
   "sdx": {
-    "name": "vett-data-lake-3-london"
+    "name": "vett-data-lake-1-paris"
   },
   "tags": {
-    "userDefined": {}
+    "application": null,
+    "userDefined": {},
+    "defaults": null
   },
-  "inputs": {
-    "nifi_csd_file_name": "NIFI-1.10.0.2.0.0.0-44.jar",
-    "nifi_csd_url": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/NIFI-1.10.0.2.0.0.0-44.jar",
-    "nifi_registry_csd_file_name": "NIFIREGISTRY-0.5.0.2.0.0.0-44.jar",
-    "nifi_registry_csd_url": "http://ec2-3-8-5-70.eu-west-2.compute.amazonaws.com/CFM/centos7/2.x/BUILDS/2.0.0.0-44/tars/parcel/NIFIREGISTRY-0.5.0.2.0.0.0-44.jar"
-  }
+  "inputs": {}
 }
