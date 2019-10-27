@@ -95,7 +95,9 @@ public class SMMTruckEventCSVGenerator extends BaseTruckEventCollector {
 		 		props.put("sasl.mechanism", saslMechanism);
 		 	}
 		 	
-		 	logger.info("Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ trustStoreLocation +"], sasl.mechanism["+ saslMechanism +"]");
+		 	String configMessage = "Security Setttings are: security.protocol["+ securityProtocol + "], ssl.truststore.location["+ trustStoreLocation +"], sasl.mechanism["+ saslMechanism +"]";
+		 	System.out.println(configMessage);
+		 	logger.info(configMessage);
 		}
  
         try {		
