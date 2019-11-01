@@ -34,7 +34,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>cdf-ref-app</finalName>
         <plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
