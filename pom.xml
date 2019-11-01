@@ -108,5 +108,6 @@
 		<module>csp-trucking-kafka</module>
 		<module>cfm-trucking-nifi</module>
 		<module>csp-trucking-flink</module>
+		<module>csp-flink-simple-quickstart</module>
 	</modules>
 </project>
