@@ -69,6 +69,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>${artifactId}-${version}</finalName>
 		<plugins>
 
 			<!-- Java Compiler -->
