@@ -109,5 +109,6 @@
 		<module>cfm-trucking-nifi</module>
 		<module>csp-trucking-flink</module>
 		<module>csp-flink-simple-quickstart</module>
+		<module>csp-flink-stateful-quickstart</module>
 	</modules>
 </project>
