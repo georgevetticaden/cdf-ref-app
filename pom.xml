@@ -110,5 +110,6 @@
 		<module>csp-trucking-flink</module>
 		<module>csp-flink-simple-quickstart</module>
 		<module>csp-flink-stateful-quickstart</module>
+		<module>csp-flink-secure-quickstart</module>
 	</modules>
 </project>
