@@ -54,10 +54,9 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
     	
         //create Geo Stream Source
     	DataStream<TruckGeoEventEnriched> geoStream = createGeoStreamSource(params, see);
-    	geoStream.print();
+    	
     	/* create the Speed Stream Source */
     	DataStream<TruckSpeedEventEnriched> speedStream = createSpeedStreamSource(params, see);
-    	speedStream.print();
 		
 		/* join the streams */
     	DataStream<TruckGeoSpeedJoin> geoSpeedJoinedStream = joinStreams(geoStream,
