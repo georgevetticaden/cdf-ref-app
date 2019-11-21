@@ -56,74 +56,51 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 
     	StreamExecutionEnvironment see = createFlinkExecutionEnv();
     	
+    	
         //create Geo Stream Source
     	DataStream<TruckGeoEventEnriched> geoStream = createGeoStreamSource(params, see);
-    	geoStream.map(i -> i).keyBy(t -> t.getDriverId()).addSink(new SinkFunction<TruckGeoEventEnriched>() {
+    	//the following map transform is hack workaround for a bug with Flink/SR integration. Need to remove once bug if fixed
+    	geoStream = geoStream.map(i -> i).keyBy(t -> t.getDriverId());
+    
+    	
+    	/* create the Speed Stream Source */
+    	DataStream<TruckSpeedEventEnriched> speedStream = createSpeedStreamSource(params, see);
+    	//the following map transform is hack workaround for a bug with Flink/SR integration. Need to remove once bug if fixed
+    	speedStream = speedStream.map(i -> i).keyBy(t -> t.getDriverId());
+		
+		/* join the streams */
+    	DataStream<TruckGeoSpeedJoin> geoSpeedJoinedStream = joinStreams(geoStream,
+				speedStream);
+    	
+    	    	
+		/* Calculate average speed of driver */
+		DataStream<DriverSpeedAvgValue> driverAvgSpeedStream = geoSpeedJoinedStream
+					  .assignTimestampsAndWatermarks(createTimestampAndWatermarkAssigner2())
+					  .keyBy(createKeySelectorForJoinStream())
+					  .window(TumblingEventTimeWindows.of(Time.minutes(3)))
+					  .aggregate(new DriverAverageSpeedAggregateFunctionNew());
+							  
+		/* Filter for Speeding Drivers */
+		DataStream<DriverSpeedAvgValue> filteredSpeedingDrivers = filterStreamForSpeedingDrivers(driverAvgSpeedStream);
+		
+		/* Publish Speeding Drivers to Kafka Topic */
+		DataStream<String> filteredSpeedingDriversString = filteredSpeedingDrivers.map(new MapFunction<DriverSpeedAvgValue, String>() {
+
+			private static final long serialVersionUID = -6828758780853422014L;
 
 			@Override
-			public void invoke(TruckGeoEventEnriched value, Context context)
-					throws Exception {
-				System.err.println(value.getClass().getSimpleName());
+			public String map(DriverSpeedAvgValue value) throws Exception {
+				return new ObjectMapper().writeValueAsString(value);
 			}
-    		
-		});
-    	//geoStream.print();
-//    	geoStream.keyBy("driverId").print();
-    	
-    	
-//    	KeyedStream<Tuple2<Integer, TruckGeoEventEnriched>, Integer> keyedStream = geoStream.keyBy(createKeySelectorForGeoStream());
-//    	keyedStream.print();
-    	
-//    	KeyedStream<TruckGeoEventEnriched, Tuple> keyedStream = geoStream.keyBy("driverId");
-//    	keyedStream.print();    	
-    	
-//    	//Following Works that serialized value to TruckGeoEventEnriched object
-//		DataStream<String> tempTransform = geoStream.map(new MapFunction<TruckGeoEventEnriched, String>() {
-//
-//			private static final long serialVersionUID = -6828758780853422014L;
-//
-//			@Override
-//			public String map(TruckGeoEventEnriched value) throws Exception {
-//				return value.getDriverId() +"," + value.getTruckId();
-//			}
-//		});    	
-//		tempTransform.print();
-    	
-//    	/* create the Speed Stream Source */
-//    	DataStream<TruckSpeedEventEnriched> speedStream = createSpeedStreamSource(params, see);
-//		
-//		/* join the streams */
-//    	DataStream<TruckGeoSpeedJoin> geoSpeedJoinedStream = joinStreams(geoStream,
-//				speedStream);
-//    	
-//    	geoSpeedJoinedStream.print();
-//    	    	
-//		/* Calculate average speed of driver */
-//		DataStream<DriverSpeedAvgValue> driverAvgSpeedStream = geoSpeedJoinedStream
-//					  .assignTimestampsAndWatermarks(createTimestampAndWatermarkAssigner2())
-//					  .keyBy(createKeySelectorForJoinStream())
-//					  .window(TumblingEventTimeWindows.of(Time.minutes(3)))
-//					  .aggregate(new DriverAverageSpeedAggregateFunctionNew());
-//							  
-//		/* Filter for Speeding Drivers */
-//		DataStream<DriverSpeedAvgValue> filteredSpeedingDrivers = filterStreamForSpeedingDrivers(driverAvgSpeedStream);
-//		
-//		/* Publish Speeding Drivers to Kafka Topic */
-//		DataStream<String> filteredSpeedingDriversString = filteredSpeedingDrivers.map(new MapFunction<DriverSpeedAvgValue, String>() {
-//
-//			private static final long serialVersionUID = -6828758780853422014L;
-//
-//			@Override
-//			public String map(DriverSpeedAvgValue value) throws Exception {
-//				return new ObjectMapper().writeValueAsString(value);
-//			}
-//		});		
-//		
-//		filteredSpeedingDriversString.print();
-//		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params)).name("Kafka Speeding Drivers Alert");
+		});		
+		
+		filteredSpeedingDriversString.print();
+		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params)).name("Kafka Speeding Drivers Alert");
 		
 
     	see.execute("Trucking Streaming Anlaytics Flink App");
+
+  
 	}
 
 
@@ -158,15 +135,15 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 	}	
 
 
-//	private static DataStream<TruckGeoSpeedJoin> joinStreams(
-//			DataStream<TruckGeoEventEnriched> geoStream, DataStream<TruckSpeedEventEnriched> speedStream) {
-//    	ProcessJoinFunction<TruckGeoEventEnriched, TruckSpeedEventEnriched, TruckGeoSpeedJoin> processJoinFunction = createProcessJoinFunction();
-//		DataStream<TruckGeoSpeedJoin> geoSpeedJoinedStream = geoStream.keyBy(createKeySelectorForGeoStream())
-//    			 .intervalJoin(speedStream.keyBy(createKeySelectorForSpeedStream()))
-//    			 .between(Time.milliseconds(-500), Time.milliseconds(500))
-//    			 .process(processJoinFunction).name("Stream Join using Interval Join");
-//		return geoSpeedJoinedStream;
-//	}
+	private static DataStream<TruckGeoSpeedJoin> joinStreams(
+			DataStream<TruckGeoEventEnriched> geoStream, DataStream<TruckSpeedEventEnriched> speedStream) {
+    	ProcessJoinFunction<TruckGeoEventEnriched, TruckSpeedEventEnriched, TruckGeoSpeedJoin> processJoinFunction = createProcessJoinFunction();
+		DataStream<TruckGeoSpeedJoin> geoSpeedJoinedStream = geoStream.keyBy(createKeySelectorForGeoStream())
+    			 .intervalJoin(speedStream.keyBy(createKeySelectorForSpeedStream()))
+    			 .between(Time.milliseconds(-500), Time.milliseconds(500))
+    			 .process(processJoinFunction).name("Stream Join using Interval Join");
+		return geoSpeedJoinedStream;
+	}
 
 
 
@@ -234,24 +211,19 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 			}
 		};
 	}		
-	
-	
-	
 
-	private static KeySelector<Tuple2<Integer, TruckGeoEventEnriched>, Integer> createKeySelectorForGeoStream() {
-		return new KeySelector<Tuple2<Integer, TruckGeoEventEnriched>, Integer>() {
+	private static KeySelector<TruckGeoEventEnriched, Integer> createKeySelectorForGeoStream() {
+		return new KeySelector<TruckGeoEventEnriched, Integer>() {
 
 			private static final long serialVersionUID = 692727801129087793L;
 
-
 			@Override
-			public Integer getKey(Tuple2<Integer, TruckGeoEventEnriched> value)
-					throws Exception {
-				return value.f1.getDriverId();
+			public Integer getKey(TruckGeoEventEnriched value) throws Exception {
+				return value.getDriverId(); 
 			}
 
 		};
-	}	
+	}		
 
 	private static KeySelector<TruckSpeedEventEnriched, Integer> createKeySelectorForSpeedStream() {
 		return new KeySelector<TruckSpeedEventEnriched, Integer>() {
