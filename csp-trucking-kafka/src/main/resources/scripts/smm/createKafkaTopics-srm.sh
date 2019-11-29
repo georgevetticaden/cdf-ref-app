@@ -87,6 +87,12 @@ else
 	--partitions 3 \
 	--topic syndicate-all-geo-critical-events;
 	 
+	/usr/bin/kafka-topics \
+	--create \
+	--zookeeper $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic alerts-speeding-drivers;
        	
 				
 fi
