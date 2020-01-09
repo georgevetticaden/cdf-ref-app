@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import cloudera.cdf.csp.flink.refapp.trucking.aggregrator.DriverAverageSpeedAggregateFunctionNew;
 import cloudera.cdf.csp.flink.refapp.trucking.aggregrator.DriverSpeedAvgValue;
 import cloudera.cdf.csp.flink.refapp.trucking.dto.TruckGeoSpeedJoin;
+import cloudera.cdf.csp.flink.refapp.trucking.sink.LogSink;
 import cloudera.cdf.csp.flink.util.Utils;
 import cloudera.cdf.csp.schema.refapp.trucking.TruckGeoEventEnriched;
 import cloudera.cdf.csp.schema.refapp.trucking.TruckSpeedEventEnriched;
@@ -95,6 +96,7 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistrySecure {
 		});		
 		
 		filteredSpeedingDriversString.print();
+		filteredSpeedingDriversString.addSink(new LogSink<>()).name("Logger Sink");
 		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params)).name("Kafka Speeding Drivers Alert");
 		
 
