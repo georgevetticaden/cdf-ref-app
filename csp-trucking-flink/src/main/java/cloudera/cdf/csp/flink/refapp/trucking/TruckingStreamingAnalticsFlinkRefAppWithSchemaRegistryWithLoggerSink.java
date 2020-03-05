@@ -42,9 +42,9 @@ import cloudera.cdf.csp.schema.refapp.trucking.TruckSpeedEventEnriched;
  * @author gvetticaden
  *
  */
-public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistrySecure {
+public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistryWithLoggerSink {
 
-	private static final Logger LOG = LoggerFactory.getLogger(TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistrySecure.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistryWithLoggerSink.class);
 	private static final String SOURCE_GEO_STREAM_TOPIC = "syndicate-geo-event-avro";	
 	private static final String SOURCE_SPEED_STREAM_TOPIC = "syndicate-speed-event-avro";
 	private static final String SINK_ALERTS_SPEEDING_DRIVER_TOPIC= "alerts-speeding-drivers";
