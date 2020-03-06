@@ -19,7 +19,7 @@ CREATE TABLE truck_geo_events (
     'connector.version'      = 'universal',
     'connector.topic'        = 'syndicate-geo-event-json',
     'connector.startup-mode' = 'latest-offset',
-    'connector.properties.bootstrap.servers' = 'ec2-18-222-24-163.us-east-2.compute.amazonaws.com:9092,ec2-3-136-85-138.us-east-2.compute.amazonaws.com:9092,ec2-18-218-162-215.us-east-2.compute.amazonaws.com:9092',
+    'connector.properties.bootstrap.servers' = 'XXX',
     'connector.properties.group.id' = 'flink-sql-truck-geo-consumer',
     'connector.properties.zookeeper.connect' = 'XXX',
     'format.type' = 'json'
