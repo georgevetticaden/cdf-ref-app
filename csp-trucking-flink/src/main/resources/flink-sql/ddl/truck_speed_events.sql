@@ -7,7 +7,9 @@ CREATE TABLE truck_speed_events (
   driverName STRING,
   routeId 	 INT,
   route		 STRING,
-  speed	INT 
+  speed	INT,
+  event_time AS CAST(from_unixtime(floor(eventTimeLong/1000)) AS TIMESTAMP(3)),
+  WATERMARK FOR event_time AS event_time - INTERVAL '5' SECOND    
 ) WITH (
 	'connector.type'    	 = 'kafka',
 	'connector.version' 	 = 'universal',
