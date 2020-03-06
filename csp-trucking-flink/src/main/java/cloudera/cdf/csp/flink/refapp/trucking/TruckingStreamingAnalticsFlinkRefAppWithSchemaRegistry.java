@@ -8,7 +8,7 @@ import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
-import org.apache.flink.formats.avro.registry.cloudera.SchemaRegistryDeserializationSchema;
+import org.apache.flink.formats.avro.registry.cloudera.ClouderaRegistryKafkaDeserializationSchema;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -247,7 +247,7 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 		speedEventSourceProps.put("group.id", "flink-truck-speed-consumer");
 		
 
-		KafkaDeserializationSchema<TruckSpeedEventEnriched> schema = SchemaRegistryDeserializationSchema
+		KafkaDeserializationSchema<TruckSpeedEventEnriched> schema = ClouderaRegistryKafkaDeserializationSchema
 				.builder(TruckSpeedEventEnriched.class)
 				.setConfig(Utils.readSchemaRegistryPropertiesNonSecure(params))
 				.build();			
@@ -284,7 +284,7 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 		geoEventSourceProps.put("group.id", "flink-truck-geo-consumer");
 		
 		
-		KafkaDeserializationSchema<TruckGeoEventEnriched> schema = SchemaRegistryDeserializationSchema
+		KafkaDeserializationSchema<TruckGeoEventEnriched> schema = ClouderaRegistryKafkaDeserializationSchema
 				.builder(TruckGeoEventEnriched.class)
 				.setConfig(Utils.readSchemaRegistryPropertiesNonSecure(params))
 				.build();		

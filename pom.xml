@@ -98,7 +98,12 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>		
+        </repository>	
+        
+        <repository>
+        	<id>csa-dev</id>
+        	<url>http://cloudera-build-us-west-1.vpc.cloudera.com/s3/build/2027939/csa/1.2.0.0/maven-repository/</url>
+        </repository>	
            	
 	</repositories>    	    
 
