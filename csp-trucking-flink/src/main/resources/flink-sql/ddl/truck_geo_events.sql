@@ -19,8 +19,8 @@ CREATE TABLE truck_geo_events (
     'connector.version'      = 'universal',
     'connector.topic'        = 'syndicate-geo-event-json',
     'connector.startup-mode' = 'latest-offset',
-    'connector.properties.bootstrap.servers' = 'XXX',
+    'connector.properties.bootstrap.servers' = 'kafka-broker-1:9092',
     'connector.properties.group.id' = 'flink-sql-truck-geo-consumer',
-    'connector.properties.zookeeper.connect' = 'XXX',
     'format.type' = 'json'
 );
+
