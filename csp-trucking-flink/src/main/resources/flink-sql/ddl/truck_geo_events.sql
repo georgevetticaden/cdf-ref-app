@@ -1,3 +1,4 @@
+
 CREATE TABLE truck_geo_events (
   eventTime STRING,
   eventTimeLong BIGINT,

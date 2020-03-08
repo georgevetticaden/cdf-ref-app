@@ -1,3 +1,4 @@
+
 CREATE TABLE truck_speed_events (
   eventTime	STRING,
   eventTimeLong BIGINT,
@@ -19,3 +20,5 @@ CREATE TABLE truck_speed_events (
     'connector.properties.group.id' = 'flink-sql-truck-speed-consumer',
 	'format.type' = 'json'
 );
+
+

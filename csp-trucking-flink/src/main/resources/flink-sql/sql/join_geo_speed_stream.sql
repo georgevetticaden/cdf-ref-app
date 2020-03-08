@@ -1,3 +1,4 @@
+
 SELECT geo_events.eventTime, geo_events.event_time, 'joined_stream' as eventSource,  
 	   geo_events.truckId , geo_events.driverId , geo_events.driverName, 
 	   speed_events.speed, geo_events.routeId, geo_events.route,
@@ -11,3 +12,5 @@ where
 	geo_events.event_time BETWEEN 
 		speed_events.event_time - INTERVAL '1' SECOND AND 
 		speed_events.event_time + INTERVAL '1' SECOND;
+		
+		

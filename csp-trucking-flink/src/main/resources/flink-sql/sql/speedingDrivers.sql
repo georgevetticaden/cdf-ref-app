@@ -1,3 +1,4 @@
+
 SELECT driverAvgSpeed.driverId, driverAvgSpeed.driverName, driverAvgSpeed.route,
 	   driverAvgSpeed.driverAvgSpeed
 FROM
@@ -21,3 +22,5 @@ FROM
 ) driverAvgSpeed
 WHERE
 driverAvgSpeed.driverAvgSpeed > 80;
+
+

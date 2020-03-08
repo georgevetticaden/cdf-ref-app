@@ -1,3 +1,4 @@
+
 SELECT TUMBLE_END(geo_events.event_time, INTERVAL '3' MINUTE) as windowEnd,
 	   geo_events.driverId,geo_events.driverName,geo_events.route,
 	   avg(speed_events.speed) as driverAvgSpeed
@@ -14,3 +15,4 @@ TUMBLE(geo_events.event_time, INTERVAL '3' MINUTE),
 geo_events.driverId,
 geo_events.driverName,
 geo_events.route;
+
