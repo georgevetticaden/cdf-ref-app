@@ -1,3 +1,4 @@
+
 CREATE TABLE speeding_driver_alerts (
     alert_time    TIMESTAMP(3),
     driverId INT,
@@ -8,6 +9,8 @@ CREATE TABLE speeding_driver_alerts (
     'connector.type'         = 'kafka',
     'connector.version'      = 'universal',
     'connector.topic'        = 'alerts-speeding-drivers',
-    'connector.properties.bootstrap.servers' = 'XXX',
+    'connector.properties.bootstrap.servers' = 'kafka-broker-1:9092',
     'format.type' = 'json'
 );
+
+

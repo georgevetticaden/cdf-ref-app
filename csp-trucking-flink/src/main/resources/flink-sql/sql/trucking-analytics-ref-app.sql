@@ -1,3 +1,4 @@
+
 INSERT INTO speeding_driver_alerts
 SELECT windowEnd, driverAvgSpeed.driverId, driverAvgSpeed.driverName, driverAvgSpeed.route,
        driverAvgSpeed.driverAvgSpeed
@@ -22,3 +23,5 @@ FROM
 ) driverAvgSpeed
 WHERE
 driverAvgSpeed.driverAvgSpeed > 80;
+
+
