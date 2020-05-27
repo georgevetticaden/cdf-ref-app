@@ -31,7 +31,7 @@ public  final class TruckSchemaConfig {
 	
 	
 	/* Schema Group Name */
-	public static final String KAFKA_SCHEMA_GROUP_NAME = "truck-sensors-kafka";
+	public static final String KAFKA_SCHEMA_GROUP_NAME = "Trucking-Iot-App";
 	
 	/* Schema names for the two streams of data */
 	public static final String KAFKA_TRUCK_SPEED_EVENT_SCHEMA_NAME = "truck_speed_events_avro";
