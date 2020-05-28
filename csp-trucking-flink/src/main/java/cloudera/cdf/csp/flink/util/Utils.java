@@ -23,10 +23,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 import static cloudera.cdf.csp.flink.util.Constants.KAFKA_PREFIX;
 import static cloudera.cdf.csp.flink.util.Constants.K_KEYSTORE_PASSWORD;
@@ -72,15 +72,22 @@ public class Utils {
 	}
 
 	public static Map<String, Object> readSchemaRegistryProperties(ParameterTool params) {
-		//Setting up schema registry client
-		Map<String, String> sslClientConfig = new HashMap<>();
-		sslClientConfig.put(K_TRUSTSTORE_PATH, params.getRequired(K_SCHEMA_REG_SSL_CLIENT_KEY + "." + K_TRUSTSTORE_PATH));
-		sslClientConfig.put(K_TRUSTSTORE_PASSWORD, params.getRequired(K_SCHEMA_REG_SSL_CLIENT_KEY + "." + K_TRUSTSTORE_PASSWORD));
-		sslClientConfig.put(K_KEYSTORE_PASSWORD, ""); //ugly hack needed for SchemaRegistryClient
+		
 
+		//See if there are parameters to talk to secure SR
+		Map<String, String> sslClientConfig = null;
+		if(StringUtils.isNotEmpty(params.get(K_SCHEMA_REG_SSL_CLIENT_KEY + "." + K_TRUSTSTORE_PATH))) {
+			sslClientConfig = new HashMap<String, String>();
+			sslClientConfig.put(K_TRUSTSTORE_PATH, params.get(K_SCHEMA_REG_SSL_CLIENT_KEY + "." + K_TRUSTSTORE_PATH));
+			//Don't think we need password
+			//sslClientConfig.put(K_TRUSTSTORE_PASSWORD, params.get(K_SCHEMA_REG_SSL_CLIENT_KEY + "." + K_TRUSTSTORE_PASSWORD));
+		}
+
+		//Setting up schema registry client
 		Map<String, Object> schemaRegistryConf = new HashMap<>();
-		schemaRegistryConf.put(K_SCHEMA_REG_URL, params.getRequired(K_SCHEMA_REG_URL));
-		schemaRegistryConf.put(K_SCHEMA_REG_SSL_CLIENT_KEY, sslClientConfig);
+		schemaRegistryConf.put(K_SCHEMA_REG_URL, params.get(K_SCHEMA_REG_URL));
+		if(sslClientConfig != null)
+			schemaRegistryConf.put(K_SCHEMA_REG_SSL_CLIENT_KEY, sslClientConfig);
 
 		LOG.info("### Schema Registry parameters:");
 		for (String key : schemaRegistryConf.keySet()) {
@@ -89,17 +96,17 @@ public class Utils {
 		return schemaRegistryConf;
 	}
 	
-	public static Map<String, Object> readSchemaRegistryPropertiesNonSecure(ParameterTool params) {
-
-
-		Map<String, Object> schemaRegistryConf = new HashMap<>();
-		schemaRegistryConf.put(K_SCHEMA_REG_URL, params.getRequired(K_SCHEMA_REG_URL));
-		LOG.info("### Schema Registry parameters:");
-		for (String key : schemaRegistryConf.keySet()) {
-			LOG.info("Schema Registry param: {}={}", key, schemaRegistryConf.get(key));
-		}
-		return schemaRegistryConf;
-	}	
+//	public static Map<String, Object> readSchemaRegistryPropertiesNonSecure(ParameterTool params) {
+//
+//
+//		Map<String, Object> schemaRegistryConf = new HashMap<>();
+//		schemaRegistryConf.put(K_SCHEMA_REG_URL, params.getRequired(K_SCHEMA_REG_URL));
+//		LOG.info("### Schema Registry parameters:");
+//		for (String key : schemaRegistryConf.keySet()) {
+//			LOG.info("Schema Registry param: {}={}", key, schemaRegistryConf.get(key));
+//		}
+//		return schemaRegistryConf;
+//	}	
 	
 	
 

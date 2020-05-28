@@ -249,7 +249,7 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 
 		KafkaDeserializationSchema<TruckSpeedEventEnriched> schema = ClouderaRegistryKafkaDeserializationSchema
 				.builder(TruckSpeedEventEnriched.class)
-				.setConfig(Utils.readSchemaRegistryPropertiesNonSecure(params))
+				.setConfig(Utils.readSchemaRegistryProperties(params))
 				.build();			
 
 		FlinkKafkaConsumer<TruckSpeedEventEnriched> speedSource = new FlinkKafkaConsumer<TruckSpeedEventEnriched>(SOURCE_SPEED_STREAM_TOPIC, schema, speedEventSourceProps);
@@ -286,7 +286,7 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 		
 		KafkaDeserializationSchema<TruckGeoEventEnriched> schema = ClouderaRegistryKafkaDeserializationSchema
 				.builder(TruckGeoEventEnriched.class)
-				.setConfig(Utils.readSchemaRegistryPropertiesNonSecure(params))
+				.setConfig(Utils.readSchemaRegistryProperties(params))
 				.build();		
 
 		FlinkKafkaConsumer<TruckGeoEventEnriched> geoSource = new FlinkKafkaConsumer<TruckGeoEventEnriched>(SOURCE_GEO_STREAM_TOPIC, schema, geoEventSourceProps);
