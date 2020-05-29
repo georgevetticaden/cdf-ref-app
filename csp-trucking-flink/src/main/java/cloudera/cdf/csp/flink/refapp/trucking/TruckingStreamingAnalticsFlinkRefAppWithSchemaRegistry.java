@@ -94,7 +94,7 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 			}
 		});		
 		
-		filteredSpeedingDriversString.print();
+		filteredSpeedingDriversString.print("Speeding Drivers");
 		filteredSpeedingDriversString.addSink(constructSpeedingDriversKafkaSink(params)).name("Kafka Speeding Drivers Alert");
 		
 
