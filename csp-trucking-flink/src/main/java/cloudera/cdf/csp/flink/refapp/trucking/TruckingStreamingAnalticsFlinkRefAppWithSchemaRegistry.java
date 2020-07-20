@@ -46,9 +46,12 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 	private static final Logger LOG = LoggerFactory.getLogger(TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry.class);
 	private static final String SOURCE_GEO_STREAM_TOPIC = "syndicate-geo-event-avro";	
 	private static final String SOURCE_SPEED_STREAM_TOPIC = "syndicate-speed-event-avro";
-	private static final String SINK_ALERTS_SPEEDING_DRIVER_TOPIC= "alerts-speeding-drivers";
 	
-	protected static final double HIGH_SPEED = 80;	
+	private static final String SINK_ALERTS_SPEEDING_DRIVER_TOPIC= "alerts-speeding-drivers";
+	private static final String SINK_DRIVER_VIOLATION_EVENTS_TOPIC = "driver-violation-events";	
+	
+	protected static final double HIGH_SPEED = 80;
+	
 	
 	public static void main(String[] args) throws Exception {
         final ParameterTool params = Utils.parseArgs(args);
@@ -72,8 +75,22 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
     	DataStream<TruckGeoSpeedJoin> geoSpeedJoinedStream = joinStreams(geoStream,
 				speedStream);
     	
+    	/* filter events of interest */
+    	DataStream<TruckGeoSpeedJoin> filteredViolationEvents = filterForViolationEvents(geoSpeedJoinedStream);
+    	
+    	/* Publish Violation Events to Kafka Topic */
+		DataStream<String> filteredViolationEventsString = filteredViolationEvents.map(new MapFunction<TruckGeoSpeedJoin, String>() {
+
+			private static final long serialVersionUID = -4614067429872560010L;
+			
+			@Override
+			public String map(TruckGeoSpeedJoin value) throws Exception {
+				return new ObjectMapper().writeValueAsString(value);
+			}
+		});	    
+		filteredViolationEventsString.addSink(constructViolationEventsKafkaSink(params)).name("Kafka Violation Events");
     	    	
-		/* Calculate average speed of driver */
+		/* Calculate average speed of driver from the join streams */
 		DataStream<DriverSpeedAvgValue> driverAvgSpeedStream = geoSpeedJoinedStream
 					  .assignTimestampsAndWatermarks(createTimestampAndWatermarkAssigner2())
 					  .keyBy(createKeySelectorForJoinStream())
@@ -105,6 +122,25 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 
 
 	
+	private static DataStream<TruckGeoSpeedJoin> filterForViolationEvents(
+			DataStream<TruckGeoSpeedJoin> geoSpeedJoinedStream) {
+
+		FilterFunction<TruckGeoSpeedJoin> filter = new FilterFunction<TruckGeoSpeedJoin>() {
+
+
+			private static final long serialVersionUID = 415980383395382850L;
+
+			@Override
+			public boolean filter(TruckGeoSpeedJoin value) throws Exception {
+				return !"Normal".equals(value.getEventtype());
+			}
+		};
+		DataStream<TruckGeoSpeedJoin> violationEventsJoinedStream = geoSpeedJoinedStream.filter(filter).name("Filtering for Violation Events in JoinedStream");
+		return violationEventsJoinedStream;		
+	}
+
+
+
 	private static AssignerWithPeriodicWatermarks<TruckGeoSpeedJoin> createTimestampAndWatermarkAssigner2() {
 		return new BoundedOutOfOrdernessTimestampExtractor<TruckGeoSpeedJoin> (Time.seconds(5)) {
 
@@ -303,6 +339,17 @@ public class TruckingStreamingAnalticsFlinkRefAppWithSchemaRegistry {
 		FlinkKafkaProducer<String> flinkKafkaProducer = new FlinkKafkaProducer<String>(SINK_ALERTS_SPEEDING_DRIVER_TOPIC, new SimpleStringSchema(), speedingDriversSinkProps);
 		return flinkKafkaProducer;
 	}
+	
+	public static  FlinkKafkaProducer<String> constructViolationEventsKafkaSink(ParameterTool params) {
+		
+		//Create new properties object and add additional props
+		Properties driverViolationSinkProps = new Properties();	
+		driverViolationSinkProps.putAll(Utils.readKafkaProperties(params));
+		driverViolationSinkProps.put("client.id", "flink-truck-alerts-producer");
+
+		FlinkKafkaProducer<String> flinkKafkaProducer = new FlinkKafkaProducer<String>(SINK_DRIVER_VIOLATION_EVENTS_TOPIC, new SimpleStringSchema(), driverViolationSinkProps);
+		return flinkKafkaProducer;
+	}	
 	
 	/* Not using for now */
 	private static DataStream<ObjectNode> filterStream(DataStream<ObjectNode> geoSpeedJoinedStream) {
