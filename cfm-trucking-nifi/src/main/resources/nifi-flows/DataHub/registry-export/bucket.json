@@ -1,0 +1,18 @@
+{
+  "allowBundleRedeploy": false,
+  "allowPublicRead": false,
+  "createdTimestamp": 1595281450568,
+  "identifier": "a206f773-5986-4f95-b44d-942f770b0761",
+  "link": {
+    "href": "buckets/a206f773-5986-4f95-b44d-942f770b0761",
+    "params": {
+      "rel": "self"
+    }
+  },
+  "name": "Default",
+  "permissions": {
+    "canDelete": true,
+    "canRead": true,
+    "canWrite": true
+  }
+}
