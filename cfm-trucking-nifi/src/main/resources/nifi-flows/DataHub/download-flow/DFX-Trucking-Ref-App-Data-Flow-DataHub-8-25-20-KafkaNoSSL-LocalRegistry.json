@@ -1,6 +1,6 @@
 {
 	"flowContents":{
-		"identifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+		"identifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 		"name":"NiFi Flow",
 		"comments":"",
 		"position":{
@@ -83,7 +83,7 @@
 				],
 				"scheduledState":"ENABLED",
 				"componentType":"PROCESSOR",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"94551b4c-4bd4-3b59-a416-979a93fffd57",
@@ -182,7 +182,7 @@
 				],
 				"scheduledState":"ENABLED",
 				"componentType":"PROCESSOR",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"0e0b760e-2561-3236-bb8e-4742878d2d25",
@@ -253,7 +253,204 @@
 				],
 				"scheduledState":"ENABLED",
 				"componentType":"PROCESSOR",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
+			},
+			{
+				"identifier":"b1039fe0-f01f-348d-aac2-63ee61ab27ad",
+				"name":"US Central Truck Fleet - Kafka Gateway",
+				"comments":"",
+				"position":{
+					"x":440.0,
+					"y":-112.0
+				},
+				"bundle":{
+					"group":"org.apache.nifi",
+					"artifact":"nifi-kafka-2-0-nar",
+					"version":"1.10.0.2.0.2.0-70"
+				},
+				"style":{
+					
+				},
+				"type":"org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0",
+				"properties":{
+					"header-name-regex":"schema.*",
+					"sasl.username":"#{Kafka Service Account}",
+					"max.poll.records":"1000000",
+					"record-writer":"293883d2-0e7f-3861-bf29-20bbd3c5f98e",
+					"group.id":"nifi-truck-sensors-central-2",
+					"bootstrap.servers":"#{Kafka Broker Endpoint}",
+					"topic_type":"names",
+					"sasl.kerberos.principal":null,
+					"sasl.kerberos.service.name":null,
+					"security.protocol":"SASL_PLAINTEXT",
+					"kerberos-credentials-service":null,
+					"ssl.context.service":null,
+					"max-uncommit-offset-wait":"30 secs",
+					"sasl.mechanism":"PLAIN",
+					"sasl.token.auth":"false",
+					"honor-transactions":"false",
+					"sasl.kerberos.keytab":null,
+					"Communications Timeout":"60 secs",
+					"topic":"#{Kafka Source Topic}",
+					"record-reader":"b78f4414-29c0-3dbf-b2c2-e8c8c90690bc",
+					"message-header-encoding":"UTF-8",
+					"sasl.password":"#{Kafka Service Account Password}",
+					"auto.offset.reset":"latest"
+				},
+				"propertyDescriptors":{
+					"header-name-regex":{
+						"name":"header-name-regex",
+						"displayName":"Headers to Add as Attributes (Regex)",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"sasl.username":{
+						"name":"sasl.username",
+						"displayName":"Username",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"max.poll.records":{
+						"name":"max.poll.records",
+						"displayName":"Max Poll Records",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"record-writer":{
+						"name":"record-writer",
+						"displayName":"Record Writer",
+						"identifiesControllerService":true,
+						"sensitive":false
+					},
+					"group.id":{
+						"name":"group.id",
+						"displayName":"Group ID",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"bootstrap.servers":{
+						"name":"bootstrap.servers",
+						"displayName":"Kafka Brokers",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"topic_type":{
+						"name":"topic_type",
+						"displayName":"Topic Name Format",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"sasl.kerberos.principal":{
+						"name":"sasl.kerberos.principal",
+						"displayName":"Kerberos Principal",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"sasl.kerberos.service.name":{
+						"name":"sasl.kerberos.service.name",
+						"displayName":"Kerberos Service Name",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"security.protocol":{
+						"name":"security.protocol",
+						"displayName":"Security Protocol",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"kerberos-credentials-service":{
+						"name":"kerberos-credentials-service",
+						"displayName":"Kerberos Credentials Service",
+						"identifiesControllerService":true,
+						"sensitive":false
+					},
+					"ssl.context.service":{
+						"name":"ssl.context.service",
+						"displayName":"SSL Context Service",
+						"identifiesControllerService":true,
+						"sensitive":false
+					},
+					"max-uncommit-offset-wait":{
+						"name":"max-uncommit-offset-wait",
+						"displayName":"Max Uncommitted Time",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"sasl.mechanism":{
+						"name":"sasl.mechanism",
+						"displayName":"SASL Mechanism",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"sasl.token.auth":{
+						"name":"sasl.token.auth",
+						"displayName":"Token Auth",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"honor-transactions":{
+						"name":"honor-transactions",
+						"displayName":"Honor Transactions",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"sasl.kerberos.keytab":{
+						"name":"sasl.kerberos.keytab",
+						"displayName":"Kerberos Keytab",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"Communications Timeout":{
+						"name":"Communications Timeout",
+						"displayName":"Communications Timeout",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"topic":{
+						"name":"topic",
+						"displayName":"Topic Name(s)",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"record-reader":{
+						"name":"record-reader",
+						"displayName":"Record Reader",
+						"identifiesControllerService":true,
+						"sensitive":false
+					},
+					"message-header-encoding":{
+						"name":"message-header-encoding",
+						"displayName":"Message Header Encoding",
+						"identifiesControllerService":false,
+						"sensitive":false
+					},
+					"sasl.password":{
+						"name":"sasl.password",
+						"displayName":"Password",
+						"identifiesControllerService":false,
+						"sensitive":true
+					},
+					"auto.offset.reset":{
+						"name":"auto.offset.reset",
+						"displayName":"Offset Reset",
+						"identifiesControllerService":false,
+						"sensitive":false
+					}
+				},
+				"schedulingPeriod":"0 sec",
+				"schedulingStrategy":"TIMER_DRIVEN",
+				"executionNode":"ALL",
+				"penaltyDuration":"30 sec",
+				"yieldDuration":"1 sec",
+				"bulletinLevel":"WARN",
+				"runDurationMillis":0,
+				"concurrentlySchedulableTaskCount":1,
+				"autoTerminatedRelationships":[
+					"parse.failure"
+				],
+				"scheduledState":"ENABLED",
+				"componentType":"PROCESSOR",
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"65dca8c5-fc0e-3cac-99dc-c715681f5a2e",
@@ -479,204 +676,7 @@
 				],
 				"scheduledState":"ENABLED",
 				"componentType":"PROCESSOR",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
-			},
-			{
-				"identifier":"b1039fe0-f01f-348d-aac2-63ee61ab27ad",
-				"name":"US Central Truck Fleet - Kafka Gateway",
-				"comments":"",
-				"position":{
-					"x":440.0,
-					"y":-112.0
-				},
-				"bundle":{
-					"group":"org.apache.nifi",
-					"artifact":"nifi-kafka-2-0-nar",
-					"version":"1.10.0.2.0.2.0-70"
-				},
-				"style":{
-					
-				},
-				"type":"org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0",
-				"properties":{
-					"header-name-regex":"schema.*",
-					"sasl.username":"#{Kafka Service Account}",
-					"max.poll.records":"10000",
-					"record-writer":"293883d2-0e7f-3861-bf29-20bbd3c5f98e",
-					"group.id":"nifi-truck-sensors-central-2",
-					"bootstrap.servers":"#{Kafka Broker Endpoint}",
-					"topic_type":"names",
-					"sasl.kerberos.principal":null,
-					"sasl.kerberos.service.name":null,
-					"security.protocol":"SASL_PLAINTEXT",
-					"kerberos-credentials-service":null,
-					"ssl.context.service":null,
-					"max-uncommit-offset-wait":"10 secs",
-					"sasl.mechanism":"PLAIN",
-					"sasl.token.auth":"false",
-					"honor-transactions":"false",
-					"sasl.kerberos.keytab":null,
-					"Communications Timeout":"60 secs",
-					"topic":"#{Kafka Source Topic}",
-					"record-reader":"b78f4414-29c0-3dbf-b2c2-e8c8c90690bc",
-					"message-header-encoding":"UTF-8",
-					"sasl.password":"#{Kafka Service Account Password}",
-					"auto.offset.reset":"latest"
-				},
-				"propertyDescriptors":{
-					"header-name-regex":{
-						"name":"header-name-regex",
-						"displayName":"Headers to Add as Attributes (Regex)",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"sasl.username":{
-						"name":"sasl.username",
-						"displayName":"Username",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"max.poll.records":{
-						"name":"max.poll.records",
-						"displayName":"Max Poll Records",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"record-writer":{
-						"name":"record-writer",
-						"displayName":"Record Writer",
-						"identifiesControllerService":true,
-						"sensitive":false
-					},
-					"group.id":{
-						"name":"group.id",
-						"displayName":"Group ID",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"bootstrap.servers":{
-						"name":"bootstrap.servers",
-						"displayName":"Kafka Brokers",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"topic_type":{
-						"name":"topic_type",
-						"displayName":"Topic Name Format",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"sasl.kerberos.principal":{
-						"name":"sasl.kerberos.principal",
-						"displayName":"Kerberos Principal",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"sasl.kerberos.service.name":{
-						"name":"sasl.kerberos.service.name",
-						"displayName":"Kerberos Service Name",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"security.protocol":{
-						"name":"security.protocol",
-						"displayName":"Security Protocol",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"kerberos-credentials-service":{
-						"name":"kerberos-credentials-service",
-						"displayName":"Kerberos Credentials Service",
-						"identifiesControllerService":true,
-						"sensitive":false
-					},
-					"ssl.context.service":{
-						"name":"ssl.context.service",
-						"displayName":"SSL Context Service",
-						"identifiesControllerService":true,
-						"sensitive":false
-					},
-					"max-uncommit-offset-wait":{
-						"name":"max-uncommit-offset-wait",
-						"displayName":"Max Uncommitted Time",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"sasl.mechanism":{
-						"name":"sasl.mechanism",
-						"displayName":"SASL Mechanism",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"sasl.token.auth":{
-						"name":"sasl.token.auth",
-						"displayName":"Token Auth",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"honor-transactions":{
-						"name":"honor-transactions",
-						"displayName":"Honor Transactions",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"sasl.kerberos.keytab":{
-						"name":"sasl.kerberos.keytab",
-						"displayName":"Kerberos Keytab",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"Communications Timeout":{
-						"name":"Communications Timeout",
-						"displayName":"Communications Timeout",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"topic":{
-						"name":"topic",
-						"displayName":"Topic Name(s)",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"record-reader":{
-						"name":"record-reader",
-						"displayName":"Record Reader",
-						"identifiesControllerService":true,
-						"sensitive":false
-					},
-					"message-header-encoding":{
-						"name":"message-header-encoding",
-						"displayName":"Message Header Encoding",
-						"identifiesControllerService":false,
-						"sensitive":false
-					},
-					"sasl.password":{
-						"name":"sasl.password",
-						"displayName":"Password",
-						"identifiesControllerService":false,
-						"sensitive":true
-					},
-					"auto.offset.reset":{
-						"name":"auto.offset.reset",
-						"displayName":"Offset Reset",
-						"identifiesControllerService":false,
-						"sensitive":false
-					}
-				},
-				"schedulingPeriod":"0 sec",
-				"schedulingStrategy":"TIMER_DRIVEN",
-				"executionNode":"ALL",
-				"penaltyDuration":"30 sec",
-				"yieldDuration":"1 sec",
-				"bulletinLevel":"WARN",
-				"runDurationMillis":0,
-				"concurrentlySchedulableTaskCount":1,
-				"autoTerminatedRelationships":[
-					"parse.failure"
-				],
-				"scheduledState":"ENABLED",
-				"componentType":"PROCESSOR",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"20945abd-1bd1-3df1-b00d-cdb350ae6489",
@@ -755,7 +755,7 @@
 				],
 				"scheduledState":"ENABLED",
 				"componentType":"PROCESSOR",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"84e7b583-5ebb-3bed-afd6-c6bfb21f9308",
@@ -827,7 +827,7 @@
 				],
 				"scheduledState":"ENABLED",
 				"componentType":"PROCESSOR",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"e95a6f3a-29b3-39ae-a9ef-93af4bebfb26",
@@ -1053,7 +1053,7 @@
 				],
 				"scheduledState":"ENABLED",
 				"componentType":"PROCESSOR",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			}
 		],
 		"inputPorts":[
@@ -1069,14 +1069,14 @@
 				"source":{
 					"id":"b1039fe0-f01f-348d-aac2-63ee61ab27ad",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"US Central Truck Fleet - Kafka Gateway",
 					"comments":""
 				},
 				"destination":{
 					"id":"20945abd-1bd1-3df1-b00d-cdb350ae6489",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Route Telemetry Events",
 					"comments":""
 				},
@@ -1098,7 +1098,7 @@
 				"partitioningAttribute":"",
 				"loadBalanceCompression":"DO_NOT_COMPRESS",
 				"componentType":"CONNECTION",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"b3e6f78e-97ae-3b6c-82f7-c88c1200fb88",
@@ -1106,14 +1106,14 @@
 				"source":{
 					"id":"20945abd-1bd1-3df1-b00d-cdb350ae6489",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Route Telemetry Events",
 					"comments":""
 				},
 				"destination":{
 					"id":"2edeab05-9b59-31f0-beb2-71f23a20d125",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Specify Schema",
 					"comments":""
 				},
@@ -1135,7 +1135,7 @@
 				"partitioningAttribute":"",
 				"loadBalanceCompression":"DO_NOT_COMPRESS",
 				"componentType":"CONNECTION",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"ae90b68e-3507-309d-b188-bd34f68b5087",
@@ -1143,14 +1143,14 @@
 				"source":{
 					"id":"0e0b760e-2561-3236-bb8e-4742878d2d25",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Specify Schema",
 					"comments":""
 				},
 				"destination":{
 					"id":"94551b4c-4bd4-3b59-a416-979a93fffd57",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"ReverseGeoLookup",
 					"comments":""
 				},
@@ -1172,7 +1172,7 @@
 				"partitioningAttribute":"",
 				"loadBalanceCompression":"DO_NOT_COMPRESS",
 				"componentType":"CONNECTION",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"455be4f8-b954-3d28-866c-7876036e142a",
@@ -1180,14 +1180,14 @@
 				"source":{
 					"id":"84e7b583-5ebb-3bed-afd6-c6bfb21f9308",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Filter Speed Events",
 					"comments":""
 				},
 				"destination":{
 					"id":"e95a6f3a-29b3-39ae-a9ef-93af4bebfb26",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Kafka-Truck-Speed-Events-JSON",
 					"comments":""
 				},
@@ -1209,7 +1209,7 @@
 				"partitioningAttribute":"",
 				"loadBalanceCompression":"DO_NOT_COMPRESS",
 				"componentType":"CONNECTION",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"e4520297-9e53-3dee-a443-13ffd53d6983",
@@ -1217,14 +1217,14 @@
 				"source":{
 					"id":"20945abd-1bd1-3df1-b00d-cdb350ae6489",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Route Telemetry Events",
 					"comments":""
 				},
 				"destination":{
 					"id":"0e0b760e-2561-3236-bb8e-4742878d2d25",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Specify Schema",
 					"comments":""
 				},
@@ -1246,7 +1246,7 @@
 				"partitioningAttribute":"",
 				"loadBalanceCompression":"DO_NOT_COMPRESS",
 				"componentType":"CONNECTION",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"1e85b0a2-ba63-3d64-b87e-e3eba75b7438",
@@ -1254,14 +1254,14 @@
 				"source":{
 					"id":"2edeab05-9b59-31f0-beb2-71f23a20d125",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Specify Schema",
 					"comments":""
 				},
 				"destination":{
 					"id":"84e7b583-5ebb-3bed-afd6-c6bfb21f9308",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Filter Speed Events",
 					"comments":""
 				},
@@ -1283,7 +1283,7 @@
 				"partitioningAttribute":"",
 				"loadBalanceCompression":"DO_NOT_COMPRESS",
 				"componentType":"CONNECTION",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"4595db3c-309a-3c66-bec1-3571a4dfaee2",
@@ -1291,14 +1291,14 @@
 				"source":{
 					"id":"94551b4c-4bd4-3b59-a416-979a93fffd57",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"ReverseGeoLookup",
 					"comments":""
 				},
 				"destination":{
 					"id":"65dca8c5-fc0e-3cac-99dc-c715681f5a2e",
 					"type":"PROCESSOR",
-					"groupId":"67f7ac05-ec89-3319-bd1c-5c83e149327d",
+					"groupId":"1c146ebc-6c96-38d1-9549-f03b02a38d35",
 					"name":"Kafka-Truck-Events-JSON",
 					"comments":""
 				},
@@ -1320,7 +1320,7 @@
 				"partitioningAttribute":"",
 				"loadBalanceCompression":"DO_NOT_COMPRESS",
 				"componentType":"CONNECTION",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			}
 		],
 		"labels":[
@@ -1390,7 +1390,7 @@
 					}
 				},
 				"componentType":"CONTROLLER_SERVICE",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"293883d2-0e7f-3861-bf29-20bbd3c5f98e",
@@ -1427,7 +1427,7 @@
 					","schema-registry":"9d47282b-22be-326f-8541-7e1eb4759e5c","TimeFormat":null,"CommentMarker":null,"schema-access-strategy":"schema-name","schema-protocol-version":"1","schema-version":null,"csvutils-character-set":"UTF-8","schema-text":"${
 						avro.schema
 					}
-					","QuoteMode":"MINIMAL","IncludeTrailingDelimiter":"true"},"propertyDescriptors":{"schema-branch":{"name":"schema-branch","displayName":"SchemaBranch","identifiesControllerService":false,"sensitive":false},"CSVFormat":{"name":"CSVFormat","displayName":"CSVFormat","identifiesControllerService":false,"sensitive":false},"QuoteCharacter":{"name":"QuoteCharacter","displayName":"QuoteCharacter","identifiesControllerService":false,"sensitive":false},"IncludeHeaderLine":{"name":"IncludeHeaderLine","displayName":"IncludeHeaderLine","identifiesControllerService":false,"sensitive":false},"ValueSeparator":{"name":"ValueSeparator","displayName":"ValueSeparator","identifiesControllerService":false,"sensitive":false},"schema-cache":{"name":"schema-cache","displayName":"SchemaCache","identifiesControllerService":true,"sensitive":false},"RecordSeparator":{"name":"RecordSeparator","displayName":"RecordSeparator","identifiesControllerService":false,"sensitive":false},"TimestampFormat":{"name":"TimestampFormat","displayName":"TimestampFormat","identifiesControllerService":false,"sensitive":false},"EscapeCharacter":{"name":"EscapeCharacter","displayName":"EscapeCharacter","identifiesControllerService":false,"sensitive":false},"DateFormat":{"name":"DateFormat","displayName":"DateFormat","identifiesControllerService":false,"sensitive":false},"SchemaWriteStrategy":{"name":"SchemaWriteStrategy","displayName":"SchemaWriteStrategy","identifiesControllerService":false,"sensitive":false},"NullString":{"name":"NullString","displayName":"NullString","identifiesControllerService":false,"sensitive":false},"TrimFields":{"name":"TrimFields","displayName":"TrimFields","identifiesControllerService":false,"sensitive":false},"schema-name":{"name":"schema-name","displayName":"SchemaName","identifiesControllerService":false,"sensitive":false},"schema-registry":{"name":"schema-registry","displayName":"SchemaRegistry","identifiesControllerService":true,"sensitive":false},"TimeFormat":{"name":"TimeFormat","displayName":"TimeFormat","identifiesControllerService":false,"sensitive":false},"CommentMarker":{"name":"CommentMarker","displayName":"CommentMarker","identifiesControllerService":false,"sensitive":false},"schema-access-strategy":{"name":"schema-access-strategy","displayName":"SchemaAccessStrategy","identifiesControllerService":false,"sensitive":false},"schema-protocol-version":{"name":"schema-protocol-version","displayName":"SchemaProtocolVersion","identifiesControllerService":false,"sensitive":false},"schema-version":{"name":"schema-version","displayName":"SchemaVersion","identifiesControllerService":false,"sensitive":false},"csvutils-character-set":{"name":"csvutils-character-set","displayName":"CharacterSet","identifiesControllerService":false,"sensitive":false},"schema-text":{"name":"schema-text","displayName":"SchemaText","identifiesControllerService":false,"sensitive":false},"QuoteMode":{"name":"QuoteMode","displayName":"QuoteMode","identifiesControllerService":false,"sensitive":false},"IncludeTrailingDelimiter":{"name":"IncludeTrailingDelimiter","displayName":"IncludeTrailingDelimiter","identifiesControllerService":false,"sensitive":false}},"componentType":"CONTROLLER_SERVICE","groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"},{"identifier":"b78f4414-29c0-3dbf-b2c2-e8c8c90690bc","name":"CSVReader-HWXSRRegistry","comments":"","type":"org.apache.nifi.csv.CSVReader","bundle":{"group":"org.apache.nifi","artifact":"nifi-record-serialization-services-nar","version":"1.10.0.2.0.2.0-70"},"controllerServiceApis":[{"type":"org.apache.nifi.serialization.RecordReaderFactory","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-services-api-nar","version":"1.10.0.2.0.2.0-70"}}],"properties":{"ignore-csv-header":"false","schema-branch":null,"CSVFormat":"custom","QuoteCharacter":"\"","ValueSeparator":"|","TimestampFormat":null,"EscapeCharacter":"\\",
+					","QuoteMode":"MINIMAL","IncludeTrailingDelimiter":"true"},"propertyDescriptors":{"schema-branch":{"name":"schema-branch","displayName":"SchemaBranch","identifiesControllerService":false,"sensitive":false},"CSVFormat":{"name":"CSVFormat","displayName":"CSVFormat","identifiesControllerService":false,"sensitive":false},"QuoteCharacter":{"name":"QuoteCharacter","displayName":"QuoteCharacter","identifiesControllerService":false,"sensitive":false},"IncludeHeaderLine":{"name":"IncludeHeaderLine","displayName":"IncludeHeaderLine","identifiesControllerService":false,"sensitive":false},"ValueSeparator":{"name":"ValueSeparator","displayName":"ValueSeparator","identifiesControllerService":false,"sensitive":false},"schema-cache":{"name":"schema-cache","displayName":"SchemaCache","identifiesControllerService":true,"sensitive":false},"RecordSeparator":{"name":"RecordSeparator","displayName":"RecordSeparator","identifiesControllerService":false,"sensitive":false},"TimestampFormat":{"name":"TimestampFormat","displayName":"TimestampFormat","identifiesControllerService":false,"sensitive":false},"EscapeCharacter":{"name":"EscapeCharacter","displayName":"EscapeCharacter","identifiesControllerService":false,"sensitive":false},"DateFormat":{"name":"DateFormat","displayName":"DateFormat","identifiesControllerService":false,"sensitive":false},"SchemaWriteStrategy":{"name":"SchemaWriteStrategy","displayName":"SchemaWriteStrategy","identifiesControllerService":false,"sensitive":false},"NullString":{"name":"NullString","displayName":"NullString","identifiesControllerService":false,"sensitive":false},"TrimFields":{"name":"TrimFields","displayName":"TrimFields","identifiesControllerService":false,"sensitive":false},"schema-name":{"name":"schema-name","displayName":"SchemaName","identifiesControllerService":false,"sensitive":false},"schema-registry":{"name":"schema-registry","displayName":"SchemaRegistry","identifiesControllerService":true,"sensitive":false},"TimeFormat":{"name":"TimeFormat","displayName":"TimeFormat","identifiesControllerService":false,"sensitive":false},"CommentMarker":{"name":"CommentMarker","displayName":"CommentMarker","identifiesControllerService":false,"sensitive":false},"schema-access-strategy":{"name":"schema-access-strategy","displayName":"SchemaAccessStrategy","identifiesControllerService":false,"sensitive":false},"schema-protocol-version":{"name":"schema-protocol-version","displayName":"SchemaProtocolVersion","identifiesControllerService":false,"sensitive":false},"schema-version":{"name":"schema-version","displayName":"SchemaVersion","identifiesControllerService":false,"sensitive":false},"csvutils-character-set":{"name":"csvutils-character-set","displayName":"CharacterSet","identifiesControllerService":false,"sensitive":false},"schema-text":{"name":"schema-text","displayName":"SchemaText","identifiesControllerService":false,"sensitive":false},"QuoteMode":{"name":"QuoteMode","displayName":"QuoteMode","identifiesControllerService":false,"sensitive":false},"IncludeTrailingDelimiter":{"name":"IncludeTrailingDelimiter","displayName":"IncludeTrailingDelimiter","identifiesControllerService":false,"sensitive":false}},"componentType":"CONTROLLER_SERVICE","groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"},{"identifier":"b78f4414-29c0-3dbf-b2c2-e8c8c90690bc","name":"CSVReader-HWXSRRegistry","comments":"","type":"org.apache.nifi.csv.CSVReader","bundle":{"group":"org.apache.nifi","artifact":"nifi-record-serialization-services-nar","version":"1.10.0.2.0.2.0-70"},"controllerServiceApis":[{"type":"org.apache.nifi.serialization.RecordReaderFactory","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-services-api-nar","version":"1.10.0.2.0.2.0-70"}}],"properties":{"ignore-csv-header":"false","schema-branch":null,"CSVFormat":"custom","QuoteCharacter":"\"","ValueSeparator":"|","TimestampFormat":null,"EscapeCharacter":"\\",
 					"Date Format":null,
 					"Null String":null,
 					"Skip Header Line":"false",
@@ -1565,7 +1565,7 @@
 					}
 				},
 				"componentType":"CONTROLLER_SERVICE",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"ca40d3ad-7e02-39b7-9e2c-bdf7769537b1",
@@ -1711,7 +1711,7 @@
 					}
 				},
 				"componentType":"CONTROLLER_SERVICE",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			},
 			{
 				"identifier":"9d47282b-22be-326f-8541-7e1eb4759e5c",
@@ -1773,7 +1773,7 @@
 					}
 				},
 				"componentType":"CONTROLLER_SERVICE",
-				"groupIdentifier":"67f7ac05-ec89-3319-bd1c-5c83e149327d"
+				"groupIdentifier":"1c146ebc-6c96-38d1-9549-f03b02a38d35"
 			}
 		],
 		"variables":{
@@ -1793,13 +1793,13 @@
 					"name":"Kafka Sink Topic - Geo Event",
 					"description":"Name of sink topic for the enriched geo events",
 					"sensitive":false,
-					"value":"syndicate-geo-event-json"
+					"value":"syndicate-geo-event-json-dfx"
 				},
 				{
 					"name":"Kafka Sink Topic - Speed Event",
 					"description":"Name of the Kafka topic for the enriched speed event",
 					"sensitive":false,
-					"value":"syndicate-speed-event-json"
+					"value":"syndicate-speed-event-json-dfx"
 				},
 				{
 					"name":"Schema - Geo Event",
@@ -1864,7 +1864,7 @@
 					"name":"Kafka Source Topic",
 					"description":"Kafka Source Topic for truck sensor events",
 					"sensitive":false,
-					"value":"gateway-central-raw-sensors"
+					"value":"gateway-central-raw-sensors-dfx"
 				}
 			]
 		}
