@@ -1,0 +1,2443 @@
+{
+  "snapshotMetadata" : {
+    "version" : 2,
+    "timestamp" : 1607669514882,
+    "author" : "anonymous",
+    "comments" : "converting to unsecure flow"
+  },
+  "flowContents" : {
+    "identifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04",
+    "name" : "IOT Trucking Fleet - Data Flow",
+    "comments" : "",
+    "position" : {
+      "x" : 439.0,
+      "y" : 193.0
+    },
+    "processGroups" : [ {
+      "identifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+      "name" : "Publish Enriched Streams Kafka Syndication Services",
+      "comments" : "",
+      "position" : {
+        "x" : 1000.0,
+        "y" : 904.0
+      },
+      "processGroups" : [ ],
+      "remoteProcessGroups" : [ ],
+      "processors" : [ {
+        "identifier" : "38bbc619-151a-35fc-9ed3-0938f49a0987",
+        "name" : "Kafka-Truck-Speed-Events-Avro-SAM",
+        "comments" : "",
+        "position" : {
+          "x" : 832.0,
+          "y" : 256.0
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-kafka-2-0-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.kafka.pubsub.PublishKafkaRecord_2_0",
+        "properties" : {
+          "compression.type" : "none",
+          "record-writer" : "45737a19-d407-34a9-b4f6-8af1b362b3af",
+          "bootstrap.servers" : "#{Kafka Broker Endpoint}",
+          "sasl.mechanism" : "GSSAPI",
+          "max.block.ms" : "5 sec",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "message-header-encoding" : "UTF-8",
+          "client.id" : "nifi-syndicate-speed-avro",
+          "ack.wait.time" : "5 secs",
+          "use-transactions" : "false",
+          "acks" : "all",
+          "security.protocol" : "PLAINTEXT",
+          "max.request.size" : "1 MB",
+          "sasl.token.auth" : "false",
+          "message-key-field" : "driverid",
+          "partitioner.class" : "org.apache.kafka.clients.producer.internals.DefaultPartitioner",
+          "topic" : "syndicate-speed-event-avro"
+        },
+        "propertyDescriptors" : {
+          "compression.type" : {
+            "name" : "compression.type",
+            "displayName" : "Compression Type",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "attribute-name-regex" : {
+            "name" : "attribute-name-regex",
+            "displayName" : "Attributes to Send as Headers (Regex)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "bootstrap.servers" : {
+            "name" : "bootstrap.servers",
+            "displayName" : "Kafka Brokers",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.principal" : {
+            "name" : "sasl.kerberos.principal",
+            "displayName" : "Kerberos Principal",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.service.name" : {
+            "name" : "sasl.kerberos.service.name",
+            "displayName" : "Kerberos Service Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "kerberos-credentials-service" : {
+            "name" : "kerberos-credentials-service",
+            "displayName" : "Kerberos Credentials Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "partition" : {
+            "name" : "partition",
+            "displayName" : "Partition",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.mechanism" : {
+            "name" : "sasl.mechanism",
+            "displayName" : "SASL Mechanism",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "max.block.ms" : {
+            "name" : "max.block.ms",
+            "displayName" : "Max Metadata Wait Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "message-header-encoding" : {
+            "name" : "message-header-encoding",
+            "displayName" : "Message Header Encoding",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "transactional-id-prefix" : {
+            "name" : "transactional-id-prefix",
+            "displayName" : "Transactional Id Prefix",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "client.id" : {
+            "name" : "client.id",
+            "displayName" : "client.id",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "ack.wait.time" : {
+            "name" : "ack.wait.time",
+            "displayName" : "Acknowledgment Wait Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.username" : {
+            "name" : "sasl.username",
+            "displayName" : "Username",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "use-transactions" : {
+            "name" : "use-transactions",
+            "displayName" : "Use Transactions",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "acks" : {
+            "name" : "acks",
+            "displayName" : "Delivery Guarantee",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "security.protocol" : {
+            "name" : "security.protocol",
+            "displayName" : "Security Protocol",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "ssl.context.service" : {
+            "name" : "ssl.context.service",
+            "displayName" : "SSL Context Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "max.request.size" : {
+            "name" : "max.request.size",
+            "displayName" : "Max Request Size",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.token.auth" : {
+            "name" : "sasl.token.auth",
+            "displayName" : "Token Auth",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "message-key-field" : {
+            "name" : "message-key-field",
+            "displayName" : "Message Key Field",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "partitioner.class" : {
+            "name" : "partitioner.class",
+            "displayName" : "Partitioner class",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.keytab" : {
+            "name" : "sasl.kerberos.keytab",
+            "displayName" : "Kerberos Keytab",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic" : {
+            "name" : "topic",
+            "displayName" : "Topic Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.password" : {
+            "name" : "sasl.password",
+            "displayName" : "Password",
+            "identifiesControllerService" : false,
+            "sensitive" : true
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "success", "failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      }, {
+        "identifier" : "df374d55-9206-3653-b83c-afe27fa20313",
+        "name" : "Kafka-Truck-Events-Avro-SAM",
+        "comments" : "",
+        "position" : {
+          "x" : 832.0,
+          "y" : -232.0
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-kafka-2-0-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.kafka.pubsub.PublishKafkaRecord_2_0",
+        "properties" : {
+          "compression.type" : "none",
+          "record-writer" : "45737a19-d407-34a9-b4f6-8af1b362b3af",
+          "bootstrap.servers" : "#{Kafka Broker Endpoint}",
+          "sasl.mechanism" : "GSSAPI",
+          "max.block.ms" : "5 sec",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "message-header-encoding" : "UTF-8",
+          "client.id" : "nifi-syndicate-geo-avro",
+          "ack.wait.time" : "5 secs",
+          "use-transactions" : "false",
+          "acks" : "all",
+          "security.protocol" : "PLAINTEXT",
+          "max.request.size" : "1 MB",
+          "sasl.token.auth" : "false",
+          "message-key-field" : "driverid",
+          "partitioner.class" : "org.apache.kafka.clients.producer.internals.DefaultPartitioner",
+          "topic" : "syndicate-geo-event-avro"
+        },
+        "propertyDescriptors" : {
+          "compression.type" : {
+            "name" : "compression.type",
+            "displayName" : "Compression Type",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "attribute-name-regex" : {
+            "name" : "attribute-name-regex",
+            "displayName" : "Attributes to Send as Headers (Regex)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "bootstrap.servers" : {
+            "name" : "bootstrap.servers",
+            "displayName" : "Kafka Brokers",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.principal" : {
+            "name" : "sasl.kerberos.principal",
+            "displayName" : "Kerberos Principal",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.service.name" : {
+            "name" : "sasl.kerberos.service.name",
+            "displayName" : "Kerberos Service Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "kerberos-credentials-service" : {
+            "name" : "kerberos-credentials-service",
+            "displayName" : "Kerberos Credentials Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "partition" : {
+            "name" : "partition",
+            "displayName" : "Partition",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.mechanism" : {
+            "name" : "sasl.mechanism",
+            "displayName" : "SASL Mechanism",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "max.block.ms" : {
+            "name" : "max.block.ms",
+            "displayName" : "Max Metadata Wait Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "message-header-encoding" : {
+            "name" : "message-header-encoding",
+            "displayName" : "Message Header Encoding",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "transactional-id-prefix" : {
+            "name" : "transactional-id-prefix",
+            "displayName" : "Transactional Id Prefix",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "client.id" : {
+            "name" : "client.id",
+            "displayName" : "client.id",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "ack.wait.time" : {
+            "name" : "ack.wait.time",
+            "displayName" : "Acknowledgment Wait Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.username" : {
+            "name" : "sasl.username",
+            "displayName" : "Username",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "use-transactions" : {
+            "name" : "use-transactions",
+            "displayName" : "Use Transactions",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "acks" : {
+            "name" : "acks",
+            "displayName" : "Delivery Guarantee",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "security.protocol" : {
+            "name" : "security.protocol",
+            "displayName" : "Security Protocol",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "ssl.context.service" : {
+            "name" : "ssl.context.service",
+            "displayName" : "SSL Context Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "max.request.size" : {
+            "name" : "max.request.size",
+            "displayName" : "Max Request Size",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.token.auth" : {
+            "name" : "sasl.token.auth",
+            "displayName" : "Token Auth",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "message-key-field" : {
+            "name" : "message-key-field",
+            "displayName" : "Message Key Field",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "partitioner.class" : {
+            "name" : "partitioner.class",
+            "displayName" : "Partitioner class",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.keytab" : {
+            "name" : "sasl.kerberos.keytab",
+            "displayName" : "Kerberos Keytab",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic" : {
+            "name" : "topic",
+            "displayName" : "Topic Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.password" : {
+            "name" : "sasl.password",
+            "displayName" : "Password",
+            "identifiesControllerService" : false,
+            "sensitive" : true
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "success", "failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      }, {
+        "identifier" : "564571ab-b5ea-35eb-aa83-e2c2b7b94320",
+        "name" : "Kafka-Truck-Events-JSON-Spark-Streaming",
+        "comments" : "",
+        "position" : {
+          "x" : 840.0,
+          "y" : -72.0
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-kafka-2-0-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.kafka.pubsub.PublishKafkaRecord_2_0",
+        "properties" : {
+          "compression.type" : "none",
+          "record-writer" : "23f95e5a-1659-3b52-8e35-8bf8ca45ed10",
+          "bootstrap.servers" : "#{Kafka Broker Endpoint}",
+          "sasl.mechanism" : "GSSAPI",
+          "max.block.ms" : "5 sec",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "message-header-encoding" : "UTF-8",
+          "client.id" : "nifi-syndicate-geo-json",
+          "ack.wait.time" : "5 secs",
+          "use-transactions" : "false",
+          "acks" : "all",
+          "security.protocol" : "PLAINTEXT",
+          "max.request.size" : "1 MB",
+          "sasl.token.auth" : "false",
+          "message-key-field" : "driverid",
+          "partitioner.class" : "org.apache.kafka.clients.producer.internals.DefaultPartitioner",
+          "topic" : "syndicate-geo-event-json"
+        },
+        "propertyDescriptors" : {
+          "compression.type" : {
+            "name" : "compression.type",
+            "displayName" : "Compression Type",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "attribute-name-regex" : {
+            "name" : "attribute-name-regex",
+            "displayName" : "Attributes to Send as Headers (Regex)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "bootstrap.servers" : {
+            "name" : "bootstrap.servers",
+            "displayName" : "Kafka Brokers",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.principal" : {
+            "name" : "sasl.kerberos.principal",
+            "displayName" : "Kerberos Principal",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.service.name" : {
+            "name" : "sasl.kerberos.service.name",
+            "displayName" : "Kerberos Service Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "kerberos-credentials-service" : {
+            "name" : "kerberos-credentials-service",
+            "displayName" : "Kerberos Credentials Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "partition" : {
+            "name" : "partition",
+            "displayName" : "Partition",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.mechanism" : {
+            "name" : "sasl.mechanism",
+            "displayName" : "SASL Mechanism",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "max.block.ms" : {
+            "name" : "max.block.ms",
+            "displayName" : "Max Metadata Wait Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "message-header-encoding" : {
+            "name" : "message-header-encoding",
+            "displayName" : "Message Header Encoding",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "transactional-id-prefix" : {
+            "name" : "transactional-id-prefix",
+            "displayName" : "Transactional Id Prefix",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "client.id" : {
+            "name" : "client.id",
+            "displayName" : "client.id",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "ack.wait.time" : {
+            "name" : "ack.wait.time",
+            "displayName" : "Acknowledgment Wait Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.username" : {
+            "name" : "sasl.username",
+            "displayName" : "Username",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "use-transactions" : {
+            "name" : "use-transactions",
+            "displayName" : "Use Transactions",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "acks" : {
+            "name" : "acks",
+            "displayName" : "Delivery Guarantee",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "security.protocol" : {
+            "name" : "security.protocol",
+            "displayName" : "Security Protocol",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "ssl.context.service" : {
+            "name" : "ssl.context.service",
+            "displayName" : "SSL Context Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "max.request.size" : {
+            "name" : "max.request.size",
+            "displayName" : "Max Request Size",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.token.auth" : {
+            "name" : "sasl.token.auth",
+            "displayName" : "Token Auth",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "message-key-field" : {
+            "name" : "message-key-field",
+            "displayName" : "Message Key Field",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "partitioner.class" : {
+            "name" : "partitioner.class",
+            "displayName" : "Partitioner class",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.keytab" : {
+            "name" : "sasl.kerberos.keytab",
+            "displayName" : "Kerberos Keytab",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic" : {
+            "name" : "topic",
+            "displayName" : "Topic Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.password" : {
+            "name" : "sasl.password",
+            "displayName" : "Password",
+            "identifiesControllerService" : false,
+            "sensitive" : true
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "success", "failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      }, {
+        "identifier" : "eee3f3f4-33ce-3424-8d6e-b6acb9ee4d3c",
+        "name" : "Kafka-Truck-Speed-Events-JSON-Spark-Streaming",
+        "comments" : "",
+        "position" : {
+          "x" : 832.0,
+          "y" : 504.0
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-kafka-2-0-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.kafka.pubsub.PublishKafkaRecord_2_0",
+        "properties" : {
+          "compression.type" : "none",
+          "record-writer" : "23f95e5a-1659-3b52-8e35-8bf8ca45ed10",
+          "bootstrap.servers" : "#{Kafka Broker Endpoint}",
+          "sasl.mechanism" : "GSSAPI",
+          "max.block.ms" : "5 sec",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "message-header-encoding" : "UTF-8",
+          "client.id" : "nifi-syndicate-speed-json",
+          "ack.wait.time" : "5 secs",
+          "use-transactions" : "false",
+          "acks" : "all",
+          "security.protocol" : "PLAINTEXT",
+          "max.request.size" : "1 MB",
+          "sasl.token.auth" : "false",
+          "message-key-field" : "driverid",
+          "partitioner.class" : "org.apache.kafka.clients.producer.internals.DefaultPartitioner",
+          "topic" : "syndicate-speed-event-json"
+        },
+        "propertyDescriptors" : {
+          "compression.type" : {
+            "name" : "compression.type",
+            "displayName" : "Compression Type",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "attribute-name-regex" : {
+            "name" : "attribute-name-regex",
+            "displayName" : "Attributes to Send as Headers (Regex)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "bootstrap.servers" : {
+            "name" : "bootstrap.servers",
+            "displayName" : "Kafka Brokers",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.principal" : {
+            "name" : "sasl.kerberos.principal",
+            "displayName" : "Kerberos Principal",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.service.name" : {
+            "name" : "sasl.kerberos.service.name",
+            "displayName" : "Kerberos Service Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "kerberos-credentials-service" : {
+            "name" : "kerberos-credentials-service",
+            "displayName" : "Kerberos Credentials Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "partition" : {
+            "name" : "partition",
+            "displayName" : "Partition",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.mechanism" : {
+            "name" : "sasl.mechanism",
+            "displayName" : "SASL Mechanism",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "max.block.ms" : {
+            "name" : "max.block.ms",
+            "displayName" : "Max Metadata Wait Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "message-header-encoding" : {
+            "name" : "message-header-encoding",
+            "displayName" : "Message Header Encoding",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "transactional-id-prefix" : {
+            "name" : "transactional-id-prefix",
+            "displayName" : "Transactional Id Prefix",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "client.id" : {
+            "name" : "client.id",
+            "displayName" : "client.id",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "ack.wait.time" : {
+            "name" : "ack.wait.time",
+            "displayName" : "Acknowledgment Wait Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.username" : {
+            "name" : "sasl.username",
+            "displayName" : "Username",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "use-transactions" : {
+            "name" : "use-transactions",
+            "displayName" : "Use Transactions",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "acks" : {
+            "name" : "acks",
+            "displayName" : "Delivery Guarantee",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "security.protocol" : {
+            "name" : "security.protocol",
+            "displayName" : "Security Protocol",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "ssl.context.service" : {
+            "name" : "ssl.context.service",
+            "displayName" : "SSL Context Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "max.request.size" : {
+            "name" : "max.request.size",
+            "displayName" : "Max Request Size",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.token.auth" : {
+            "name" : "sasl.token.auth",
+            "displayName" : "Token Auth",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "message-key-field" : {
+            "name" : "message-key-field",
+            "displayName" : "Message Key Field",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "partitioner.class" : {
+            "name" : "partitioner.class",
+            "displayName" : "Partitioner class",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.keytab" : {
+            "name" : "sasl.kerberos.keytab",
+            "displayName" : "Kerberos Keytab",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic" : {
+            "name" : "topic",
+            "displayName" : "Topic Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.password" : {
+            "name" : "sasl.password",
+            "displayName" : "Password",
+            "identifiesControllerService" : false,
+            "sensitive" : true
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "success", "failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      } ],
+      "inputPorts" : [ {
+        "identifier" : "4e806b4a-378b-342f-8a31-44efec3cdc08",
+        "name" : "Geo-Events",
+        "comments" : "",
+        "position" : {
+          "x" : 358.525055109586,
+          "y" : -0.8543931766928381
+        },
+        "type" : "INPUT_PORT",
+        "concurrentlySchedulableTaskCount" : 1,
+        "allowRemoteAccess" : false,
+        "componentType" : "INPUT_PORT",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      }, {
+        "identifier" : "951a6b2d-784f-3038-b542-04d5adaef699",
+        "name" : "Speed Events",
+        "comments" : "",
+        "position" : {
+          "x" : 362.20532244357037,
+          "y" : 359.64215833697904
+        },
+        "type" : "INPUT_PORT",
+        "concurrentlySchedulableTaskCount" : 1,
+        "allowRemoteAccess" : false,
+        "componentType" : "INPUT_PORT",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      } ],
+      "outputPorts" : [ ],
+      "connections" : [ {
+        "identifier" : "a892fbf3-4327-37b7-b477-d3e0427143d5",
+        "name" : "",
+        "source" : {
+          "id" : "4e806b4a-378b-342f-8a31-44efec3cdc08",
+          "type" : "INPUT_PORT",
+          "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+          "name" : "Geo-Events",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "df374d55-9206-3653-b83c-afe27fa20313",
+          "type" : "PROCESSOR",
+          "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+          "name" : "Kafka-Truck-Events-Avro-SAM",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      }, {
+        "identifier" : "1d80b642-a920-3a2c-9f40-a028abc14dc0",
+        "name" : "",
+        "source" : {
+          "id" : "951a6b2d-784f-3038-b542-04d5adaef699",
+          "type" : "INPUT_PORT",
+          "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+          "name" : "Speed Events",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "38bbc619-151a-35fc-9ed3-0938f49a0987",
+          "type" : "PROCESSOR",
+          "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+          "name" : "Kafka-Truck-Speed-Events-Avro-SAM",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      }, {
+        "identifier" : "588e73c8-3bd1-3614-9bb1-40e1f6b0764b",
+        "name" : "",
+        "source" : {
+          "id" : "951a6b2d-784f-3038-b542-04d5adaef699",
+          "type" : "INPUT_PORT",
+          "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+          "name" : "Speed Events",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "eee3f3f4-33ce-3424-8d6e-b6acb9ee4d3c",
+          "type" : "PROCESSOR",
+          "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+          "name" : "Kafka-Truck-Speed-Events-JSON-Spark-Streaming",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      }, {
+        "identifier" : "bacc336a-f62c-329d-b8f3-7634987c5501",
+        "name" : "",
+        "source" : {
+          "id" : "4e806b4a-378b-342f-8a31-44efec3cdc08",
+          "type" : "INPUT_PORT",
+          "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+          "name" : "Geo-Events",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "564571ab-b5ea-35eb-aa83-e2c2b7b94320",
+          "type" : "PROCESSOR",
+          "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+          "name" : "Kafka-Truck-Events-JSON-Spark-Streaming",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d74c351d-a71f-3264-935c-e6d1008fac0d"
+      } ],
+      "labels" : [ ],
+      "funnels" : [ ],
+      "controllerServices" : [ ],
+      "variables" : { },
+      "parameterContextName" : "IOT-Trucking-App",
+      "componentType" : "PROCESS_GROUP",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    }, {
+      "identifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4",
+      "name" : "Acquire Events from Kafka IOT Gateways",
+      "comments" : "",
+      "position" : {
+        "x" : 1005.0147909870611,
+        "y" : 303.6945000912142
+      },
+      "processGroups" : [ ],
+      "remoteProcessGroups" : [ ],
+      "processors" : [ {
+        "identifier" : "0b4d2155-b5ae-375a-9c68-18366cc4cbf1",
+        "name" : "US West Truck Fleet - Kafka Gateway ",
+        "comments" : "",
+        "position" : {
+          "x" : 880.0,
+          "y" : 336.0
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-kafka-2-0-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0",
+        "properties" : {
+          "header-name-regex" : "schema.*",
+          "max.poll.records" : "10000",
+          "record-writer" : "1b15c58a-f782-35ff-ae24-0ce2dbf6fc1c",
+          "group.id" : "nifi-truck-sensors-west",
+          "bootstrap.servers" : "#{Kafka Broker Endpoint}",
+          "topic_type" : "names",
+          "security.protocol" : "PLAINTEXT",
+          "max-uncommit-offset-wait" : "1 secs",
+          "sasl.mechanism" : "GSSAPI",
+          "sasl.token.auth" : "false",
+          "honor-transactions" : "true",
+          "Communications Timeout" : "60 secs",
+          "topic" : "gateway-west-raw-sensors",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "message-header-encoding" : "UTF-8",
+          "auto.offset.reset" : "latest"
+        },
+        "propertyDescriptors" : {
+          "header-name-regex" : {
+            "name" : "header-name-regex",
+            "displayName" : "Headers to Add as Attributes (Regex)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.username" : {
+            "name" : "sasl.username",
+            "displayName" : "Username",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "max.poll.records" : {
+            "name" : "max.poll.records",
+            "displayName" : "Max Poll Records",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "group.id" : {
+            "name" : "group.id",
+            "displayName" : "Group ID",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "bootstrap.servers" : {
+            "name" : "bootstrap.servers",
+            "displayName" : "Kafka Brokers",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic_type" : {
+            "name" : "topic_type",
+            "displayName" : "Topic Name Format",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.principal" : {
+            "name" : "sasl.kerberos.principal",
+            "displayName" : "Kerberos Principal",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.service.name" : {
+            "name" : "sasl.kerberos.service.name",
+            "displayName" : "Kerberos Service Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "security.protocol" : {
+            "name" : "security.protocol",
+            "displayName" : "Security Protocol",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "kerberos-credentials-service" : {
+            "name" : "kerberos-credentials-service",
+            "displayName" : "Kerberos Credentials Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "ssl.context.service" : {
+            "name" : "ssl.context.service",
+            "displayName" : "SSL Context Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "max-uncommit-offset-wait" : {
+            "name" : "max-uncommit-offset-wait",
+            "displayName" : "Max Uncommitted Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.mechanism" : {
+            "name" : "sasl.mechanism",
+            "displayName" : "SASL Mechanism",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.token.auth" : {
+            "name" : "sasl.token.auth",
+            "displayName" : "Token Auth",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "honor-transactions" : {
+            "name" : "honor-transactions",
+            "displayName" : "Honor Transactions",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.keytab" : {
+            "name" : "sasl.kerberos.keytab",
+            "displayName" : "Kerberos Keytab",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "Communications Timeout" : {
+            "name" : "Communications Timeout",
+            "displayName" : "Communications Timeout",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic" : {
+            "name" : "topic",
+            "displayName" : "Topic Name(s)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "message-header-encoding" : {
+            "name" : "message-header-encoding",
+            "displayName" : "Message Header Encoding",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.password" : {
+            "name" : "sasl.password",
+            "displayName" : "Password",
+            "identifiesControllerService" : false,
+            "sensitive" : true
+          },
+          "auto.offset.reset" : {
+            "name" : "auto.offset.reset",
+            "displayName" : "Offset Reset",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "parse.failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4"
+      }, {
+        "identifier" : "b9eef8fd-649f-3549-861c-eed3101eed9c",
+        "name" : "US East Truck Fleet - Kafka Gateway",
+        "comments" : "",
+        "position" : {
+          "x" : 1792.0,
+          "y" : 336.0
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-kafka-2-0-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0",
+        "properties" : {
+          "header-name-regex" : "schema.*",
+          "max.poll.records" : "10000",
+          "record-writer" : "1b15c58a-f782-35ff-ae24-0ce2dbf6fc1c",
+          "group.id" : "nifi-truck-sensors-east",
+          "bootstrap.servers" : "#{Kafka Broker Endpoint}",
+          "topic_type" : "names",
+          "security.protocol" : "PLAINTEXT",
+          "max-uncommit-offset-wait" : "1 secs",
+          "sasl.mechanism" : "GSSAPI",
+          "sasl.token.auth" : "false",
+          "honor-transactions" : "true",
+          "Communications Timeout" : "60 secs",
+          "topic" : "gateway-east-raw-sensors",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "message-header-encoding" : "UTF-8",
+          "auto.offset.reset" : "latest"
+        },
+        "propertyDescriptors" : {
+          "header-name-regex" : {
+            "name" : "header-name-regex",
+            "displayName" : "Headers to Add as Attributes (Regex)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.username" : {
+            "name" : "sasl.username",
+            "displayName" : "Username",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "max.poll.records" : {
+            "name" : "max.poll.records",
+            "displayName" : "Max Poll Records",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "group.id" : {
+            "name" : "group.id",
+            "displayName" : "Group ID",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "bootstrap.servers" : {
+            "name" : "bootstrap.servers",
+            "displayName" : "Kafka Brokers",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic_type" : {
+            "name" : "topic_type",
+            "displayName" : "Topic Name Format",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.principal" : {
+            "name" : "sasl.kerberos.principal",
+            "displayName" : "Kerberos Principal",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.service.name" : {
+            "name" : "sasl.kerberos.service.name",
+            "displayName" : "Kerberos Service Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "security.protocol" : {
+            "name" : "security.protocol",
+            "displayName" : "Security Protocol",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "kerberos-credentials-service" : {
+            "name" : "kerberos-credentials-service",
+            "displayName" : "Kerberos Credentials Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "ssl.context.service" : {
+            "name" : "ssl.context.service",
+            "displayName" : "SSL Context Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "max-uncommit-offset-wait" : {
+            "name" : "max-uncommit-offset-wait",
+            "displayName" : "Max Uncommitted Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.mechanism" : {
+            "name" : "sasl.mechanism",
+            "displayName" : "SASL Mechanism",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.token.auth" : {
+            "name" : "sasl.token.auth",
+            "displayName" : "Token Auth",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "honor-transactions" : {
+            "name" : "honor-transactions",
+            "displayName" : "Honor Transactions",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.keytab" : {
+            "name" : "sasl.kerberos.keytab",
+            "displayName" : "Kerberos Keytab",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "Communications Timeout" : {
+            "name" : "Communications Timeout",
+            "displayName" : "Communications Timeout",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic" : {
+            "name" : "topic",
+            "displayName" : "Topic Name(s)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "message-header-encoding" : {
+            "name" : "message-header-encoding",
+            "displayName" : "Message Header Encoding",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.password" : {
+            "name" : "sasl.password",
+            "displayName" : "Password",
+            "identifiesControllerService" : false,
+            "sensitive" : true
+          },
+          "auto.offset.reset" : {
+            "name" : "auto.offset.reset",
+            "displayName" : "Offset Reset",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "parse.failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4"
+      }, {
+        "identifier" : "f8f37dc8-7560-3c62-bdbd-1b98084871e1",
+        "name" : "US Central Truck Fleet - Kafka Gateway",
+        "comments" : "",
+        "position" : {
+          "x" : 1312.0,
+          "y" : 336.0
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-kafka-2-0-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.kafka.pubsub.ConsumeKafkaRecord_2_0",
+        "properties" : {
+          "header-name-regex" : "schema.*",
+          "max.poll.records" : "10000",
+          "record-writer" : "1b15c58a-f782-35ff-ae24-0ce2dbf6fc1c",
+          "group.id" : "nifi-truck-sensors-central",
+          "bootstrap.servers" : "#{Kafka Broker Endpoint}",
+          "topic_type" : "names",
+          "security.protocol" : "PLAINTEXT",
+          "max-uncommit-offset-wait" : "1 secs",
+          "sasl.mechanism" : "GSSAPI",
+          "sasl.token.auth" : "false",
+          "honor-transactions" : "true",
+          "Communications Timeout" : "60 secs",
+          "topic" : "gateway-central-raw-sensors",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "message-header-encoding" : "UTF-8",
+          "auto.offset.reset" : "latest"
+        },
+        "propertyDescriptors" : {
+          "header-name-regex" : {
+            "name" : "header-name-regex",
+            "displayName" : "Headers to Add as Attributes (Regex)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.username" : {
+            "name" : "sasl.username",
+            "displayName" : "Username",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "max.poll.records" : {
+            "name" : "max.poll.records",
+            "displayName" : "Max Poll Records",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "group.id" : {
+            "name" : "group.id",
+            "displayName" : "Group ID",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "bootstrap.servers" : {
+            "name" : "bootstrap.servers",
+            "displayName" : "Kafka Brokers",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic_type" : {
+            "name" : "topic_type",
+            "displayName" : "Topic Name Format",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.principal" : {
+            "name" : "sasl.kerberos.principal",
+            "displayName" : "Kerberos Principal",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.service.name" : {
+            "name" : "sasl.kerberos.service.name",
+            "displayName" : "Kerberos Service Name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "security.protocol" : {
+            "name" : "security.protocol",
+            "displayName" : "Security Protocol",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "kerberos-credentials-service" : {
+            "name" : "kerberos-credentials-service",
+            "displayName" : "Kerberos Credentials Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "ssl.context.service" : {
+            "name" : "ssl.context.service",
+            "displayName" : "SSL Context Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "max-uncommit-offset-wait" : {
+            "name" : "max-uncommit-offset-wait",
+            "displayName" : "Max Uncommitted Time",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.mechanism" : {
+            "name" : "sasl.mechanism",
+            "displayName" : "SASL Mechanism",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.token.auth" : {
+            "name" : "sasl.token.auth",
+            "displayName" : "Token Auth",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "honor-transactions" : {
+            "name" : "honor-transactions",
+            "displayName" : "Honor Transactions",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.kerberos.keytab" : {
+            "name" : "sasl.kerberos.keytab",
+            "displayName" : "Kerberos Keytab",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "Communications Timeout" : {
+            "name" : "Communications Timeout",
+            "displayName" : "Communications Timeout",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "topic" : {
+            "name" : "topic",
+            "displayName" : "Topic Name(s)",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "message-header-encoding" : {
+            "name" : "message-header-encoding",
+            "displayName" : "Message Header Encoding",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "sasl.password" : {
+            "name" : "sasl.password",
+            "displayName" : "Password",
+            "identifiesControllerService" : false,
+            "sensitive" : true
+          },
+          "auto.offset.reset" : {
+            "name" : "auto.offset.reset",
+            "displayName" : "Offset Reset",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "parse.failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4"
+      } ],
+      "inputPorts" : [ ],
+      "outputPorts" : [ {
+        "identifier" : "d9f17718-5994-33da-b15e-d1191c2bffca",
+        "name" : "Truck Fleet Sensor Streams",
+        "comments" : "",
+        "position" : {
+          "x" : 1378.7101833265508,
+          "y" : 616.1647067211195
+        },
+        "type" : "OUTPUT_PORT",
+        "concurrentlySchedulableTaskCount" : 1,
+        "allowRemoteAccess" : false,
+        "componentType" : "OUTPUT_PORT",
+        "groupIdentifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4"
+      } ],
+      "connections" : [ {
+        "identifier" : "9cc7e0ad-0e8a-32c0-80bb-1ddfacad8e31",
+        "name" : "",
+        "source" : {
+          "id" : "f8f37dc8-7560-3c62-bdbd-1b98084871e1",
+          "type" : "PROCESSOR",
+          "groupId" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4",
+          "name" : "US Central Truck Fleet - Kafka Gateway",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "d9f17718-5994-33da-b15e-d1191c2bffca",
+          "type" : "OUTPUT_PORT",
+          "groupId" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4",
+          "name" : "Truck Fleet Sensor Streams",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "success" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4"
+      }, {
+        "identifier" : "922a5a78-f622-3f40-8cf3-b7a329c6fa85",
+        "name" : "",
+        "source" : {
+          "id" : "0b4d2155-b5ae-375a-9c68-18366cc4cbf1",
+          "type" : "PROCESSOR",
+          "groupId" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4",
+          "name" : "US West Truck Fleet - Kafka Gateway ",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "d9f17718-5994-33da-b15e-d1191c2bffca",
+          "type" : "OUTPUT_PORT",
+          "groupId" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4",
+          "name" : "Truck Fleet Sensor Streams",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "success" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4"
+      }, {
+        "identifier" : "02ed2851-932b-3c6d-827c-bebabb317c07",
+        "name" : "",
+        "source" : {
+          "id" : "b9eef8fd-649f-3549-861c-eed3101eed9c",
+          "type" : "PROCESSOR",
+          "groupId" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4",
+          "name" : "US East Truck Fleet - Kafka Gateway",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "d9f17718-5994-33da-b15e-d1191c2bffca",
+          "type" : "OUTPUT_PORT",
+          "groupId" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4",
+          "name" : "Truck Fleet Sensor Streams",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "success" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4"
+      } ],
+      "labels" : [ {
+        "identifier" : "a3fbb023-dadc-3d4e-a04d-4d360b22625f",
+        "position" : {
+          "x" : 1008.0,
+          "y" : 96.0
+        },
+        "label" : "Upstream app is sending CSV events with schema name in Kafka Message Header.\n \nUse ConsumeKafkaRecord do the following\n1. Grab the schema name from Kafka Header and store in Attribute called schema.name\n2. Use the schema name to look up the Schema in HWX SR\n3. Use the schema from HWX SR to convert to ProcessRecords\n4. Route events by event source (speed or geo) using SQL\n",
+        "width" : 916.2188110351562,
+        "height" : 194.44070434570312,
+        "style" : {
+          "font-size" : "22px"
+        },
+        "componentType" : "LABEL",
+        "groupIdentifier" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4"
+      } ],
+      "funnels" : [ ],
+      "controllerServices" : [ ],
+      "variables" : { },
+      "parameterContextName" : "IOT-Trucking-App",
+      "componentType" : "PROCESS_GROUP",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    }, {
+      "identifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+      "name" : "Route, Transform and Enrich",
+      "comments" : "",
+      "position" : {
+        "x" : 1005.6033849950011,
+        "y" : 569.3951690202704
+      },
+      "processGroups" : [ ],
+      "remoteProcessGroups" : [ ],
+      "processors" : [ {
+        "identifier" : "b9dbb466-7adf-3181-9ce5-9e282359177d",
+        "name" : "Specify Schema",
+        "comments" : "",
+        "position" : {
+          "x" : 1000.5769121052078,
+          "y" : 742.1326478033814
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-update-attribute-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.attributes.UpdateAttribute",
+        "properties" : {
+          "Store State" : "Do not store state",
+          "canonical-value-lookup-cache-size" : "100",
+          "schema.name" : "truck_events_avro"
+        },
+        "propertyDescriptors" : {
+          "Delete Attributes Expression" : {
+            "name" : "Delete Attributes Expression",
+            "displayName" : "Delete Attributes Expression",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "Store State" : {
+            "name" : "Store State",
+            "displayName" : "Store State",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "canonical-value-lookup-cache-size" : {
+            "name" : "canonical-value-lookup-cache-size",
+            "displayName" : "Cache Value Lookup Cache Size",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "schema.name" : {
+            "name" : "schema.name",
+            "displayName" : "schema.name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "Stateful Variables Initial Value" : {
+            "name" : "Stateful Variables Initial Value",
+            "displayName" : "Stateful Variables Initial Value",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "e03a7f85-a1ae-3b15-b1ad-0e4f2dc5a63e",
+        "name" : "ReverseGeoLookup",
+        "comments" : "",
+        "position" : {
+          "x" : 1006.0852857448386,
+          "y" : 972.688521571574
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-standard-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.standard.LookupRecord",
+        "properties" : {
+          "result-contents" : "insert-entire-record",
+          "routing-strategy" : "route-to-success",
+          "lng" : "/longitude",
+          "result-record-path" : "/geoAddress",
+          "record-writer" : "1b15c58a-f782-35ff-ae24-0ce2dbf6fc1c",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "lookup-service" : "cf3c5cb7-4bee-3d76-8965-4fdb6e32227b",
+          "record-update-strategy" : "use-property",
+          "lat" : "/latitude"
+        },
+        "propertyDescriptors" : {
+          "result-contents" : {
+            "name" : "result-contents",
+            "displayName" : "Record Result Contents",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "routing-strategy" : {
+            "name" : "routing-strategy",
+            "displayName" : "Routing Strategy",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "lng" : {
+            "name" : "lng",
+            "displayName" : "lng",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "result-record-path" : {
+            "name" : "result-record-path",
+            "displayName" : "Result RecordPath",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "lookup-service" : {
+            "name" : "lookup-service",
+            "displayName" : "Lookup Service",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "record-update-strategy" : {
+            "name" : "record-update-strategy",
+            "displayName" : "Record Update Strategy",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "lat" : {
+            "name" : "lat",
+            "displayName" : "lat",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "2938156d-8172-3c2a-a387-d963a2c5afe1",
+        "name" : "Specify Schema",
+        "comments" : "",
+        "position" : {
+          "x" : 1514.9817281477158,
+          "y" : 729.4647037046028
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-update-attribute-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.attributes.UpdateAttribute",
+        "properties" : {
+          "Store State" : "Do not store state",
+          "canonical-value-lookup-cache-size" : "100",
+          "schema.name" : "truck_speed_events_avro"
+        },
+        "propertyDescriptors" : {
+          "Delete Attributes Expression" : {
+            "name" : "Delete Attributes Expression",
+            "displayName" : "Delete Attributes Expression",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "Store State" : {
+            "name" : "Store State",
+            "displayName" : "Store State",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "canonical-value-lookup-cache-size" : {
+            "name" : "canonical-value-lookup-cache-size",
+            "displayName" : "Cache Value Lookup Cache Size",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "schema.name" : {
+            "name" : "schema.name",
+            "displayName" : "schema.name",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "Stateful Variables Initial Value" : {
+            "name" : "Stateful Variables Initial Value",
+            "displayName" : "Stateful Variables Initial Value",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "fefd994f-9dba-3a14-b1a0-0fd4cffe3946",
+        "name" : "Route Telemetry Events",
+        "comments" : "",
+        "position" : {
+          "x" : 1224.0038717554926,
+          "y" : 508.4203950037886
+        },
+        "bundle" : {
+          "group" : "org.apache.nifi",
+          "artifact" : "nifi-standard-nar",
+          "version" : "1.11.4.2.0.4.0-80"
+        },
+        "style" : { },
+        "type" : "org.apache.nifi.processors.standard.QueryRecord",
+        "properties" : {
+          "cache-schema" : "false",
+          "truck_speed_event" : "SELECT * FROM FLOWFILE where eventSource = 'truck_speed_event'",
+          "record-writer" : "1b15c58a-f782-35ff-ae24-0ce2dbf6fc1c",
+          "record-reader" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+          "include-zero-record-flowfiles" : "false",
+          "truck_geo_event" : "SELECT * FROM FLOWFILE where eventSource = 'truck_geo_event'"
+        },
+        "propertyDescriptors" : {
+          "cache-schema" : {
+            "name" : "cache-schema",
+            "displayName" : "Cache Schema",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "truck_speed_event" : {
+            "name" : "truck_speed_event",
+            "displayName" : "truck_speed_event",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "record-writer" : {
+            "name" : "record-writer",
+            "displayName" : "Record Writer",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "record-reader" : {
+            "name" : "record-reader",
+            "displayName" : "Record Reader",
+            "identifiesControllerService" : true,
+            "sensitive" : false
+          },
+          "include-zero-record-flowfiles" : {
+            "name" : "include-zero-record-flowfiles",
+            "displayName" : "Include Zero Record FlowFiles",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          },
+          "truck_geo_event" : {
+            "name" : "truck_geo_event",
+            "displayName" : "truck_geo_event",
+            "identifiesControllerService" : false,
+            "sensitive" : false
+          }
+        },
+        "schedulingPeriod" : "0 sec",
+        "schedulingStrategy" : "TIMER_DRIVEN",
+        "executionNode" : "ALL",
+        "penaltyDuration" : "30 sec",
+        "yieldDuration" : "1 sec",
+        "bulletinLevel" : "WARN",
+        "runDurationMillis" : 0,
+        "concurrentlySchedulableTaskCount" : 1,
+        "autoTerminatedRelationships" : [ "original", "failure" ],
+        "scheduledState" : "ENABLED",
+        "componentType" : "PROCESSOR",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      } ],
+      "inputPorts" : [ {
+        "identifier" : "21b5df7b-74c0-399b-9869-caf7e0ac9a06",
+        "name" : "Truck Fleet Sensor Streams",
+        "comments" : "",
+        "position" : {
+          "x" : 1278.0852972487808,
+          "y" : 390.1481996819724
+        },
+        "type" : "INPUT_PORT",
+        "concurrentlySchedulableTaskCount" : 1,
+        "allowRemoteAccess" : false,
+        "componentType" : "INPUT_PORT",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      } ],
+      "outputPorts" : [ {
+        "identifier" : "e1afdb05-3ca0-3688-9354-72d2a830f673",
+        "name" : "Geo Enriched Streams",
+        "comments" : "",
+        "position" : {
+          "x" : 1054.0852972487808,
+          "y" : 1227.1482301995507
+        },
+        "type" : "OUTPUT_PORT",
+        "concurrentlySchedulableTaskCount" : 1,
+        "allowRemoteAccess" : false,
+        "componentType" : "OUTPUT_PORT",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "935f95f2-e65d-3f27-9867-7c28a6936da2",
+        "name" : "Speed Enriched Streams",
+        "comments" : "",
+        "position" : {
+          "x" : 1575.0852972487808,
+          "y" : 1218.1482301995507
+        },
+        "type" : "OUTPUT_PORT",
+        "concurrentlySchedulableTaskCount" : 1,
+        "allowRemoteAccess" : false,
+        "componentType" : "OUTPUT_PORT",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      } ],
+      "connections" : [ {
+        "identifier" : "a4f7034a-be06-3baa-8cbe-15b6026ddf59",
+        "name" : "",
+        "source" : {
+          "id" : "e03a7f85-a1ae-3b15-b1ad-0e4f2dc5a63e",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "ReverseGeoLookup",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "e1afdb05-3ca0-3688-9354-72d2a830f673",
+          "type" : "OUTPUT_PORT",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Geo Enriched Streams",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "success" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "67fb785e-3049-3b3a-8a94-c2c06cf28245",
+        "name" : "",
+        "source" : {
+          "id" : "b9dbb466-7adf-3181-9ce5-9e282359177d",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Specify Schema",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "e03a7f85-a1ae-3b15-b1ad-0e4f2dc5a63e",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "ReverseGeoLookup",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "success" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "406a3150-b2ce-3f43-ba8a-2f62afb0f44d",
+        "name" : "",
+        "source" : {
+          "id" : "2938156d-8172-3c2a-a387-d963a2c5afe1",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Specify Schema",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "935f95f2-e65d-3f27-9867-7c28a6936da2",
+          "type" : "OUTPUT_PORT",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Speed Enriched Streams",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "success" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "acc2e29e-81e6-3287-b8b5-a153a6a2a8c3",
+        "name" : "",
+        "source" : {
+          "id" : "21b5df7b-74c0-399b-9869-caf7e0ac9a06",
+          "type" : "INPUT_PORT",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Truck Fleet Sensor Streams",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "fefd994f-9dba-3a14-b1a0-0fd4cffe3946",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Route Telemetry Events",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "476e905c-44dd-30ae-a8f8-a589a1acd7fb",
+        "name" : "",
+        "source" : {
+          "id" : "fefd994f-9dba-3a14-b1a0-0fd4cffe3946",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Route Telemetry Events",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "b9dbb466-7adf-3181-9ce5-9e282359177d",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Specify Schema",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "truck_geo_event" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      }, {
+        "identifier" : "de518970-1732-3644-a64a-d2f31cc33953",
+        "name" : "",
+        "source" : {
+          "id" : "fefd994f-9dba-3a14-b1a0-0fd4cffe3946",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Route Telemetry Events",
+          "comments" : ""
+        },
+        "destination" : {
+          "id" : "2938156d-8172-3c2a-a387-d963a2c5afe1",
+          "type" : "PROCESSOR",
+          "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+          "name" : "Specify Schema",
+          "comments" : ""
+        },
+        "labelIndex" : 1,
+        "zIndex" : 0,
+        "selectedRelationships" : [ "truck_speed_event" ],
+        "backPressureObjectThreshold" : 10000,
+        "backPressureDataSizeThreshold" : "1 GB",
+        "flowFileExpiration" : "0 sec",
+        "prioritizers" : [ ],
+        "bends" : [ ],
+        "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+        "partitioningAttribute" : "",
+        "loadBalanceCompression" : "DO_NOT_COMPRESS",
+        "componentType" : "CONNECTION",
+        "groupIdentifier" : "d97250de-7d6a-3e1e-9b26-4263fa932911"
+      } ],
+      "labels" : [ ],
+      "funnels" : [ ],
+      "controllerServices" : [ ],
+      "variables" : { },
+      "componentType" : "PROCESS_GROUP",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    } ],
+    "remoteProcessGroups" : [ ],
+    "processors" : [ ],
+    "inputPorts" : [ ],
+    "outputPorts" : [ ],
+    "connections" : [ {
+      "identifier" : "45105880-7797-3173-afda-1ae317eac45d",
+      "name" : "",
+      "source" : {
+        "id" : "935f95f2-e65d-3f27-9867-7c28a6936da2",
+        "type" : "OUTPUT_PORT",
+        "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+        "name" : "Speed Enriched Streams",
+        "comments" : ""
+      },
+      "destination" : {
+        "id" : "951a6b2d-784f-3038-b542-04d5adaef699",
+        "type" : "INPUT_PORT",
+        "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+        "name" : "Speed Events",
+        "comments" : ""
+      },
+      "labelIndex" : 1,
+      "zIndex" : 0,
+      "selectedRelationships" : [ "" ],
+      "backPressureObjectThreshold" : 10000,
+      "backPressureDataSizeThreshold" : "1 GB",
+      "flowFileExpiration" : "0 sec",
+      "prioritizers" : [ ],
+      "bends" : [ {
+        "x" : 1093.175353824603,
+        "y" : 787.6484330171636
+      }, {
+        "x" : 1097.0997314453125,
+        "y" : 804.115966796875
+      } ],
+      "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+      "partitioningAttribute" : "",
+      "loadBalanceCompression" : "DO_NOT_COMPRESS",
+      "componentType" : "CONNECTION",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    }, {
+      "identifier" : "1c1a72e1-e957-3078-bad4-ccb9cb6d083a",
+      "name" : "",
+      "source" : {
+        "id" : "e1afdb05-3ca0-3688-9354-72d2a830f673",
+        "type" : "OUTPUT_PORT",
+        "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+        "name" : "Geo Enriched Streams",
+        "comments" : ""
+      },
+      "destination" : {
+        "id" : "4e806b4a-378b-342f-8a31-44efec3cdc08",
+        "type" : "INPUT_PORT",
+        "groupId" : "d74c351d-a71f-3264-935c-e6d1008fac0d",
+        "name" : "Geo-Events",
+        "comments" : ""
+      },
+      "labelIndex" : 1,
+      "zIndex" : 0,
+      "selectedRelationships" : [ "" ],
+      "backPressureObjectThreshold" : 10000,
+      "backPressureDataSizeThreshold" : "1 GB",
+      "flowFileExpiration" : "0 sec",
+      "prioritizers" : [ ],
+      "bends" : [ {
+        "x" : 1306.585205078125,
+        "y" : 804.9893798828125
+      } ],
+      "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+      "partitioningAttribute" : "",
+      "loadBalanceCompression" : "DO_NOT_COMPRESS",
+      "componentType" : "CONNECTION",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    }, {
+      "identifier" : "453824ef-e696-3a27-bac4-858ddb1e731f",
+      "name" : "",
+      "source" : {
+        "id" : "d9f17718-5994-33da-b15e-d1191c2bffca",
+        "type" : "OUTPUT_PORT",
+        "groupId" : "ca66f224-cc09-360a-8403-6e8d4bd1a3f4",
+        "name" : "Truck Fleet Sensor Streams",
+        "comments" : ""
+      },
+      "destination" : {
+        "id" : "21b5df7b-74c0-399b-9869-caf7e0ac9a06",
+        "type" : "INPUT_PORT",
+        "groupId" : "d97250de-7d6a-3e1e-9b26-4263fa932911",
+        "name" : "Truck Fleet Sensor Streams",
+        "comments" : ""
+      },
+      "labelIndex" : 1,
+      "zIndex" : 0,
+      "selectedRelationships" : [ "" ],
+      "backPressureObjectThreshold" : 10000,
+      "backPressureDataSizeThreshold" : "1 GB",
+      "flowFileExpiration" : "0 sec",
+      "prioritizers" : [ ],
+      "bends" : [ ],
+      "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+      "partitioningAttribute" : "",
+      "loadBalanceCompression" : "DO_NOT_COMPRESS",
+      "componentType" : "CONNECTION",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    } ],
+    "labels" : [ {
+      "identifier" : "3b8d7fac-e922-3ed2-9377-76ec209def8d",
+      "position" : {
+        "x" : 1440.0,
+        "y" : 344.0
+      },
+      "label" : "Ingest Data Streams from Kafka Gateway Topics",
+      "width" : 544.0,
+      "height" : 64.0,
+      "style" : {
+        "font-size" : "24px"
+      },
+      "componentType" : "LABEL",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    }, {
+      "identifier" : "d5da4321-3eb1-3314-b375-8f098266c89e",
+      "position" : {
+        "x" : 1440.0,
+        "y" : 896.0
+      },
+      "label" : "Send normalized enriched data to downstream Kafka \"Syndication\" Topics.\n \nUse Schema Registry to serialize from CSV into Avro before sending \nto Kafka by fetching  Schema associated with Kafka topic \nfrom  Schema Registry.",
+      "width" : 824.0,
+      "height" : 152.0,
+      "style" : {
+        "font-size" : "24px"
+      },
+      "componentType" : "LABEL",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    }, {
+      "identifier" : "57f18601-eea2-3959-9e30-cb4d7018efd0",
+      "position" : {
+        "x" : 1432.0,
+        "y" : 592.0
+      },
+      "label" : "Parse, Route, Transform, Enrich the Data.\n \nUse Schema Registry to project schema make transformations easier",
+      "width" : 776.0,
+      "height" : 112.0,
+      "style" : {
+        "font-size" : "24px"
+      },
+      "componentType" : "LABEL",
+      "groupIdentifier" : "8b90e5a2-7550-3f26-9fdb-556bfcf08e04"
+    } ],
+    "funnels" : [ ],
+    "controllerServices" : [ ],
+    "variables" : { },
+    "parameterContextName" : "IOT-Trucking-App",
+    "componentType" : "PROCESS_GROUP"
+  },
+  "externalControllerServices" : {
+    "1b15c58a-f782-35ff-ae24-0ce2dbf6fc1c" : {
+      "identifier" : "1b15c58a-f782-35ff-ae24-0ce2dbf6fc1c",
+      "name" : "CSV Writer - HWX SR Registry"
+    },
+    "23f95e5a-1659-3b52-8e35-8bf8ca45ed10" : {
+      "identifier" : "23f95e5a-1659-3b52-8e35-8bf8ca45ed10",
+      "name" : "JSON Writer"
+    },
+    "cf3c5cb7-4bee-3d76-8965-4fdb6e32227b" : {
+      "identifier" : "cf3c5cb7-4bee-3d76-8965-4fdb6e32227b",
+      "name" : "Enrich-  ReverseGeoCodeLookupService"
+    },
+    "45737a19-d407-34a9-b4f6-8af1b362b3af" : {
+      "identifier" : "45737a19-d407-34a9-b4f6-8af1b362b3af",
+      "name" : "Avro Writer - HWX SR Registry - HWX Content Encode"
+    },
+    "a4d7813e-aec1-34ea-b278-89f4c7f80dbb" : {
+      "identifier" : "a4d7813e-aec1-34ea-b278-89f4c7f80dbb",
+      "name" : "CSV Reader - HWX SR Registry"
+    }
+  },
+  "parameterContexts" : {
+    "IOT-Trucking-App" : {
+      "name" : "IOT-Trucking-App",
+      "parameters" : [ {
+        "name" : "Kafka Broker Endpoint",
+        "description" : "Kafka broker endont",
+        "sensitive" : false,
+        "value" : "ec2-3-133-82-193.us-east-2.compute.amazonaws.com:9092,ec2-3-18-223-190.us-east-2.compute.amazonaws.com:9092,ec2-13-59-229-229.us-east-2.compute.amazonaws.com:9092"
+      }, {
+        "name" : "SR Endpoint",
+        "description" : "",
+        "sensitive" : false,
+        "value" : "http://ec2-18-191-148-124.us-east-2.compute.amazonaws.com:7788/api/v1"
+      } ]
+    }
+  },
+  "flowEncodingVersion" : "1.0"
+}
