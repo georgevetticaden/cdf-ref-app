@@ -1,0 +1,22 @@
+{
+  "bucketIdentifier": "02f1ca32-396e-4f75-ab7a-1e4656c43fc9",
+  "bucketName": "Default",
+  "createdTimestamp": 1607060953838,
+  "description": "Trucking NiFi app consuming from streaming trucking sensors, normalizing and enriching the streams and publishing data to downstream Kafka topics. ",
+  "identifier": "1a8db62b-17bd-4db2-b267-fc27257cd79e",
+  "link": {
+    "href": "buckets/02f1ca32-396e-4f75-ab7a-1e4656c43fc9/flows/1a8db62b-17bd-4db2-b267-fc27257cd79e",
+    "params": {
+      "rel": "self"
+    }
+  },
+  "modifiedTimestamp": 1607664396005,
+  "name": "IOT Trucking Data Flow",
+  "permissions": {
+    "canDelete": true,
+    "canRead": true,
+    "canWrite": true
+  },
+  "type": "Flow",
+  "versionCount": 2
+}
