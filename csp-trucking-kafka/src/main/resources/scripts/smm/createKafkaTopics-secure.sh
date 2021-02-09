@@ -232,7 +232,39 @@ else
     --bootstrap-server $1 \
     --replication-factor 2 \
     --partitions 3 \
-    --topic speed-events-filtered;         	    
+    --topic speed-events-filtered;         	 
+    
+	/usr/bin/kafka-topics \
+	--create \
+	--command-config client.properties \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic gateway-west-raw-sensors-json;
+
+	/usr/bin/kafka-topics \
+	--create \
+	--command-config client.properties \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic gateway-central-raw-sensors-json;
+
+	/usr/bin/kafka-topics \
+	--create \
+	--command-config client.properties \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic gateway-east-raw-sensors-json;
+	
+	/usr/bin/kafka-topics \
+	--create \
+	--command-config client.properties \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic gateway-europe-raw-sensors-json;	       
        	
 				
 fi
