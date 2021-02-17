@@ -5,12 +5,13 @@
 export SIMULATOR_JAR=stream-simulator-jar-with-dependencies.jar
 
 
-export kafkaBrokers=""
+export kafkaBrokers="messaging-cluster-1-broker0.gvettica.xcu2-8y8x.dev.cldr.work:9093,messaging-cluster-1-broker1.gvettica.xcu2-8y8x.dev.cldr.work:9093,messaging-cluster-1-broker2.gvettica.xcu2-8y8x.dev.cldr.work:9093"
+
 
 export SECURE_MODE=SECURE 
-export JAAS_CONFIG=" -Djava.security.auth.login.config=dev_producer_jaas.conf -Dsecurity.protocol=SASL_SSL -Dssl.truststore.location=cm-auto-global_truststore.jks -Dssl.truststore.password= "
-export numOfEuropeTrucks=25
-export numOfCriticalEventProducers=30
+export JAAS_CONFIG=" -Djava.security.auth.login.config=dev_producer_jaas-ldap.conf -Dsecurity.protocol=SASL_SSL -Dssl.truststore.location=/var/lib/cloudera-scm-agent/agent-cert/cm-auto-global_truststore.jks -Dsasl.mechanism=PLAIN "
+export numOfEuropeTrucks=3
+export numOfCriticalEventProducers=5
 
 export ROUTES_LOCATION=/root/workspace/Data-Loader/routes/midwest
 
@@ -278,5 +279,3 @@ createMicroServiceProducers;
 createAllGeoCriticalEventProducers;
 
 	
-
-
