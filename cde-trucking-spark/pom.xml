@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cloudera.cdf.refapp</groupId>
+    <artifactId>cdf-ref-app</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>cde-trucking-spark</artifactId>
+  
+  <name>cde-trucking-spark</name>
+  
+  <properties>
+    <build.testJarPhase>none</build.testJarPhase>
+    <build.copyDependenciesPhase>package</build.copyDependenciesPhase>
+    <hadoop.deps.scope>provided</hadoop.deps.scope>
+    <hive.deps.scope>provided</hive.deps.scope>
+    <parquet.deps.scope>provided</parquet.deps.scope>
+    <scala.binary.version>2.12</scala.binary.version>
+    <spark.version>3.1.1</spark.version>
+  </properties>
+  
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.spark-project.spark</groupId>
+      <artifactId>unused</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-mllib_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-hive_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-graphx_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming-kafka-0-10_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-sql-kafka-0-10_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.scopt</groupId>
+      <artifactId>scopt_${scala.binary.version}</artifactId>
+      <version>3.7.1</version>
+    </dependency>
+  </dependencies>
+  
+  
+</project>
