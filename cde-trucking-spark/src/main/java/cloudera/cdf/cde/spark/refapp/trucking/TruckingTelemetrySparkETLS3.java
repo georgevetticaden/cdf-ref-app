@@ -10,13 +10,9 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.functions;
 import org.apache.spark.sql.functions.*;
 import org.apache.spark.sql.types.*;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 
-public class TruckingTelemetrySparkETL {
+public class TruckingTelemetrySparkETLS3 {
 	
-	
-	private static final Logger LOG = LoggerFactory.getLogger(TruckingTelemetrySparkETL.class);
 	
 	public static void main(String[] args) throws AnalysisException {
 		// $example on:init_session$
@@ -36,9 +32,6 @@ public class TruckingTelemetrySparkETL {
 	}
 
 	private static void truckingTelemetryETL(SparkSession spark, String sourceFile, String destinationFile) {
-		
-		LOG.info(".....Starting truckingTelemetryETL..." );
-		
 		Dataset<Row> telemetryDataSet = spark.read().json(sourceFile);
 		debug(telemetryDataSet, "Raw Data Set");
 		
