@@ -20,6 +20,7 @@
     <parquet.deps.scope>provided</parquet.deps.scope>
     <scala.binary.version>2.12</scala.binary.version>
     <spark.version>3.1.1</spark.version>
+    <aws.version>1.11.163</aws.version>
   </properties>
   
   
@@ -39,6 +40,12 @@
 			<version>1.2.17</version>
 			<scope>provided</scope>
 		</dependency>
+		
+<dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-java-sdk</artifactId>
+    <version>${aws.version}</version>
+</dependency>		
 		
 		
     <dependency>
