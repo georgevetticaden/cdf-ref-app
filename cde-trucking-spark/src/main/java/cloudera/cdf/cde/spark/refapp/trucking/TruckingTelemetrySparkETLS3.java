@@ -21,8 +21,8 @@ public class TruckingTelemetrySparkETLS3 {
 	public static void main(String[] args) throws AnalysisException {
 		// $example on:init_session$
 		
-		String s3Folder = args[0];
-		String destination = args[1];
+		String s3SourceFolder = args[0];
+		String s3DestinationFolder = args[1];
 		
 		String accessKey = args[2];
 		String accessPassword = args[3];
@@ -39,13 +39,13 @@ public class TruckingTelemetrySparkETLS3 {
 		spark.sparkContext().hadoopConfiguration().set("s.s3a.endpoint", "s3.amazonaws.com");
 		
 
-		truckingTelemetryETL(spark, s3Folder, destination);
+		truckingTelemetryETL(spark, s3SourceFolder, s3DestinationFolder);
 
 		spark.stop();
 	}
 
-	private static void truckingTelemetryETL(SparkSession spark, String s3Folder, String destinationFile) {
-		String s3FolderLocationUrl = "s3a://"+ s3Folder + "/*";
+	private static void truckingTelemetryETL(SparkSession spark, String s3SourceFolder, String s3DestinationFolder) {
+		String s3FolderLocationUrl = "s3a://"+ s3SourceFolder + "/*";
 		
 		LOG.warn("S3 Folder Url is: " + s3FolderLocationUrl);
 		
@@ -83,12 +83,12 @@ public class TruckingTelemetrySparkETLS3 {
 		LOG.warn("Before filter, speed events count is: " + speedEventsCount + ". After Filter, count is: " + speedEventsFilteredCount);
 		
 		/* Write geo data to destination in avro Format*/
-		String geoDestFile = destinationFile + "/truck_geo_events";
-		truckGeoEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(geoDestFile);
+		String geoDestS3File = "s3a://" + s3DestinationFolder + "/truck_geo_events";
+		truckGeoEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(geoDestS3File);
 		
 		/* Write speed data to destination in avro Format*/
-		String speedDestFile = destinationFile + "/truck_speed_events";
-		fileredTruckSpeedEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(speedDestFile);
+		String speedDestS3File = "s3a://" + s3DestinationFolder + "/truck_speed_events";
+		fileredTruckSpeedEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(speedDestS3File);
 		
 		
 		
