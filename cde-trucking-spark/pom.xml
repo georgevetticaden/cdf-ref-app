@@ -21,6 +21,7 @@
     <scala.binary.version>2.12</scala.binary.version>
     <spark.version>3.1.1</spark.version>
     <aws.version>1.11.163</aws.version>
+    <hadoop.version>3.2.0</hadoop.version>
   </properties>
   
   
@@ -41,11 +42,33 @@
 			<scope>provided</scope>
 		</dependency>
 		
-<dependency>
-    <groupId>com.amazonaws</groupId>
-    <artifactId>aws-java-sdk</artifactId>
-    <version>${aws.version}</version>
-</dependency>		
+		
+		<!-- Requeired for Junit Tests for S3 JDK explroation -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk</artifactId>
+		    <version>${aws.version}</version>
+		    <scope>test</scope>
+		</dependency>		
+		
+		
+		<!-- Required for Spark S3 Access -->
+		<dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-aws</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>		
 		
 		
     <dependency>
