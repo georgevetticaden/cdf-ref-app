@@ -236,7 +236,29 @@ else
 	--bootstrap-server $1 \
 	--replication-factor 2 \
 	--partitions 3 \
-	--topic gateway-europe-raw-sensors-json;	       
+	--topic gateway-europe-raw-sensors-json;	
+	
+	/usr/bin/kafka-topics \
+	--create \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic emea-pos-sales-events;
+
+	/usr/bin/kafka-topics \
+	--create \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic us-pos-sales-events;
+	
+	/usr/bin/kafka-topics \
+	--create \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic apac-pos-sales-events;	       
+       	       
        	
 				
 fi
