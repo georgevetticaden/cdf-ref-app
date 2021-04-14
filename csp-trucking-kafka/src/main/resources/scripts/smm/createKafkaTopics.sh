@@ -257,7 +257,14 @@ else
 	--bootstrap-server $1 \
 	--replication-factor 2 \
 	--partitions 3 \
-	--topic apac-pos-sales-events;	       
+	--topic apac-pos-sales-events;	      
+	
+	/usr/bin/kafka-topics \
+	--create \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic syslog-json;	 
        	       
        	
 				

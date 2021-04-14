@@ -289,7 +289,14 @@ else
 	--replication-factor 2 \
 	--partitions 3 \
 	--topic apac-pos-sales-events;	       
-       	       
+ 
+ 	/usr/bin/kafka-topics \
+	--create \
+	--command-config client.properties \
+	--bootstrap-server $1 \
+	--replication-factor 2 \
+	--partitions 3 \
+	--topic syslog-json;	      	       
        	
 				
 fi
