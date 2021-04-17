@@ -45,7 +45,12 @@ public class TruckingTelemetrySparkETLS3 {
 	}
 
 	private static void truckingTelemetryETL(SparkSession spark, String s3SourceFolder, String s3DestinationFolder) {
-		String s3FolderLocationUrl = "s3a://"+ s3SourceFolder + "/*";
+		
+		
+		/* Removing Star as the adding the wildcard caused error when running in DataHub */
+		//String s3FolderLocationUrl = "s3a://"+ s3SourceFolder + "/*";
+		String s3FolderLocationUrl = "s3a://"+ s3SourceFolder ;
+
 		
 		LOG.warn("S3 Folder Url is: " + s3FolderLocationUrl);
 		
@@ -57,7 +62,7 @@ public class TruckingTelemetrySparkETLS3 {
 		
 		/* Extract Time Components for partitions when writing to Impala */
 		telemetryDataSet = extractTimeComponents(telemetryDataSet);
-		debug(telemetryDataSet, "Raw Data Set With Time Components");
+		debug(telemetryDataSet, "Raw Data Set With Time Components......change..");
 		
 		/* Filter by telemetry source */		
 		Dataset<Row> truckGeoEvents =  
@@ -82,7 +87,7 @@ public class TruckingTelemetrySparkETLS3 {
 		long speedEventsFilteredCount = fileredTruckSpeedEvents.count();
 		LOG.warn("Before filter, speed events count is: " + speedEventsCount + ". After Filter, count is: " + speedEventsFilteredCount);
 		
-		/* Write geo data to destination in avro Format*/
+		/* Write geo data to destination in parquest Format*/
 		String geoDestS3File = "s3a://" + s3DestinationFolder + "/truck_geo_events";
 		truckGeoEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(geoDestS3File);
 		
