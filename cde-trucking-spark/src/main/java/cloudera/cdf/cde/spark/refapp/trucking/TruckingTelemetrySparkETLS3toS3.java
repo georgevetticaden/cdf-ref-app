@@ -13,9 +13,9 @@ import org.apache.spark.sql.types.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TruckingTelemetrySparkETLS3 {
+public class TruckingTelemetrySparkETLS3toS3 {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(TruckingTelemetrySparkETLS3.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TruckingTelemetrySparkETLS3toS3.class);
 	
 	
 	public static void main(String[] args) throws AnalysisException {
@@ -26,6 +26,8 @@ public class TruckingTelemetrySparkETLS3 {
 		
 		String accessKey = args[2];
 		String accessPassword = args[3];
+		
+		String writeFormat = args[4];
 		
 		SparkSession spark = SparkSession.builder()
 				.appName("Java Spark SQL basic example")
@@ -39,12 +41,12 @@ public class TruckingTelemetrySparkETLS3 {
 		spark.sparkContext().hadoopConfiguration().set("s.s3a.endpoint", "s3.amazonaws.com");
 		
 
-		truckingTelemetryETL(spark, s3SourceFolder, s3DestinationFolder);
+		truckingTelemetryETL(spark, s3SourceFolder, s3DestinationFolder, writeFormat);
 
 		spark.stop();
 	}
 
-	private static void truckingTelemetryETL(SparkSession spark, String s3SourceFolder, String s3DestinationFolder) {
+	private static void truckingTelemetryETL(SparkSession spark, String s3SourceFolder, String s3DestinationFolder, String writeFormat) {
 		
 		
 		/* Removing Star as the adding the wildcard caused error when running in DataHub */
@@ -87,14 +89,20 @@ public class TruckingTelemetrySparkETLS3 {
 		long speedEventsFilteredCount = fileredTruckSpeedEvents.count();
 		LOG.warn("Before filter, speed events count is: " + speedEventsCount + ". After Filter, count is: " + speedEventsFilteredCount);
 		
-		/* Write geo data to destination in parquest Format*/
 		String geoDestS3File = "s3a://" + s3DestinationFolder + "/truck_geo_events";
-		truckGeoEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(geoDestS3File);
-		
-		/* Write speed data to destination in avro Format*/
 		String speedDestS3File = "s3a://" + s3DestinationFolder + "/truck_speed_events";
-		fileredTruckSpeedEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(speedDestS3File);
 		
+		/* Write geo and speed data to destination in based on configured format*/
+		if(writeFormat.equals("parquet")) {
+			truckGeoEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(geoDestS3File);
+			fileredTruckSpeedEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(speedDestS3File);
+		} else if (writeFormat.equals("orc")) {
+			truckGeoEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").orc(geoDestS3File);
+			fileredTruckSpeedEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").orc(speedDestS3File);
+		} else {
+			throw new RuntimeException("Unsupported format["+ writeFormat + "]");
+		}
+
 		
 		
 	}
