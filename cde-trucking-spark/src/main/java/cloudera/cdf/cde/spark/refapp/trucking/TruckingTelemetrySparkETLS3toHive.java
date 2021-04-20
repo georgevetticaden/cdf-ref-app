@@ -50,8 +50,8 @@ public class TruckingTelemetrySparkETLS3toHive {
 
 	private static void truckingTelemetryETL(SparkSession spark, String s3SourceFolder, String s3DestinationFolder, String writeFormat) {
 		
-
-		//HiveWarehouseSession hiveSession = HiveWarehouseSession.session(spark).build();
+		/* Initializing the Session even though the hiveSession object is not being used or else you will get errors on writing to Hive */
+		HiveWarehouseSession hiveSession = HiveWarehouseSession.session(spark).build();
 		
 
 		String s3FolderLocationUrl = "s3a://"+ s3SourceFolder ;		
