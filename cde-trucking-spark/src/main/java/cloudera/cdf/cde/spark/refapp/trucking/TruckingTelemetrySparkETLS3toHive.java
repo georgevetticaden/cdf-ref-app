@@ -12,6 +12,8 @@ import org.apache.spark.sql.functions.*;
 import org.apache.spark.sql.types.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.hortonworks.hwc.HiveWarehouseSession;
+import com.hortonworks.hwc.HiveWarehouseSession.*;
 
 public class TruckingTelemetrySparkETLS3toHive {
 	
@@ -48,63 +50,40 @@ public class TruckingTelemetrySparkETLS3toHive {
 
 	private static void truckingTelemetryETL(SparkSession spark, String s3SourceFolder, String s3DestinationFolder, String writeFormat) {
 		
-		
-		/* Removing Star as the adding the wildcard caused error when running in DataHub */
-		//String s3FolderLocationUrl = "s3a://"+ s3SourceFolder + "/*";
-		String s3FolderLocationUrl = "s3a://"+ s3SourceFolder ;
 
+		//HiveWarehouseSession hiveSession = HiveWarehouseSession.session(spark).build();
 		
-		LOG.warn("S3 Folder Url is: " + s3FolderLocationUrl);
+
+		String s3FolderLocationUrl = "s3a://"+ s3SourceFolder ;		
 		
 		Dataset<Row> telemetryDataSet = spark.read().json(s3FolderLocationUrl);
-		
-		LOG.warn("Number of records is: " + telemetryDataSet.count());
-		
-		debug(telemetryDataSet, "Raw Data Set");
-		
-		/* Extract Time Components for partitions when writing to Impala */
 		telemetryDataSet = extractTimeComponents(telemetryDataSet);
-		debug(telemetryDataSet, "Raw Data Set With Time Components......change..");
 		
-		/* Filter by telemetry source */		
-		Dataset<Row> truckGeoEvents =  
-				telemetryDataSet.filter(col("eventSource").equalTo("truck_geo_event"))
-								.drop("speed", "correlationId");
-		debug(truckGeoEvents, "Truck Geo Event Telemetry");
-	
 		Dataset<Row> truckSpeedEvents =  
 				telemetryDataSet.filter(col("eventSource").equalTo("truck_speed_event"))
-								.drop("eventType", "longitude", "latitude", "correlationId");
-		
-		
+								.drop("eventType", "longitude", "latitude", "correlationId", "eventTimeLong", "eventTimeString");
+
 		long speedEventsCount = truckSpeedEvents.count();
+
 		
-		/* filter for Speed Events greater than 60 */
-		
-		// Register DataFrame as as SQL temporary view
 		truckSpeedEvents.createOrReplaceTempView("truck_speed_events");
-		Dataset<Row> fileredTruckSpeedEvents =  spark.sql("select * from truck_speed_events where speed > 60");
+		Dataset<Row> fileredTruckSpeedEvents =  spark.sql("select * from truck_speed_events where speed > 60");		
 		debug(fileredTruckSpeedEvents, "Truck Speed Event Telemetry Filtered");
 		
 		long speedEventsFilteredCount = fileredTruckSpeedEvents.count();
 		LOG.warn("Before filter, speed events count is: " + speedEventsCount + ". After Filter, count is: " + speedEventsFilteredCount);
 		
-		String geoDestS3File = "s3a://" + s3DestinationFolder + "/truck_geo_events";
-		String speedDestS3File = "s3a://" + s3DestinationFolder + "/truck_speed_events";
+		fileredTruckSpeedEvents.write().format(HiveWarehouseSession.HIVE_WAREHOUSE_CONNECTOR).mode("append")
+	    .option("database", "truck_fleet_db")
+		.option("table", "hive_truck_speed_events")
+	    .save();		
 		
-		/* Write geo and speed data to destination in based on configured format*/
-		if(writeFormat.equals("parquet")) {
-			truckGeoEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(geoDestS3File);
-			fileredTruckSpeedEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").parquet(speedDestS3File);
-		} else if (writeFormat.equals("orc")) {
-			truckGeoEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").orc(geoDestS3File);
-			fileredTruckSpeedEvents.write().mode("append").partitionBy("truckId", "year", "month", "day", "hour").orc(speedDestS3File);
-		} else {
-			throw new RuntimeException("Unsupported format["+ writeFormat + "]");
-		}
+		
+//		fileredTruckSpeedEvents.write().format(HiveWarehouseSession.HIVE_WAREHOUSE_CONNECTOR).mode("append")
+//		    .option("database", "truck_fleet_db")
+//			.option("table", "hive_truck_speed_events").option("partition", "c1='truckId', c2='year', c3='month', c4='day', c5='hour'")
+//		   .save();
 
-		
-		
 	}
 
 	/**
@@ -112,11 +91,11 @@ public class TruckingTelemetrySparkETLS3toHive {
 	 */
 	private static Dataset<Row> extractTimeComponents(Dataset<Row> telemetryDataSet) {
 		return telemetryDataSet.withColumn("eventTimeString", col("eventTime"))
-						.withColumn("eventTime", functions.to_timestamp(col("eventTimeString")))
-						.withColumn("year", functions.year(col("eventTime")))
-						.withColumn("month", functions.month(col("eventTime")))
-						.withColumn("day", functions.dayofmonth(col("eventTime")))
-						.withColumn("hour", functions.hour(col("eventTime")));
+						.withColumn("eventTime", functions.to_timestamp(col("eventTimeString")));
+//						.withColumn("year", functions.year(col("eventTime")))
+//						.withColumn("month", functions.month(col("eventTime")))
+//						.withColumn("day", functions.dayofmonth(col("eventTime")))
+//						.withColumn("hour", functions.hour(col("eventTime")));
 	}
 
 	private static void debug(Dataset<Row> dataSet, String message) {
