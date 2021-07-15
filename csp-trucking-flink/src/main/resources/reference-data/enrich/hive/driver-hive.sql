@@ -1,7 +1,7 @@
 create database employees_hr_hive_db;
 
 CREATE TABLE employees_hr_hive_db.driver
-(driverid int,
+(driverid BIGINT,
 drivername string,
 certified string,
 wage_plan string

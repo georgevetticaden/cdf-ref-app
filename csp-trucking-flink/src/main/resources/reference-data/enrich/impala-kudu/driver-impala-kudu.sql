@@ -1,7 +1,7 @@
 create database employees_hr_kudu_impala_db;
 
 CREATE  TABLE employees_hr_kudu_impala_db.driver
-(driverId int, 
+(driverId BIGINT, 
 driverName string, 
 certified string,
 wage_plan string,

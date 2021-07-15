@@ -1,10 +1,10 @@
 create database employees_hr_kudu_impala_db;
 
 CREATE  TABLE employees_hr_kudu_impala_db.timesheet
-(driverid int,
-timesheet_week int,
-hours_logged int,
-miles_logged int,
+(driverid BIGINT,
+timesheet_week BIGINT,
+hours_logged BIGINT,
+miles_logged BIGINT,
 primary key (driverId, timesheet_week)
 )
 PARTITION BY HASH PARTITIONS 4

@@ -1,18 +1,16 @@
 create database employees_hr_hive_db;
 
 CREATE TABLE employees_hr_hive_db.timesheet
-(driverid int,
-timesheet_week int,
-hours_logged int,
-miles_logged int
+(driverid BIGINT,
+timesheet_week BIGINT,
+hours_logged BIGINT,
+miles_logged BIGINT
 )
 CLUSTERED BY (driverId) INTO 5 BUCKETS
 STORED AS ORC
 TBLPROPERTIES(
 'transactional'='false'
 );
-
-
 
 
 insert into employees_hr_hive_db.timesheet
