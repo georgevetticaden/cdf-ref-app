@@ -1,0 +1,17 @@
+[
+  {
+    "metricId": "rateBytesSent",
+    "alert": {
+      "thresholdLessThan": {
+        "unitId": "kilobytesPerSecond",
+        "value": 100
+      },
+      "frequencyTolerance": {
+        "unit": {
+          "id": "MINUTES"
+        },
+        "value": 5
+      }
+    }
+  }
+]

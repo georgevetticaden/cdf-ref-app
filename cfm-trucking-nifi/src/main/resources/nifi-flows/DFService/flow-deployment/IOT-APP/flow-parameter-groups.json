@@ -1,0 +1,72 @@
+[
+  {
+    "name": "DFX - Trucking IOT App",
+    "parameters": [
+      {
+        "name": "Kafka Broker Endpoint",
+        "assetReferences": [],
+        "value": "csm-kafka-cluster-corebroker0.gvettica.a465-9q4k.cloudera.site:9093,csm-kafka-cluster-corebroker1.gvettica.a465-9q4k.cloudera.site:9093,csm-kafka-cluster-corebroker2.gvettica.a465-9q4k.cloudera.site:9093,csm-kafka-cluster-broker0.gvettica.a465-9q4k.cloudera.site:9093"
+      },
+      {
+        "name": "Kafka Consumer Group Id",
+        "assetReferences": [],
+        "value": "dfx-truck-sensors-europe"
+      },
+      {
+        "name": "Kafka Service Account",
+        "assetReferences": [],
+        "value": "srv_vett_dfx_kafka_service"
+      },
+      {
+        "name": "Kafka Service Account Password",
+        "assetReferences": [],
+        "value": "<<CDP_MISSING_SENSITIVE_VALUE>>"
+      },
+      {
+        "name": "Kafka Sink Topic - Geo Event",
+        "assetReferences": [],
+        "value": "syndicate-geo-event-json"
+      },
+      {
+        "name": "Kafka Sink Topic - Speed Event",
+        "assetReferences": [],
+        "value": "syndicate-speed-event-json"
+      },
+      {
+        "name": "Kafka Source Topic",
+        "assetReferences": [],
+        "value": "gateway-europe-raw-sensors"
+      },
+      {
+        "name": "Routing Rule Geo Event",
+        "assetReferences": [],
+        "value": "SELECT * FROM FLOWFILE where eventSource = 'truck_geo_event'"
+      },
+      {
+        "name": "Routing Rule Speed Event",
+        "assetReferences": [],
+        "value": "SELECT * FROM FLOWFILE where eventSource = 'truck_speed_event'"
+      },
+      {
+        "name": "Schema Registry Endpoint",
+        "assetReferences": [],
+        "value": "https://csm-kafka-cluster-registry0.gvettica.a465-9q4k.cloudera.site:7790/api/v1"
+      },
+      {
+        "name": "Schema Registry Service Account",
+        "assetReferences": [],
+        "value": "srv_truck_sr_service"
+      },
+      {
+        "name": "Schema Registry Service Account Password",
+        "assetReferences": [],
+        "value": "<<CDP_MISSING_SENSITIVE_VALUE>>"
+      },
+      {
+        "name": "Speed Filter",
+        "assetReferences": [],
+        "value": "40"
+      }
+    ]
+  }
+]
