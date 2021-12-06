@@ -1,9 +1,10 @@
-package org.cde.trucking.spark;
+package cloudera.cdf.refapp.trucking.simulator;
 
 import java.io.File;
 import java.sql.Timestamp;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,12 +91,20 @@ public class S3Test {
 		
 		s3client.putObject(
 				  bucketName, 
-				  "vett-data-lake-1-oregon/vett-naaf/truck-all-events-csv-0.json", 
+				  "vett-data-lake-1-oregon/vett-naaf/truck-all-events-csv-1.json", 
 				  new File("/Users/gvetticaden/Downloads/s3/truck-telemetry-raw/truck-all-events-csv-0.json")
 				);
 		
 			
 	}	
+	
+	@Test
+	public void fileTest() {
+		 File fileTest = new File("/Users/gvetticaden/Downloads/s3/truck-telemetry-raw/truck-all-events-csv-0.json");
+		 String path = fileTest.getAbsolutePath();
+		 String pathWithOutDelimiter = path.substring(1);
+		 LOG.info(pathWithOutDelimiter);
+	}
 	
 
 }
