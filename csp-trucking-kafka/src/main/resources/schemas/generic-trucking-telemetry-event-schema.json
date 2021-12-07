@@ -1,0 +1,64 @@
+{
+	"type": "record",
+	"namespace": "cloudera.cdf.csp.schema.refapp.trucking",
+	"name": "TruckEvent",
+	"fields": [{
+			"name": "eventTime",
+			"type": "string"
+		},
+		{
+			"name": "eventTimeLong",
+			"type": "long",
+			"default": 0
+		},
+		{
+			"name": "eventSource",
+			"type": "string"
+		},
+		{
+			"name": "truckId",
+			"type": "int"
+		},
+		{
+			"name": "driverId",
+			"type": "int"
+		},
+		{
+			"name": "driverName",
+			"type": "string"
+		},
+		{
+			"name": "routeId",
+			"type": "int"
+		},
+		{
+			"name": "route",
+			"type": "string"
+		},
+		{
+			"name": "eventType",
+			"type": "string",
+			"default": "None"
+		},
+		{
+			"name": "latitude",
+			"type": "double",
+			"default": 0
+		},
+		{
+			"name": "longitude",
+			"type": "double",
+			"default": 0
+		},
+		{
+			"name": "correlationId",
+			"type": "long",
+			"default": 0
+		},
+		{
+			"name": "speed",
+			"type": "int",
+			"default": 0
+		}
+	]
+}

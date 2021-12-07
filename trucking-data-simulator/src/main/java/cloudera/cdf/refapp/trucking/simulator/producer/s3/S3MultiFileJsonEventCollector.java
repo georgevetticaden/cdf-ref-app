@@ -110,7 +110,7 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 
 	private void sendTruckEventToFile(MobileEyeEvent mee) {
 		
-		String eventToPass = createTruckGeoEventJsonString(mee) +"|" + LINE_BREAK;
+		String eventToPass = createTruckGeoEventJsonString(mee) + LINE_BREAK;
 
 		logger.debug("Creating truck geo event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");	
 					
@@ -124,7 +124,7 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 
 	private void sendTruckSpeedEventToFile(MobileEyeEvent mee) {
 		
-		String eventToPass = createTruckSpeedEventJsonString(mee) + "|" + LINE_BREAK;
+		String eventToPass = createTruckSpeedEventJsonString(mee) + LINE_BREAK;
 		logger.debug("Creating truck speed event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");
 						
 		
