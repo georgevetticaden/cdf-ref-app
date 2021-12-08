@@ -166,12 +166,12 @@
 			"properties": {
 				"cache-schema": "true",
 				"dbf-default-precision": "10",
-				"truck_speed_event": "#{Routing Rule Speed Event}",
+				"truck_speed_event": "#{routing_rule_speed_event}",
 				"record-writer": "4873831c-611c-36ea-ab51-0ad95a85f55c",
 				"record-reader": "b7f820e7-024e-3c84-b587-6c5db23e2027",
 				"include-zero-record-flowfiles": "false",
 				"dbf-default-scale": "0",
-				"truck_geo_event": "#{Routing Rule Geo Event}"
+				"truck_geo_event": "#{routing_rule_geo_event}"
 			},
 			"propertyDescriptors": {
 				"cache-schema": {
@@ -253,7 +253,7 @@
 			"properties": {
 				"Proxy Host": null,
 				"range-length": null,
-				"Access Key": "#{aws.access.key}",
+				"Access Key": "#{aws_access_key}",
 				"range-start": null,
 				"proxy-configuration-service": null,
 				"Endpoint Override URL": null,
@@ -262,11 +262,11 @@
 				"AWS Credentials Provider service": null,
 				"SSL Context Service": null,
 				"Signer Override": "Default Signature",
-				"Bucket": "#{s3.bucket}",
+				"Bucket": "#{s3_bucket}",
 				"Version": null,
 				"Communications Timeout": "30 secs",
-				"Region": "#{s3.region}",
-				"Secret Key": "#{aws.access.password}",
+				"Region": "#{s3_region}",
+				"Secret Key": "#{aws_access_password}",
 				"Credentials File": null,
 				"proxy-user-name": null,
 				"Proxy Host Port": null,
@@ -431,7 +431,7 @@
 				"Proxy Host": null,
 				"FullControl User List": "${s3.permissions.full.users}",
 				"Owner": "${s3.owner}",
-				"Access Key": "#{aws.access.key}",
+				"Access Key": "#{aws_access_key}",
 				"proxy-configuration-service": null,
 				"Cache Control": null,
 				"s3-object-remove-tags-prefix": "false",
@@ -440,7 +440,7 @@
 				"canned-acl": "${s3.permissions.cannedacl}",
 				"Signer Override": "Default Signature",
 				"Content Type": null,
-				"Secret Key": "#{aws.access.password}",
+				"Secret Key": "#{aws_access_password}",
 				"Write ACL User List": "${s3.permissions.writeacl.users}",
 				"server-side-encryption": "None",
 				"Read ACL User List": "${s3.permissions.readacl.users}",
@@ -449,12 +449,12 @@
 				"Storage Class": "Standard",
 				"Multipart Part Size": "5 GB",
 				"use-chunked-encoding": "true",
-				"Object Key": "#{s3.dest.path.speed.event}/speed-${filename:substringAfterLast('/')}",
+				"Object Key": "#{s3_dest_path_speed_event}/speed-${filename:substringAfterLast('/')}",
 				"AWS Credentials Provider service": null,
 				"Multipart Threshold": "5 GB",
 				"s3-object-tags-prefix": null,
 				"SSL Context Service": null,
-				"Bucket": "#{s3.bucket}",
+				"Bucket": "#{s3_bucket}",
 				"Multipart Upload AgeOff Interval": "60 min",
 				"use-path-style-access": "false",
 				"Write Permission User List": "${s3.permissions.write.users}",
@@ -807,7 +807,7 @@
 				"Proxy Host": null,
 				"FullControl User List": "${s3.permissions.full.users}",
 				"Owner": "${s3.owner}",
-				"Access Key": "#{aws.access.key}",
+				"Access Key": "#{aws_access_key}",
 				"proxy-configuration-service": null,
 				"Cache Control": null,
 				"s3-object-remove-tags-prefix": "false",
@@ -816,7 +816,7 @@
 				"canned-acl": "${s3.permissions.cannedacl}",
 				"Signer Override": "Default Signature",
 				"Content Type": null,
-				"Secret Key": "#{aws.access.password}",
+				"Secret Key": "#{aws_access_password}",
 				"Write ACL User List": "${s3.permissions.writeacl.users}",
 				"server-side-encryption": "None",
 				"Read ACL User List": "${s3.permissions.readacl.users}",
@@ -825,12 +825,12 @@
 				"Storage Class": "Standard",
 				"Multipart Part Size": "5 GB",
 				"use-chunked-encoding": "true",
-				"Object Key": "#{s3.dest.path.geo.event}/geo-${filename:substringAfterLast('/')}",
+				"Object Key": "#{s3_dest_path_geo_event}/geo-${filename:substringAfterLast('/')}",
 				"AWS Credentials Provider service": null,
 				"Multipart Threshold": "5 GB",
 				"s3-object-tags-prefix": null,
 				"SSL Context Service": null,
-				"Bucket": "#{s3.bucket}",
+				"Bucket": "#{s3_bucket}",
 				"Multipart Upload AgeOff Interval": "60 min",
 				"use-path-style-access": "false",
 				"Write Permission User List": "${s3.permissions.write.users}",
@@ -1346,7 +1346,7 @@
 				"Time Format": null,
 				"schema-access-strategy": "schema-text-property",
 				"schema-version": null,
-				"schema-text": "#{telemetry.source.schema}"
+				"schema-text": "#{telemetry_source_schema}"
 			},
 			"propertyDescriptors": {
 				"Timestamp Format": {
@@ -1447,7 +1447,7 @@
 				"schema-access-strategy": "schema-text-property",
 				"schema-protocol-version": "1",
 				"schema-version": null,
-				"schema-text": "#{telemetry.source.schema}"
+				"schema-text": "#{telemetry_source_schema}"
 			},
 			"propertyDescriptors": {
 				"schema-branch": {
@@ -1642,7 +1642,7 @@
 				"Time Format": null,
 				"schema-access-strategy": "schema-text-property",
 				"schema-version": null,
-				"schema-text": "#{telemetry.dest.geo.event.schema}"
+				"schema-text": "#{telemetry_dest_geo_event_schema}"
 			},
 			"propertyDescriptors": {
 				"Timestamp Format": {
@@ -1743,7 +1743,7 @@
 				"schema-access-strategy": "schema-text-property",
 				"schema-protocol-version": "1",
 				"schema-version": null,
-				"schema-text": "#{telemetry.dest.geo.event.schema}"
+				"schema-text": "#{telemetry_dest_geo_event_schema}"
 			},
 			"propertyDescriptors": {
 				"schema-branch": {
@@ -1863,63 +1863,63 @@
 		"TruckSensorS3toS3Processing": {
 			"name": "TruckSensorS3toS3Processing",
 			"parameters": [{
-				"name": "telemetry.source.schema",
+				"name": "aws_access_password",
+				"description": "",
+				"sensitive": true
+			}, {
+				"name": "routing_rule_geo_event",
 				"description": "",
 				"sensitive": false,
-				"value": "{\n\t\"type\": \"record\",\n\t\"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n\t\"name\": \"TruckEvent\",\n\t\"fields\": [{\n\t\t\t\"name\": \"eventTime\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventTimeLong\",\n\t\t\t\"type\": \"long\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventSource\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"truckId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"driverId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"driverName\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"routeId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"route\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventType\",\n\t\t\t\"type\": \"string\",\n\t\t\t\"default\": \"None\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"latitude\",\n\t\t\t\"type\": \"double\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"longitude\",\n\t\t\t\"type\": \"double\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"correlationId\",\n\t\t\t\"type\": \"long\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"speed\",\n\t\t\t\"type\": \"int\",\n\t\t\t\"default\": 0\n\t\t}\n\t]\n}"
+				"value": "SELECT * FROM FLOWFILE where eventSource = 'truck_geo_event'"
 			}, {
-				"name": "s3.region",
+				"name": "s3_region",
 				"description": "",
 				"sensitive": false,
 				"value": "us-west-2"
 			}, {
-				"name": "Routing Rule Speed Event",
+				"name": "routing_rule_speed_event",
 				"description": "",
 				"sensitive": false,
 				"value": "SELECT * FROM FLOWFILE where eventSource = 'truck_speed_event'"
 			}, {
-				"name": "s3.dest.path.geo.event",
-				"description": "",
-				"sensitive": false,
-				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-processed/truck-geo-events"
-			}, {
-				"name": "telemetry.dest.geo.event.schema",
-				"description": "",
-				"sensitive": false,
-				"value": "{\n \"type\": \"record\",\n \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n \"name\": \"TruckGeoEventEnriched\",\n \"fields\": [\n  {\n   \"name\": \"eventTime\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventTimeLong\",\n   \"type\": \"long\",\n   \"default\": 0\n  },\n  {\n   \"name\": \"eventSource\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"truckId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverName\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"routeId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"route\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventType\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"latitude\",\n   \"type\": \"double\"\n  },\n  {\n   \"name\": \"longitude\",\n   \"type\": \"double\"\n  },\n  {\n   \"name\": \"correlationId\",\n   \"type\": \"long\"\n  },\n  {\n   \"name\": \"geoAddress\",\n   \"type\": \"string\",\n   \"default\": \"None\"\n  }\n ]\n}"
-			}, {
-				"name": "s3.bucket",
-				"description": "",
-				"sensitive": false,
-				"value": "vett-new-pm-cdp-oregon"
-			}, {
-				"name": "s3.dest.path.speed.event",
-				"description": "",
-				"sensitive": false,
-				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-processed/truck-speed-events"
-			}, {
-				"name": "aws.access.key",
+				"name": "aws_access_key",
 				"description": "",
 				"sensitive": true
 			}, {
-				"name": "telemetry.dest.speed.event.schema",
-				"description": "",
-				"sensitive": false,
-				"value": "{\n \"type\": \"record\",\n \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n \"name\": \"TruckSpeedEventEnriched\",\n \"fields\": [\n  {\n   \"name\": \"eventTime\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventTimeLong\",\n   \"type\": \"long\",\n   \"default\": 0\n  },\n  {\n   \"name\": \"eventSource\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"truckId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverName\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"routeId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"route\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"speed\",\n   \"type\": \"int\"\n  }\n ]\n}"
-			}, {
-				"name": "s3.filter.path",
+				"name": "s3_filter_path",
 				"description": "",
 				"sensitive": false,
 				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw/"
 			}, {
-				"name": "aws.access.password",
-				"description": "",
-				"sensitive": true
-			}, {
-				"name": "Routing Rule Geo Event",
+				"name": "telemetry_dest_geo_event_schema",
 				"description": "",
 				"sensitive": false,
-				"value": "SELECT * FROM FLOWFILE where eventSource = 'truck_geo_event'"
+				"value": "{\n \"type\": \"record\",\n \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n \"name\": \"TruckGeoEventEnriched\",\n \"fields\": [\n  {\n   \"name\": \"eventTime\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventTimeLong\",\n   \"type\": \"long\",\n   \"default\": 0\n  },\n  {\n   \"name\": \"eventSource\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"truckId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverName\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"routeId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"route\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventType\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"latitude\",\n   \"type\": \"double\"\n  },\n  {\n   \"name\": \"longitude\",\n   \"type\": \"double\"\n  },\n  {\n   \"name\": \"correlationId\",\n   \"type\": \"long\"\n  },\n  {\n   \"name\": \"geoAddress\",\n   \"type\": \"string\",\n   \"default\": \"None\"\n  }\n ]\n}"
+			}, {
+				"name": "telemetry_dest_speed_event_schema",
+				"description": "",
+				"sensitive": false,
+				"value": "{\n \"type\": \"record\",\n \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n \"name\": \"TruckSpeedEventEnriched\",\n \"fields\": [\n  {\n   \"name\": \"eventTime\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventTimeLong\",\n   \"type\": \"long\",\n   \"default\": 0\n  },\n  {\n   \"name\": \"eventSource\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"truckId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverName\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"routeId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"route\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"speed\",\n   \"type\": \"int\"\n  }\n ]\n}"
+			}, {
+				"name": "s3_dest_path_speed_event",
+				"description": "",
+				"sensitive": false,
+				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-processed/truck-speed-events"
+			}, {
+				"name": "s3_dest_path_geo_event",
+				"description": "",
+				"sensitive": false,
+				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-processed/truck-geo-events"
+			}, {
+				"name": "s3_bucket",
+				"description": "",
+				"sensitive": false,
+				"value": "vett-new-pm-cdp-oregon"
+			}, {
+				"name": "telemetry_source_schema",
+				"description": "",
+				"sensitive": false,
+				"value": "{\n\t\"type\": \"record\",\n\t\"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n\t\"name\": \"TruckEvent\",\n\t\"fields\": [{\n\t\t\t\"name\": \"eventTime\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventTimeLong\",\n\t\t\t\"type\": \"long\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventSource\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"truckId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"driverId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"driverName\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"routeId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"route\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventType\",\n\t\t\t\"type\": \"string\",\n\t\t\t\"default\": \"None\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"latitude\",\n\t\t\t\"type\": \"double\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"longitude\",\n\t\t\t\"type\": \"double\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"correlationId\",\n\t\t\t\"type\": \"long\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"speed\",\n\t\t\t\"type\": \"int\",\n\t\t\t\"default\": 0\n\t\t}\n\t]\n}"
 			}]
 		}
 	},
