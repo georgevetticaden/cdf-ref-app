@@ -32,10 +32,13 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 	
 	private AmazonS3 s3client;
 	private String bucketName;
+	
+	StringBuffer eventBuffer;
 
 	public S3MultiFileJsonEventCollector(String fileName, EventSourceType eventSource, int numOfEventsPerFile, String bucketName) {
 	       this.fileNamePrefix = fileName;
-		   this.truckEventsFile =  createFile(fileNamePrefix, fileSuffix);
+	       this.truckEventsFile =  createFile(fileNamePrefix, fileSuffix);
+		   this.eventBuffer = new StringBuffer();
 	       this.eventSourceType = eventSource;
 	       this.numOfEventsPerFile = numOfEventsPerFile;
 	       this.bucketName = bucketName;
@@ -71,15 +74,17 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 
 		MobileEyeEvent mee = (MobileEyeEvent) event;
 		
-		logger.info("Count in file is: " + currentEventCountPerFile + " and max count in file is: " + numOfEventsPerFile);
+		logger.info("Count in Buffer is: " + currentEventCountPerFile + " and max count in file is: " + numOfEventsPerFile);
 		
 		
 		if(currentEventCountPerFile > numOfEventsPerFile ) {
 			
+			writeBufferedEventsToFile();
 			uploadFileToS3();			
 			
 			fileSuffix++;
 			currentEventCountPerFile = 0;
+			eventBuffer = new StringBuffer();
 			this.truckEventsFile = createFile(fileNamePrefix, fileSuffix);
 			logger.info("Create new Streaming file["+this.truckEventsFile+"]");
 		}
@@ -112,27 +117,32 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 		
 		String eventToPass = createTruckGeoEventJsonString(mee) + LINE_BREAK;
 
-		logger.debug("Creating truck geo event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");	
+		//logger.debug("Creating truck geo event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");	
+		
+		eventBuffer.append(eventToPass);
 					
-		try {
-			FileUtils.writeStringToFile(truckEventsFile, eventToPass, Charset.defaultCharset(), true);
-		} catch (Exception e) {
-			logger.error("Error sending event[" + eventToPass + "] to file[ " + truckEventsFile + " ] ", e);
-		}		
 		
 	}
 
 	private void sendTruckSpeedEventToFile(MobileEyeEvent mee) {
 		
 		String eventToPass = createTruckSpeedEventJsonString(mee) + LINE_BREAK;
-		logger.debug("Creating truck speed event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");
-						
+		//logger.debug("Creating truck speed event["+eventToPass+"] for driver["+mee.getTruck().getDriver().getDriverId() + "] in truck [" + mee.getTruck() + "]");
 		
-		try {
-			FileUtils.writeStringToFile(truckEventsFile, eventToPass, Charset.defaultCharset(), true);
-		} catch (Exception e) {
-			logger.error("Error sending event[" + eventToPass + "] to file[ " + truckEventsFile + " ] ", e);
-		}	
+		eventBuffer.append(eventToPass);
+		
 	}
+
+	private void writeBufferedEventsToFile() {
+		try {
+			this.truckEventsFile =  createFile(fileNamePrefix, fileSuffix);	
+			FileUtils.writeStringToFile(truckEventsFile, eventBuffer.toString(), Charset.defaultCharset(), true);
+			logger.info("Writing the following contents to file["+truckEventsFile+"]: " + eventBuffer.toString());
+		} catch (Exception e) {
+			logger.error("Error file[ " + truckEventsFile + " ] ", e);
+		}
+	}
+	
+	
 
 }
