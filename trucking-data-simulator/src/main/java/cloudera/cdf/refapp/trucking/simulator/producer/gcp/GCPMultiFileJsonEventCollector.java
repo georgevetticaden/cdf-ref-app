@@ -37,11 +37,13 @@ public class GCPMultiFileJsonEventCollector extends BaseTruckEventCollector {
 	private String bucketName;
 	
 	StringBuffer eventBuffer;
+	
+	/* Required for GCP Function and not Lambda Functions */
+	private static final String rootFolderForSimulatedData = "/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
 
 
 	public GCPMultiFileJsonEventCollector(String fileName, EventSourceType eventSource, int numOfEventsPerFile, String bucketName) {
 	       this.fileNamePrefix = fileName;
-	       this.truckEventsFile =  createFile(fileNamePrefix, fileSuffix);
 		   this.eventBuffer = new StringBuffer();
 	       this.eventSourceType = eventSource;
 	       this.numOfEventsPerFile = numOfEventsPerFile;
@@ -84,7 +86,6 @@ public class GCPMultiFileJsonEventCollector extends BaseTruckEventCollector {
 			fileSuffix++;
 			currentEventCountPerFile = 0;
 			eventBuffer = new StringBuffer();
-			this.truckEventsFile = createFile(fileNamePrefix, fileSuffix);
 			logger.info("Create new Streaming file["+this.truckEventsFile+"]");
 		}
 		
@@ -103,7 +104,7 @@ public class GCPMultiFileJsonEventCollector extends BaseTruckEventCollector {
 	}
 
 	private void uploadFileToGCP() throws Exception {
-		String bucketKey = truckEventsFile.getAbsolutePath().substring(1);
+		String bucketKey = truckEventsFile.getName();
 		logger.info("Uploading file with Key["+bucketKey+"] to Bucket["+bucketName+"]");
 
 	
@@ -137,7 +138,8 @@ public class GCPMultiFileJsonEventCollector extends BaseTruckEventCollector {
 
 	private void writeBufferedEventsToFile() {
 		try {
-			this.truckEventsFile =  createFile(fileNamePrefix, fileSuffix);	
+		    this.truckEventsFile =  createFile(rootFolderForSimulatedData+fileNamePrefix, fileSuffix);
+
 			FileUtils.writeStringToFile(truckEventsFile, eventBuffer.toString(), Charset.defaultCharset(), true);
 			logger.info("Writing the following contents to file["+truckEventsFile+"]: " + eventBuffer.toString());
 		} catch (Exception e) {

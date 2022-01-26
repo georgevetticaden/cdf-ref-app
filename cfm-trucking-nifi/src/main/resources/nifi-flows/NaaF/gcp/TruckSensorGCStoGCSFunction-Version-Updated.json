@@ -1,0 +1,1664 @@
+{
+	"flowContents": {
+		"identifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+		"name": "TruckSensorGCStoGCSFunction",
+		"comments": "",
+		"position": {
+			"x": 792.0,
+			"y": 288.0
+		},
+		"processGroups": [],
+		"remoteProcessGroups": [],
+		"processors": [{
+			"identifier": "124efff4-f72e-3806-8795-91285f86cc02",
+			"name": "PutStreamingGeoEventInGCS",
+			"comments": "",
+			"position": {
+				"x": 160.0,
+				"y": 1016.0
+			},
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-gcp-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"style": {},
+			"type": "org.apache.nifi.processors.gcp.storage.PutGCSObject",
+			"properties": {
+				"gcp-proxy-host": null,
+				"gcs-content-disposition-type": null,
+				"gcp-retry-count": "6",
+				"proxy-configuration-service": null,
+				"gcs-overwrite-object": "true",
+				"gcp-proxy-user-name": null,
+				"gcs-object-md5": null,
+				"gcs-content-type": "${mime.type}",
+				"gcs-object-crc32c": null,
+				"gcp-project-id": "#{gcp_project}",
+				"GCP Credentials Provider Service": "effd0c09-462b-35ae-b866-a32fee1e820a",
+				"gcs-key": "#{gcp_dest_path_geo_event}/geo-${filename:substringAfterLast('/')}",
+				"gcp-proxy-port": null,
+				"gcs-bucket": "#{gcp_bucket}",
+				"gcs-object-acl": null
+			},
+			"propertyDescriptors": {
+				"gcp-proxy-host": {
+					"name": "gcp-proxy-host",
+					"displayName": "Proxy host",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-content-disposition-type": {
+					"name": "gcs-content-disposition-type",
+					"displayName": "Content Disposition Type",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-retry-count": {
+					"name": "gcp-retry-count",
+					"displayName": "Number of retries",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"proxy-configuration-service": {
+					"name": "proxy-configuration-service",
+					"displayName": "Proxy Configuration Service",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"gcs-server-side-encryption-key": {
+					"name": "gcs-server-side-encryption-key",
+					"displayName": "Server Side Encryption Key",
+					"identifiesControllerService": false,
+					"sensitive": true
+				},
+				"gcs-overwrite-object": {
+					"name": "gcs-overwrite-object",
+					"displayName": "Overwrite Object",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-proxy-user-name": {
+					"name": "gcp-proxy-user-name",
+					"displayName": "HTTP Proxy Username",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-object-md5": {
+					"name": "gcs-object-md5",
+					"displayName": "MD5 Hash",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-content-type": {
+					"name": "gcs-content-type",
+					"displayName": "Content Type",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-object-crc32c": {
+					"name": "gcs-object-crc32c",
+					"displayName": "CRC32C Checksum",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-project-id": {
+					"name": "gcp-project-id",
+					"displayName": "Project ID",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"GCP Credentials Provider Service": {
+					"name": "GCP Credentials Provider Service",
+					"displayName": "GCP Credentials Provider Service",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"gcs-key": {
+					"name": "gcs-key",
+					"displayName": "Key",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-proxy-user-password": {
+					"name": "gcp-proxy-user-password",
+					"displayName": "HTTP Proxy Password",
+					"identifiesControllerService": false,
+					"sensitive": true
+				},
+				"gcp-proxy-port": {
+					"name": "gcp-proxy-port",
+					"displayName": "Proxy port",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-bucket": {
+					"name": "gcs-bucket",
+					"displayName": "Bucket",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-object-acl": {
+					"name": "gcs-object-acl",
+					"displayName": "Object ACL",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"schedulingPeriod": "0 sec",
+			"schedulingStrategy": "TIMER_DRIVEN",
+			"executionNode": "ALL",
+			"penaltyDuration": "30 sec",
+			"yieldDuration": "1 sec",
+			"bulletinLevel": "WARN",
+			"runDurationMillis": 0,
+			"concurrentlySchedulableTaskCount": 1,
+			"autoTerminatedRelationships": ["success", "failure"],
+			"scheduledState": "ENABLED",
+			"componentType": "PROCESSOR",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "e93ee113-7f3e-31bf-9849-c3f4c5cae9aa",
+			"name": "EvaluateJsonPath",
+			"comments": "",
+			"position": {
+				"x": 312.0,
+				"y": 96.0
+			},
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-standard-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"style": {},
+			"type": "org.apache.nifi.processors.standard.EvaluateJsonPath",
+			"properties": {
+				"bucket": "$.bucket",
+				"Destination": "flowfile-attribute",
+				"Return Type": "auto-detect",
+				"Null Value Representation": "empty string",
+				"key": "$.name",
+				"Path Not Found Behavior": "ignore"
+			},
+			"propertyDescriptors": {
+				"bucket": {
+					"name": "bucket",
+					"displayName": "bucket",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Destination": {
+					"name": "Destination",
+					"displayName": "Destination",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Return Type": {
+					"name": "Return Type",
+					"displayName": "Return Type",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Null Value Representation": {
+					"name": "Null Value Representation",
+					"displayName": "Null Value Representation",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"key": {
+					"name": "key",
+					"displayName": "key",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Path Not Found Behavior": {
+					"name": "Path Not Found Behavior",
+					"displayName": "Path Not Found Behavior",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"schedulingPeriod": "0 sec",
+			"schedulingStrategy": "TIMER_DRIVEN",
+			"executionNode": "ALL",
+			"penaltyDuration": "30 sec",
+			"yieldDuration": "1 sec",
+			"bulletinLevel": "WARN",
+			"runDurationMillis": 0,
+			"concurrentlySchedulableTaskCount": 1,
+			"autoTerminatedRelationships": ["failure", "unmatched"],
+			"scheduledState": "ENABLED",
+			"componentType": "PROCESSOR",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "1df7fbca-7cbb-3231-a0b1-9876876d9d8b",
+			"name": "PutStreamingGeoEventInGCS",
+			"comments": "",
+			"position": {
+				"x": 552.0,
+				"y": 1008.0
+			},
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-gcp-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"style": {},
+			"type": "org.apache.nifi.processors.gcp.storage.PutGCSObject",
+			"properties": {
+				"gcp-proxy-host": null,
+				"gcs-content-disposition-type": null,
+				"gcp-retry-count": "6",
+				"proxy-configuration-service": null,
+				"gcs-overwrite-object": "true",
+				"gcp-proxy-user-name": null,
+				"gcs-object-md5": null,
+				"gcs-content-type": "${mime.type}",
+				"gcs-object-crc32c": null,
+				"gcp-project-id": "#{gcp_project}",
+				"GCP Credentials Provider Service": "effd0c09-462b-35ae-b866-a32fee1e820a",
+				"gcs-key": "#{gcp_dest_path_speed_event}/geo-${filename:substringAfterLast('/')}",
+				"gcp-proxy-port": null,
+				"gcs-bucket": "#{gcp_bucket}",
+				"gcs-object-acl": null
+			},
+			"propertyDescriptors": {
+				"gcp-proxy-host": {
+					"name": "gcp-proxy-host",
+					"displayName": "Proxy host",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-content-disposition-type": {
+					"name": "gcs-content-disposition-type",
+					"displayName": "Content Disposition Type",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-retry-count": {
+					"name": "gcp-retry-count",
+					"displayName": "Number of retries",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"proxy-configuration-service": {
+					"name": "proxy-configuration-service",
+					"displayName": "Proxy Configuration Service",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"gcs-server-side-encryption-key": {
+					"name": "gcs-server-side-encryption-key",
+					"displayName": "Server Side Encryption Key",
+					"identifiesControllerService": false,
+					"sensitive": true
+				},
+				"gcs-overwrite-object": {
+					"name": "gcs-overwrite-object",
+					"displayName": "Overwrite Object",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-proxy-user-name": {
+					"name": "gcp-proxy-user-name",
+					"displayName": "HTTP Proxy Username",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-object-md5": {
+					"name": "gcs-object-md5",
+					"displayName": "MD5 Hash",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-content-type": {
+					"name": "gcs-content-type",
+					"displayName": "Content Type",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-object-crc32c": {
+					"name": "gcs-object-crc32c",
+					"displayName": "CRC32C Checksum",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-project-id": {
+					"name": "gcp-project-id",
+					"displayName": "Project ID",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"GCP Credentials Provider Service": {
+					"name": "GCP Credentials Provider Service",
+					"displayName": "GCP Credentials Provider Service",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"gcs-key": {
+					"name": "gcs-key",
+					"displayName": "Key",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-proxy-user-password": {
+					"name": "gcp-proxy-user-password",
+					"displayName": "HTTP Proxy Password",
+					"identifiesControllerService": false,
+					"sensitive": true
+				},
+				"gcp-proxy-port": {
+					"name": "gcp-proxy-port",
+					"displayName": "Proxy port",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-bucket": {
+					"name": "gcs-bucket",
+					"displayName": "Bucket",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-object-acl": {
+					"name": "gcs-object-acl",
+					"displayName": "Object ACL",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"schedulingPeriod": "0 sec",
+			"schedulingStrategy": "TIMER_DRIVEN",
+			"executionNode": "ALL",
+			"penaltyDuration": "30 sec",
+			"yieldDuration": "1 sec",
+			"bulletinLevel": "WARN",
+			"runDurationMillis": 0,
+			"concurrentlySchedulableTaskCount": 1,
+			"autoTerminatedRelationships": ["success", "failure"],
+			"scheduledState": "ENABLED",
+			"componentType": "PROCESSOR",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "167b3be6-b1ba-3ead-b837-a88070f5a44b",
+			"name": "ReverseGeoLookup",
+			"comments": "",
+			"position": {
+				"x": 184.0,
+				"y": 784.0
+			},
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-standard-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"style": {},
+			"type": "org.apache.nifi.processors.standard.LookupRecord",
+			"properties": {
+				"result-contents": "insert-entire-record",
+				"routing-strategy": "route-to-success",
+				"lng": "/longitude",
+				"result-record-path": "/geoAddress",
+				"record-writer": "661fbcff-82ed-347b-9364-8ddc3e8425f3",
+				"record-reader": "85727028-d6f7-3464-ad9d-95dc2084a44c",
+				"lookup-service": "0355dacd-c9e0-3c5d-9c0c-5195e69e0e64",
+				"record-update-strategy": "use-property",
+				"lat": "/latitude"
+			},
+			"propertyDescriptors": {
+				"result-contents": {
+					"name": "result-contents",
+					"displayName": "Record Result Contents",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"routing-strategy": {
+					"name": "routing-strategy",
+					"displayName": "Routing Strategy",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"lng": {
+					"name": "lng",
+					"displayName": "lng",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"result-record-path": {
+					"name": "result-record-path",
+					"displayName": "Result RecordPath",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"record-writer": {
+					"name": "record-writer",
+					"displayName": "Record Writer",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"record-reader": {
+					"name": "record-reader",
+					"displayName": "Record Reader",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"lookup-service": {
+					"name": "lookup-service",
+					"displayName": "Lookup Service",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"record-update-strategy": {
+					"name": "record-update-strategy",
+					"displayName": "Record Update Strategy",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"lat": {
+					"name": "lat",
+					"displayName": "lat",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"schedulingPeriod": "0 sec",
+			"schedulingStrategy": "TIMER_DRIVEN",
+			"executionNode": "ALL",
+			"penaltyDuration": "30 sec",
+			"yieldDuration": "1 sec",
+			"bulletinLevel": "WARN",
+			"runDurationMillis": 0,
+			"concurrentlySchedulableTaskCount": 1,
+			"autoTerminatedRelationships": ["failure"],
+			"scheduledState": "ENABLED",
+			"componentType": "PROCESSOR",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "ad3d17d5-1788-33c0-ac1f-aab2bd9fe5fe",
+			"name": "LogAttribute",
+			"comments": "",
+			"position": {
+				"x": 312.0,
+				"y": -160.0
+			},
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-standard-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"style": {},
+			"type": "org.apache.nifi.processors.standard.LogAttribute",
+			"properties": {
+				"Log prefix": null,
+				"character-set": "UTF-8",
+				"Log Level": "info",
+				"attributes-to-ignore-regex": null,
+				"Attributes to Ignore": null,
+				"Attributes to Log": null,
+				"attributes-to-log-regex": ".*",
+				"Log Payload": "true"
+			},
+			"propertyDescriptors": {
+				"Log prefix": {
+					"name": "Log prefix",
+					"displayName": "Log prefix",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"character-set": {
+					"name": "character-set",
+					"displayName": "Character Set",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Log Level": {
+					"name": "Log Level",
+					"displayName": "Log Level",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"attributes-to-ignore-regex": {
+					"name": "attributes-to-ignore-regex",
+					"displayName": "Attributes to Ignore by Regular Expression",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Attributes to Ignore": {
+					"name": "Attributes to Ignore",
+					"displayName": "Attributes to Ignore",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Attributes to Log": {
+					"name": "Attributes to Log",
+					"displayName": "Attributes to Log",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"attributes-to-log-regex": {
+					"name": "attributes-to-log-regex",
+					"displayName": "Attributes to Log by Regular Expression",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Log Payload": {
+					"name": "Log Payload",
+					"displayName": "Log Payload",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"schedulingPeriod": "0 sec",
+			"schedulingStrategy": "TIMER_DRIVEN",
+			"executionNode": "ALL",
+			"penaltyDuration": "30 sec",
+			"yieldDuration": "1 sec",
+			"bulletinLevel": "WARN",
+			"runDurationMillis": 0,
+			"concurrentlySchedulableTaskCount": 1,
+			"autoTerminatedRelationships": [],
+			"scheduledState": "ENABLED",
+			"componentType": "PROCESSOR",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "adf00970-0afb-31ed-8479-e2471d43de1b",
+			"name": "FetchGCSObject",
+			"comments": "",
+			"position": {
+				"x": 344.0,
+				"y": 328.0
+			},
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-gcp-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"style": {},
+			"type": "org.apache.nifi.processors.gcp.storage.FetchGCSObject",
+			"properties": {
+				"GCP Credentials Provider Service": "effd0c09-462b-35ae-b866-a32fee1e820a",
+				"gcp-proxy-host": null,
+				"gcs-object-range-start": null,
+				"gcs-key": "${key}",
+				"gcp-retry-count": "6",
+				"proxy-configuration-service": null,
+				"gcs-object-range-length": null,
+				"gcp-proxy-user-name": null,
+				"gcp-proxy-port": null,
+				"gcs-bucket": "${bucket}",
+				"gcp-project-id": "#{gcp_project}",
+				"gcs-generation": null
+			},
+			"propertyDescriptors": {
+				"gcp-proxy-host": {
+					"name": "gcp-proxy-host",
+					"displayName": "Proxy host",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-retry-count": {
+					"name": "gcp-retry-count",
+					"displayName": "Number of retries",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"proxy-configuration-service": {
+					"name": "proxy-configuration-service",
+					"displayName": "Proxy Configuration Service",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"gcs-server-side-encryption-key": {
+					"name": "gcs-server-side-encryption-key",
+					"displayName": "Server Side Encryption Key",
+					"identifiesControllerService": false,
+					"sensitive": true
+				},
+				"gcs-object-range-length": {
+					"name": "gcs-object-range-length",
+					"displayName": "Range Length",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-proxy-user-name": {
+					"name": "gcp-proxy-user-name",
+					"displayName": "HTTP Proxy Username",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-project-id": {
+					"name": "gcp-project-id",
+					"displayName": "Project ID",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-generation": {
+					"name": "gcs-generation",
+					"displayName": "Object Generation",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"GCP Credentials Provider Service": {
+					"name": "GCP Credentials Provider Service",
+					"displayName": "GCP Credentials Provider Service",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"gcs-object-range-start": {
+					"name": "gcs-object-range-start",
+					"displayName": "Range Start",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-key": {
+					"name": "gcs-key",
+					"displayName": "Name",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcp-proxy-user-password": {
+					"name": "gcp-proxy-user-password",
+					"displayName": "HTTP Proxy Password",
+					"identifiesControllerService": false,
+					"sensitive": true
+				},
+				"gcp-proxy-port": {
+					"name": "gcp-proxy-port",
+					"displayName": "Proxy port",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"gcs-bucket": {
+					"name": "gcs-bucket",
+					"displayName": "Bucket",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"schedulingPeriod": "0 sec",
+			"schedulingStrategy": "TIMER_DRIVEN",
+			"executionNode": "ALL",
+			"penaltyDuration": "30 sec",
+			"yieldDuration": "1 sec",
+			"bulletinLevel": "WARN",
+			"runDurationMillis": 0,
+			"concurrentlySchedulableTaskCount": 1,
+			"autoTerminatedRelationships": ["failure"],
+			"scheduledState": "ENABLED",
+			"componentType": "PROCESSOR",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "50f1ef58-37b1-3b2e-9d5c-0581f230b6b3",
+			"name": "RouteTelemetryEvents",
+			"comments": "",
+			"position": {
+				"x": 344.0,
+				"y": 560.0
+			},
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-standard-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"style": {},
+			"type": "org.apache.nifi.processors.standard.QueryRecord",
+			"properties": {
+				"cache-schema": "true",
+				"dbf-default-precision": "10",
+				"truck_speed_event": "#{routing_rule_speed_event}",
+				"record-writer": "af9cd967-1c8f-34cf-8ddb-0bbdbc8f39df",
+				"record-reader": "a1e63ccc-f8c9-3f23-a498-436a87698a2b",
+				"include-zero-record-flowfiles": "false",
+				"dbf-default-scale": "0",
+				"truck_geo_event": "#{routing_rule_geo_event}"
+			},
+			"propertyDescriptors": {
+				"cache-schema": {
+					"name": "cache-schema",
+					"displayName": "Cache Schema",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"dbf-default-precision": {
+					"name": "dbf-default-precision",
+					"displayName": "Default Decimal Precision",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"truck_speed_event": {
+					"name": "truck_speed_event",
+					"displayName": "truck_speed_event",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"record-writer": {
+					"name": "record-writer",
+					"displayName": "Record Writer",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"record-reader": {
+					"name": "record-reader",
+					"displayName": "Record Reader",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"include-zero-record-flowfiles": {
+					"name": "include-zero-record-flowfiles",
+					"displayName": "Include Zero Record FlowFiles",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"dbf-default-scale": {
+					"name": "dbf-default-scale",
+					"displayName": "Default Decimal Scale",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"truck_geo_event": {
+					"name": "truck_geo_event",
+					"displayName": "truck_geo_event",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"schedulingPeriod": "0 sec",
+			"schedulingStrategy": "TIMER_DRIVEN",
+			"executionNode": "ALL",
+			"penaltyDuration": "30 sec",
+			"yieldDuration": "1 sec",
+			"bulletinLevel": "WARN",
+			"runDurationMillis": 0,
+			"concurrentlySchedulableTaskCount": 1,
+			"autoTerminatedRelationships": ["original", "failure"],
+			"scheduledState": "ENABLED",
+			"componentType": "PROCESSOR",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}],
+		"inputPorts": [{
+			"identifier": "1bfb5ca7-921a-3170-b6b7-e315a7f2928a",
+			"name": "GCSTrigger",
+			"position": {
+				"x": 368.0,
+				"y": -288.0
+			},
+			"type": "INPUT_PORT",
+			"concurrentlySchedulableTaskCount": 1,
+			"allowRemoteAccess": false,
+			"componentType": "INPUT_PORT",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}],
+		"outputPorts": [],
+		"connections": [{
+			"identifier": "c3118b14-d5a8-313f-b637-98d3ed0f77bd",
+			"name": "",
+			"source": {
+				"id": "167b3be6-b1ba-3ead-b837-a88070f5a44b",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "ReverseGeoLookup",
+				"comments": ""
+			},
+			"destination": {
+				"id": "124efff4-f72e-3806-8795-91285f86cc02",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "PutStreamingGeoEventInGCS",
+				"comments": ""
+			},
+			"labelIndex": 1,
+			"zIndex": 0,
+			"selectedRelationships": ["success"],
+			"backPressureObjectThreshold": 10000,
+			"backPressureDataSizeThreshold": "1 GB",
+			"flowFileExpiration": "0 sec",
+			"prioritizers": [],
+			"bends": [],
+			"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+			"partitioningAttribute": "",
+			"loadBalanceCompression": "DO_NOT_COMPRESS",
+			"componentType": "CONNECTION",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "c87b5812-4547-3b67-9532-f987ed64d7c0",
+			"name": "",
+			"source": {
+				"id": "e93ee113-7f3e-31bf-9849-c3f4c5cae9aa",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "EvaluateJsonPath",
+				"comments": ""
+			},
+			"destination": {
+				"id": "adf00970-0afb-31ed-8479-e2471d43de1b",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "FetchGCSObject",
+				"comments": ""
+			},
+			"labelIndex": 1,
+			"zIndex": 0,
+			"selectedRelationships": ["matched"],
+			"backPressureObjectThreshold": 10000,
+			"backPressureDataSizeThreshold": "1 GB",
+			"flowFileExpiration": "0 sec",
+			"prioritizers": [],
+			"bends": [],
+			"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+			"partitioningAttribute": "",
+			"loadBalanceCompression": "DO_NOT_COMPRESS",
+			"componentType": "CONNECTION",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "66a1e4e4-0d23-37df-8126-654bd40bcab0",
+			"name": "",
+			"source": {
+				"id": "50f1ef58-37b1-3b2e-9d5c-0581f230b6b3",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "RouteTelemetryEvents",
+				"comments": ""
+			},
+			"destination": {
+				"id": "1df7fbca-7cbb-3231-a0b1-9876876d9d8b",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "PutStreamingGeoEventInGCS",
+				"comments": ""
+			},
+			"labelIndex": 1,
+			"zIndex": 0,
+			"selectedRelationships": ["truck_speed_event"],
+			"backPressureObjectThreshold": 10000,
+			"backPressureDataSizeThreshold": "1 GB",
+			"flowFileExpiration": "0 sec",
+			"prioritizers": [],
+			"bends": [],
+			"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+			"partitioningAttribute": "",
+			"loadBalanceCompression": "DO_NOT_COMPRESS",
+			"componentType": "CONNECTION",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "362fb528-57bb-338f-bcb5-2b41d216b39e",
+			"name": "",
+			"source": {
+				"id": "ad3d17d5-1788-33c0-ac1f-aab2bd9fe5fe",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "LogAttribute",
+				"comments": ""
+			},
+			"destination": {
+				"id": "e93ee113-7f3e-31bf-9849-c3f4c5cae9aa",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "EvaluateJsonPath",
+				"comments": ""
+			},
+			"labelIndex": 1,
+			"zIndex": 0,
+			"selectedRelationships": ["success"],
+			"backPressureObjectThreshold": 10000,
+			"backPressureDataSizeThreshold": "1 GB",
+			"flowFileExpiration": "0 sec",
+			"prioritizers": [],
+			"bends": [],
+			"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+			"partitioningAttribute": "",
+			"loadBalanceCompression": "DO_NOT_COMPRESS",
+			"componentType": "CONNECTION",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "4b8af1f0-3eb9-387a-b57d-321f2d52eaa3",
+			"name": "",
+			"source": {
+				"id": "adf00970-0afb-31ed-8479-e2471d43de1b",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "FetchGCSObject",
+				"comments": ""
+			},
+			"destination": {
+				"id": "50f1ef58-37b1-3b2e-9d5c-0581f230b6b3",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "RouteTelemetryEvents",
+				"comments": ""
+			},
+			"labelIndex": 1,
+			"zIndex": 0,
+			"selectedRelationships": ["success"],
+			"backPressureObjectThreshold": 10000,
+			"backPressureDataSizeThreshold": "1 GB",
+			"flowFileExpiration": "0 sec",
+			"prioritizers": [],
+			"bends": [],
+			"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+			"partitioningAttribute": "",
+			"loadBalanceCompression": "DO_NOT_COMPRESS",
+			"componentType": "CONNECTION",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "4d8e71e3-ab1b-3361-b1c7-3d8edfe7b29f",
+			"name": "",
+			"source": {
+				"id": "1bfb5ca7-921a-3170-b6b7-e315a7f2928a",
+				"type": "INPUT_PORT",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "GCSTrigger"
+			},
+			"destination": {
+				"id": "ad3d17d5-1788-33c0-ac1f-aab2bd9fe5fe",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "LogAttribute",
+				"comments": ""
+			},
+			"labelIndex": 1,
+			"zIndex": 0,
+			"selectedRelationships": [""],
+			"backPressureObjectThreshold": 10000,
+			"backPressureDataSizeThreshold": "1 GB",
+			"flowFileExpiration": "0 sec",
+			"prioritizers": [],
+			"bends": [],
+			"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+			"partitioningAttribute": "",
+			"loadBalanceCompression": "DO_NOT_COMPRESS",
+			"componentType": "CONNECTION",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "9b64ff5d-c066-30e4-ae3c-6b9530d1e030",
+			"name": "",
+			"source": {
+				"id": "50f1ef58-37b1-3b2e-9d5c-0581f230b6b3",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "RouteTelemetryEvents",
+				"comments": ""
+			},
+			"destination": {
+				"id": "167b3be6-b1ba-3ead-b837-a88070f5a44b",
+				"type": "PROCESSOR",
+				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
+				"name": "ReverseGeoLookup",
+				"comments": ""
+			},
+			"labelIndex": 1,
+			"zIndex": 0,
+			"selectedRelationships": ["truck_geo_event"],
+			"backPressureObjectThreshold": 10000,
+			"backPressureDataSizeThreshold": "1 GB",
+			"flowFileExpiration": "0 sec",
+			"prioritizers": [],
+			"bends": [],
+			"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+			"partitioningAttribute": "",
+			"loadBalanceCompression": "DO_NOT_COMPRESS",
+			"componentType": "CONNECTION",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}],
+		"labels": [],
+		"funnels": [],
+		"controllerServices": [{
+			"identifier": "661fbcff-82ed-347b-9364-8ddc3e8425f3",
+			"name": "GeoTelemetryEnrichedWriterJson",
+			"comments": "",
+			"type": "org.apache.nifi.json.JsonRecordSetWriter",
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-record-serialization-services-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"controllerServiceApis": [{
+				"type": "org.apache.nifi.serialization.RecordSetWriterFactory",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-standard-services-api-nar",
+					"version": "1.13.2.2.2.2.0-12"
+				}
+			}],
+			"properties": {
+				"schema-branch": null,
+				"compression-level": "1",
+				"schema-cache": null,
+				"Timestamp Format": null,
+				"Date Format": null,
+				"Pretty Print JSON": "false",
+				"compression-format": "none",
+				"Schema Write Strategy": "no-schema",
+				"suppress-nulls": "never-suppress",
+				"output-grouping": "output-array",
+				"schema-name": "${schema.name}",
+				"schema-registry": null,
+				"Time Format": null,
+				"schema-access-strategy": "schema-text-property",
+				"schema-protocol-version": "1",
+				"schema-version": null,
+				"schema-text": "#{telemetry_dest_geo_event_schema}"
+			},
+			"propertyDescriptors": {
+				"schema-branch": {
+					"name": "schema-branch",
+					"displayName": "Schema Branch",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"compression-level": {
+					"name": "compression-level",
+					"displayName": "Compression Level",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-cache": {
+					"name": "schema-cache",
+					"displayName": "Schema Cache",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"Timestamp Format": {
+					"name": "Timestamp Format",
+					"displayName": "Timestamp Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Date Format": {
+					"name": "Date Format",
+					"displayName": "Date Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Pretty Print JSON": {
+					"name": "Pretty Print JSON",
+					"displayName": "Pretty Print JSON",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"compression-format": {
+					"name": "compression-format",
+					"displayName": "Compression Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Schema Write Strategy": {
+					"name": "Schema Write Strategy",
+					"displayName": "Schema Write Strategy",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"suppress-nulls": {
+					"name": "suppress-nulls",
+					"displayName": "Suppress Null Values",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"output-grouping": {
+					"name": "output-grouping",
+					"displayName": "Output Grouping",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-name": {
+					"name": "schema-name",
+					"displayName": "Schema Name",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-registry": {
+					"name": "schema-registry",
+					"displayName": "Schema Registry",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"Time Format": {
+					"name": "Time Format",
+					"displayName": "Time Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-access-strategy": {
+					"name": "schema-access-strategy",
+					"displayName": "Schema Access Strategy",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-protocol-version": {
+					"name": "schema-protocol-version",
+					"displayName": "Schema Protocol Version",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-version": {
+					"name": "schema-version",
+					"displayName": "Schema Version",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-text": {
+					"name": "schema-text",
+					"displayName": "Schema Text",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"componentType": "CONTROLLER_SERVICE",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "af9cd967-1c8f-34cf-8ddb-0bbdbc8f39df",
+			"name": "TruckTelemetryWriterJson",
+			"comments": "",
+			"type": "org.apache.nifi.json.JsonRecordSetWriter",
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-record-serialization-services-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"controllerServiceApis": [{
+				"type": "org.apache.nifi.serialization.RecordSetWriterFactory",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-standard-services-api-nar",
+					"version": "1.13.2.2.2.2.0-12"
+				}
+			}],
+			"properties": {
+				"schema-branch": null,
+				"compression-level": "1",
+				"schema-cache": null,
+				"Timestamp Format": null,
+				"Date Format": null,
+				"Pretty Print JSON": "false",
+				"compression-format": "none",
+				"Schema Write Strategy": "no-schema",
+				"suppress-nulls": "never-suppress",
+				"output-grouping": "output-array",
+				"schema-name": "${schema.name}",
+				"schema-registry": null,
+				"Time Format": null,
+				"schema-access-strategy": "schema-text-property",
+				"schema-protocol-version": "1",
+				"schema-version": null,
+				"schema-text": "#{telemetry_source_schema}"
+			},
+			"propertyDescriptors": {
+				"schema-branch": {
+					"name": "schema-branch",
+					"displayName": "Schema Branch",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"compression-level": {
+					"name": "compression-level",
+					"displayName": "Compression Level",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-cache": {
+					"name": "schema-cache",
+					"displayName": "Schema Cache",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"Timestamp Format": {
+					"name": "Timestamp Format",
+					"displayName": "Timestamp Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Date Format": {
+					"name": "Date Format",
+					"displayName": "Date Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Pretty Print JSON": {
+					"name": "Pretty Print JSON",
+					"displayName": "Pretty Print JSON",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"compression-format": {
+					"name": "compression-format",
+					"displayName": "Compression Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Schema Write Strategy": {
+					"name": "Schema Write Strategy",
+					"displayName": "Schema Write Strategy",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"suppress-nulls": {
+					"name": "suppress-nulls",
+					"displayName": "Suppress Null Values",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"output-grouping": {
+					"name": "output-grouping",
+					"displayName": "Output Grouping",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-name": {
+					"name": "schema-name",
+					"displayName": "Schema Name",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-registry": {
+					"name": "schema-registry",
+					"displayName": "Schema Registry",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"Time Format": {
+					"name": "Time Format",
+					"displayName": "Time Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-access-strategy": {
+					"name": "schema-access-strategy",
+					"displayName": "Schema Access Strategy",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-protocol-version": {
+					"name": "schema-protocol-version",
+					"displayName": "Schema Protocol Version",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-version": {
+					"name": "schema-version",
+					"displayName": "Schema Version",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-text": {
+					"name": "schema-text",
+					"displayName": "Schema Text",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"componentType": "CONTROLLER_SERVICE",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "0355dacd-c9e0-3c5d-9c0c-5195e69e0e64",
+			"name": "Enrich- ReverseGeoCodeLookupService",
+			"comments": "",
+			"type": "org.apache.nifi.lookup.script.ScriptedLookupService",
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-scripting-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"controllerServiceApis": [{
+				"type": "org.apache.nifi.lookup.LookupService",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-standard-services-api-nar",
+					"version": "1.13.2.2.2.2.0-12"
+				}
+			}],
+			"properties": {
+				"Script File": null,
+				"googleApiKey": "AIzaSyA-h19EtKZMbh33QXCWVdaK5gCFfbS-GAk",
+				"Script Engine": "Groovy",
+				"Script Body": "import org.apache.nifi.controller.ControllerServiceInitializationContext\nimport org.apache.nifi.reporting.InitializationException\n\n\nclass GroovyLookupService implements LookupService<String> {\n\n   def apiKey\n   def log\n    \n   @Override\n    Optional<String> lookup(Map<String,String> coords) {\n      def lat = coords['lat']\n      def lng = coords['lng']\n      def fmt_addr = \"No Address\"\n      Optional.ofNullable(fmt_addr?.toString())\n    }\n\n    @Override\n    Class<?> getValueType() {\n        return String\n    }\n\n    @Override\n    Set<String> getRequiredKeys() {\n      return ['lat','lng'] as Set<String>\n    }\n\n    void setLogger(logger) {\n       log = logger\n    }\n\n    void onEnabled(context) {\n        def googleApiKeyPropertyDescriptor = context.properties.find {k,v -> k.name == 'googleApiKey'}?.key\n        apiKey = context.getProperty(googleApiKeyPropertyDescriptor)?.evaluateAttributeExpressions()?.value\n    }\n\n    @Override\n    void initialize(ControllerServiceInitializationContext context) throws InitializationException {\n\n    }\n\n    @Override\n    Collection<ValidationResult> validate(ValidationContext context) {\n        return null\n    }\n\n    @Override\n    PropertyDescriptor getPropertyDescriptor(String name) {\n        return null\n    }\n\n    @Override\n    void onPropertyModified(PropertyDescriptor descriptor, String oldValue, String newValue) {\n\n    }\n\n    @Override\n    List<PropertyDescriptor> getPropertyDescriptors() {\n        return null\n    }\n\n    @Override\n    String getIdentifier() {\n        return null\n    }\n}\n\nlookupService = new GroovyLookupService()",
+				"Module Directory": null
+			},
+			"propertyDescriptors": {
+				"Script File": {
+					"name": "Script File",
+					"displayName": "Script File",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"googleApiKey": {
+					"name": "googleApiKey",
+					"displayName": "googleApiKey",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Script Engine": {
+					"name": "Script Engine",
+					"displayName": "Script Engine",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Script Body": {
+					"name": "Script Body",
+					"displayName": "Script Body",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Module Directory": {
+					"name": "Module Directory",
+					"displayName": "Module Directory",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"componentType": "CONTROLLER_SERVICE",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "effd0c09-462b-35ae-b866-a32fee1e820a",
+			"name": "GCPCredentialsControllerService",
+			"comments": "",
+			"type": "org.apache.nifi.processors.gcp.credentials.service.GCPCredentialsControllerService",
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-gcp-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"controllerServiceApis": [{
+				"type": "org.apache.nifi.gcp.credentials.service.GCPCredentialsService",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-gcp-services-api-nar",
+					"version": "1.13.2.2.2.2.0-12"
+				}
+			}],
+			"properties": {
+				"proxy-configuration-service": null,
+				"compute-engine-credentials": "false",
+				"application-default-credentials": "false",
+				"service-account-json-file": null,
+				"service-account-json": "#{gcp_svc_acct_json_key}"
+			},
+			"propertyDescriptors": {
+				"proxy-configuration-service": {
+					"name": "proxy-configuration-service",
+					"displayName": "Proxy Configuration Service",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"compute-engine-credentials": {
+					"name": "compute-engine-credentials",
+					"displayName": "Use Compute Engine Credentials",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"application-default-credentials": {
+					"name": "application-default-credentials",
+					"displayName": "Use Application Default Credentials",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"service-account-json-file": {
+					"name": "service-account-json-file",
+					"displayName": "Service Account JSON File",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"service-account-json": {
+					"name": "service-account-json",
+					"displayName": "Service Account JSON",
+					"identifiesControllerService": false,
+					"sensitive": true
+				}
+			},
+			"componentType": "CONTROLLER_SERVICE",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "a1e63ccc-f8c9-3f23-a498-436a87698a2b",
+			"name": "TruckTelemetryReaderJson",
+			"comments": "",
+			"type": "org.apache.nifi.json.JsonTreeReader",
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-record-serialization-services-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"controllerServiceApis": [{
+				"type": "org.apache.nifi.serialization.RecordReaderFactory",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-standard-services-api-nar",
+					"version": "1.13.2.2.2.2.0-12"
+				}
+			}],
+			"properties": {
+				"Timestamp Format": null,
+				"schema-inference-cache": null,
+				"Date Format": null,
+				"schema-branch": null,
+				"schema-name": "${schema.name}",
+				"schema-registry": null,
+				"Time Format": null,
+				"schema-access-strategy": "schema-text-property",
+				"schema-version": null,
+				"schema-text": "#{telemetry_source_schema}"
+			},
+			"propertyDescriptors": {
+				"Timestamp Format": {
+					"name": "Timestamp Format",
+					"displayName": "Timestamp Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-inference-cache": {
+					"name": "schema-inference-cache",
+					"displayName": "Schema Inference Cache",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"Date Format": {
+					"name": "Date Format",
+					"displayName": "Date Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-branch": {
+					"name": "schema-branch",
+					"displayName": "Schema Branch",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-name": {
+					"name": "schema-name",
+					"displayName": "Schema Name",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-registry": {
+					"name": "schema-registry",
+					"displayName": "Schema Registry",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"Time Format": {
+					"name": "Time Format",
+					"displayName": "Time Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-access-strategy": {
+					"name": "schema-access-strategy",
+					"displayName": "Schema Access Strategy",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-version": {
+					"name": "schema-version",
+					"displayName": "Schema Version",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-text": {
+					"name": "schema-text",
+					"displayName": "Schema Text",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"componentType": "CONTROLLER_SERVICE",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}, {
+			"identifier": "85727028-d6f7-3464-ad9d-95dc2084a44c",
+			"name": "GeoTelemetryEnrichedReaderJson",
+			"comments": "",
+			"type": "org.apache.nifi.json.JsonTreeReader",
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-record-serialization-services-nar",
+				"version": "1.13.2.2.2.2.0-12"
+			},
+			"controllerServiceApis": [{
+				"type": "org.apache.nifi.serialization.RecordReaderFactory",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-standard-services-api-nar",
+					"version": "1.13.2.2.2.2.0-12"
+				}
+			}],
+			"properties": {
+				"Timestamp Format": null,
+				"schema-inference-cache": null,
+				"Date Format": null,
+				"schema-branch": null,
+				"schema-name": "${schema.name}",
+				"schema-registry": null,
+				"Time Format": null,
+				"schema-access-strategy": "schema-text-property",
+				"schema-version": null,
+				"schema-text": "#{telemetry_dest_geo_event_schema}"
+			},
+			"propertyDescriptors": {
+				"Timestamp Format": {
+					"name": "Timestamp Format",
+					"displayName": "Timestamp Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-inference-cache": {
+					"name": "schema-inference-cache",
+					"displayName": "Schema Inference Cache",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"Date Format": {
+					"name": "Date Format",
+					"displayName": "Date Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-branch": {
+					"name": "schema-branch",
+					"displayName": "Schema Branch",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-name": {
+					"name": "schema-name",
+					"displayName": "Schema Name",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-registry": {
+					"name": "schema-registry",
+					"displayName": "Schema Registry",
+					"identifiesControllerService": true,
+					"sensitive": false
+				},
+				"Time Format": {
+					"name": "Time Format",
+					"displayName": "Time Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-access-strategy": {
+					"name": "schema-access-strategy",
+					"displayName": "Schema Access Strategy",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-version": {
+					"name": "schema-version",
+					"displayName": "Schema Version",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"schema-text": {
+					"name": "schema-text",
+					"displayName": "Schema Text",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"componentType": "CONTROLLER_SERVICE",
+			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
+		}],
+		"variables": {},
+		"parameterContextName": "TruckSensorGCStoGCSProcessing",
+		"flowFileConcurrency": "UNBOUNDED",
+		"flowFileOutboundPolicy": "STREAM_WHEN_AVAILABLE",
+		"componentType": "PROCESS_GROUP"
+	},
+	"externalControllerServices": {},
+	"parameterContexts": {
+		"TruckSensorGCStoGCSProcessing": {
+			"name": "TruckSensorGCStoGCSProcessing",
+			"parameters": [{
+				"name": "routing_rule_geo_event",
+				"description": "",
+				"sensitive": false,
+				"value": "SELECT * FROM FLOWFILE where eventSource = 'truck_geo_event'"
+			}, {
+				"name": "gcp_dest_path_geo_event",
+				"description": "",
+				"sensitive": false,
+				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-processed/truck-geo-events"
+			}, {
+				"name": "routing_rule_speed_event",
+				"description": "",
+				"sensitive": false,
+				"value": "SELECT * FROM FLOWFILE where eventSource = 'truck_speed_event'"
+			}, {
+				"name": "gcp_bucket",
+				"description": "",
+				"sensitive": false,
+				"value": "vett-new-pm-cdp-oregon"
+			}, {
+				"name": "gcp_project",
+				"description": "",
+				"sensitive": false,
+				"value": "gcp-gvetticaden-sko"
+			}, {
+				"name": "telemetry_dest_geo_event_schema",
+				"description": "",
+				"sensitive": false,
+				"value": "{\n \"type\": \"record\",\n \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n \"name\": \"TruckGeoEventEnriched\",\n \"fields\": [\n  {\n   \"name\": \"eventTime\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventTimeLong\",\n   \"type\": \"long\",\n   \"default\": 0\n  },\n  {\n   \"name\": \"eventSource\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"truckId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverName\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"routeId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"route\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventType\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"latitude\",\n   \"type\": \"double\"\n  },\n  {\n   \"name\": \"longitude\",\n   \"type\": \"double\"\n  },\n  {\n   \"name\": \"correlationId\",\n   \"type\": \"long\"\n  },\n  {\n   \"name\": \"geoAddress\",\n   \"type\": \"string\",\n   \"default\": \"None\"\n  }\n ]\n}"
+			}, {
+				"name": "telemetry_dest_speed_event_schema",
+				"description": "",
+				"sensitive": false,
+				"value": "{\n \"type\": \"record\",\n \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n \"name\": \"TruckSpeedEventEnriched\",\n \"fields\": [\n  {\n   \"name\": \"eventTime\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"eventTimeLong\",\n   \"type\": \"long\",\n   \"default\": 0\n  },\n  {\n   \"name\": \"eventSource\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"truckId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"driverName\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"routeId\",\n   \"type\": \"int\"\n  },\n  {\n   \"name\": \"route\",\n   \"type\": \"string\"\n  },\n  {\n   \"name\": \"speed\",\n   \"type\": \"int\"\n  }\n ]\n}"
+			}, {
+				"name": "gcp_svc_acct_json_key",
+				"description": "",
+				"sensitive": true
+			}, {
+				"name": "telemetry_source_schema",
+				"description": "",
+				"sensitive": false,
+				"value": "{\n\t\"type\": \"record\",\n\t\"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\n\t\"name\": \"TruckEvent\",\n\t\"fields\": [{\n\t\t\t\"name\": \"eventTime\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventTimeLong\",\n\t\t\t\"type\": \"long\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventSource\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"truckId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"driverId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"driverName\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"routeId\",\n\t\t\t\"type\": \"int\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"route\",\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"eventType\",\n\t\t\t\"type\": \"string\",\n\t\t\t\"default\": \"None\"\n\t\t},\n\t\t{\n\t\t\t\"name\": \"latitude\",\n\t\t\t\"type\": \"double\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"longitude\",\n\t\t\t\"type\": \"double\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"correlationId\",\n\t\t\t\"type\": \"long\",\n\t\t\t\"default\": 0\n\t\t},\n\t\t{\n\t\t\t\"name\": \"speed\",\n\t\t\t\"type\": \"int\",\n\t\t\t\"default\": 0\n\t\t}\n\t]\n}"
+			}, {
+				"name": "gcp_dest_path_speed_event",
+				"description": "",
+				"sensitive": false,
+				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-processed/truck-speed-events"
+			}, {
+				"name": "gcp_filter_path",
+				"description": "",
+				"sensitive": false,
+				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw/"
+			}]
+		}
+	},
+	"flowEncodingVersion": "1.0"
+}
