@@ -20,7 +20,7 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-gcp-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"style": {},
 			"type": "org.apache.nifi.processors.gcp.storage.PutGCSObject",
@@ -36,9 +36,9 @@
 				"gcs-object-crc32c": null,
 				"gcp-project-id": "#{gcp_project}",
 				"GCP Credentials Provider Service": "effd0c09-462b-35ae-b866-a32fee1e820a",
-				"gcs-key": "#{gcp_dest_path_geo_event}/geo-${filename:substringAfterLast('/')}",
+				"gcs-key": "#{gcp_dest_path_geo_event}/geo-${key}",
 				"gcp-proxy-port": null,
-				"gcs-bucket": "#{gcp_bucket}",
+				"gcs-bucket": "#{gcp_bucket_dest}",
 				"gcs-object-acl": null
 			},
 			"propertyDescriptors": {
@@ -168,7 +168,7 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-standard-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"style": {},
 			"type": "org.apache.nifi.processors.standard.EvaluateJsonPath",
@@ -232,16 +232,16 @@
 			"groupIdentifier": "bb1a0520-ae8f-334a-9d00-4c534566ec12"
 		}, {
 			"identifier": "1df7fbca-7cbb-3231-a0b1-9876876d9d8b",
-			"name": "PutStreamingGeoEventInGCS",
+			"name": "PutStreamingSpeedEventInGCS",
 			"comments": "",
 			"position": {
-				"x": 552.0,
-				"y": 1008.0
+				"x": 560.0,
+				"y": 1016.0
 			},
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-gcp-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"style": {},
 			"type": "org.apache.nifi.processors.gcp.storage.PutGCSObject",
@@ -257,9 +257,9 @@
 				"gcs-object-crc32c": null,
 				"gcp-project-id": "#{gcp_project}",
 				"GCP Credentials Provider Service": "effd0c09-462b-35ae-b866-a32fee1e820a",
-				"gcs-key": "#{gcp_dest_path_speed_event}/geo-${filename:substringAfterLast('/')}",
+				"gcs-key": "#{gcp_dest_path_speed_event}/speed-${key}",
 				"gcp-proxy-port": null,
-				"gcs-bucket": "#{gcp_bucket}",
+				"gcs-bucket": "#{gcp_bucket_dest}",
 				"gcs-object-acl": null
 			},
 			"propertyDescriptors": {
@@ -389,7 +389,7 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-standard-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"style": {},
 			"type": "org.apache.nifi.processors.standard.LookupRecord",
@@ -483,7 +483,7 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-standard-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"style": {},
 			"type": "org.apache.nifi.processors.standard.LogAttribute",
@@ -570,7 +570,7 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-gcp-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"style": {},
 			"type": "org.apache.nifi.processors.gcp.storage.FetchGCSObject",
@@ -697,7 +697,7 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-standard-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"style": {},
 			"type": "org.apache.nifi.processors.standard.QueryRecord",
@@ -862,7 +862,7 @@
 				"id": "1df7fbca-7cbb-3231-a0b1-9876876d9d8b",
 				"type": "PROCESSOR",
 				"groupId": "bb1a0520-ae8f-334a-9d00-4c534566ec12",
-				"name": "PutStreamingGeoEventInGCS",
+				"name": "PutStreamingSpeedEventInGCS",
 				"comments": ""
 			},
 			"labelIndex": 1,
@@ -1008,14 +1008,14 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-record-serialization-services-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"controllerServiceApis": [{
 				"type": "org.apache.nifi.serialization.RecordSetWriterFactory",
 				"bundle": {
 					"group": "org.apache.nifi",
 					"artifact": "nifi-standard-services-api-nar",
-					"version": "1.13.2.2.2.2.0-12"
+					"version": "1.13.2.2.2.2.0-127"
 				}
 			}],
 			"properties": {
@@ -1151,14 +1151,14 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-record-serialization-services-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"controllerServiceApis": [{
 				"type": "org.apache.nifi.serialization.RecordSetWriterFactory",
 				"bundle": {
 					"group": "org.apache.nifi",
 					"artifact": "nifi-standard-services-api-nar",
-					"version": "1.13.2.2.2.2.0-12"
+					"version": "1.13.2.2.2.2.0-127"
 				}
 			}],
 			"properties": {
@@ -1294,14 +1294,14 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-scripting-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"controllerServiceApis": [{
 				"type": "org.apache.nifi.lookup.LookupService",
 				"bundle": {
 					"group": "org.apache.nifi",
 					"artifact": "nifi-standard-services-api-nar",
-					"version": "1.13.2.2.2.2.0-12"
+					"version": "1.13.2.2.2.2.0-127"
 				}
 			}],
 			"properties": {
@@ -1353,14 +1353,14 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-gcp-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"controllerServiceApis": [{
 				"type": "org.apache.nifi.gcp.credentials.service.GCPCredentialsService",
 				"bundle": {
 					"group": "org.apache.nifi",
 					"artifact": "nifi-gcp-services-api-nar",
-					"version": "1.13.2.2.2.2.0-12"
+					"version": "1.13.2.2.2.2.0-127"
 				}
 			}],
 			"properties": {
@@ -1412,14 +1412,14 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-record-serialization-services-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"controllerServiceApis": [{
 				"type": "org.apache.nifi.serialization.RecordReaderFactory",
 				"bundle": {
 					"group": "org.apache.nifi",
 					"artifact": "nifi-standard-services-api-nar",
-					"version": "1.13.2.2.2.2.0-12"
+					"version": "1.13.2.2.2.2.0-127"
 				}
 			}],
 			"properties": {
@@ -1506,14 +1506,14 @@
 			"bundle": {
 				"group": "org.apache.nifi",
 				"artifact": "nifi-record-serialization-services-nar",
-				"version": "1.13.2.2.2.2.0-12"
+				"version": "1.13.2.2.2.2.0-127"
 			},
 			"controllerServiceApis": [{
 				"type": "org.apache.nifi.serialization.RecordReaderFactory",
 				"bundle": {
 					"group": "org.apache.nifi",
 					"artifact": "nifi-standard-services-api-nar",
-					"version": "1.13.2.2.2.2.0-12"
+					"version": "1.13.2.2.2.2.0-127"
 				}
 			}],
 			"properties": {
@@ -1612,17 +1612,22 @@
 				"name": "gcp_dest_path_geo_event",
 				"description": "",
 				"sensitive": false,
-				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-processed/truck-geo-events"
+				"value": "truck-geo-events"
 			}, {
 				"name": "routing_rule_speed_event",
 				"description": "",
 				"sensitive": false,
 				"value": "SELECT * FROM FLOWFILE where eventSource = 'truck_speed_event'"
 			}, {
-				"name": "gcp_bucket",
+				"name": "gcp_bucket_src",
 				"description": "",
 				"sensitive": false,
-				"value": "vett-new-pm-cdp-oregon"
+				"value": "truck-telemetry-raw"
+			}, {
+				"name": "gcp_bucket_dest",
+				"description": "",
+				"sensitive": false,
+				"value": "truck-telemetry-processed"
 			}, {
 				"name": "gcp_project",
 				"description": "",
@@ -1651,12 +1656,7 @@
 				"name": "gcp_dest_path_speed_event",
 				"description": "",
 				"sensitive": false,
-				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-processed/truck-speed-events"
-			}, {
-				"name": "gcp_filter_path",
-				"description": "",
-				"sensitive": false,
-				"value": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw/"
+				"value": "truck-speed-events"
 			}]
 		}
 	},
