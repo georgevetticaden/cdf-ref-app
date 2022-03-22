@@ -1,23 +1,19 @@
-package cloudera.cdf.refapp.trucking.simulator.producer.adls;
+package cloudera.cdf.refapp.trucking.simulator.producer.azure;
 
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 
-
-import com.google.auth.Credentials;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.BlobId;
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
-
 import cloudera.cdf.refapp.trucking.simulator.domain.transport.EventSourceType;
 import cloudera.cdf.refapp.trucking.simulator.domain.transport.MobileEyeEvent;
 import cloudera.cdf.refapp.trucking.simulator.producer.BaseTruckEventCollector;
+
+import com.azure.storage.common.StorageSharedKeyCredential;
+import com.azure.storage.file.datalake.DataLakeDirectoryClient;
+import com.azure.storage.file.datalake.DataLakeFileClient;
+import com.azure.storage.file.datalake.DataLakeServiceClientBuilder;
 
 
 public class ADLSMultiFileJsonEventCollector extends BaseTruckEventCollector {
@@ -31,39 +27,46 @@ public class ADLSMultiFileJsonEventCollector extends BaseTruckEventCollector {
 	private int currentEventCountPerFile = 0;
 	private int fileSuffix = 0;
 	private String fileNamePrefix;
+		
+	private DataLakeDirectoryClient azureDataLakeDirectoryClient;
 	
-	private Storage googleCloudStorageClient;
-	
-	private String bucketName;
+	//Azure Container/FileSystem Name
+	private String azureContainerName;
+	//The directory where files will be written under the container/filesystem
+	private String stagingDirectoryName;
 	
 	StringBuffer eventBuffer;
 	
-	/* Required for GCP Function and not Lambda Functions */
+
 	private static final String rootFolderForSimulatedData = "/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
 
 
-	public ADLSMultiFileJsonEventCollector(String fileName, EventSourceType eventSource, int numOfEventsPerFile, String bucketName) {
+	public ADLSMultiFileJsonEventCollector(String fileName, EventSourceType eventSource, int numOfEventsPerFile, String containerName, String directoryName) {
 	       this.fileNamePrefix = fileName;
 		   this.eventBuffer = new StringBuffer();
 	       this.eventSourceType = eventSource;
 	       this.numOfEventsPerFile = numOfEventsPerFile;
-	       this.bucketName = bucketName;
-	       createGCPClient();		
+	       this.azureContainerName = containerName;
+	       this.stagingDirectoryName = directoryName;
+	       crerateAzureDataLakeDirectoryClient();		
 		}
 
-	private void createGCPClient() {
+	private void crerateAzureDataLakeDirectoryClient() {
+		
+		String accountName = System.getProperty("azure.storage.account.name");
+		String accountKey = System.getProperty("azure.storage.account.key");
 
-		try {
-		String authFile = System.getProperty("gcp.auth.key.file");
-		String projectName = "gcp-gvetticaden-sko";
-		Credentials credentials = GoogleCredentials
-				  .fromStream(new FileInputStream(authFile));
-				
-		this.googleCloudStorageClient = StorageOptions.newBuilder().setCredentials(credentials)
-				  .setProjectId(projectName).build().getService();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		StorageSharedKeyCredential sharedKeyCredential =
+		        new StorageSharedKeyCredential(accountName, accountKey);	 
+		DataLakeServiceClientBuilder builder = new DataLakeServiceClientBuilder();
+		builder.credential(sharedKeyCredential);
+		builder.endpoint("https://" + accountName + ".dfs.core.windows.net");
+
+		/* Create the Azure DataLakeDirectoryClient  */
+		this.azureDataLakeDirectoryClient = builder.buildClient()
+				.getFileSystemClient(this.azureContainerName)
+				.getDirectoryClient(this.stagingDirectoryName);		
+
 	}
 
 	private File createFile(String fileNamePrefix, int fileSuffix) {
@@ -81,7 +84,7 @@ public class ADLSMultiFileJsonEventCollector extends BaseTruckEventCollector {
 		if(currentEventCountPerFile > numOfEventsPerFile ) {
 			
 			writeBufferedEventsToFile();
-			uploadFileToGCP();			
+			uploadFileToAzureDataLake();			
 			
 			fileSuffix++;
 			currentEventCountPerFile = 0;
@@ -103,16 +106,15 @@ public class ADLSMultiFileJsonEventCollector extends BaseTruckEventCollector {
 		}
 	}
 
-	private void uploadFileToGCP() throws Exception {
-		String bucketKey = truckEventsFile.getName();
-		logger.info("Uploading file with Key["+bucketKey+"] to Bucket["+bucketName+"]");
-
-	
-		BlobId blobId = BlobId.of(bucketName, bucketKey);
-		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+	private void uploadFileToAzureDataLake() throws Exception {
+		String fileName = truckEventsFile.getName();
+		String fullPath = truckEventsFile.getAbsolutePath();
 		
-		this.googleCloudStorageClient.create(blobInfo, FileUtils.readFileToByteArray(truckEventsFile));		
+		logger.info("Uploading file["+fullPath+"] to Azure Container/FileSystem["+this.azureContainerName+"] in directory["+this.stagingDirectoryName+"] with name["+fileName+"]");
 		
+		DataLakeFileClient fileClient = this.azureDataLakeDirectoryClient.createFile(fileName, true);
+	    
+	    fileClient.uploadFromFile(fullPath, true);				
 	
 	}
 

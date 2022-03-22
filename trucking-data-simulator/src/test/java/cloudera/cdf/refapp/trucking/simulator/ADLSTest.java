@@ -8,7 +8,6 @@ import com.azure.core.http.rest.PagedIterable;
 import com.azure.storage.common.StorageSharedKeyCredential;
 import com.azure.storage.file.datalake.DataLakeDirectoryClient;
 import com.azure.storage.file.datalake.DataLakeFileClient;
-import com.azure.storage.file.datalake.DataLakeFileSystemClient;
 import com.azure.storage.file.datalake.DataLakeServiceClient;
 import com.azure.storage.file.datalake.DataLakeServiceClientBuilder;
 import com.azure.storage.file.datalake.models.FileSystemItem;
@@ -83,4 +82,11 @@ public class ADLSTest {
 		return dataLakeServiceClient;
 	}	
 
+	
+	@Test
+	public void fileTest() {
+		File file  = new File ("/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw/truck-sensor-readings-0.json");		
+		System.out.println(file.getName());
+		System.out.println(file.getAbsolutePath());
+	}
 }
