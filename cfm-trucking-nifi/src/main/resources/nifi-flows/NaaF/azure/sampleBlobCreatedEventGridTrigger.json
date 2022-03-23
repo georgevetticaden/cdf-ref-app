@@ -1,0 +1,25 @@
+{
+	"topic": "/subscriptions/a8a30f9b-5321-4fd2-9c15-745b2d68556b/resourceGroups/pm-sandbox/providers/Microsoft.Storage/storageAccounts/vettstorage",
+	"subject": "/blobServices/default/containers/truck-telemetry-raw/blobs/stage/truck-telemetry-rawtruck-sensor-readings-2.json",
+	"eventType": "Microsoft.Storage.BlobCreated",
+	"id": "5c35117c-c01e-0003-3143-3e8b9a0656b4",
+	"data": {
+		"api": "PutBlob",
+		"clientRequestId": "92e5d023-2361-40f5-84b4-0bbe9a18f050",
+		"requestId": "5c35117c-c01e-0003-3143-3e8b9a000000",
+		"eTag": "0x8DA0C5A83E782F9",
+		"contentType": "application/json",
+		"contentLength": 635370,
+		"blobType": "BlockBlob",
+		"blobUrl": "https://vettstorage.blob.core.windows.net/truck-telemetry-raw/stage/truck-telemetry-rawtruck-sensor-readings-2.json",
+		"url": "https://vettstorage.blob.core.windows.net/truck-telemetry-raw/stage/truck-telemetry-rawtruck-sensor-readings-2.json",
+		"sequencer": "00000000000000000000000000011691000000000000831b",
+		"identity": "$superuser",
+		"storageDiagnostics": {
+			"batchId": "0f906eee-6006-0068-0043-3e0c6e000000"
+		}
+	},
+	"dataVersion": "",
+	"metadataVersion": "1",
+	"eventTime": "2022-03-22T23:20:12.593652Z"
+}
