@@ -18,7 +18,8 @@
         <jackson.version>2.13.1</jackson.version>
         <aws.kinesis.version>1.8.7</aws.kinesis.version>
 		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
-		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	        
+		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	 
+		<java.version>11</java.version>       
 	</properties>
 	
 	<dependencies>
@@ -314,11 +315,14 @@
         </dependency>	
         
         <!-- Libraries for SMM End to End Latency Interceptors -->    
+        
+        <!-- 
         <dependency>
             <groupId>com.hortonworks.smm</groupId>
             <artifactId>monitoring-interceptors</artifactId>
             <version>${smm.monitoring.interceptors.version}</version>
         </dependency>     
+        -->
         
 		<dependency>
 			<groupId>cloudera.cdf.refapp</groupId>
@@ -363,8 +367,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			        

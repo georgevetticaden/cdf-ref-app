@@ -16,7 +16,9 @@
         <jackson.version>2.7.3</jackson.version>
 		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
 		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	  
-		<avro.version>1.8.2</avro.version>      
+		<avro.version>1.8.2</avro.version>   
+		<java.version>11</java.version>
+
 	</properties>
 	
 	<dependencies>
@@ -185,6 +187,16 @@
 	
 	<build>
 		<plugins>
+		
+   
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>		
       	
 			<plugin>
 			  <groupId>org.apache.avro</groupId>

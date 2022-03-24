@@ -38,8 +38,9 @@ public class ADLSMultiFileJsonEventCollector extends BaseTruckEventCollector {
 	StringBuffer eventBuffer;
 	
 
-	private static final String rootFolderForSimulatedData = "/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
+	//private static final String rootFolderForSimulatedData = "/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
 
+	private static final String rootFolderForSimulatedData = "/Users/gvetticaden/df-functions-data-generator/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
 
 	public ADLSMultiFileJsonEventCollector(String fileName, EventSourceType eventSource, int numOfEventsPerFile, String containerName, String directoryName) {
 	       this.fileNamePrefix = fileName;
