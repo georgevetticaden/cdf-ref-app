@@ -23,6 +23,7 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 
 	private static final String LINE_BREAK = "\n";
 	private static final String FILE_TYPE = ".json";
+	private static final String S3_RAW_SOURCE_KEY_PREFIX = "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
 	private File truckEventsFile;
 	private EventSourceType eventSourceType;
 	private int numOfEventsPerFile;
@@ -104,13 +105,16 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 	}
 
 	private void uploadFileToS3() {
-		String bucketKey = truckEventsFile.getAbsolutePath().substring(1);
+
+		String shortFileName = truckEventsFile.getName();
+		String bucketKey = S3_RAW_SOURCE_KEY_PREFIX + '/'+shortFileName;
 		logger.info("Uploading file with Key["+bucketKey+"] to Bucket["+bucketName+"]");
 		s3client.putObject(
 				  bucketName, 
 				  bucketKey, 
 				  truckEventsFile
 				);
+			
 	}
 
 	private void sendTruckEventToFile(MobileEyeEvent mee) {
