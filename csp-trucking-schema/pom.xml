@@ -17,7 +17,7 @@
 		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
 		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	  
 		<avro.version>1.8.2</avro.version>   
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 
 	</properties>
 	
