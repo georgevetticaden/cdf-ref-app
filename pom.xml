@@ -20,7 +20,7 @@
 		
 		<!-- SMM Interceptors Versions -->
 		<smm.monitoring.interceptors.version>2.1.0.2.0.0.0-94</smm.monitoring.interceptors.version>
-        <junit.version>4.5</junit.version>
+        <junit.version>4.13.1</junit.version>
         <log4j2.version>2.6.2</log4j2.version>
         <java.version>8</java.version>
 
