@@ -27,7 +27,7 @@
           "arn": "arn:aws:s3:::example-bucket"
         },
         "object": {
-          "key": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw-2/truck-sensor-readings-0.json",
+          "key": "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw-v2/truck-sensor-readings-0.json",
           "size": 1024,
           "eTag": "0123456789abcdef0123456789abcdef",
           "sequencer": "0A1B2C3D4E5F678901"
@@ -36,4 +36,3 @@
     }
   ]
 }
-
