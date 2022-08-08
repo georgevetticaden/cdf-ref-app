@@ -26,12 +26,13 @@ public class S3MultiFileSimulationRunnerTruckFleetApp {
 				String eventSourceString = args[6];
 				EventSourceType eventSource = EventSourceType.valueOf(eventSourceString);
 				
-				String bucketKey = args[7];
+				String s3FileNamePrefix = args[7];
 				
 				final int numOfEventsPerFile = Integer.valueOf(args[8]);
 				
 				final String s3BucketName = args[9];
 				
+				final String bucketKeyPrefixPath = args[10];
 				
 				
 							
@@ -46,7 +47,7 @@ public class S3MultiFileSimulationRunnerTruckFleetApp {
 				final ActorRef listener = system.actorOf(
 						Props.create(SimulatorListener.class), "listener");
 				final ActorRef eventCollector = system.actorOf(
-						Props.create(eventCollectorClass, bucketKey, eventSource, numOfEventsPerFile, s3BucketName), "eventCollector");
+						Props.create(eventCollectorClass, s3FileNamePrefix, eventSource, numOfEventsPerFile, s3BucketName, bucketKeyPrefixPath), "eventCollector");
 				System.out.println(eventCollector.path());
 				
 				

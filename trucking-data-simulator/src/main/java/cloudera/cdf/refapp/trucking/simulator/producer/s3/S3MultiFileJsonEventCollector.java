@@ -23,7 +23,6 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 
 	private static final String LINE_BREAK = "\n";
 	private static final String FILE_TYPE = ".json";
-	private static final String S3_RAW_SOURCE_KEY_PREFIX = "vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
 	private File truckEventsFile;
 	private EventSourceType eventSourceType;
 	private int numOfEventsPerFile;
@@ -33,16 +32,22 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 	
 	private AmazonS3 s3client;
 	private String bucketName;
-	
-	StringBuffer eventBuffer;
+	private String bucketKeyPrefix;
 
-	public S3MultiFileJsonEventCollector(String fileName, EventSourceType eventSource, int numOfEventsPerFile, String bucketName) {
-	       this.fileNamePrefix = fileName;
-	       this.truckEventsFile =  createFile(fileNamePrefix, fileSuffix);
+
+	private StringBuffer eventBuffer;
+	
+	private static final String rootFolderForSimulatedData = "/Users/gvetticaden/df-functions-data-generator/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
+	
+
+	public S3MultiFileJsonEventCollector(String s3FileNamePrefix, EventSourceType eventSource, int numOfEventsPerFile, String bucketName, String bucketKeyPrefixPath) {
+	       this.fileNamePrefix = s3FileNamePrefix;
 		   this.eventBuffer = new StringBuffer();
 	       this.eventSourceType = eventSource;
 	       this.numOfEventsPerFile = numOfEventsPerFile;
+	       
 	       this.bucketName = bucketName;
+	       this.bucketKeyPrefix = bucketKeyPrefixPath;
 	       createAWSClient();		
 		}
 
@@ -86,8 +91,6 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 			fileSuffix++;
 			currentEventCountPerFile = 0;
 			eventBuffer = new StringBuffer();
-			this.truckEventsFile = createFile(fileNamePrefix, fileSuffix);
-			logger.info("Create new Streaming file["+this.truckEventsFile+"]");
 		}
 		
 		if(eventSourceType == null || EventSourceType.ALL_STREAMS.equals(eventSourceType)) {
@@ -107,7 +110,7 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 	private void uploadFileToS3() {
 
 		String shortFileName = truckEventsFile.getName();
-		String bucketKey = S3_RAW_SOURCE_KEY_PREFIX + '/'+shortFileName;
+		String bucketKey = bucketKeyPrefix + '/'+shortFileName;
 		logger.info("Uploading file with Key["+bucketKey+"] to Bucket["+bucketName+"]");
 		s3client.putObject(
 				  bucketName, 
@@ -139,7 +142,7 @@ public class S3MultiFileJsonEventCollector extends BaseTruckEventCollector {
 
 	private void writeBufferedEventsToFile() {
 		try {
-			this.truckEventsFile =  createFile(fileNamePrefix, fileSuffix);	
+		    this.truckEventsFile =  createFile(rootFolderForSimulatedData+ "/" + fileNamePrefix, fileSuffix);
 			FileUtils.writeStringToFile(truckEventsFile, eventBuffer.toString(), Charset.defaultCharset(), true);
 			logger.info("Writing the following contents to file["+truckEventsFile+"]: " + eventBuffer.toString());
 		} catch (Exception e) {

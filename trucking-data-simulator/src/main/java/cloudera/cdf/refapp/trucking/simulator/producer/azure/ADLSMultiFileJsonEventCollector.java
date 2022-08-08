@@ -90,7 +90,6 @@ public class ADLSMultiFileJsonEventCollector extends BaseTruckEventCollector {
 			fileSuffix++;
 			currentEventCountPerFile = 0;
 			eventBuffer = new StringBuffer();
-			logger.info("Create new Streaming file["+this.truckEventsFile+"]");
 		}
 		
 		if(eventSourceType == null || EventSourceType.ALL_STREAMS.equals(eventSourceType)) {
@@ -141,7 +140,7 @@ public class ADLSMultiFileJsonEventCollector extends BaseTruckEventCollector {
 
 	private void writeBufferedEventsToFile() {
 		try {
-		    this.truckEventsFile =  createFile(rootFolderForSimulatedData+fileNamePrefix, fileSuffix);
+		    this.truckEventsFile =  createFile(rootFolderForSimulatedData+ "/" + fileNamePrefix, fileSuffix);
 
 			FileUtils.writeStringToFile(truckEventsFile, eventBuffer.toString(), Charset.defaultCharset(), true);
 			logger.info("Writing the following contents to file["+truckEventsFile+"]: " + eventBuffer.toString());
