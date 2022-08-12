@@ -27,7 +27,7 @@
           "arn": "arn:aws:s3:::example-bucket"
         },
         "object": {
-          "key": "s3-to-snowflake-demo/pos-snowflake-staging/truck-sensor-readings-0.json",
+          "key": "s3-to-redshift-demo/pos-redshift-staging/truck-sensor-readings-0.json",
           "size": 1024,
           "eTag": "0123456789abcdef0123456789abcdef",
           "sequencer": "0A1B2C3D4E5F678901"
