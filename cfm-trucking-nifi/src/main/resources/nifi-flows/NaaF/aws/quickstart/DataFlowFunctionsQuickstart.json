@@ -1,1 +1,2656 @@
-{"flowContents":{"identifier":"f7ec47e6-9057-30b0-abb7-0b38eb709ef6","instanceIdentifier":"a4c2cb58-0182-1000-565f-6ad654e140b8","name":"DataFlowFunctionsQuickstart","comments":"","position":{"x":536.0,"y":768.0},"processGroups":[{"identifier":"e22052dd-145f-37ba-9bee-9341b8dd405d","instanceIdentifier":"a8448fb6-0182-1000-31a2-f2b5fab31450","name":"Quickstart Function -TelemetryS3toS3Processing ","comments":"","position":{"x":504.0,"y":-448.0},"processGroups":[{"identifier":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","instanceIdentifier":"513f3fd2-8344-11f8-cab2-0aef72a2cad1","name":"DFFunctionS3TriggerParser","comments":"","position":{"x":224.0,"y":-416.0},"processGroups":[],"remoteProcessGroups":[],"processors":[{"identifier":"1701f645-96fb-388f-8c63-d2eaa40644d7","instanceIdentifier":"513f3fd6-8344-11f8-3795-0e425ecc6743","name":"SplitJson","comments":"","position":{"x":776.0,"y":560.0},"type":"org.apache.nifi.processors.standard.SplitJson","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-nar","version":"1.16.3"},"properties":{"Null Value Representation":"empty string","JsonPath Expression":"$.Records"},"propertyDescriptors":{"Null Value Representation":{"name":"Null Value Representation","displayName":"Null Value Representation","identifiesControllerService":false,"sensitive":false},"JsonPath Expression":{"name":"JsonPath Expression","displayName":"JsonPath Expression","identifiesControllerService":false,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"ALL","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":["original","failure"],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"a34a9b25-1524-33d1-8706-e0037ad4cfd6"},{"identifier":"c46c5f9d-ab6b-3429-a3ee-b1f59bf98144","instanceIdentifier":"513f3fd5-8344-11f8-5ffd-0ec5c409e008","name":"EvaluateJsonPath","comments":"","position":{"x":776.0,"y":776.0},"type":"org.apache.nifi.processors.standard.EvaluateJsonPath","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-nar","version":"1.16.3"},"properties":{"bucket":"$.s3.bucket.name","Destination":"flowfile-attribute","Return Type":"auto-detect","Null Value Representation":"empty string","region":"$.awsRegion","key":"$.s3.object.key","Path Not Found Behavior":"ignore"},"propertyDescriptors":{"bucket":{"name":"bucket","displayName":"bucket","identifiesControllerService":false,"sensitive":false},"Destination":{"name":"Destination","displayName":"Destination","identifiesControllerService":false,"sensitive":false},"Return Type":{"name":"Return Type","displayName":"Return Type","identifiesControllerService":false,"sensitive":false},"Null Value Representation":{"name":"Null Value Representation","displayName":"Null Value Representation","identifiesControllerService":false,"sensitive":false},"region":{"name":"region","displayName":"region","identifiesControllerService":false,"sensitive":false},"key":{"name":"key","displayName":"key","identifiesControllerService":false,"sensitive":false},"Path Not Found Behavior":{"name":"Path Not Found Behavior","displayName":"Path Not Found Behavior","identifiesControllerService":false,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"ALL","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":["failure","unmatched"],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"a34a9b25-1524-33d1-8706-e0037ad4cfd6"}],"inputPorts":[{"identifier":"aac661bc-9f2b-31e6-af2c-a86b69dee795","instanceIdentifier":"513f3fd3-8344-11f8-4996-4325cd55a7d4","name":"DFFunctionS3TriggerEvent","comments":"","position":{"x":824.0,"y":440.0},"type":"INPUT_PORT","concurrentlySchedulableTaskCount":1,"scheduledState":"ENABLED","allowRemoteAccess":false,"componentType":"INPUT_PORT","groupIdentifier":"a34a9b25-1524-33d1-8706-e0037ad4cfd6"}],"outputPorts":[{"identifier":"9783eb2a-16a7-30fe-9716-7102d61462c1","instanceIdentifier":"513f3fd4-8344-11f8-cbae-7c132df30c28","name":"DFFunctionS3TriggerParsed","position":{"x":832.0,"y":1008.0},"type":"OUTPUT_PORT","concurrentlySchedulableTaskCount":1,"scheduledState":"ENABLED","allowRemoteAccess":false,"componentType":"OUTPUT_PORT","groupIdentifier":"a34a9b25-1524-33d1-8706-e0037ad4cfd6"}],"connections":[{"identifier":"9ec6f426-5274-33a9-aac3-5698b1bf45f0","instanceIdentifier":"513f3fd8-8344-11f8-80d3-906a21d2600e","name":"","source":{"id":"c46c5f9d-ab6b-3429-a3ee-b1f59bf98144","type":"PROCESSOR","groupId":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","name":"EvaluateJsonPath","comments":"","instanceIdentifier":"513f3fd5-8344-11f8-5ffd-0ec5c409e008"},"destination":{"id":"9783eb2a-16a7-30fe-9716-7102d61462c1","type":"OUTPUT_PORT","groupId":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","name":"DFFunctionS3TriggerParsed","instanceIdentifier":"513f3fd4-8344-11f8-cbae-7c132df30c28"},"labelIndex":1,"zIndex":0,"selectedRelationships":["matched"],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"a34a9b25-1524-33d1-8706-e0037ad4cfd6"},{"identifier":"e0da5ead-0027-3061-901f-1130165534cf","instanceIdentifier":"513f3fd9-8344-11f8-081d-7082bbb594e6","name":"","source":{"id":"aac661bc-9f2b-31e6-af2c-a86b69dee795","type":"INPUT_PORT","groupId":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","name":"DFFunctionS3TriggerEvent","comments":"","instanceIdentifier":"513f3fd3-8344-11f8-4996-4325cd55a7d4"},"destination":{"id":"1701f645-96fb-388f-8c63-d2eaa40644d7","type":"PROCESSOR","groupId":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","name":"SplitJson","comments":"","instanceIdentifier":"513f3fd6-8344-11f8-3795-0e425ecc6743"},"labelIndex":1,"zIndex":0,"selectedRelationships":[""],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"a34a9b25-1524-33d1-8706-e0037ad4cfd6"},{"identifier":"2ce05309-cefe-3566-8a74-a67cfb1eb32c","instanceIdentifier":"513f3fd7-8344-11f8-8ad4-011776c65fea","name":"","source":{"id":"1701f645-96fb-388f-8c63-d2eaa40644d7","type":"PROCESSOR","groupId":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","name":"SplitJson","comments":"","instanceIdentifier":"513f3fd6-8344-11f8-3795-0e425ecc6743"},"destination":{"id":"c46c5f9d-ab6b-3429-a3ee-b1f59bf98144","type":"PROCESSOR","groupId":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","name":"EvaluateJsonPath","comments":"","instanceIdentifier":"513f3fd5-8344-11f8-5ffd-0ec5c409e008"},"labelIndex":1,"zIndex":0,"selectedRelationships":["split"],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"a34a9b25-1524-33d1-8706-e0037ad4cfd6"}],"labels":[],"funnels":[],"controllerServices":[],"variables":{},"defaultFlowFileExpiration":"0 sec","defaultBackPressureObjectThreshold":10000,"defaultBackPressureDataSizeThreshold":"1 GB","flowFileConcurrency":"UNBOUNDED","flowFileOutboundPolicy":"STREAM_WHEN_AVAILABLE","componentType":"PROCESS_GROUP","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"}],"remoteProcessGroups":[],"processors":[{"identifier":"0d706321-9f62-3369-91c3-bfd4de34fe73","instanceIdentifier":"513f3fd1-8344-11f8-97dc-fc1fc2ee5b1f","name":"Deliver Parquet Speed Events into S3","comments":"","position":{"x":568.0,"y":528.0},"type":"org.apache.nifi.processors.aws.s3.PutS3Object","bundle":{"group":"org.apache.nifi","artifact":"nifi-aws-nar","version":"1.16.3"},"properties":{"Proxy Host":null,"FullControl User List":"${s3.permissions.full.users}","Owner":"${s3.owner}","Access Key":"#{aws_access_key_id}","proxy-configuration-service":null,"Cache Control":null,"s3-object-remove-tags-prefix":"false","Endpoint Override URL":null,"Multipart Upload Max Age Threshold":"7 days","canned-acl":"${s3.permissions.cannedacl}","Signer Override":"Default Signature","Content Type":null,"Secret Key":"#{aws_access_key_password}","Write ACL User List":"${s3.permissions.writeacl.users}","server-side-encryption":"None","Read ACL User List":"${s3.permissions.readacl.users}","encryption-service":null,"Content Disposition":null,"Storage Class":"Standard","Multipart Part Size":"5 GB","use-chunked-encoding":"true","Object Key":"#{s3_dest_path_speed_event}/speed-${key:substringAfterLast('/'):substringBeforeLast('.')}.parquet","AWS Credentials Provider service":null,"Multipart Threshold":"5 GB","s3-object-tags-prefix":null,"SSL Context Service":null,"Bucket":"#{s3_bucket}","Multipart Upload AgeOff Interval":"60 min","use-path-style-access":"false","Write Permission User List":"${s3.permissions.write.users}","Communications Timeout":"30 secs","Credentials File":null,"Region":"us-west-2","Read Permission User List":"${s3.permissions.read.users}","Expiration Time Rule":null,"proxy-user-name":null,"Proxy Host Port":null,"s3-temporary-directory-multipart":"${java.io.tmpdir}"},"propertyDescriptors":{"Proxy Host":{"name":"Proxy Host","displayName":"Proxy Host","identifiesControllerService":false,"sensitive":false},"FullControl User List":{"name":"FullControl User List","displayName":"FullControl User List","identifiesControllerService":false,"sensitive":false},"Owner":{"name":"Owner","displayName":"Owner","identifiesControllerService":false,"sensitive":false},"Access Key":{"name":"Access Key","displayName":"Access Key ID","identifiesControllerService":false,"sensitive":true},"proxy-configuration-service":{"name":"proxy-configuration-service","displayName":"Proxy Configuration Service","identifiesControllerService":true,"sensitive":false},"Cache Control":{"name":"Cache Control","displayName":"Cache Control","identifiesControllerService":false,"sensitive":false},"s3-object-remove-tags-prefix":{"name":"s3-object-remove-tags-prefix","displayName":"Remove Tag Prefix","identifiesControllerService":false,"sensitive":false},"Endpoint Override URL":{"name":"Endpoint Override URL","displayName":"Endpoint Override URL","identifiesControllerService":false,"sensitive":false},"Multipart Upload Max Age Threshold":{"name":"Multipart Upload Max Age Threshold","displayName":"Multipart Upload Max Age Threshold","identifiesControllerService":false,"sensitive":false},"canned-acl":{"name":"canned-acl","displayName":"Canned ACL","identifiesControllerService":false,"sensitive":false},"Signer Override":{"name":"Signer Override","displayName":"Signer Override","identifiesControllerService":false,"sensitive":false},"proxy-user-password":{"name":"proxy-user-password","displayName":"Proxy Password","identifiesControllerService":false,"sensitive":true},"Content Type":{"name":"Content Type","displayName":"Content Type","identifiesControllerService":false,"sensitive":false},"Secret Key":{"name":"Secret Key","displayName":"Secret Access Key","identifiesControllerService":false,"sensitive":true},"Write ACL User List":{"name":"Write ACL User List","displayName":"Write ACL User List","identifiesControllerService":false,"sensitive":false},"server-side-encryption":{"name":"server-side-encryption","displayName":"Server Side Encryption","identifiesControllerService":false,"sensitive":false},"Read ACL User List":{"name":"Read ACL User List","displayName":"Read ACL User List","identifiesControllerService":false,"sensitive":false},"encryption-service":{"name":"encryption-service","displayName":"Encryption Service","identifiesControllerService":true,"sensitive":false},"Content Disposition":{"name":"Content Disposition","displayName":"Content Disposition","identifiesControllerService":false,"sensitive":false},"Storage Class":{"name":"Storage Class","displayName":"Storage Class","identifiesControllerService":false,"sensitive":false},"Multipart Part Size":{"name":"Multipart Part Size","displayName":"Multipart Part Size","identifiesControllerService":false,"sensitive":false},"use-chunked-encoding":{"name":"use-chunked-encoding","displayName":"Use Chunked Encoding","identifiesControllerService":false,"sensitive":false},"Object Key":{"name":"Object Key","displayName":"Object Key","identifiesControllerService":false,"sensitive":false},"AWS Credentials Provider service":{"name":"AWS Credentials Provider service","displayName":"AWS Credentials Provider Service","identifiesControllerService":true,"sensitive":false},"Multipart Threshold":{"name":"Multipart Threshold","displayName":"Multipart Threshold","identifiesControllerService":false,"sensitive":false},"s3-object-tags-prefix":{"name":"s3-object-tags-prefix","displayName":"Object Tags Prefix","identifiesControllerService":false,"sensitive":false},"SSL Context Service":{"name":"SSL Context Service","displayName":"SSL Context Service","identifiesControllerService":true,"sensitive":false},"Bucket":{"name":"Bucket","displayName":"Bucket","identifiesControllerService":false,"sensitive":false},"Multipart Upload AgeOff Interval":{"name":"Multipart Upload AgeOff Interval","displayName":"Multipart Upload AgeOff Interval","identifiesControllerService":false,"sensitive":false},"use-path-style-access":{"name":"use-path-style-access","displayName":"Use Path Style Access","identifiesControllerService":false,"sensitive":false},"Write Permission User List":{"name":"Write Permission User List","displayName":"Write Permission User List","identifiesControllerService":false,"sensitive":false},"Communications Timeout":{"name":"Communications Timeout","displayName":"Communications Timeout","identifiesControllerService":false,"sensitive":false},"Credentials File":{"name":"Credentials File","displayName":"Credentials File","identifiesControllerService":false,"sensitive":false,"resourceDefinition":{"cardinality":"SINGLE","resourceTypes":["FILE"]}},"Region":{"name":"Region","displayName":"Region","identifiesControllerService":false,"sensitive":false},"Read Permission User List":{"name":"Read Permission User List","displayName":"Read Permission User List","identifiesControllerService":false,"sensitive":false},"Expiration Time Rule":{"name":"Expiration Time Rule","displayName":"Expiration Time Rule","identifiesControllerService":false,"sensitive":false},"proxy-user-name":{"name":"proxy-user-name","displayName":"Proxy Username","identifiesControllerService":false,"sensitive":false},"Proxy Host Port":{"name":"Proxy Host Port","displayName":"Proxy Host Port","identifiesControllerService":false,"sensitive":false},"s3-temporary-directory-multipart":{"name":"s3-temporary-directory-multipart","displayName":"Temporary Directory Multipart State","identifiesControllerService":false,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"ALL","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":["success","failure"],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"23752870-df31-31fc-a097-71470a892a42","instanceIdentifier":"513f3fcf-8344-11f8-178a-9cd2a1a713c3","name":"Deliver Parquet Geo Events into S3","comments":"","position":{"x":-48.0,"y":536.0},"type":"org.apache.nifi.processors.aws.s3.PutS3Object","bundle":{"group":"org.apache.nifi","artifact":"nifi-aws-nar","version":"1.16.3"},"properties":{"Proxy Host":null,"FullControl User List":"${s3.permissions.full.users}","Owner":"${s3.owner}","Access Key":"#{aws_access_key_id}","proxy-configuration-service":null,"Cache Control":null,"s3-object-remove-tags-prefix":"false","Endpoint Override URL":null,"Multipart Upload Max Age Threshold":"7 days","canned-acl":"${s3.permissions.cannedacl}","Signer Override":"Default Signature","Content Type":null,"Secret Key":"#{aws_access_key_password}","Write ACL User List":"${s3.permissions.writeacl.users}","server-side-encryption":"None","Read ACL User List":"${s3.permissions.readacl.users}","encryption-service":null,"Content Disposition":null,"Storage Class":"Standard","Multipart Part Size":"5 GB","use-chunked-encoding":"true","Object Key":"#{s3_dest_path_geo_event}/geo-${key:substringAfterLast('/'):substringBeforeLast('.')}.parquet","AWS Credentials Provider service":null,"Multipart Threshold":"5 GB","s3-object-tags-prefix":null,"SSL Context Service":null,"Bucket":"#{s3_bucket}","Multipart Upload AgeOff Interval":"60 min","use-path-style-access":"false","Write Permission User List":"${s3.permissions.write.users}","Communications Timeout":"30 secs","Credentials File":null,"Region":"us-west-2","Read Permission User List":"${s3.permissions.read.users}","Expiration Time Rule":null,"proxy-user-name":null,"Proxy Host Port":null,"s3-temporary-directory-multipart":"${java.io.tmpdir}"},"propertyDescriptors":{"Proxy Host":{"name":"Proxy Host","displayName":"Proxy Host","identifiesControllerService":false,"sensitive":false},"FullControl User List":{"name":"FullControl User List","displayName":"FullControl User List","identifiesControllerService":false,"sensitive":false},"Owner":{"name":"Owner","displayName":"Owner","identifiesControllerService":false,"sensitive":false},"Access Key":{"name":"Access Key","displayName":"Access Key ID","identifiesControllerService":false,"sensitive":true},"proxy-configuration-service":{"name":"proxy-configuration-service","displayName":"Proxy Configuration Service","identifiesControllerService":true,"sensitive":false},"Cache Control":{"name":"Cache Control","displayName":"Cache Control","identifiesControllerService":false,"sensitive":false},"s3-object-remove-tags-prefix":{"name":"s3-object-remove-tags-prefix","displayName":"Remove Tag Prefix","identifiesControllerService":false,"sensitive":false},"Endpoint Override URL":{"name":"Endpoint Override URL","displayName":"Endpoint Override URL","identifiesControllerService":false,"sensitive":false},"Multipart Upload Max Age Threshold":{"name":"Multipart Upload Max Age Threshold","displayName":"Multipart Upload Max Age Threshold","identifiesControllerService":false,"sensitive":false},"canned-acl":{"name":"canned-acl","displayName":"Canned ACL","identifiesControllerService":false,"sensitive":false},"Signer Override":{"name":"Signer Override","displayName":"Signer Override","identifiesControllerService":false,"sensitive":false},"proxy-user-password":{"name":"proxy-user-password","displayName":"Proxy Password","identifiesControllerService":false,"sensitive":true},"Content Type":{"name":"Content Type","displayName":"Content Type","identifiesControllerService":false,"sensitive":false},"Secret Key":{"name":"Secret Key","displayName":"Secret Access Key","identifiesControllerService":false,"sensitive":true},"Write ACL User List":{"name":"Write ACL User List","displayName":"Write ACL User List","identifiesControllerService":false,"sensitive":false},"server-side-encryption":{"name":"server-side-encryption","displayName":"Server Side Encryption","identifiesControllerService":false,"sensitive":false},"Read ACL User List":{"name":"Read ACL User List","displayName":"Read ACL User List","identifiesControllerService":false,"sensitive":false},"encryption-service":{"name":"encryption-service","displayName":"Encryption Service","identifiesControllerService":true,"sensitive":false},"Content Disposition":{"name":"Content Disposition","displayName":"Content Disposition","identifiesControllerService":false,"sensitive":false},"Storage Class":{"name":"Storage Class","displayName":"Storage Class","identifiesControllerService":false,"sensitive":false},"Multipart Part Size":{"name":"Multipart Part Size","displayName":"Multipart Part Size","identifiesControllerService":false,"sensitive":false},"use-chunked-encoding":{"name":"use-chunked-encoding","displayName":"Use Chunked Encoding","identifiesControllerService":false,"sensitive":false},"Object Key":{"name":"Object Key","displayName":"Object Key","identifiesControllerService":false,"sensitive":false},"AWS Credentials Provider service":{"name":"AWS Credentials Provider service","displayName":"AWS Credentials Provider Service","identifiesControllerService":true,"sensitive":false},"Multipart Threshold":{"name":"Multipart Threshold","displayName":"Multipart Threshold","identifiesControllerService":false,"sensitive":false},"s3-object-tags-prefix":{"name":"s3-object-tags-prefix","displayName":"Object Tags Prefix","identifiesControllerService":false,"sensitive":false},"SSL Context Service":{"name":"SSL Context Service","displayName":"SSL Context Service","identifiesControllerService":true,"sensitive":false},"Bucket":{"name":"Bucket","displayName":"Bucket","identifiesControllerService":false,"sensitive":false},"Multipart Upload AgeOff Interval":{"name":"Multipart Upload AgeOff Interval","displayName":"Multipart Upload AgeOff Interval","identifiesControllerService":false,"sensitive":false},"use-path-style-access":{"name":"use-path-style-access","displayName":"Use Path Style Access","identifiesControllerService":false,"sensitive":false},"Write Permission User List":{"name":"Write Permission User List","displayName":"Write Permission User List","identifiesControllerService":false,"sensitive":false},"Communications Timeout":{"name":"Communications Timeout","displayName":"Communications Timeout","identifiesControllerService":false,"sensitive":false},"Credentials File":{"name":"Credentials File","displayName":"Credentials File","identifiesControllerService":false,"sensitive":false,"resourceDefinition":{"cardinality":"SINGLE","resourceTypes":["FILE"]}},"Region":{"name":"Region","displayName":"Region","identifiesControllerService":false,"sensitive":false},"Read Permission User List":{"name":"Read Permission User List","displayName":"Read Permission User List","identifiesControllerService":false,"sensitive":false},"Expiration Time Rule":{"name":"Expiration Time Rule","displayName":"Expiration Time Rule","identifiesControllerService":false,"sensitive":false},"proxy-user-name":{"name":"proxy-user-name","displayName":"Proxy Username","identifiesControllerService":false,"sensitive":false},"Proxy Host Port":{"name":"Proxy Host Port","displayName":"Proxy Host Port","identifiesControllerService":false,"sensitive":false},"s3-temporary-directory-multipart":{"name":"s3-temporary-directory-multipart","displayName":"Temporary Directory Multipart State","identifiesControllerService":false,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"ALL","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":["success","failure"],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"fa44e5e2-8505-3a21-8aab-1ffb9feb3578","instanceIdentifier":"513f3fe6-8344-11f8-710f-cdfedc8622fe","name":"Reverse Geo Lookup Enrichment","comments":"","position":{"x":-48.0,"y":312.0},"type":"org.apache.nifi.processors.standard.LookupRecord","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-nar","version":"1.16.3"},"properties":{"result-contents":"insert-entire-record","routing-strategy":"route-to-success","lng":"/longitude","result-record-path":"/geoAddress","record-writer":"b49b4562-b259-3b53-af4a-fd9c723ac046","record-reader":"a1e63ccc-f8c9-3f23-a498-436a87698a2b","lookup-service":"a08fd288-2ee1-37bf-bd12-be182ad3451e","record-update-strategy":"use-property","lat":"/latitude"},"propertyDescriptors":{"result-contents":{"name":"result-contents","displayName":"Record Result Contents","identifiesControllerService":false,"sensitive":false},"routing-strategy":{"name":"routing-strategy","displayName":"Routing Strategy","identifiesControllerService":false,"sensitive":false},"lng":{"name":"lng","displayName":"lng","identifiesControllerService":false,"sensitive":false},"result-record-path":{"name":"result-record-path","displayName":"Result RecordPath","identifiesControllerService":false,"sensitive":false},"record-writer":{"name":"record-writer","displayName":"Record Writer","identifiesControllerService":true,"sensitive":false},"record-reader":{"name":"record-reader","displayName":"Record Reader","identifiesControllerService":true,"sensitive":false},"lookup-service":{"name":"lookup-service","displayName":"Lookup Service","identifiesControllerService":true,"sensitive":false},"record-update-strategy":{"name":"record-update-strategy","displayName":"Record Update Strategy","identifiesControllerService":false,"sensitive":false},"lat":{"name":"lat","displayName":"lat","identifiesControllerService":false,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"ALL","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":["failure"],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"6255ca5d-c9e7-3867-b481-77f641c87cf4","instanceIdentifier":"513f3fce-8344-11f8-485b-538fdc4e5790","name":"Fetch Telemetry File","comments":"","position":{"x":240.0,"y":-152.0},"type":"org.apache.nifi.processors.aws.s3.FetchS3Object","bundle":{"group":"org.apache.nifi","artifact":"nifi-aws-nar","version":"1.16.3"},"properties":{"Proxy Host":null,"range-length":null,"Access Key":"#{aws_access_key_id}","range-start":null,"proxy-configuration-service":null,"Endpoint Override URL":null,"requester-pays":"false","Object Key":"${key}","AWS Credentials Provider service":null,"SSL Context Service":null,"Signer Override":"Default Signature","Bucket":"${bucket}","Version":null,"Communications Timeout":"30 secs","Region":"#{s3_region}","Secret Key":"#{aws_access_key_password}","Credentials File":null,"proxy-user-name":null,"Proxy Host Port":null,"encryption-service":null},"propertyDescriptors":{"Proxy Host":{"name":"Proxy Host","displayName":"Proxy Host","identifiesControllerService":false,"sensitive":false},"range-length":{"name":"range-length","displayName":"Range Length","identifiesControllerService":false,"sensitive":false},"Access Key":{"name":"Access Key","displayName":"Access Key ID","identifiesControllerService":false,"sensitive":true},"range-start":{"name":"range-start","displayName":"Range Start","identifiesControllerService":false,"sensitive":false},"proxy-configuration-service":{"name":"proxy-configuration-service","displayName":"Proxy Configuration Service","identifiesControllerService":true,"sensitive":false},"Endpoint Override URL":{"name":"Endpoint Override URL","displayName":"Endpoint Override URL","identifiesControllerService":false,"sensitive":false},"requester-pays":{"name":"requester-pays","displayName":"Requester Pays","identifiesControllerService":false,"sensitive":false},"Object Key":{"name":"Object Key","displayName":"Object Key","identifiesControllerService":false,"sensitive":false},"AWS Credentials Provider service":{"name":"AWS Credentials Provider service","displayName":"AWS Credentials Provider Service","identifiesControllerService":true,"sensitive":false},"SSL Context Service":{"name":"SSL Context Service","displayName":"SSL Context Service","identifiesControllerService":true,"sensitive":false},"Signer Override":{"name":"Signer Override","displayName":"Signer Override","identifiesControllerService":false,"sensitive":false},"Bucket":{"name":"Bucket","displayName":"Bucket","identifiesControllerService":false,"sensitive":false},"Version":{"name":"Version","displayName":"Version","identifiesControllerService":false,"sensitive":false},"proxy-user-password":{"name":"proxy-user-password","displayName":"Proxy Password","identifiesControllerService":false,"sensitive":true},"Communications Timeout":{"name":"Communications Timeout","displayName":"Communications Timeout","identifiesControllerService":false,"sensitive":false},"Region":{"name":"Region","displayName":"Region","identifiesControllerService":false,"sensitive":false},"Secret Key":{"name":"Secret Key","displayName":"Secret Access Key","identifiesControllerService":false,"sensitive":true},"Credentials File":{"name":"Credentials File","displayName":"Credentials File","identifiesControllerService":false,"sensitive":false,"resourceDefinition":{"cardinality":"SINGLE","resourceTypes":["FILE"]}},"proxy-user-name":{"name":"proxy-user-name","displayName":"Proxy Username","identifiesControllerService":false,"sensitive":false},"Proxy Host Port":{"name":"Proxy Host Port","displayName":"Proxy Host Port","identifiesControllerService":false,"sensitive":false},"encryption-service":{"name":"encryption-service","displayName":"Encryption Service","identifiesControllerService":true,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"ALL","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":["failure"],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"4a6180e6-2ce6-32e9-ab16-15c0a3e4aa05","instanceIdentifier":"513f3fed-8344-11f8-0fc4-da388b2d6daf","name":"Filter Speed Events","comments":"","position":{"x":560.0,"y":312.0},"type":"org.apache.nifi.processors.standard.QueryRecord","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-nar","version":"1.16.3"},"properties":{"cache-schema":"true","dbf-default-precision":"10","filtered_events":"#{filter_rule_speed_event}","record-writer":"806893d1-6c4c-34c0-8134-a92636d1fc5e","record-reader":"a1e63ccc-f8c9-3f23-a498-436a87698a2b","include-zero-record-flowfiles":"true","dbf-default-scale":"0"},"propertyDescriptors":{"cache-schema":{"name":"cache-schema","displayName":"Cache Schema","identifiesControllerService":false,"sensitive":false},"dbf-default-precision":{"name":"dbf-default-precision","displayName":"Default Decimal Precision","identifiesControllerService":false,"sensitive":false},"filtered_events":{"name":"filtered_events","displayName":"filtered_events","identifiesControllerService":false,"sensitive":false},"record-writer":{"name":"record-writer","displayName":"Record Writer","identifiesControllerService":true,"sensitive":false},"record-reader":{"name":"record-reader","displayName":"Record Reader","identifiesControllerService":true,"sensitive":false},"include-zero-record-flowfiles":{"name":"include-zero-record-flowfiles","displayName":"Include Zero Record FlowFiles","identifiesControllerService":false,"sensitive":false},"dbf-default-scale":{"name":"dbf-default-scale","displayName":"Default Decimal Scale","identifiesControllerService":false,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"ALL","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":["original","failure"],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"50f1ef58-37b1-3b2e-9d5c-0581f230b6b3","instanceIdentifier":"513f3fd0-8344-11f8-88e9-730993ef64c6","name":"Route Telemetry Events","comments":"","position":{"x":240.0,"y":80.0},"type":"org.apache.nifi.processors.standard.QueryRecord","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-nar","version":"1.16.3"},"properties":{"cache-schema":"true","dbf-default-precision":"10","truck_speed_event":"#{routing_rule_speed_event}","record-writer":"fd93bb75-e9d4-39be-847a-0655d31373cc","record-reader":"a1e63ccc-f8c9-3f23-a498-436a87698a2b","include-zero-record-flowfiles":"false","dbf-default-scale":"0","truck_geo_event":"#{routing_rule_geo_event}"},"propertyDescriptors":{"cache-schema":{"name":"cache-schema","displayName":"Cache Schema","identifiesControllerService":false,"sensitive":false},"dbf-default-precision":{"name":"dbf-default-precision","displayName":"Default Decimal Precision","identifiesControllerService":false,"sensitive":false},"truck_speed_event":{"name":"truck_speed_event","displayName":"truck_speed_event","identifiesControllerService":false,"sensitive":false},"record-writer":{"name":"record-writer","displayName":"Record Writer","identifiesControllerService":true,"sensitive":false},"record-reader":{"name":"record-reader","displayName":"Record Reader","identifiesControllerService":true,"sensitive":false},"include-zero-record-flowfiles":{"name":"include-zero-record-flowfiles","displayName":"Include Zero Record FlowFiles","identifiesControllerService":false,"sensitive":false},"dbf-default-scale":{"name":"dbf-default-scale","displayName":"Default Decimal Scale","identifiesControllerService":false,"sensitive":false},"truck_geo_event":{"name":"truck_geo_event","displayName":"truck_geo_event","identifiesControllerService":false,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"ALL","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":["original","failure"],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"}],"inputPorts":[{"identifier":"0637d9cc-342e-3fd2-a30f-e724e5af21b5","instanceIdentifier":"513f3fcd-8344-11f8-8c4d-7e1d78956ce5","name":"S3Trigger","position":{"x":296.0,"y":-560.0},"type":"INPUT_PORT","concurrentlySchedulableTaskCount":1,"scheduledState":"ENABLED","allowRemoteAccess":false,"componentType":"INPUT_PORT","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"}],"outputPorts":[],"connections":[{"identifier":"ac152449-1ff9-3959-9d5e-4cc6520c4831","instanceIdentifier":"513f3fdc-8344-11f8-8009-033a8ef8400c","name":"","source":{"id":"9783eb2a-16a7-30fe-9716-7102d61462c1","type":"OUTPUT_PORT","groupId":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","name":"DFFunctionS3TriggerParsed","instanceIdentifier":"513f3fd4-8344-11f8-cbae-7c132df30c28"},"destination":{"id":"6255ca5d-c9e7-3867-b481-77f641c87cf4","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Fetch Telemetry File","comments":"","instanceIdentifier":"513f3fce-8344-11f8-485b-538fdc4e5790"},"labelIndex":1,"zIndex":0,"selectedRelationships":[""],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"47c86e48-8edf-3eb7-a9bd-c368e7655d8b","instanceIdentifier":"513f3fdb-8344-11f8-d294-6807303f34a4","name":"","source":{"id":"6255ca5d-c9e7-3867-b481-77f641c87cf4","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Fetch Telemetry File","comments":"","instanceIdentifier":"513f3fce-8344-11f8-485b-538fdc4e5790"},"destination":{"id":"50f1ef58-37b1-3b2e-9d5c-0581f230b6b3","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Route Telemetry Events","comments":"","instanceIdentifier":"513f3fd0-8344-11f8-88e9-730993ef64c6"},"labelIndex":1,"zIndex":0,"selectedRelationships":["success"],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"f2a195e5-553d-3e8b-997d-ac66438ebb47","instanceIdentifier":"513f3fde-8344-11f8-ae24-24fcf3921c35","name":"","source":{"id":"0637d9cc-342e-3fd2-a30f-e724e5af21b5","type":"INPUT_PORT","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"S3Trigger","instanceIdentifier":"513f3fcd-8344-11f8-8c4d-7e1d78956ce5"},"destination":{"id":"aac661bc-9f2b-31e6-af2c-a86b69dee795","type":"INPUT_PORT","groupId":"a34a9b25-1524-33d1-8706-e0037ad4cfd6","name":"DFFunctionS3TriggerEvent","comments":"","instanceIdentifier":"513f3fd3-8344-11f8-4996-4325cd55a7d4"},"labelIndex":1,"zIndex":0,"selectedRelationships":[""],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"4b250433-f70e-3785-8527-8d4f4d0abd01","instanceIdentifier":"513f3ff1-8344-11f8-3c25-53fe5faf2946","name":"","source":{"id":"50f1ef58-37b1-3b2e-9d5c-0581f230b6b3","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Route Telemetry Events","comments":"","instanceIdentifier":"513f3fd0-8344-11f8-88e9-730993ef64c6"},"destination":{"id":"4a6180e6-2ce6-32e9-ab16-15c0a3e4aa05","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Filter Speed Events","comments":"","instanceIdentifier":"513f3fed-8344-11f8-0fc4-da388b2d6daf"},"labelIndex":1,"zIndex":0,"selectedRelationships":["truck_speed_event"],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"dbe45fc4-70c5-32ba-b6a2-dc7b64adbb0a","instanceIdentifier":"513f3fec-8344-11f8-27bb-6f1da18eb7ed","name":"","source":{"id":"fa44e5e2-8505-3a21-8aab-1ffb9feb3578","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Reverse Geo Lookup Enrichment","comments":"","instanceIdentifier":"513f3fe6-8344-11f8-710f-cdfedc8622fe"},"destination":{"id":"23752870-df31-31fc-a097-71470a892a42","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Deliver Parquet Geo Events into S3","comments":"","instanceIdentifier":"513f3fcf-8344-11f8-178a-9cd2a1a713c3"},"labelIndex":1,"zIndex":0,"selectedRelationships":["success"],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"14c153b0-33a2-382f-96c7-249d2c946029","instanceIdentifier":"513f3ffb-8344-11f8-a70d-e6be6b6dae15","name":"","source":{"id":"4a6180e6-2ce6-32e9-ab16-15c0a3e4aa05","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Filter Speed Events","comments":"","instanceIdentifier":"513f3fed-8344-11f8-0fc4-da388b2d6daf"},"destination":{"id":"0d706321-9f62-3369-91c3-bfd4de34fe73","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Deliver Parquet Speed Events into S3","comments":"","instanceIdentifier":"513f3fd1-8344-11f8-97dc-fc1fc2ee5b1f"},"labelIndex":1,"zIndex":0,"selectedRelationships":["filtered_events"],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"9a9db9fe-cdaa-317b-8b46-6cf706491809","instanceIdentifier":"513f3ff0-8344-11f8-7810-9f10b01fef6f","name":"","source":{"id":"50f1ef58-37b1-3b2e-9d5c-0581f230b6b3","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Route Telemetry Events","comments":"","instanceIdentifier":"513f3fd0-8344-11f8-88e9-730993ef64c6"},"destination":{"id":"fa44e5e2-8505-3a21-8aab-1ffb9feb3578","type":"PROCESSOR","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"Reverse Geo Lookup Enrichment","comments":"","instanceIdentifier":"513f3fe6-8344-11f8-710f-cdfedc8622fe"},"labelIndex":1,"zIndex":0,"selectedRelationships":["truck_geo_event"],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"}],"labels":[{"identifier":"34cf82d7-b507-3b0d-8f2a-0fd3127a88cd","instanceIdentifier":"513f3fc9-8344-11f8-6770-e6d68e8e2607","position":{"x":648.0,"y":-400.0},"label":"Parses S3 Trigger to retrieve bucket \nand key for new telemetry file","zIndex":0,"width":216.0,"height":88.0,"style":{"font-size":"12px"},"componentType":"LABEL","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"5c773e5d-c546-3ead-b349-c39a7a3a72f9","instanceIdentifier":"513f3fcb-8344-11f8-87cd-4887f5c3f0a0","position":{"x":648.0,"y":-152.0},"label":"Retrieves the new Telemetry File \nthat landed in S3 bucket","zIndex":0,"width":216.0,"height":88.0,"style":{"font-size":"12px"},"componentType":"LABEL","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"33191028-331a-3004-bd10-c1fe41e5ec14","instanceIdentifier":"513f3ff6-8344-11f8-3e89-4e901946ff05","position":{"x":-320.0,"y":336.0},"label":"Enriches events with geo information using\nlat and long of event. The output is using the \nnew geo schema with enriched new field  \nand written out in parquet format. ","zIndex":0,"width":248.0,"height":88.0,"style":{"font-size":"12px"},"componentType":"LABEL","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"e751fe21-1385-39a9-82e9-e8830cf3a340","instanceIdentifier":"513f3fcc-8344-11f8-dc90-7d5655b7b40e","position":{"x":320.0,"y":552.0},"label":"Sends processed telemetry events two \ndifferent S3 folders based on routing rules\nin parquet format.","zIndex":0,"width":232.0,"height":88.0,"style":{"font-size":"12px"},"componentType":"LABEL","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"6e697a0b-f6e0-3865-9e31-7ce77cbdda36","instanceIdentifier":"513f3fca-8344-11f8-b66a-ef85eddf7401","position":{"x":656.0,"y":80.0},"label":"Routes, Filters and Transforms \nthe events int JSON based \non routing rules using SQL.","zIndex":0,"width":216.0,"height":88.0,"style":{"font-size":"12px"},"componentType":"LABEL","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"f0b5356b-6bde-3bee-b124-770444be5fcb","instanceIdentifier":"513f3ff8-8344-11f8-84f4-54660962bae4","position":{"x":928.0,"y":352.0},"label":"Filters events based on filter rule. \nThe output is using the  new speed schema \nand written out in parquet format. ","zIndex":0,"width":248.0,"height":64.0,"style":{"font-size":"12px"},"componentType":"LABEL","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"}],"funnels":[],"controllerServices":[{"identifier":"b49b4562-b259-3b53-af4a-fd9c723ac046","instanceIdentifier":"513f3ff9-8344-11f8-7426-079fb05c68bb","name":"GeoTelemetryParquetWriter","comments":"","type":"org.apache.nifi.parquet.ParquetRecordSetWriter","bundle":{"group":"org.apache.nifi","artifact":"nifi-parquet-nar","version":"1.16.3"},"properties":{"schema-branch":null,"max-padding-size":null,"avro-write-old-list-structure":"true","row-group-size":null,"schema-cache":null,"enable-dictionary-encoding":null,"Schema Write Strategy":"no-schema","page-size":null,"writer-version":null,"compression-type":"UNCOMPRESSED","schema-name":"${schema.name}","cache-size":"1000","schema-registry":null,"enable-validation":null,"dictionary-page-size":null,"int96-fields":null,"schema-access-strategy":"schema-text-property","schema-protocol-version":"1","schema-version":null,"schema-text":"#{telemetry_geo_schema}","avro-add-list-element-records":"true"},"propertyDescriptors":{"schema-branch":{"name":"schema-branch","displayName":"Schema Branch","identifiesControllerService":false,"sensitive":false},"max-padding-size":{"name":"max-padding-size","displayName":"Max Padding Size","identifiesControllerService":false,"sensitive":false},"avro-write-old-list-structure":{"name":"avro-write-old-list-structure","displayName":"Avro Write Old List Structure","identifiesControllerService":false,"sensitive":false},"row-group-size":{"name":"row-group-size","displayName":"Row Group Size","identifiesControllerService":false,"sensitive":false},"schema-cache":{"name":"schema-cache","displayName":"Schema Cache","identifiesControllerService":true,"sensitive":false},"enable-dictionary-encoding":{"name":"enable-dictionary-encoding","displayName":"Enable Dictionary Encoding","identifiesControllerService":false,"sensitive":false},"Schema Write Strategy":{"name":"Schema Write Strategy","displayName":"Schema Write Strategy","identifiesControllerService":false,"sensitive":false},"page-size":{"name":"page-size","displayName":"Page Size","identifiesControllerService":false,"sensitive":false},"writer-version":{"name":"writer-version","displayName":"Writer Version","identifiesControllerService":false,"sensitive":false},"compression-type":{"name":"compression-type","displayName":"Compression Type","identifiesControllerService":false,"sensitive":false},"schema-name":{"name":"schema-name","displayName":"Schema Name","identifiesControllerService":false,"sensitive":false},"cache-size":{"name":"cache-size","displayName":"Cache Size","identifiesControllerService":false,"sensitive":false},"schema-registry":{"name":"schema-registry","displayName":"Schema Registry","identifiesControllerService":true,"sensitive":false},"enable-validation":{"name":"enable-validation","displayName":"Enable Validation","identifiesControllerService":false,"sensitive":false},"dictionary-page-size":{"name":"dictionary-page-size","displayName":"Dictionary Page Size","identifiesControllerService":false,"sensitive":false},"int96-fields":{"name":"int96-fields","displayName":"INT96 Fields","identifiesControllerService":false,"sensitive":false},"schema-access-strategy":{"name":"schema-access-strategy","displayName":"Schema Access Strategy","identifiesControllerService":false,"sensitive":false},"schema-protocol-version":{"name":"schema-protocol-version","displayName":"Schema Protocol Version","identifiesControllerService":false,"sensitive":false},"schema-version":{"name":"schema-version","displayName":"Schema Version","identifiesControllerService":false,"sensitive":false},"schema-text":{"name":"schema-text","displayName":"Schema Text","identifiesControllerService":false,"sensitive":false},"avro-add-list-element-records":{"name":"avro-add-list-element-records","displayName":"Avro Add List Element Records","identifiesControllerService":false,"sensitive":false}},"controllerServiceApis":[{"type":"org.apache.nifi.serialization.RecordSetWriterFactory","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-services-api-nar","version":"1.16.3"}}],"scheduledState":"DISABLED","componentType":"CONTROLLER_SERVICE","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"806893d1-6c4c-34c0-8134-a92636d1fc5e","instanceIdentifier":"513f3ffa-8344-11f8-b624-801ada2620c9","name":"SpeedTelemetryParquetWriter","comments":"","type":"org.apache.nifi.parquet.ParquetRecordSetWriter","bundle":{"group":"org.apache.nifi","artifact":"nifi-parquet-nar","version":"1.16.3"},"properties":{"schema-branch":null,"max-padding-size":null,"avro-write-old-list-structure":"true","row-group-size":null,"schema-cache":null,"enable-dictionary-encoding":null,"Schema Write Strategy":"no-schema","page-size":null,"writer-version":null,"compression-type":"UNCOMPRESSED","schema-name":"${schema.name}","cache-size":"1000","schema-registry":null,"enable-validation":null,"dictionary-page-size":null,"int96-fields":null,"schema-access-strategy":"schema-text-property","schema-protocol-version":"1","schema-version":null,"schema-text":"#{telemetry_speed_schema}","avro-add-list-element-records":"true"},"propertyDescriptors":{"schema-branch":{"name":"schema-branch","displayName":"Schema Branch","identifiesControllerService":false,"sensitive":false},"max-padding-size":{"name":"max-padding-size","displayName":"Max Padding Size","identifiesControllerService":false,"sensitive":false},"avro-write-old-list-structure":{"name":"avro-write-old-list-structure","displayName":"Avro Write Old List Structure","identifiesControllerService":false,"sensitive":false},"row-group-size":{"name":"row-group-size","displayName":"Row Group Size","identifiesControllerService":false,"sensitive":false},"schema-cache":{"name":"schema-cache","displayName":"Schema Cache","identifiesControllerService":true,"sensitive":false},"enable-dictionary-encoding":{"name":"enable-dictionary-encoding","displayName":"Enable Dictionary Encoding","identifiesControllerService":false,"sensitive":false},"Schema Write Strategy":{"name":"Schema Write Strategy","displayName":"Schema Write Strategy","identifiesControllerService":false,"sensitive":false},"page-size":{"name":"page-size","displayName":"Page Size","identifiesControllerService":false,"sensitive":false},"writer-version":{"name":"writer-version","displayName":"Writer Version","identifiesControllerService":false,"sensitive":false},"compression-type":{"name":"compression-type","displayName":"Compression Type","identifiesControllerService":false,"sensitive":false},"schema-name":{"name":"schema-name","displayName":"Schema Name","identifiesControllerService":false,"sensitive":false},"cache-size":{"name":"cache-size","displayName":"Cache Size","identifiesControllerService":false,"sensitive":false},"schema-registry":{"name":"schema-registry","displayName":"Schema Registry","identifiesControllerService":true,"sensitive":false},"enable-validation":{"name":"enable-validation","displayName":"Enable Validation","identifiesControllerService":false,"sensitive":false},"dictionary-page-size":{"name":"dictionary-page-size","displayName":"Dictionary Page Size","identifiesControllerService":false,"sensitive":false},"int96-fields":{"name":"int96-fields","displayName":"INT96 Fields","identifiesControllerService":false,"sensitive":false},"schema-access-strategy":{"name":"schema-access-strategy","displayName":"Schema Access Strategy","identifiesControllerService":false,"sensitive":false},"schema-protocol-version":{"name":"schema-protocol-version","displayName":"Schema Protocol Version","identifiesControllerService":false,"sensitive":false},"schema-version":{"name":"schema-version","displayName":"Schema Version","identifiesControllerService":false,"sensitive":false},"schema-text":{"name":"schema-text","displayName":"Schema Text","identifiesControllerService":false,"sensitive":false},"avro-add-list-element-records":{"name":"avro-add-list-element-records","displayName":"Avro Add List Element Records","identifiesControllerService":false,"sensitive":false}},"controllerServiceApis":[{"type":"org.apache.nifi.serialization.RecordSetWriterFactory","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-services-api-nar","version":"1.16.3"}}],"scheduledState":"DISABLED","componentType":"CONTROLLER_SERVICE","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"a1e63ccc-f8c9-3f23-a498-436a87698a2b","instanceIdentifier":"513f3fc7-8344-11f8-e321-71c88ff9fc79","name":"RawTelemetryJsonReaderJson","comments":"","type":"org.apache.nifi.json.JsonTreeReader","bundle":{"group":"org.apache.nifi","artifact":"nifi-record-serialization-services-nar","version":"1.16.3"},"properties":{"Timestamp Format":null,"schema-inference-cache":null,"Date Format":null,"schema-branch":null,"schema-name":"${schema.name}","starting-field-strategy":"ROOT_NODE","schema-registry":null,"starting-field-name":null,"Time Format":null,"schema-access-strategy":"schema-text-property","schema-version":null,"schema-text":"#{telemetry_raw_schema}"},"propertyDescriptors":{"Timestamp Format":{"name":"Timestamp Format","displayName":"Timestamp Format","identifiesControllerService":false,"sensitive":false},"schema-inference-cache":{"name":"schema-inference-cache","displayName":"Schema Inference Cache","identifiesControllerService":true,"sensitive":false},"Date Format":{"name":"Date Format","displayName":"Date Format","identifiesControllerService":false,"sensitive":false},"schema-branch":{"name":"schema-branch","displayName":"Schema Branch","identifiesControllerService":false,"sensitive":false},"schema-name":{"name":"schema-name","displayName":"Schema Name","identifiesControllerService":false,"sensitive":false},"starting-field-strategy":{"name":"starting-field-strategy","displayName":"Starting Field Strategy","identifiesControllerService":false,"sensitive":false},"schema-registry":{"name":"schema-registry","displayName":"Schema Registry","identifiesControllerService":true,"sensitive":false},"starting-field-name":{"name":"starting-field-name","displayName":"Starting Field Name","identifiesControllerService":false,"sensitive":false},"Time Format":{"name":"Time Format","displayName":"Time Format","identifiesControllerService":false,"sensitive":false},"schema-access-strategy":{"name":"schema-access-strategy","displayName":"Schema Access Strategy","identifiesControllerService":false,"sensitive":false},"schema-version":{"name":"schema-version","displayName":"Schema Version","identifiesControllerService":false,"sensitive":false},"schema-text":{"name":"schema-text","displayName":"Schema Text","identifiesControllerService":false,"sensitive":false}},"controllerServiceApis":[{"type":"org.apache.nifi.serialization.RecordReaderFactory","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-services-api-nar","version":"1.16.3"}}],"scheduledState":"DISABLED","componentType":"CONTROLLER_SERVICE","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"fd93bb75-e9d4-39be-847a-0655d31373cc","instanceIdentifier":"513f3fc8-8344-11f8-d3a5-fb57bb997d1f","name":"RawTelemetryJsonWriterJson","comments":"","type":"org.apache.nifi.json.JsonRecordSetWriter","bundle":{"group":"org.apache.nifi","artifact":"nifi-record-serialization-services-nar","version":"1.16.3"},"properties":{"schema-branch":null,"compression-level":"1","schema-cache":null,"Timestamp Format":null,"Date Format":null,"Pretty Print JSON":"false","compression-format":"none","Schema Write Strategy":"no-schema","suppress-nulls":"never-suppress","output-grouping":"output-array","schema-name":"${schema.name}","schema-registry":null,"Time Format":null,"schema-access-strategy":"schema-text-property","schema-protocol-version":"1","schema-version":null,"schema-text":"#{telemetry_raw_schema}"},"propertyDescriptors":{"schema-branch":{"name":"schema-branch","displayName":"Schema Branch","identifiesControllerService":false,"sensitive":false},"compression-level":{"name":"compression-level","displayName":"Compression Level","identifiesControllerService":false,"sensitive":false},"schema-cache":{"name":"schema-cache","displayName":"Schema Cache","identifiesControllerService":true,"sensitive":false},"Timestamp Format":{"name":"Timestamp Format","displayName":"Timestamp Format","identifiesControllerService":false,"sensitive":false},"Date Format":{"name":"Date Format","displayName":"Date Format","identifiesControllerService":false,"sensitive":false},"Pretty Print JSON":{"name":"Pretty Print JSON","displayName":"Pretty Print JSON","identifiesControllerService":false,"sensitive":false},"compression-format":{"name":"compression-format","displayName":"Compression Format","identifiesControllerService":false,"sensitive":false},"Schema Write Strategy":{"name":"Schema Write Strategy","displayName":"Schema Write Strategy","identifiesControllerService":false,"sensitive":false},"suppress-nulls":{"name":"suppress-nulls","displayName":"Suppress Null Values","identifiesControllerService":false,"sensitive":false},"output-grouping":{"name":"output-grouping","displayName":"Output Grouping","identifiesControllerService":false,"sensitive":false},"schema-name":{"name":"schema-name","displayName":"Schema Name","identifiesControllerService":false,"sensitive":false},"schema-registry":{"name":"schema-registry","displayName":"Schema Registry","identifiesControllerService":true,"sensitive":false},"Time Format":{"name":"Time Format","displayName":"Time Format","identifiesControllerService":false,"sensitive":false},"schema-access-strategy":{"name":"schema-access-strategy","displayName":"Schema Access Strategy","identifiesControllerService":false,"sensitive":false},"schema-protocol-version":{"name":"schema-protocol-version","displayName":"Schema Protocol Version","identifiesControllerService":false,"sensitive":false},"schema-version":{"name":"schema-version","displayName":"Schema Version","identifiesControllerService":false,"sensitive":false},"schema-text":{"name":"schema-text","displayName":"Schema Text","identifiesControllerService":false,"sensitive":false}},"controllerServiceApis":[{"type":"org.apache.nifi.serialization.RecordSetWriterFactory","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-services-api-nar","version":"1.16.3"}}],"scheduledState":"DISABLED","componentType":"CONTROLLER_SERVICE","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"},{"identifier":"a08fd288-2ee1-37bf-bd12-be182ad3451e","instanceIdentifier":"513f3feb-8344-11f8-7475-609252f398fe","name":"Enrich- ReverseGeoCodeLookupService","comments":"","type":"org.apache.nifi.lookup.script.ScriptedLookupService","bundle":{"group":"org.apache.nifi","artifact":"nifi-scripting-nar","version":"1.16.3"},"properties":{"Script File":null,"googleApiKey":"dummy","Script Engine":"Groovy","Script Body":"import org.apache.nifi.controller.ControllerServiceInitializationContext\nimport org.apache.nifi.reporting.InitializationException\n\n\nclass GroovyLookupService implements LookupService<String> {\n\n   def apiKey\n   def log\n    \n   @Override\n    Optional<String> lookup(Map<String,String> coords) {\n      def lat = coords['lat']\n      def lng = coords['lng']\n      def fmt_addr = \"No Address\"\n      Optional.ofNullable(fmt_addr?.toString())\n    }\n\n    @Override\n    Class<?> getValueType() {\n        return String\n    }\n\n    @Override\n    Set<String> getRequiredKeys() {\n      return ['lat','lng'] as Set<String>\n    }\n\n    void setLogger(logger) {\n       log = logger\n    }\n\n    void onEnabled(context) {\n        def googleApiKeyPropertyDescriptor = context.properties.find {k,v -> k.name == 'googleApiKey'}?.key\n        apiKey = context.getProperty(googleApiKeyPropertyDescriptor)?.evaluateAttributeExpressions()?.value\n    }\n\n    @Override\n    void initialize(ControllerServiceInitializationContext context) throws InitializationException {\n\n    }\n\n    @Override\n    Collection<ValidationResult> validate(ValidationContext context) {\n        return null\n    }\n\n    @Override\n    PropertyDescriptor getPropertyDescriptor(String name) {\n        return null\n    }\n\n    @Override\n    void onPropertyModified(PropertyDescriptor descriptor, String oldValue, String newValue) {\n\n    }\n\n    @Override\n    List<PropertyDescriptor> getPropertyDescriptors() {\n        return null\n    }\n\n    @Override\n    String getIdentifier() {\n        return null\n    }\n}\n\nlookupService = new GroovyLookupService()","Module Directory":null},"propertyDescriptors":{"Script File":{"name":"Script File","displayName":"Script File","identifiesControllerService":false,"sensitive":false,"resourceDefinition":{"cardinality":"SINGLE","resourceTypes":["FILE"]}},"googleApiKey":{"name":"googleApiKey","displayName":"googleApiKey","identifiesControllerService":false,"sensitive":false},"Script Engine":{"name":"Script Engine","displayName":"Script Engine","identifiesControllerService":false,"sensitive":false},"Script Body":{"name":"Script Body","displayName":"Script Body","identifiesControllerService":false,"sensitive":false},"Module Directory":{"name":"Module Directory","displayName":"Module Directory","identifiesControllerService":false,"sensitive":false,"resourceDefinition":{"cardinality":"MULTIPLE","resourceTypes":["DIRECTORY","FILE"]}}},"controllerServiceApis":[{"type":"org.apache.nifi.lookup.LookupService","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-services-api-nar","version":"1.16.3"}}],"scheduledState":"DISABLED","componentType":"CONTROLLER_SERVICE","groupIdentifier":"e22052dd-145f-37ba-9bee-9341b8dd405d"}],"variables":{},"parameterContextName":"DataFlowFunctionsQuickstart","defaultFlowFileExpiration":"0 sec","defaultBackPressureObjectThreshold":10000,"defaultBackPressureDataSizeThreshold":"1 GB","flowFileConcurrency":"UNBOUNDED","flowFileOutboundPolicy":"STREAM_WHEN_AVAILABLE","componentType":"PROCESS_GROUP","groupIdentifier":"f7ec47e6-9057-30b0-abb7-0b38eb709ef6"}],"remoteProcessGroups":[],"processors":[{"identifier":"5558c764-9f37-3ee6-a880-31769383a98d","instanceIdentifier":"ab0c88fe-a2b1-3517-8d3b-996efa88f4ba","name":"Mock Data - S3 Trigger Event","comments":"","position":{"x":-184.0,"y":-424.0},"type":"org.apache.nifi.processors.standard.GenerateFlowFile","bundle":{"group":"org.apache.nifi","artifact":"nifi-standard-nar","version":"1.16.3"},"properties":{"character-set":"UTF-8","File Size":"0B","mime-type":null,"generate-ff-custom-text":"{\n  \"Records\": [\n    {\n      \"eventVersion\": \"2.0\",\n      \"eventSource\": \"aws:s3\",\n      \"awsRegion\": \"us-west-2\",\n      \"eventTime\": \"1970-01-01T00:00:00.000Z\",\n      \"eventName\": \"ObjectCreated:Put\",\n      \"userIdentity\": {\n        \"principalId\": \"EXAMPLE\"\n      },\n      \"requestParameters\": {\n        \"sourceIPAddress\": \"127.0.0.1\"\n      },\n      \"responseElements\": {\n        \"x-amz-request-id\": \"EXAMPLE123456789\",\n        \"x-amz-id-2\": \"EXAMPLE123/5678abcdefghijklambdaisawesome/mnopqrstuvwxyzABCDEFGH\"\n      },\n      \"s3\": {\n        \"s3SchemaVersion\": \"1.0\",\n        \"configurationId\": \"testConfigRule\",\n        \"bucket\": {\n          \"name\": \"dataflowfunctionsquickstart\",\n          \"ownerIdentity\": {\n            \"principalId\": \"EXAMPLE\"\n          },\n          \"arn\": \"arn:aws:s3:::example-bucket\"\n        },\n        \"object\": {\n          \"key\": \"truck-telemetry-raw/sampleTelemetryRawData.txt\",\n          \"size\": 1024,\n          \"eTag\": \"0123456789abcdef0123456789abcdef\",\n          \"sequencer\": \"0A1B2C3D4E5F678901\"\n        }\n      }\n    }\n  ]\n}","Batch Size":"1","Unique FlowFiles":"false","Data Format":"Text"},"propertyDescriptors":{"character-set":{"name":"character-set","displayName":"Character Set","identifiesControllerService":false,"sensitive":false},"File Size":{"name":"File Size","displayName":"File Size","identifiesControllerService":false,"sensitive":false},"mime-type":{"name":"mime-type","displayName":"Mime Type","identifiesControllerService":false,"sensitive":false},"generate-ff-custom-text":{"name":"generate-ff-custom-text","displayName":"Custom Text","identifiesControllerService":false,"sensitive":false},"Batch Size":{"name":"Batch Size","displayName":"Batch Size","identifiesControllerService":false,"sensitive":false},"Unique FlowFiles":{"name":"Unique FlowFiles","displayName":"Unique FlowFiles","identifiesControllerService":false,"sensitive":false},"Data Format":{"name":"Data Format","displayName":"Data Format","identifiesControllerService":false,"sensitive":false}},"style":{},"schedulingPeriod":"0 sec","schedulingStrategy":"TIMER_DRIVEN","executionNode":"PRIMARY","penaltyDuration":"30 sec","yieldDuration":"1 sec","bulletinLevel":"WARN","runDurationMillis":0,"concurrentlySchedulableTaskCount":1,"autoTerminatedRelationships":[],"scheduledState":"ENABLED","retryCount":10,"retriedRelationships":[],"backoffMechanism":"PENALIZE_FLOWFILE","maxBackoffPeriod":"10 mins","componentType":"PROCESSOR","groupIdentifier":"f7ec47e6-9057-30b0-abb7-0b38eb709ef6"}],"inputPorts":[],"outputPorts":[],"connections":[{"identifier":"49253f7f-fbce-3f66-92f0-f3cba33466b7","instanceIdentifier":"513f3ff4-8344-11f8-6fcc-f90c1f400b34","name":"","source":{"id":"5558c764-9f37-3ee6-a880-31769383a98d","type":"PROCESSOR","groupId":"f7ec47e6-9057-30b0-abb7-0b38eb709ef6","name":"Mock Data - S3 Trigger Event","comments":"","instanceIdentifier":"ab0c88fe-a2b1-3517-8d3b-996efa88f4ba"},"destination":{"id":"0637d9cc-342e-3fd2-a30f-e724e5af21b5","type":"INPUT_PORT","groupId":"e22052dd-145f-37ba-9bee-9341b8dd405d","name":"S3Trigger","instanceIdentifier":"513f3fcd-8344-11f8-8c4d-7e1d78956ce5"},"labelIndex":1,"zIndex":0,"selectedRelationships":["success"],"backPressureObjectThreshold":10000,"backPressureDataSizeThreshold":"1 GB","flowFileExpiration":"0 sec","prioritizers":[],"bends":[],"loadBalanceStrategy":"DO_NOT_LOAD_BALANCE","partitioningAttribute":"","loadBalanceCompression":"DO_NOT_COMPRESS","componentType":"CONNECTION","groupIdentifier":"f7ec47e6-9057-30b0-abb7-0b38eb709ef6"}],"labels":[{"identifier":"0935d130-325a-3426-a890-6fd993e1654e","instanceIdentifier":"7699671a-e867-33cc-2bab-9a6b2f83f6c2","position":{"x":-136.0,"y":-552.0},"label":"Mock Data for S3 Trigger to test locally \nbefore deploying as function.\n \nAfter setting up S3 buckets and uploading\nsample telemetry into bucket, right click\non processor and select 'Run Once'","zIndex":0,"width":248.0,"height":96.0,"style":{"font-size":"12px"},"componentType":"LABEL","groupIdentifier":"f7ec47e6-9057-30b0-abb7-0b38eb709ef6"},{"identifier":"22d93b46-c6c5-3d9b-92f7-4a88dc82dc88","instanceIdentifier":"fa88e3f2-6c8f-3ace-1ca3-e73161c9d1d3","position":{"x":504.0,"y":-600.0},"label":"The function that processing new telemetry data \nfrom an S3 bucket, does processing and sends\ntransformed data into different S3 folders.\n\nThis is the function you will download \nand upload to DataFlow Catalog and \nrun as server-less using Cloud provider \nservices ((e.g: AWS Lambda)","zIndex":0,"width":280.0,"height":120.0,"style":{"font-size":"12px"},"componentType":"LABEL","groupIdentifier":"f7ec47e6-9057-30b0-abb7-0b38eb709ef6"}],"funnels":[],"controllerServices":[],"variables":{},"parameterContextName":"DataFlowFunctionsQuickstart","defaultFlowFileExpiration":"0 sec","defaultBackPressureObjectThreshold":10000,"defaultBackPressureDataSizeThreshold":"1 GB","flowFileConcurrency":"UNBOUNDED","flowFileOutboundPolicy":"STREAM_WHEN_AVAILABLE","componentType":"PROCESS_GROUP"},"externalControllerServices":{},"parameterContexts":{"DataFlowFunctionsQuickstart":{"name":"DataFlowFunctionsQuickstart","parameters":[{"name":"aws_access_key_password","description":"AWS secret access key secret to fetch and write objects to S3","sensitive":true},{"name":"telemetry_speed_schema","description":"","sensitive":false,"value":"{\n \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\", \"name\": \"TruckSpeedEventEnriched\",\n \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},\n  \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"route\",\"type\": \"string\"},\n\t\t\t{\"name\": \"speed\",\"type\": \"int\"}\n \t\t  ]\n}"},{"name":"routing_rule_geo_event","description":"The rule to filter and route for certain types of types of events","sensitive":false,"value":"SELECT * FROM FLOWFILE where eventSource = 'truck_geo_event'"},{"name":"s3_region","description":"The region where the bucket is located.","sensitive":false,"value":"us-west-2"},{"name":"aws_access_key_id","description":"AWS access key id to fetch and write objects to S3 bucket","sensitive":true},{"name":"routing_rule_speed_event","description":"The rule to filter and route for certain types of types of events","sensitive":false,"value":"SELECT * FROM FLOWFILE where eventSource = 'truck_speed_event'"},{"name":"telemetry_geo_schema","description":"","sensitive":false,"value":"{\n \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\", \"name\": \"TruckGeoEventEnriched\",\n \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},\n  \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"route\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventType\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"latitude\",\"type\": \"double\"},\n  \t\t\t{\"name\": \"longitude\",\"type\": \"double\"},\n  \t\t\t{\"name\": \"correlationId\",\"type\": \"long\"},\n\t\t\t{\"name\": \"geoAddress\",\"type\": \"string\",\"default\": \"None\"}\n \t\t  ]\n}"},{"name":"filter_rule_speed_event","description":"The rule to filter speed telemetry events","sensitive":false,"value":"SELECT * FROM FLOWFILE where speed > 40"},{"name":"s3_dest_path_speed_event","description":"The S3 folder that certain filtered events will be written to.","sensitive":false,"value":"truck-telemetry-processed/truck-speed-events"},{"name":"s3_dest_path_geo_event","description":"The S3 folder that certain filtered events will be written to.","sensitive":false,"value":"truck-telemetry-processed/truck-geo-events"},{"name":"telemetry_raw_schema","description":"","sensitive":false,"value":"{\n \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\"name\": \"TruckEvent\",\n \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},\n  \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"route\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventType\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"latitude\",\"type\": \"double\"},\n  \t\t\t{\"name\": \"longitude\",\"type\": \"double\"},\n  \t\t\t{\"name\": \"correlationId\",\"type\": \"long\"},\n\t\t\t{\"name\": \"speed\",\"type\": \"int\",\"default\": 0}\n \t\t  ]\n}"},{"name":"s3_bucket","description":"S3 bucket where telemetry data will be processed","sensitive":false,"value":"dataflowfunctionsquickstart"}],"inheritedParameterContexts":[],"componentType":"PARAMETER_CONTEXT"}},"flowEncodingVersion":"1.0"}
+{
+	"flowContents": {
+		"identifier": "f7ec47e6-9057-30b0-abb7-0b38eb709ef6",
+		"instanceIdentifier": "a4c2cb58-0182-1000-565f-6ad654e140b8",
+		"name": "DataFlowFunctionsQuickstart",
+		"comments": "",
+		"position": {
+			"x": 536.0,
+			"y": 768.0
+		},
+		"processGroups": [{
+			"identifier": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+			"instanceIdentifier": "a8448fb6-0182-1000-31a2-f2b5fab31450",
+			"name": "Quickstart Function -TelemetryS3toS3Processing ",
+			"comments": "",
+			"position": {
+				"x": 504.0,
+				"y": -448.0
+			},
+			"processGroups": [{
+				"identifier": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+				"instanceIdentifier": "513f3fd2-8344-11f8-cab2-0aef72a2cad1",
+				"name": "DFFunctionS3TriggerParser",
+				"comments": "",
+				"position": {
+					"x": 224.0,
+					"y": -416.0
+				},
+				"processGroups": [],
+				"remoteProcessGroups": [],
+				"processors": [{
+					"identifier": "1701f645-96fb-388f-8c63-d2eaa40644d7",
+					"instanceIdentifier": "513f3fd6-8344-11f8-3795-0e425ecc6743",
+					"name": "SplitJson",
+					"comments": "",
+					"position": {
+						"x": 776.0,
+						"y": 560.0
+					},
+					"type": "org.apache.nifi.processors.standard.SplitJson",
+					"bundle": {
+						"group": "org.apache.nifi",
+						"artifact": "nifi-standard-nar",
+						"version": "1.16.3"
+					},
+					"properties": {
+						"Null Value Representation": "empty string",
+						"JsonPath Expression": "$.Records"
+					},
+					"propertyDescriptors": {
+						"Null Value Representation": {
+							"name": "Null Value Representation",
+							"displayName": "Null Value Representation",
+							"identifiesControllerService": false,
+							"sensitive": false
+						},
+						"JsonPath Expression": {
+							"name": "JsonPath Expression",
+							"displayName": "JsonPath Expression",
+							"identifiesControllerService": false,
+							"sensitive": false
+						}
+					},
+					"style": {},
+					"schedulingPeriod": "0 sec",
+					"schedulingStrategy": "TIMER_DRIVEN",
+					"executionNode": "ALL",
+					"penaltyDuration": "30 sec",
+					"yieldDuration": "1 sec",
+					"bulletinLevel": "WARN",
+					"runDurationMillis": 0,
+					"concurrentlySchedulableTaskCount": 1,
+					"autoTerminatedRelationships": ["original", "failure"],
+					"scheduledState": "ENABLED",
+					"retryCount": 10,
+					"retriedRelationships": [],
+					"backoffMechanism": "PENALIZE_FLOWFILE",
+					"maxBackoffPeriod": "10 mins",
+					"componentType": "PROCESSOR",
+					"groupIdentifier": "a34a9b25-1524-33d1-8706-e0037ad4cfd6"
+				}, {
+					"identifier": "c46c5f9d-ab6b-3429-a3ee-b1f59bf98144",
+					"instanceIdentifier": "513f3fd5-8344-11f8-5ffd-0ec5c409e008",
+					"name": "EvaluateJsonPath",
+					"comments": "",
+					"position": {
+						"x": 776.0,
+						"y": 776.0
+					},
+					"type": "org.apache.nifi.processors.standard.EvaluateJsonPath",
+					"bundle": {
+						"group": "org.apache.nifi",
+						"artifact": "nifi-standard-nar",
+						"version": "1.16.3"
+					},
+					"properties": {
+						"bucket": "$.s3.bucket.name",
+						"Destination": "flowfile-attribute",
+						"Return Type": "auto-detect",
+						"Null Value Representation": "empty string",
+						"region": "$.awsRegion",
+						"key": "$.s3.object.key",
+						"Path Not Found Behavior": "ignore"
+					},
+					"propertyDescriptors": {
+						"bucket": {
+							"name": "bucket",
+							"displayName": "bucket",
+							"identifiesControllerService": false,
+							"sensitive": false
+						},
+						"Destination": {
+							"name": "Destination",
+							"displayName": "Destination",
+							"identifiesControllerService": false,
+							"sensitive": false
+						},
+						"Return Type": {
+							"name": "Return Type",
+							"displayName": "Return Type",
+							"identifiesControllerService": false,
+							"sensitive": false
+						},
+						"Null Value Representation": {
+							"name": "Null Value Representation",
+							"displayName": "Null Value Representation",
+							"identifiesControllerService": false,
+							"sensitive": false
+						},
+						"region": {
+							"name": "region",
+							"displayName": "region",
+							"identifiesControllerService": false,
+							"sensitive": false
+						},
+						"key": {
+							"name": "key",
+							"displayName": "key",
+							"identifiesControllerService": false,
+							"sensitive": false
+						},
+						"Path Not Found Behavior": {
+							"name": "Path Not Found Behavior",
+							"displayName": "Path Not Found Behavior",
+							"identifiesControllerService": false,
+							"sensitive": false
+						}
+					},
+					"style": {},
+					"schedulingPeriod": "0 sec",
+					"schedulingStrategy": "TIMER_DRIVEN",
+					"executionNode": "ALL",
+					"penaltyDuration": "30 sec",
+					"yieldDuration": "1 sec",
+					"bulletinLevel": "WARN",
+					"runDurationMillis": 0,
+					"concurrentlySchedulableTaskCount": 1,
+					"autoTerminatedRelationships": ["failure", "unmatched"],
+					"scheduledState": "ENABLED",
+					"retryCount": 10,
+					"retriedRelationships": [],
+					"backoffMechanism": "PENALIZE_FLOWFILE",
+					"maxBackoffPeriod": "10 mins",
+					"componentType": "PROCESSOR",
+					"groupIdentifier": "a34a9b25-1524-33d1-8706-e0037ad4cfd6"
+				}],
+				"inputPorts": [{
+					"identifier": "aac661bc-9f2b-31e6-af2c-a86b69dee795",
+					"instanceIdentifier": "513f3fd3-8344-11f8-4996-4325cd55a7d4",
+					"name": "DFFunctionS3TriggerEvent",
+					"comments": "",
+					"position": {
+						"x": 824.0,
+						"y": 440.0
+					},
+					"type": "INPUT_PORT",
+					"concurrentlySchedulableTaskCount": 1,
+					"scheduledState": "ENABLED",
+					"allowRemoteAccess": false,
+					"componentType": "INPUT_PORT",
+					"groupIdentifier": "a34a9b25-1524-33d1-8706-e0037ad4cfd6"
+				}],
+				"outputPorts": [{
+					"identifier": "9783eb2a-16a7-30fe-9716-7102d61462c1",
+					"instanceIdentifier": "513f3fd4-8344-11f8-cbae-7c132df30c28",
+					"name": "DFFunctionS3TriggerParsed",
+					"position": {
+						"x": 832.0,
+						"y": 1008.0
+					},
+					"type": "OUTPUT_PORT",
+					"concurrentlySchedulableTaskCount": 1,
+					"scheduledState": "ENABLED",
+					"allowRemoteAccess": false,
+					"componentType": "OUTPUT_PORT",
+					"groupIdentifier": "a34a9b25-1524-33d1-8706-e0037ad4cfd6"
+				}],
+				"connections": [{
+					"identifier": "9ec6f426-5274-33a9-aac3-5698b1bf45f0",
+					"instanceIdentifier": "513f3fd8-8344-11f8-80d3-906a21d2600e",
+					"name": "",
+					"source": {
+						"id": "c46c5f9d-ab6b-3429-a3ee-b1f59bf98144",
+						"type": "PROCESSOR",
+						"groupId": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+						"name": "EvaluateJsonPath",
+						"comments": "",
+						"instanceIdentifier": "513f3fd5-8344-11f8-5ffd-0ec5c409e008"
+					},
+					"destination": {
+						"id": "9783eb2a-16a7-30fe-9716-7102d61462c1",
+						"type": "OUTPUT_PORT",
+						"groupId": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+						"name": "DFFunctionS3TriggerParsed",
+						"instanceIdentifier": "513f3fd4-8344-11f8-cbae-7c132df30c28"
+					},
+					"labelIndex": 1,
+					"zIndex": 0,
+					"selectedRelationships": ["matched"],
+					"backPressureObjectThreshold": 10000,
+					"backPressureDataSizeThreshold": "1 GB",
+					"flowFileExpiration": "0 sec",
+					"prioritizers": [],
+					"bends": [],
+					"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+					"partitioningAttribute": "",
+					"loadBalanceCompression": "DO_NOT_COMPRESS",
+					"componentType": "CONNECTION",
+					"groupIdentifier": "a34a9b25-1524-33d1-8706-e0037ad4cfd6"
+				}, {
+					"identifier": "e0da5ead-0027-3061-901f-1130165534cf",
+					"instanceIdentifier": "513f3fd9-8344-11f8-081d-7082bbb594e6",
+					"name": "",
+					"source": {
+						"id": "aac661bc-9f2b-31e6-af2c-a86b69dee795",
+						"type": "INPUT_PORT",
+						"groupId": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+						"name": "DFFunctionS3TriggerEvent",
+						"comments": "",
+						"instanceIdentifier": "513f3fd3-8344-11f8-4996-4325cd55a7d4"
+					},
+					"destination": {
+						"id": "1701f645-96fb-388f-8c63-d2eaa40644d7",
+						"type": "PROCESSOR",
+						"groupId": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+						"name": "SplitJson",
+						"comments": "",
+						"instanceIdentifier": "513f3fd6-8344-11f8-3795-0e425ecc6743"
+					},
+					"labelIndex": 1,
+					"zIndex": 0,
+					"selectedRelationships": [""],
+					"backPressureObjectThreshold": 10000,
+					"backPressureDataSizeThreshold": "1 GB",
+					"flowFileExpiration": "0 sec",
+					"prioritizers": [],
+					"bends": [],
+					"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+					"partitioningAttribute": "",
+					"loadBalanceCompression": "DO_NOT_COMPRESS",
+					"componentType": "CONNECTION",
+					"groupIdentifier": "a34a9b25-1524-33d1-8706-e0037ad4cfd6"
+				}, {
+					"identifier": "2ce05309-cefe-3566-8a74-a67cfb1eb32c",
+					"instanceIdentifier": "513f3fd7-8344-11f8-8ad4-011776c65fea",
+					"name": "",
+					"source": {
+						"id": "1701f645-96fb-388f-8c63-d2eaa40644d7",
+						"type": "PROCESSOR",
+						"groupId": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+						"name": "SplitJson",
+						"comments": "",
+						"instanceIdentifier": "513f3fd6-8344-11f8-3795-0e425ecc6743"
+					},
+					"destination": {
+						"id": "c46c5f9d-ab6b-3429-a3ee-b1f59bf98144",
+						"type": "PROCESSOR",
+						"groupId": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+						"name": "EvaluateJsonPath",
+						"comments": "",
+						"instanceIdentifier": "513f3fd5-8344-11f8-5ffd-0ec5c409e008"
+					},
+					"labelIndex": 1,
+					"zIndex": 0,
+					"selectedRelationships": ["split"],
+					"backPressureObjectThreshold": 10000,
+					"backPressureDataSizeThreshold": "1 GB",
+					"flowFileExpiration": "0 sec",
+					"prioritizers": [],
+					"bends": [],
+					"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+					"partitioningAttribute": "",
+					"loadBalanceCompression": "DO_NOT_COMPRESS",
+					"componentType": "CONNECTION",
+					"groupIdentifier": "a34a9b25-1524-33d1-8706-e0037ad4cfd6"
+				}],
+				"labels": [],
+				"funnels": [],
+				"controllerServices": [],
+				"variables": {},
+				"defaultFlowFileExpiration": "0 sec",
+				"defaultBackPressureObjectThreshold": 10000,
+				"defaultBackPressureDataSizeThreshold": "1 GB",
+				"flowFileConcurrency": "UNBOUNDED",
+				"flowFileOutboundPolicy": "STREAM_WHEN_AVAILABLE",
+				"componentType": "PROCESS_GROUP",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}],
+			"remoteProcessGroups": [],
+			"processors": [{
+				"identifier": "0d706321-9f62-3369-91c3-bfd4de34fe73",
+				"instanceIdentifier": "513f3fd1-8344-11f8-97dc-fc1fc2ee5b1f",
+				"name": "Deliver Parquet Speed Events into S3",
+				"comments": "",
+				"position": {
+					"x": 568.0,
+					"y": 528.0
+				},
+				"type": "org.apache.nifi.processors.aws.s3.PutS3Object",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-aws-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"Proxy Host": null,
+					"FullControl User List": "${s3.permissions.full.users}",
+					"Owner": "${s3.owner}",
+					"Access Key": "#{aws_access_key_id}",
+					"proxy-configuration-service": null,
+					"Cache Control": null,
+					"s3-object-remove-tags-prefix": "false",
+					"Endpoint Override URL": null,
+					"Multipart Upload Max Age Threshold": "7 days",
+					"canned-acl": "${s3.permissions.cannedacl}",
+					"Signer Override": "Default Signature",
+					"Content Type": null,
+					"Secret Key": "#{aws_access_key_password}",
+					"Write ACL User List": "${s3.permissions.writeacl.users}",
+					"server-side-encryption": "None",
+					"Read ACL User List": "${s3.permissions.readacl.users}",
+					"encryption-service": null,
+					"Content Disposition": null,
+					"Storage Class": "Standard",
+					"Multipart Part Size": "5 GB",
+					"use-chunked-encoding": "true",
+					"Object Key": "#{s3_dest_path_speed_event}/speed-${key:substringAfterLast('/'):substringBeforeLast('.')}.parquet",
+					"AWS Credentials Provider service": null,
+					"Multipart Threshold": "5 GB",
+					"s3-object-tags-prefix": null,
+					"SSL Context Service": null,
+					"Bucket": "#{s3_bucket}",
+					"Multipart Upload AgeOff Interval": "60 min",
+					"use-path-style-access": "false",
+					"Write Permission User List": "${s3.permissions.write.users}",
+					"Communications Timeout": "30 secs",
+					"Credentials File": null,
+					"Region": "us-west-2",
+					"Read Permission User List": "${s3.permissions.read.users}",
+					"Expiration Time Rule": null,
+					"proxy-user-name": null,
+					"Proxy Host Port": null,
+					"s3-temporary-directory-multipart": "${java.io.tmpdir}"
+				},
+				"propertyDescriptors": {
+					"Proxy Host": {
+						"name": "Proxy Host",
+						"displayName": "Proxy Host",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"FullControl User List": {
+						"name": "FullControl User List",
+						"displayName": "FullControl User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Owner": {
+						"name": "Owner",
+						"displayName": "Owner",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Access Key": {
+						"name": "Access Key",
+						"displayName": "Access Key ID",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"proxy-configuration-service": {
+						"name": "proxy-configuration-service",
+						"displayName": "Proxy Configuration Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Cache Control": {
+						"name": "Cache Control",
+						"displayName": "Cache Control",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"s3-object-remove-tags-prefix": {
+						"name": "s3-object-remove-tags-prefix",
+						"displayName": "Remove Tag Prefix",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Endpoint Override URL": {
+						"name": "Endpoint Override URL",
+						"displayName": "Endpoint Override URL",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Multipart Upload Max Age Threshold": {
+						"name": "Multipart Upload Max Age Threshold",
+						"displayName": "Multipart Upload Max Age Threshold",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"canned-acl": {
+						"name": "canned-acl",
+						"displayName": "Canned ACL",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Signer Override": {
+						"name": "Signer Override",
+						"displayName": "Signer Override",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"proxy-user-password": {
+						"name": "proxy-user-password",
+						"displayName": "Proxy Password",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"Content Type": {
+						"name": "Content Type",
+						"displayName": "Content Type",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Secret Key": {
+						"name": "Secret Key",
+						"displayName": "Secret Access Key",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"Write ACL User List": {
+						"name": "Write ACL User List",
+						"displayName": "Write ACL User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"server-side-encryption": {
+						"name": "server-side-encryption",
+						"displayName": "Server Side Encryption",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Read ACL User List": {
+						"name": "Read ACL User List",
+						"displayName": "Read ACL User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"encryption-service": {
+						"name": "encryption-service",
+						"displayName": "Encryption Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Content Disposition": {
+						"name": "Content Disposition",
+						"displayName": "Content Disposition",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Storage Class": {
+						"name": "Storage Class",
+						"displayName": "Storage Class",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Multipart Part Size": {
+						"name": "Multipart Part Size",
+						"displayName": "Multipart Part Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"use-chunked-encoding": {
+						"name": "use-chunked-encoding",
+						"displayName": "Use Chunked Encoding",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Object Key": {
+						"name": "Object Key",
+						"displayName": "Object Key",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"AWS Credentials Provider service": {
+						"name": "AWS Credentials Provider service",
+						"displayName": "AWS Credentials Provider Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Multipart Threshold": {
+						"name": "Multipart Threshold",
+						"displayName": "Multipart Threshold",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"s3-object-tags-prefix": {
+						"name": "s3-object-tags-prefix",
+						"displayName": "Object Tags Prefix",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"SSL Context Service": {
+						"name": "SSL Context Service",
+						"displayName": "SSL Context Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Bucket": {
+						"name": "Bucket",
+						"displayName": "Bucket",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Multipart Upload AgeOff Interval": {
+						"name": "Multipart Upload AgeOff Interval",
+						"displayName": "Multipart Upload AgeOff Interval",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"use-path-style-access": {
+						"name": "use-path-style-access",
+						"displayName": "Use Path Style Access",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Write Permission User List": {
+						"name": "Write Permission User List",
+						"displayName": "Write Permission User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Communications Timeout": {
+						"name": "Communications Timeout",
+						"displayName": "Communications Timeout",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Credentials File": {
+						"name": "Credentials File",
+						"displayName": "Credentials File",
+						"identifiesControllerService": false,
+						"sensitive": false,
+						"resourceDefinition": {
+							"cardinality": "SINGLE",
+							"resourceTypes": ["FILE"]
+						}
+					},
+					"Region": {
+						"name": "Region",
+						"displayName": "Region",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Read Permission User List": {
+						"name": "Read Permission User List",
+						"displayName": "Read Permission User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Expiration Time Rule": {
+						"name": "Expiration Time Rule",
+						"displayName": "Expiration Time Rule",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"proxy-user-name": {
+						"name": "proxy-user-name",
+						"displayName": "Proxy Username",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Proxy Host Port": {
+						"name": "Proxy Host Port",
+						"displayName": "Proxy Host Port",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"s3-temporary-directory-multipart": {
+						"name": "s3-temporary-directory-multipart",
+						"displayName": "Temporary Directory Multipart State",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"style": {},
+				"schedulingPeriod": "0 sec",
+				"schedulingStrategy": "TIMER_DRIVEN",
+				"executionNode": "ALL",
+				"penaltyDuration": "30 sec",
+				"yieldDuration": "1 sec",
+				"bulletinLevel": "WARN",
+				"runDurationMillis": 0,
+				"concurrentlySchedulableTaskCount": 1,
+				"autoTerminatedRelationships": ["success", "failure"],
+				"scheduledState": "ENABLED",
+				"retryCount": 10,
+				"retriedRelationships": [],
+				"backoffMechanism": "PENALIZE_FLOWFILE",
+				"maxBackoffPeriod": "10 mins",
+				"componentType": "PROCESSOR",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "23752870-df31-31fc-a097-71470a892a42",
+				"instanceIdentifier": "513f3fcf-8344-11f8-178a-9cd2a1a713c3",
+				"name": "Deliver Parquet Geo Events into S3",
+				"comments": "",
+				"position": {
+					"x": -48.0,
+					"y": 536.0
+				},
+				"type": "org.apache.nifi.processors.aws.s3.PutS3Object",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-aws-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"Proxy Host": null,
+					"FullControl User List": "${s3.permissions.full.users}",
+					"Owner": "${s3.owner}",
+					"Access Key": "#{aws_access_key_id}",
+					"proxy-configuration-service": null,
+					"Cache Control": null,
+					"s3-object-remove-tags-prefix": "false",
+					"Endpoint Override URL": null,
+					"Multipart Upload Max Age Threshold": "7 days",
+					"canned-acl": "${s3.permissions.cannedacl}",
+					"Signer Override": "Default Signature",
+					"Content Type": null,
+					"Secret Key": "#{aws_access_key_password}",
+					"Write ACL User List": "${s3.permissions.writeacl.users}",
+					"server-side-encryption": "None",
+					"Read ACL User List": "${s3.permissions.readacl.users}",
+					"encryption-service": null,
+					"Content Disposition": null,
+					"Storage Class": "Standard",
+					"Multipart Part Size": "5 GB",
+					"use-chunked-encoding": "true",
+					"Object Key": "#{s3_dest_path_geo_event}/geo-${key:substringAfterLast('/'):substringBeforeLast('.')}.parquet",
+					"AWS Credentials Provider service": null,
+					"Multipart Threshold": "5 GB",
+					"s3-object-tags-prefix": null,
+					"SSL Context Service": null,
+					"Bucket": "#{s3_bucket}",
+					"Multipart Upload AgeOff Interval": "60 min",
+					"use-path-style-access": "false",
+					"Write Permission User List": "${s3.permissions.write.users}",
+					"Communications Timeout": "30 secs",
+					"Credentials File": null,
+					"Region": "us-west-2",
+					"Read Permission User List": "${s3.permissions.read.users}",
+					"Expiration Time Rule": null,
+					"proxy-user-name": null,
+					"Proxy Host Port": null,
+					"s3-temporary-directory-multipart": "${java.io.tmpdir}"
+				},
+				"propertyDescriptors": {
+					"Proxy Host": {
+						"name": "Proxy Host",
+						"displayName": "Proxy Host",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"FullControl User List": {
+						"name": "FullControl User List",
+						"displayName": "FullControl User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Owner": {
+						"name": "Owner",
+						"displayName": "Owner",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Access Key": {
+						"name": "Access Key",
+						"displayName": "Access Key ID",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"proxy-configuration-service": {
+						"name": "proxy-configuration-service",
+						"displayName": "Proxy Configuration Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Cache Control": {
+						"name": "Cache Control",
+						"displayName": "Cache Control",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"s3-object-remove-tags-prefix": {
+						"name": "s3-object-remove-tags-prefix",
+						"displayName": "Remove Tag Prefix",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Endpoint Override URL": {
+						"name": "Endpoint Override URL",
+						"displayName": "Endpoint Override URL",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Multipart Upload Max Age Threshold": {
+						"name": "Multipart Upload Max Age Threshold",
+						"displayName": "Multipart Upload Max Age Threshold",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"canned-acl": {
+						"name": "canned-acl",
+						"displayName": "Canned ACL",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Signer Override": {
+						"name": "Signer Override",
+						"displayName": "Signer Override",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"proxy-user-password": {
+						"name": "proxy-user-password",
+						"displayName": "Proxy Password",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"Content Type": {
+						"name": "Content Type",
+						"displayName": "Content Type",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Secret Key": {
+						"name": "Secret Key",
+						"displayName": "Secret Access Key",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"Write ACL User List": {
+						"name": "Write ACL User List",
+						"displayName": "Write ACL User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"server-side-encryption": {
+						"name": "server-side-encryption",
+						"displayName": "Server Side Encryption",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Read ACL User List": {
+						"name": "Read ACL User List",
+						"displayName": "Read ACL User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"encryption-service": {
+						"name": "encryption-service",
+						"displayName": "Encryption Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Content Disposition": {
+						"name": "Content Disposition",
+						"displayName": "Content Disposition",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Storage Class": {
+						"name": "Storage Class",
+						"displayName": "Storage Class",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Multipart Part Size": {
+						"name": "Multipart Part Size",
+						"displayName": "Multipart Part Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"use-chunked-encoding": {
+						"name": "use-chunked-encoding",
+						"displayName": "Use Chunked Encoding",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Object Key": {
+						"name": "Object Key",
+						"displayName": "Object Key",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"AWS Credentials Provider service": {
+						"name": "AWS Credentials Provider service",
+						"displayName": "AWS Credentials Provider Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Multipart Threshold": {
+						"name": "Multipart Threshold",
+						"displayName": "Multipart Threshold",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"s3-object-tags-prefix": {
+						"name": "s3-object-tags-prefix",
+						"displayName": "Object Tags Prefix",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"SSL Context Service": {
+						"name": "SSL Context Service",
+						"displayName": "SSL Context Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Bucket": {
+						"name": "Bucket",
+						"displayName": "Bucket",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Multipart Upload AgeOff Interval": {
+						"name": "Multipart Upload AgeOff Interval",
+						"displayName": "Multipart Upload AgeOff Interval",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"use-path-style-access": {
+						"name": "use-path-style-access",
+						"displayName": "Use Path Style Access",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Write Permission User List": {
+						"name": "Write Permission User List",
+						"displayName": "Write Permission User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Communications Timeout": {
+						"name": "Communications Timeout",
+						"displayName": "Communications Timeout",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Credentials File": {
+						"name": "Credentials File",
+						"displayName": "Credentials File",
+						"identifiesControllerService": false,
+						"sensitive": false,
+						"resourceDefinition": {
+							"cardinality": "SINGLE",
+							"resourceTypes": ["FILE"]
+						}
+					},
+					"Region": {
+						"name": "Region",
+						"displayName": "Region",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Read Permission User List": {
+						"name": "Read Permission User List",
+						"displayName": "Read Permission User List",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Expiration Time Rule": {
+						"name": "Expiration Time Rule",
+						"displayName": "Expiration Time Rule",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"proxy-user-name": {
+						"name": "proxy-user-name",
+						"displayName": "Proxy Username",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Proxy Host Port": {
+						"name": "Proxy Host Port",
+						"displayName": "Proxy Host Port",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"s3-temporary-directory-multipart": {
+						"name": "s3-temporary-directory-multipart",
+						"displayName": "Temporary Directory Multipart State",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"style": {},
+				"schedulingPeriod": "0 sec",
+				"schedulingStrategy": "TIMER_DRIVEN",
+				"executionNode": "ALL",
+				"penaltyDuration": "30 sec",
+				"yieldDuration": "1 sec",
+				"bulletinLevel": "WARN",
+				"runDurationMillis": 0,
+				"concurrentlySchedulableTaskCount": 1,
+				"autoTerminatedRelationships": ["success", "failure"],
+				"scheduledState": "ENABLED",
+				"retryCount": 10,
+				"retriedRelationships": [],
+				"backoffMechanism": "PENALIZE_FLOWFILE",
+				"maxBackoffPeriod": "10 mins",
+				"componentType": "PROCESSOR",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "fa44e5e2-8505-3a21-8aab-1ffb9feb3578",
+				"instanceIdentifier": "513f3fe6-8344-11f8-710f-cdfedc8622fe",
+				"name": "Reverse Geo Lookup Enrichment",
+				"comments": "",
+				"position": {
+					"x": -48.0,
+					"y": 312.0
+				},
+				"type": "org.apache.nifi.processors.standard.LookupRecord",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-standard-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"result-contents": "insert-entire-record",
+					"routing-strategy": "route-to-success",
+					"lng": "/longitude",
+					"result-record-path": "/geoAddress",
+					"record-writer": "b49b4562-b259-3b53-af4a-fd9c723ac046",
+					"record-reader": "a1e63ccc-f8c9-3f23-a498-436a87698a2b",
+					"lookup-service": "a08fd288-2ee1-37bf-bd12-be182ad3451e",
+					"record-update-strategy": "use-property",
+					"lat": "/latitude"
+				},
+				"propertyDescriptors": {
+					"result-contents": {
+						"name": "result-contents",
+						"displayName": "Record Result Contents",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"routing-strategy": {
+						"name": "routing-strategy",
+						"displayName": "Routing Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"lng": {
+						"name": "lng",
+						"displayName": "lng",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"result-record-path": {
+						"name": "result-record-path",
+						"displayName": "Result RecordPath",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"record-writer": {
+						"name": "record-writer",
+						"displayName": "Record Writer",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"record-reader": {
+						"name": "record-reader",
+						"displayName": "Record Reader",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"lookup-service": {
+						"name": "lookup-service",
+						"displayName": "Lookup Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"record-update-strategy": {
+						"name": "record-update-strategy",
+						"displayName": "Record Update Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"lat": {
+						"name": "lat",
+						"displayName": "lat",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"style": {},
+				"schedulingPeriod": "0 sec",
+				"schedulingStrategy": "TIMER_DRIVEN",
+				"executionNode": "ALL",
+				"penaltyDuration": "30 sec",
+				"yieldDuration": "1 sec",
+				"bulletinLevel": "WARN",
+				"runDurationMillis": 0,
+				"concurrentlySchedulableTaskCount": 1,
+				"autoTerminatedRelationships": ["failure"],
+				"scheduledState": "ENABLED",
+				"retryCount": 10,
+				"retriedRelationships": [],
+				"backoffMechanism": "PENALIZE_FLOWFILE",
+				"maxBackoffPeriod": "10 mins",
+				"componentType": "PROCESSOR",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "6255ca5d-c9e7-3867-b481-77f641c87cf4",
+				"instanceIdentifier": "513f3fce-8344-11f8-485b-538fdc4e5790",
+				"name": "Fetch Telemetry File",
+				"comments": "",
+				"position": {
+					"x": 240.0,
+					"y": -152.0
+				},
+				"type": "org.apache.nifi.processors.aws.s3.FetchS3Object",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-aws-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"Proxy Host": null,
+					"range-length": null,
+					"Access Key": "#{aws_access_key_id}",
+					"range-start": null,
+					"proxy-configuration-service": null,
+					"Endpoint Override URL": null,
+					"requester-pays": "false",
+					"Object Key": "${key}",
+					"AWS Credentials Provider service": null,
+					"SSL Context Service": null,
+					"Signer Override": "Default Signature",
+					"Bucket": "${bucket}",
+					"Version": null,
+					"Communications Timeout": "30 secs",
+					"Region": "#{s3_region}",
+					"Secret Key": "#{aws_access_key_password}",
+					"Credentials File": null,
+					"proxy-user-name": null,
+					"Proxy Host Port": null,
+					"encryption-service": null
+				},
+				"propertyDescriptors": {
+					"Proxy Host": {
+						"name": "Proxy Host",
+						"displayName": "Proxy Host",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"range-length": {
+						"name": "range-length",
+						"displayName": "Range Length",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Access Key": {
+						"name": "Access Key",
+						"displayName": "Access Key ID",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"range-start": {
+						"name": "range-start",
+						"displayName": "Range Start",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"proxy-configuration-service": {
+						"name": "proxy-configuration-service",
+						"displayName": "Proxy Configuration Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Endpoint Override URL": {
+						"name": "Endpoint Override URL",
+						"displayName": "Endpoint Override URL",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"requester-pays": {
+						"name": "requester-pays",
+						"displayName": "Requester Pays",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Object Key": {
+						"name": "Object Key",
+						"displayName": "Object Key",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"AWS Credentials Provider service": {
+						"name": "AWS Credentials Provider service",
+						"displayName": "AWS Credentials Provider Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"SSL Context Service": {
+						"name": "SSL Context Service",
+						"displayName": "SSL Context Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Signer Override": {
+						"name": "Signer Override",
+						"displayName": "Signer Override",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Bucket": {
+						"name": "Bucket",
+						"displayName": "Bucket",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Version": {
+						"name": "Version",
+						"displayName": "Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"proxy-user-password": {
+						"name": "proxy-user-password",
+						"displayName": "Proxy Password",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"Communications Timeout": {
+						"name": "Communications Timeout",
+						"displayName": "Communications Timeout",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Region": {
+						"name": "Region",
+						"displayName": "Region",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Secret Key": {
+						"name": "Secret Key",
+						"displayName": "Secret Access Key",
+						"identifiesControllerService": false,
+						"sensitive": true
+					},
+					"Credentials File": {
+						"name": "Credentials File",
+						"displayName": "Credentials File",
+						"identifiesControllerService": false,
+						"sensitive": false,
+						"resourceDefinition": {
+							"cardinality": "SINGLE",
+							"resourceTypes": ["FILE"]
+						}
+					},
+					"proxy-user-name": {
+						"name": "proxy-user-name",
+						"displayName": "Proxy Username",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Proxy Host Port": {
+						"name": "Proxy Host Port",
+						"displayName": "Proxy Host Port",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"encryption-service": {
+						"name": "encryption-service",
+						"displayName": "Encryption Service",
+						"identifiesControllerService": true,
+						"sensitive": false
+					}
+				},
+				"style": {},
+				"schedulingPeriod": "0 sec",
+				"schedulingStrategy": "TIMER_DRIVEN",
+				"executionNode": "ALL",
+				"penaltyDuration": "30 sec",
+				"yieldDuration": "1 sec",
+				"bulletinLevel": "WARN",
+				"runDurationMillis": 0,
+				"concurrentlySchedulableTaskCount": 1,
+				"autoTerminatedRelationships": ["failure"],
+				"scheduledState": "ENABLED",
+				"retryCount": 10,
+				"retriedRelationships": [],
+				"backoffMechanism": "PENALIZE_FLOWFILE",
+				"maxBackoffPeriod": "10 mins",
+				"componentType": "PROCESSOR",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "4a6180e6-2ce6-32e9-ab16-15c0a3e4aa05",
+				"instanceIdentifier": "513f3fed-8344-11f8-0fc4-da388b2d6daf",
+				"name": "Filter Speed Events",
+				"comments": "",
+				"position": {
+					"x": 560.0,
+					"y": 312.0
+				},
+				"type": "org.apache.nifi.processors.standard.QueryRecord",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-standard-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"cache-schema": "true",
+					"dbf-default-precision": "10",
+					"filtered_events": "#{filter_rule_speed_event}",
+					"record-writer": "806893d1-6c4c-34c0-8134-a92636d1fc5e",
+					"record-reader": "a1e63ccc-f8c9-3f23-a498-436a87698a2b",
+					"include-zero-record-flowfiles": "true",
+					"dbf-default-scale": "0"
+				},
+				"propertyDescriptors": {
+					"cache-schema": {
+						"name": "cache-schema",
+						"displayName": "Cache Schema",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"dbf-default-precision": {
+						"name": "dbf-default-precision",
+						"displayName": "Default Decimal Precision",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"filtered_events": {
+						"name": "filtered_events",
+						"displayName": "filtered_events",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"record-writer": {
+						"name": "record-writer",
+						"displayName": "Record Writer",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"record-reader": {
+						"name": "record-reader",
+						"displayName": "Record Reader",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"include-zero-record-flowfiles": {
+						"name": "include-zero-record-flowfiles",
+						"displayName": "Include Zero Record FlowFiles",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"dbf-default-scale": {
+						"name": "dbf-default-scale",
+						"displayName": "Default Decimal Scale",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"style": {},
+				"schedulingPeriod": "0 sec",
+				"schedulingStrategy": "TIMER_DRIVEN",
+				"executionNode": "ALL",
+				"penaltyDuration": "30 sec",
+				"yieldDuration": "1 sec",
+				"bulletinLevel": "WARN",
+				"runDurationMillis": 0,
+				"concurrentlySchedulableTaskCount": 1,
+				"autoTerminatedRelationships": ["original", "failure"],
+				"scheduledState": "ENABLED",
+				"retryCount": 10,
+				"retriedRelationships": [],
+				"backoffMechanism": "PENALIZE_FLOWFILE",
+				"maxBackoffPeriod": "10 mins",
+				"componentType": "PROCESSOR",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "50f1ef58-37b1-3b2e-9d5c-0581f230b6b3",
+				"instanceIdentifier": "513f3fd0-8344-11f8-88e9-730993ef64c6",
+				"name": "Route Telemetry Events",
+				"comments": "",
+				"position": {
+					"x": 240.0,
+					"y": 80.0
+				},
+				"type": "org.apache.nifi.processors.standard.QueryRecord",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-standard-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"cache-schema": "true",
+					"dbf-default-precision": "10",
+					"truck_speed_event": "#{routing_rule_speed_event}",
+					"record-writer": "fd93bb75-e9d4-39be-847a-0655d31373cc",
+					"record-reader": "a1e63ccc-f8c9-3f23-a498-436a87698a2b",
+					"include-zero-record-flowfiles": "false",
+					"dbf-default-scale": "0",
+					"truck_geo_event": "#{routing_rule_geo_event}"
+				},
+				"propertyDescriptors": {
+					"cache-schema": {
+						"name": "cache-schema",
+						"displayName": "Cache Schema",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"dbf-default-precision": {
+						"name": "dbf-default-precision",
+						"displayName": "Default Decimal Precision",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"truck_speed_event": {
+						"name": "truck_speed_event",
+						"displayName": "truck_speed_event",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"record-writer": {
+						"name": "record-writer",
+						"displayName": "Record Writer",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"record-reader": {
+						"name": "record-reader",
+						"displayName": "Record Reader",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"include-zero-record-flowfiles": {
+						"name": "include-zero-record-flowfiles",
+						"displayName": "Include Zero Record FlowFiles",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"dbf-default-scale": {
+						"name": "dbf-default-scale",
+						"displayName": "Default Decimal Scale",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"truck_geo_event": {
+						"name": "truck_geo_event",
+						"displayName": "truck_geo_event",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"style": {},
+				"schedulingPeriod": "0 sec",
+				"schedulingStrategy": "TIMER_DRIVEN",
+				"executionNode": "ALL",
+				"penaltyDuration": "30 sec",
+				"yieldDuration": "1 sec",
+				"bulletinLevel": "WARN",
+				"runDurationMillis": 0,
+				"concurrentlySchedulableTaskCount": 1,
+				"autoTerminatedRelationships": ["original", "failure"],
+				"scheduledState": "ENABLED",
+				"retryCount": 10,
+				"retriedRelationships": [],
+				"backoffMechanism": "PENALIZE_FLOWFILE",
+				"maxBackoffPeriod": "10 mins",
+				"componentType": "PROCESSOR",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}],
+			"inputPorts": [{
+				"identifier": "0637d9cc-342e-3fd2-a30f-e724e5af21b5",
+				"instanceIdentifier": "513f3fcd-8344-11f8-8c4d-7e1d78956ce5",
+				"name": "S3Trigger",
+				"position": {
+					"x": 296.0,
+					"y": -560.0
+				},
+				"type": "INPUT_PORT",
+				"concurrentlySchedulableTaskCount": 1,
+				"scheduledState": "ENABLED",
+				"allowRemoteAccess": false,
+				"componentType": "INPUT_PORT",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}],
+			"outputPorts": [],
+			"connections": [{
+				"identifier": "ac152449-1ff9-3959-9d5e-4cc6520c4831",
+				"instanceIdentifier": "513f3fdc-8344-11f8-8009-033a8ef8400c",
+				"name": "",
+				"source": {
+					"id": "9783eb2a-16a7-30fe-9716-7102d61462c1",
+					"type": "OUTPUT_PORT",
+					"groupId": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+					"name": "DFFunctionS3TriggerParsed",
+					"instanceIdentifier": "513f3fd4-8344-11f8-cbae-7c132df30c28"
+				},
+				"destination": {
+					"id": "6255ca5d-c9e7-3867-b481-77f641c87cf4",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Fetch Telemetry File",
+					"comments": "",
+					"instanceIdentifier": "513f3fce-8344-11f8-485b-538fdc4e5790"
+				},
+				"labelIndex": 1,
+				"zIndex": 0,
+				"selectedRelationships": [""],
+				"backPressureObjectThreshold": 10000,
+				"backPressureDataSizeThreshold": "1 GB",
+				"flowFileExpiration": "0 sec",
+				"prioritizers": [],
+				"bends": [],
+				"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+				"partitioningAttribute": "",
+				"loadBalanceCompression": "DO_NOT_COMPRESS",
+				"componentType": "CONNECTION",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "47c86e48-8edf-3eb7-a9bd-c368e7655d8b",
+				"instanceIdentifier": "513f3fdb-8344-11f8-d294-6807303f34a4",
+				"name": "",
+				"source": {
+					"id": "6255ca5d-c9e7-3867-b481-77f641c87cf4",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Fetch Telemetry File",
+					"comments": "",
+					"instanceIdentifier": "513f3fce-8344-11f8-485b-538fdc4e5790"
+				},
+				"destination": {
+					"id": "50f1ef58-37b1-3b2e-9d5c-0581f230b6b3",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Route Telemetry Events",
+					"comments": "",
+					"instanceIdentifier": "513f3fd0-8344-11f8-88e9-730993ef64c6"
+				},
+				"labelIndex": 1,
+				"zIndex": 0,
+				"selectedRelationships": ["success"],
+				"backPressureObjectThreshold": 10000,
+				"backPressureDataSizeThreshold": "1 GB",
+				"flowFileExpiration": "0 sec",
+				"prioritizers": [],
+				"bends": [],
+				"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+				"partitioningAttribute": "",
+				"loadBalanceCompression": "DO_NOT_COMPRESS",
+				"componentType": "CONNECTION",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "f2a195e5-553d-3e8b-997d-ac66438ebb47",
+				"instanceIdentifier": "513f3fde-8344-11f8-ae24-24fcf3921c35",
+				"name": "",
+				"source": {
+					"id": "0637d9cc-342e-3fd2-a30f-e724e5af21b5",
+					"type": "INPUT_PORT",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "S3Trigger",
+					"instanceIdentifier": "513f3fcd-8344-11f8-8c4d-7e1d78956ce5"
+				},
+				"destination": {
+					"id": "aac661bc-9f2b-31e6-af2c-a86b69dee795",
+					"type": "INPUT_PORT",
+					"groupId": "a34a9b25-1524-33d1-8706-e0037ad4cfd6",
+					"name": "DFFunctionS3TriggerEvent",
+					"comments": "",
+					"instanceIdentifier": "513f3fd3-8344-11f8-4996-4325cd55a7d4"
+				},
+				"labelIndex": 1,
+				"zIndex": 0,
+				"selectedRelationships": [""],
+				"backPressureObjectThreshold": 10000,
+				"backPressureDataSizeThreshold": "1 GB",
+				"flowFileExpiration": "0 sec",
+				"prioritizers": [],
+				"bends": [],
+				"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+				"partitioningAttribute": "",
+				"loadBalanceCompression": "DO_NOT_COMPRESS",
+				"componentType": "CONNECTION",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "4b250433-f70e-3785-8527-8d4f4d0abd01",
+				"instanceIdentifier": "513f3ff1-8344-11f8-3c25-53fe5faf2946",
+				"name": "",
+				"source": {
+					"id": "50f1ef58-37b1-3b2e-9d5c-0581f230b6b3",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Route Telemetry Events",
+					"comments": "",
+					"instanceIdentifier": "513f3fd0-8344-11f8-88e9-730993ef64c6"
+				},
+				"destination": {
+					"id": "4a6180e6-2ce6-32e9-ab16-15c0a3e4aa05",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Filter Speed Events",
+					"comments": "",
+					"instanceIdentifier": "513f3fed-8344-11f8-0fc4-da388b2d6daf"
+				},
+				"labelIndex": 1,
+				"zIndex": 0,
+				"selectedRelationships": ["truck_speed_event"],
+				"backPressureObjectThreshold": 10000,
+				"backPressureDataSizeThreshold": "1 GB",
+				"flowFileExpiration": "0 sec",
+				"prioritizers": [],
+				"bends": [],
+				"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+				"partitioningAttribute": "",
+				"loadBalanceCompression": "DO_NOT_COMPRESS",
+				"componentType": "CONNECTION",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "dbe45fc4-70c5-32ba-b6a2-dc7b64adbb0a",
+				"instanceIdentifier": "513f3fec-8344-11f8-27bb-6f1da18eb7ed",
+				"name": "",
+				"source": {
+					"id": "fa44e5e2-8505-3a21-8aab-1ffb9feb3578",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Reverse Geo Lookup Enrichment",
+					"comments": "",
+					"instanceIdentifier": "513f3fe6-8344-11f8-710f-cdfedc8622fe"
+				},
+				"destination": {
+					"id": "23752870-df31-31fc-a097-71470a892a42",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Deliver Parquet Geo Events into S3",
+					"comments": "",
+					"instanceIdentifier": "513f3fcf-8344-11f8-178a-9cd2a1a713c3"
+				},
+				"labelIndex": 1,
+				"zIndex": 0,
+				"selectedRelationships": ["success"],
+				"backPressureObjectThreshold": 10000,
+				"backPressureDataSizeThreshold": "1 GB",
+				"flowFileExpiration": "0 sec",
+				"prioritizers": [],
+				"bends": [],
+				"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+				"partitioningAttribute": "",
+				"loadBalanceCompression": "DO_NOT_COMPRESS",
+				"componentType": "CONNECTION",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "14c153b0-33a2-382f-96c7-249d2c946029",
+				"instanceIdentifier": "513f3ffb-8344-11f8-a70d-e6be6b6dae15",
+				"name": "",
+				"source": {
+					"id": "4a6180e6-2ce6-32e9-ab16-15c0a3e4aa05",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Filter Speed Events",
+					"comments": "",
+					"instanceIdentifier": "513f3fed-8344-11f8-0fc4-da388b2d6daf"
+				},
+				"destination": {
+					"id": "0d706321-9f62-3369-91c3-bfd4de34fe73",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Deliver Parquet Speed Events into S3",
+					"comments": "",
+					"instanceIdentifier": "513f3fd1-8344-11f8-97dc-fc1fc2ee5b1f"
+				},
+				"labelIndex": 1,
+				"zIndex": 0,
+				"selectedRelationships": ["filtered_events"],
+				"backPressureObjectThreshold": 10000,
+				"backPressureDataSizeThreshold": "1 GB",
+				"flowFileExpiration": "0 sec",
+				"prioritizers": [],
+				"bends": [],
+				"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+				"partitioningAttribute": "",
+				"loadBalanceCompression": "DO_NOT_COMPRESS",
+				"componentType": "CONNECTION",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "9a9db9fe-cdaa-317b-8b46-6cf706491809",
+				"instanceIdentifier": "513f3ff0-8344-11f8-7810-9f10b01fef6f",
+				"name": "",
+				"source": {
+					"id": "50f1ef58-37b1-3b2e-9d5c-0581f230b6b3",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Route Telemetry Events",
+					"comments": "",
+					"instanceIdentifier": "513f3fd0-8344-11f8-88e9-730993ef64c6"
+				},
+				"destination": {
+					"id": "fa44e5e2-8505-3a21-8aab-1ffb9feb3578",
+					"type": "PROCESSOR",
+					"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+					"name": "Reverse Geo Lookup Enrichment",
+					"comments": "",
+					"instanceIdentifier": "513f3fe6-8344-11f8-710f-cdfedc8622fe"
+				},
+				"labelIndex": 1,
+				"zIndex": 0,
+				"selectedRelationships": ["truck_geo_event"],
+				"backPressureObjectThreshold": 10000,
+				"backPressureDataSizeThreshold": "1 GB",
+				"flowFileExpiration": "0 sec",
+				"prioritizers": [],
+				"bends": [],
+				"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+				"partitioningAttribute": "",
+				"loadBalanceCompression": "DO_NOT_COMPRESS",
+				"componentType": "CONNECTION",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}],
+			"labels": [{
+				"identifier": "34cf82d7-b507-3b0d-8f2a-0fd3127a88cd",
+				"instanceIdentifier": "513f3fc9-8344-11f8-6770-e6d68e8e2607",
+				"position": {
+					"x": 648.0,
+					"y": -400.0
+				},
+				"label": "Parses S3 Trigger to retrieve bucket \nand key for new telemetry file",
+				"zIndex": 0,
+				"width": 216.0,
+				"height": 88.0,
+				"style": {
+					"font-size": "12px"
+				},
+				"componentType": "LABEL",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "5c773e5d-c546-3ead-b349-c39a7a3a72f9",
+				"instanceIdentifier": "513f3fcb-8344-11f8-87cd-4887f5c3f0a0",
+				"position": {
+					"x": 648.0,
+					"y": -152.0
+				},
+				"label": "Retrieves the new Telemetry File \nthat landed in S3 bucket",
+				"zIndex": 0,
+				"width": 216.0,
+				"height": 88.0,
+				"style": {
+					"font-size": "12px"
+				},
+				"componentType": "LABEL",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "33191028-331a-3004-bd10-c1fe41e5ec14",
+				"instanceIdentifier": "513f3ff6-8344-11f8-3e89-4e901946ff05",
+				"position": {
+					"x": -320.0,
+					"y": 336.0
+				},
+				"label": "Enriches events with geo information using\nlat and long of event. The output is using the \nnew geo schema with enriched new field  \nand written out in parquet format. ",
+				"zIndex": 0,
+				"width": 248.0,
+				"height": 88.0,
+				"style": {
+					"font-size": "12px"
+				},
+				"componentType": "LABEL",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "e751fe21-1385-39a9-82e9-e8830cf3a340",
+				"instanceIdentifier": "513f3fcc-8344-11f8-dc90-7d5655b7b40e",
+				"position": {
+					"x": 320.0,
+					"y": 552.0
+				},
+				"label": "Sends processed telemetry events two \ndifferent S3 folders based on routing rules\nin parquet format.",
+				"zIndex": 0,
+				"width": 232.0,
+				"height": 88.0,
+				"style": {
+					"font-size": "12px"
+				},
+				"componentType": "LABEL",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "6e697a0b-f6e0-3865-9e31-7ce77cbdda36",
+				"instanceIdentifier": "513f3fca-8344-11f8-b66a-ef85eddf7401",
+				"position": {
+					"x": 656.0,
+					"y": 80.0
+				},
+				"label": "Routes, Filters and Transforms \nthe events int JSON based \non routing rules using SQL.",
+				"zIndex": 0,
+				"width": 216.0,
+				"height": 88.0,
+				"style": {
+					"font-size": "12px"
+				},
+				"componentType": "LABEL",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "f0b5356b-6bde-3bee-b124-770444be5fcb",
+				"instanceIdentifier": "513f3ff8-8344-11f8-84f4-54660962bae4",
+				"position": {
+					"x": 928.0,
+					"y": 352.0
+				},
+				"label": "Filters events based on filter rule. \nThe output is using the  new speed schema \nand written out in parquet format. ",
+				"zIndex": 0,
+				"width": 248.0,
+				"height": 64.0,
+				"style": {
+					"font-size": "12px"
+				},
+				"componentType": "LABEL",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}],
+			"funnels": [],
+			"controllerServices": [{
+				"identifier": "b49b4562-b259-3b53-af4a-fd9c723ac046",
+				"instanceIdentifier": "513f3ff9-8344-11f8-7426-079fb05c68bb",
+				"name": "GeoTelemetryParquetWriter",
+				"comments": "",
+				"type": "org.apache.nifi.parquet.ParquetRecordSetWriter",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-parquet-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"schema-branch": null,
+					"max-padding-size": null,
+					"avro-write-old-list-structure": "true",
+					"row-group-size": null,
+					"schema-cache": null,
+					"enable-dictionary-encoding": null,
+					"Schema Write Strategy": "no-schema",
+					"page-size": null,
+					"writer-version": null,
+					"compression-type": "UNCOMPRESSED",
+					"schema-name": "${schema.name}",
+					"cache-size": "1000",
+					"schema-registry": null,
+					"enable-validation": null,
+					"dictionary-page-size": null,
+					"int96-fields": null,
+					"schema-access-strategy": "schema-text-property",
+					"schema-protocol-version": "1",
+					"schema-version": null,
+					"schema-text": "#{telemetry_geo_schema}",
+					"avro-add-list-element-records": "true"
+				},
+				"propertyDescriptors": {
+					"schema-branch": {
+						"name": "schema-branch",
+						"displayName": "Schema Branch",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"max-padding-size": {
+						"name": "max-padding-size",
+						"displayName": "Max Padding Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"avro-write-old-list-structure": {
+						"name": "avro-write-old-list-structure",
+						"displayName": "Avro Write Old List Structure",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"row-group-size": {
+						"name": "row-group-size",
+						"displayName": "Row Group Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-cache": {
+						"name": "schema-cache",
+						"displayName": "Schema Cache",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"enable-dictionary-encoding": {
+						"name": "enable-dictionary-encoding",
+						"displayName": "Enable Dictionary Encoding",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Schema Write Strategy": {
+						"name": "Schema Write Strategy",
+						"displayName": "Schema Write Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"page-size": {
+						"name": "page-size",
+						"displayName": "Page Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"writer-version": {
+						"name": "writer-version",
+						"displayName": "Writer Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"compression-type": {
+						"name": "compression-type",
+						"displayName": "Compression Type",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-name": {
+						"name": "schema-name",
+						"displayName": "Schema Name",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"cache-size": {
+						"name": "cache-size",
+						"displayName": "Cache Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-registry": {
+						"name": "schema-registry",
+						"displayName": "Schema Registry",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"enable-validation": {
+						"name": "enable-validation",
+						"displayName": "Enable Validation",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"dictionary-page-size": {
+						"name": "dictionary-page-size",
+						"displayName": "Dictionary Page Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"int96-fields": {
+						"name": "int96-fields",
+						"displayName": "INT96 Fields",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-access-strategy": {
+						"name": "schema-access-strategy",
+						"displayName": "Schema Access Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-protocol-version": {
+						"name": "schema-protocol-version",
+						"displayName": "Schema Protocol Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-version": {
+						"name": "schema-version",
+						"displayName": "Schema Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-text": {
+						"name": "schema-text",
+						"displayName": "Schema Text",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"avro-add-list-element-records": {
+						"name": "avro-add-list-element-records",
+						"displayName": "Avro Add List Element Records",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"controllerServiceApis": [{
+					"type": "org.apache.nifi.serialization.RecordSetWriterFactory",
+					"bundle": {
+						"group": "org.apache.nifi",
+						"artifact": "nifi-standard-services-api-nar",
+						"version": "1.16.3"
+					}
+				}],
+				"scheduledState": "DISABLED",
+				"componentType": "CONTROLLER_SERVICE",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "806893d1-6c4c-34c0-8134-a92636d1fc5e",
+				"instanceIdentifier": "513f3ffa-8344-11f8-b624-801ada2620c9",
+				"name": "SpeedTelemetryParquetWriter",
+				"comments": "",
+				"type": "org.apache.nifi.parquet.ParquetRecordSetWriter",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-parquet-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"schema-branch": null,
+					"max-padding-size": null,
+					"avro-write-old-list-structure": "true",
+					"row-group-size": null,
+					"schema-cache": null,
+					"enable-dictionary-encoding": null,
+					"Schema Write Strategy": "no-schema",
+					"page-size": null,
+					"writer-version": null,
+					"compression-type": "UNCOMPRESSED",
+					"schema-name": "${schema.name}",
+					"cache-size": "1000",
+					"schema-registry": null,
+					"enable-validation": null,
+					"dictionary-page-size": null,
+					"int96-fields": null,
+					"schema-access-strategy": "schema-text-property",
+					"schema-protocol-version": "1",
+					"schema-version": null,
+					"schema-text": "#{telemetry_speed_schema}",
+					"avro-add-list-element-records": "true"
+				},
+				"propertyDescriptors": {
+					"schema-branch": {
+						"name": "schema-branch",
+						"displayName": "Schema Branch",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"max-padding-size": {
+						"name": "max-padding-size",
+						"displayName": "Max Padding Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"avro-write-old-list-structure": {
+						"name": "avro-write-old-list-structure",
+						"displayName": "Avro Write Old List Structure",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"row-group-size": {
+						"name": "row-group-size",
+						"displayName": "Row Group Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-cache": {
+						"name": "schema-cache",
+						"displayName": "Schema Cache",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"enable-dictionary-encoding": {
+						"name": "enable-dictionary-encoding",
+						"displayName": "Enable Dictionary Encoding",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Schema Write Strategy": {
+						"name": "Schema Write Strategy",
+						"displayName": "Schema Write Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"page-size": {
+						"name": "page-size",
+						"displayName": "Page Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"writer-version": {
+						"name": "writer-version",
+						"displayName": "Writer Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"compression-type": {
+						"name": "compression-type",
+						"displayName": "Compression Type",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-name": {
+						"name": "schema-name",
+						"displayName": "Schema Name",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"cache-size": {
+						"name": "cache-size",
+						"displayName": "Cache Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-registry": {
+						"name": "schema-registry",
+						"displayName": "Schema Registry",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"enable-validation": {
+						"name": "enable-validation",
+						"displayName": "Enable Validation",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"dictionary-page-size": {
+						"name": "dictionary-page-size",
+						"displayName": "Dictionary Page Size",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"int96-fields": {
+						"name": "int96-fields",
+						"displayName": "INT96 Fields",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-access-strategy": {
+						"name": "schema-access-strategy",
+						"displayName": "Schema Access Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-protocol-version": {
+						"name": "schema-protocol-version",
+						"displayName": "Schema Protocol Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-version": {
+						"name": "schema-version",
+						"displayName": "Schema Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-text": {
+						"name": "schema-text",
+						"displayName": "Schema Text",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"avro-add-list-element-records": {
+						"name": "avro-add-list-element-records",
+						"displayName": "Avro Add List Element Records",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"controllerServiceApis": [{
+					"type": "org.apache.nifi.serialization.RecordSetWriterFactory",
+					"bundle": {
+						"group": "org.apache.nifi",
+						"artifact": "nifi-standard-services-api-nar",
+						"version": "1.16.3"
+					}
+				}],
+				"scheduledState": "DISABLED",
+				"componentType": "CONTROLLER_SERVICE",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "a1e63ccc-f8c9-3f23-a498-436a87698a2b",
+				"instanceIdentifier": "513f3fc7-8344-11f8-e321-71c88ff9fc79",
+				"name": "RawTelemetryJsonReaderJson",
+				"comments": "",
+				"type": "org.apache.nifi.json.JsonTreeReader",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-record-serialization-services-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"Timestamp Format": null,
+					"schema-inference-cache": null,
+					"Date Format": null,
+					"schema-branch": null,
+					"schema-name": "${schema.name}",
+					"starting-field-strategy": "ROOT_NODE",
+					"schema-registry": null,
+					"starting-field-name": null,
+					"Time Format": null,
+					"schema-access-strategy": "schema-text-property",
+					"schema-version": null,
+					"schema-text": "#{telemetry_raw_schema}"
+				},
+				"propertyDescriptors": {
+					"Timestamp Format": {
+						"name": "Timestamp Format",
+						"displayName": "Timestamp Format",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-inference-cache": {
+						"name": "schema-inference-cache",
+						"displayName": "Schema Inference Cache",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Date Format": {
+						"name": "Date Format",
+						"displayName": "Date Format",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-branch": {
+						"name": "schema-branch",
+						"displayName": "Schema Branch",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-name": {
+						"name": "schema-name",
+						"displayName": "Schema Name",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"starting-field-strategy": {
+						"name": "starting-field-strategy",
+						"displayName": "Starting Field Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-registry": {
+						"name": "schema-registry",
+						"displayName": "Schema Registry",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"starting-field-name": {
+						"name": "starting-field-name",
+						"displayName": "Starting Field Name",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Time Format": {
+						"name": "Time Format",
+						"displayName": "Time Format",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-access-strategy": {
+						"name": "schema-access-strategy",
+						"displayName": "Schema Access Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-version": {
+						"name": "schema-version",
+						"displayName": "Schema Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-text": {
+						"name": "schema-text",
+						"displayName": "Schema Text",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"controllerServiceApis": [{
+					"type": "org.apache.nifi.serialization.RecordReaderFactory",
+					"bundle": {
+						"group": "org.apache.nifi",
+						"artifact": "nifi-standard-services-api-nar",
+						"version": "1.16.3"
+					}
+				}],
+				"scheduledState": "DISABLED",
+				"componentType": "CONTROLLER_SERVICE",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "fd93bb75-e9d4-39be-847a-0655d31373cc",
+				"instanceIdentifier": "513f3fc8-8344-11f8-d3a5-fb57bb997d1f",
+				"name": "RawTelemetryJsonWriterJson",
+				"comments": "",
+				"type": "org.apache.nifi.json.JsonRecordSetWriter",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-record-serialization-services-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"schema-branch": null,
+					"compression-level": "1",
+					"schema-cache": null,
+					"Timestamp Format": null,
+					"Date Format": null,
+					"Pretty Print JSON": "false",
+					"compression-format": "none",
+					"Schema Write Strategy": "no-schema",
+					"suppress-nulls": "never-suppress",
+					"output-grouping": "output-array",
+					"schema-name": "${schema.name}",
+					"schema-registry": null,
+					"Time Format": null,
+					"schema-access-strategy": "schema-text-property",
+					"schema-protocol-version": "1",
+					"schema-version": null,
+					"schema-text": "#{telemetry_raw_schema}"
+				},
+				"propertyDescriptors": {
+					"schema-branch": {
+						"name": "schema-branch",
+						"displayName": "Schema Branch",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"compression-level": {
+						"name": "compression-level",
+						"displayName": "Compression Level",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-cache": {
+						"name": "schema-cache",
+						"displayName": "Schema Cache",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Timestamp Format": {
+						"name": "Timestamp Format",
+						"displayName": "Timestamp Format",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Date Format": {
+						"name": "Date Format",
+						"displayName": "Date Format",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Pretty Print JSON": {
+						"name": "Pretty Print JSON",
+						"displayName": "Pretty Print JSON",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"compression-format": {
+						"name": "compression-format",
+						"displayName": "Compression Format",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Schema Write Strategy": {
+						"name": "Schema Write Strategy",
+						"displayName": "Schema Write Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"suppress-nulls": {
+						"name": "suppress-nulls",
+						"displayName": "Suppress Null Values",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"output-grouping": {
+						"name": "output-grouping",
+						"displayName": "Output Grouping",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-name": {
+						"name": "schema-name",
+						"displayName": "Schema Name",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-registry": {
+						"name": "schema-registry",
+						"displayName": "Schema Registry",
+						"identifiesControllerService": true,
+						"sensitive": false
+					},
+					"Time Format": {
+						"name": "Time Format",
+						"displayName": "Time Format",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-access-strategy": {
+						"name": "schema-access-strategy",
+						"displayName": "Schema Access Strategy",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-protocol-version": {
+						"name": "schema-protocol-version",
+						"displayName": "Schema Protocol Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-version": {
+						"name": "schema-version",
+						"displayName": "Schema Version",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"schema-text": {
+						"name": "schema-text",
+						"displayName": "Schema Text",
+						"identifiesControllerService": false,
+						"sensitive": false
+					}
+				},
+				"controllerServiceApis": [{
+					"type": "org.apache.nifi.serialization.RecordSetWriterFactory",
+					"bundle": {
+						"group": "org.apache.nifi",
+						"artifact": "nifi-standard-services-api-nar",
+						"version": "1.16.3"
+					}
+				}],
+				"scheduledState": "DISABLED",
+				"componentType": "CONTROLLER_SERVICE",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}, {
+				"identifier": "a08fd288-2ee1-37bf-bd12-be182ad3451e",
+				"instanceIdentifier": "513f3feb-8344-11f8-7475-609252f398fe",
+				"name": "Enrich- ReverseGeoCodeLookupService",
+				"comments": "",
+				"type": "org.apache.nifi.lookup.script.ScriptedLookupService",
+				"bundle": {
+					"group": "org.apache.nifi",
+					"artifact": "nifi-scripting-nar",
+					"version": "1.16.3"
+				},
+				"properties": {
+					"Script File": null,
+					"googleApiKey": "dummy",
+					"Script Engine": "Groovy",
+					"Script Body": "import org.apache.nifi.controller.ControllerServiceInitializationContext\nimport org.apache.nifi.reporting.InitializationException\n\n\nclass GroovyLookupService implements LookupService<String> {\n\n   def apiKey\n   def log\n    \n   @Override\n    Optional<String> lookup(Map<String,String> coords) {\n      def lat = coords['lat']\n      def lng = coords['lng']\n      def fmt_addr = \"No Address\"\n      Optional.ofNullable(fmt_addr?.toString())\n    }\n\n    @Override\n    Class<?> getValueType() {\n        return String\n    }\n\n    @Override\n    Set<String> getRequiredKeys() {\n      return ['lat','lng'] as Set<String>\n    }\n\n    void setLogger(logger) {\n       log = logger\n    }\n\n    void onEnabled(context) {\n        def googleApiKeyPropertyDescriptor = context.properties.find {k,v -> k.name == 'googleApiKey'}?.key\n        apiKey = context.getProperty(googleApiKeyPropertyDescriptor)?.evaluateAttributeExpressions()?.value\n    }\n\n    @Override\n    void initialize(ControllerServiceInitializationContext context) throws InitializationException {\n\n    }\n\n    @Override\n    Collection<ValidationResult> validate(ValidationContext context) {\n        return null\n    }\n\n    @Override\n    PropertyDescriptor getPropertyDescriptor(String name) {\n        return null\n    }\n\n    @Override\n    void onPropertyModified(PropertyDescriptor descriptor, String oldValue, String newValue) {\n\n    }\n\n    @Override\n    List<PropertyDescriptor> getPropertyDescriptors() {\n        return null\n    }\n\n    @Override\n    String getIdentifier() {\n        return null\n    }\n}\n\nlookupService = new GroovyLookupService()",
+					"Module Directory": null
+				},
+				"propertyDescriptors": {
+					"Script File": {
+						"name": "Script File",
+						"displayName": "Script File",
+						"identifiesControllerService": false,
+						"sensitive": false,
+						"resourceDefinition": {
+							"cardinality": "SINGLE",
+							"resourceTypes": ["FILE"]
+						}
+					},
+					"googleApiKey": {
+						"name": "googleApiKey",
+						"displayName": "googleApiKey",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Script Engine": {
+						"name": "Script Engine",
+						"displayName": "Script Engine",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Script Body": {
+						"name": "Script Body",
+						"displayName": "Script Body",
+						"identifiesControllerService": false,
+						"sensitive": false
+					},
+					"Module Directory": {
+						"name": "Module Directory",
+						"displayName": "Module Directory",
+						"identifiesControllerService": false,
+						"sensitive": false,
+						"resourceDefinition": {
+							"cardinality": "MULTIPLE",
+							"resourceTypes": ["DIRECTORY", "FILE"]
+						}
+					}
+				},
+				"controllerServiceApis": [{
+					"type": "org.apache.nifi.lookup.LookupService",
+					"bundle": {
+						"group": "org.apache.nifi",
+						"artifact": "nifi-standard-services-api-nar",
+						"version": "1.16.3"
+					}
+				}],
+				"scheduledState": "DISABLED",
+				"componentType": "CONTROLLER_SERVICE",
+				"groupIdentifier": "e22052dd-145f-37ba-9bee-9341b8dd405d"
+			}],
+			"variables": {},
+			"parameterContextName": "DataFlowFunctionsQuickstart",
+			"defaultFlowFileExpiration": "0 sec",
+			"defaultBackPressureObjectThreshold": 10000,
+			"defaultBackPressureDataSizeThreshold": "1 GB",
+			"flowFileConcurrency": "UNBOUNDED",
+			"flowFileOutboundPolicy": "STREAM_WHEN_AVAILABLE",
+			"componentType": "PROCESS_GROUP",
+			"groupIdentifier": "f7ec47e6-9057-30b0-abb7-0b38eb709ef6"
+		}],
+		"remoteProcessGroups": [],
+		"processors": [{
+			"identifier": "5558c764-9f37-3ee6-a880-31769383a98d",
+			"instanceIdentifier": "ab0c88fe-a2b1-3517-8d3b-996efa88f4ba",
+			"name": "Mock Data - S3 Trigger Event",
+			"comments": "",
+			"position": {
+				"x": -184.0,
+				"y": -424.0
+			},
+			"type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+			"bundle": {
+				"group": "org.apache.nifi",
+				"artifact": "nifi-standard-nar",
+				"version": "1.16.3"
+			},
+			"properties": {
+				"character-set": "UTF-8",
+				"File Size": "0B",
+				"mime-type": null,
+				"generate-ff-custom-text": "{\n  \"Records\": [\n    {\n      \"eventVersion\": \"2.0\",\n      \"eventSource\": \"aws:s3\",\n      \"awsRegion\": \"us-west-2\",\n      \"eventTime\": \"1970-01-01T00:00:00.000Z\",\n      \"eventName\": \"ObjectCreated:Put\",\n      \"userIdentity\": {\n        \"principalId\": \"EXAMPLE\"\n      },\n      \"requestParameters\": {\n        \"sourceIPAddress\": \"127.0.0.1\"\n      },\n      \"responseElements\": {\n        \"x-amz-request-id\": \"EXAMPLE123456789\",\n        \"x-amz-id-2\": \"EXAMPLE123/5678abcdefghijklambdaisawesome/mnopqrstuvwxyzABCDEFGH\"\n      },\n      \"s3\": {\n        \"s3SchemaVersion\": \"1.0\",\n        \"configurationId\": \"testConfigRule\",\n        \"bucket\": {\n          \"name\": \"dataflowfunctionsquickstart\",\n          \"ownerIdentity\": {\n            \"principalId\": \"EXAMPLE\"\n          },\n          \"arn\": \"arn:aws:s3:::example-bucket\"\n        },\n        \"object\": {\n          \"key\": \"truck-telemetry-raw/sampleTelemetryRawData.txt\",\n          \"size\": 1024,\n          \"eTag\": \"0123456789abcdef0123456789abcdef\",\n          \"sequencer\": \"0A1B2C3D4E5F678901\"\n        }\n      }\n    }\n  ]\n}",
+				"Batch Size": "1",
+				"Unique FlowFiles": "false",
+				"Data Format": "Text"
+			},
+			"propertyDescriptors": {
+				"character-set": {
+					"name": "character-set",
+					"displayName": "Character Set",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"File Size": {
+					"name": "File Size",
+					"displayName": "File Size",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"mime-type": {
+					"name": "mime-type",
+					"displayName": "Mime Type",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"generate-ff-custom-text": {
+					"name": "generate-ff-custom-text",
+					"displayName": "Custom Text",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Batch Size": {
+					"name": "Batch Size",
+					"displayName": "Batch Size",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Unique FlowFiles": {
+					"name": "Unique FlowFiles",
+					"displayName": "Unique FlowFiles",
+					"identifiesControllerService": false,
+					"sensitive": false
+				},
+				"Data Format": {
+					"name": "Data Format",
+					"displayName": "Data Format",
+					"identifiesControllerService": false,
+					"sensitive": false
+				}
+			},
+			"style": {},
+			"schedulingPeriod": "0 sec",
+			"schedulingStrategy": "TIMER_DRIVEN",
+			"executionNode": "PRIMARY",
+			"penaltyDuration": "30 sec",
+			"yieldDuration": "1 sec",
+			"bulletinLevel": "WARN",
+			"runDurationMillis": 0,
+			"concurrentlySchedulableTaskCount": 1,
+			"autoTerminatedRelationships": [],
+			"scheduledState": "ENABLED",
+			"retryCount": 10,
+			"retriedRelationships": [],
+			"backoffMechanism": "PENALIZE_FLOWFILE",
+			"maxBackoffPeriod": "10 mins",
+			"componentType": "PROCESSOR",
+			"groupIdentifier": "f7ec47e6-9057-30b0-abb7-0b38eb709ef6"
+		}],
+		"inputPorts": [],
+		"outputPorts": [],
+		"connections": [{
+			"identifier": "49253f7f-fbce-3f66-92f0-f3cba33466b7",
+			"instanceIdentifier": "513f3ff4-8344-11f8-6fcc-f90c1f400b34",
+			"name": "",
+			"source": {
+				"id": "5558c764-9f37-3ee6-a880-31769383a98d",
+				"type": "PROCESSOR",
+				"groupId": "f7ec47e6-9057-30b0-abb7-0b38eb709ef6",
+				"name": "Mock Data - S3 Trigger Event",
+				"comments": "",
+				"instanceIdentifier": "ab0c88fe-a2b1-3517-8d3b-996efa88f4ba"
+			},
+			"destination": {
+				"id": "0637d9cc-342e-3fd2-a30f-e724e5af21b5",
+				"type": "INPUT_PORT",
+				"groupId": "e22052dd-145f-37ba-9bee-9341b8dd405d",
+				"name": "S3Trigger",
+				"instanceIdentifier": "513f3fcd-8344-11f8-8c4d-7e1d78956ce5"
+			},
+			"labelIndex": 1,
+			"zIndex": 0,
+			"selectedRelationships": ["success"],
+			"backPressureObjectThreshold": 10000,
+			"backPressureDataSizeThreshold": "1 GB",
+			"flowFileExpiration": "0 sec",
+			"prioritizers": [],
+			"bends": [],
+			"loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+			"partitioningAttribute": "",
+			"loadBalanceCompression": "DO_NOT_COMPRESS",
+			"componentType": "CONNECTION",
+			"groupIdentifier": "f7ec47e6-9057-30b0-abb7-0b38eb709ef6"
+		}],
+		"labels": [{
+			"identifier": "0935d130-325a-3426-a890-6fd993e1654e",
+			"instanceIdentifier": "7699671a-e867-33cc-2bab-9a6b2f83f6c2",
+			"position": {
+				"x": -136.0,
+				"y": -552.0
+			},
+			"label": "Mock Data for S3 Trigger to test locally \nbefore deploying as function.\n \nAfter setting up S3 buckets and uploading\nsample telemetry into bucket, right click\non processor and select 'Run Once'",
+			"zIndex": 0,
+			"width": 248.0,
+			"height": 96.0,
+			"style": {
+				"font-size": "12px"
+			},
+			"componentType": "LABEL",
+			"groupIdentifier": "f7ec47e6-9057-30b0-abb7-0b38eb709ef6"
+		}, {
+			"identifier": "22d93b46-c6c5-3d9b-92f7-4a88dc82dc88",
+			"instanceIdentifier": "fa88e3f2-6c8f-3ace-1ca3-e73161c9d1d3",
+			"position": {
+				"x": 504.0,
+				"y": -600.0
+			},
+			"label": "The function that processing new telemetry data \nfrom an S3 bucket, does processing and sends\ntransformed data into different S3 folders.\n\nThis is the function you will download \nand upload to DataFlow Catalog and \nrun as server-less using Cloud provider \nservices ((e.g: AWS Lambda)",
+			"zIndex": 0,
+			"width": 280.0,
+			"height": 120.0,
+			"style": {
+				"font-size": "12px"
+			},
+			"componentType": "LABEL",
+			"groupIdentifier": "f7ec47e6-9057-30b0-abb7-0b38eb709ef6"
+		}],
+		"funnels": [],
+		"controllerServices": [],
+		"variables": {},
+		"parameterContextName": "DataFlowFunctionsQuickstart",
+		"defaultFlowFileExpiration": "0 sec",
+		"defaultBackPressureObjectThreshold": 10000,
+		"defaultBackPressureDataSizeThreshold": "1 GB",
+		"flowFileConcurrency": "UNBOUNDED",
+		"flowFileOutboundPolicy": "STREAM_WHEN_AVAILABLE",
+		"componentType": "PROCESS_GROUP"
+	},
+	"externalControllerServices": {},
+	"parameterContexts": {
+		"DataFlowFunctionsQuickstart": {
+			"name": "DataFlowFunctionsQuickstart",
+			"parameters": [{
+				"name": "aws_access_key_password",
+				"description": "AWS secret access key secret to fetch and write objects to S3",
+				"sensitive": true
+			}, {
+				"name": "telemetry_speed_schema",
+				"description": "",
+				"sensitive": false,
+				"value": "{\n \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\", \"name\": \"TruckSpeedEventEnriched\",\n \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},\n  \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"route\",\"type\": \"string\"},\n\t\t\t{\"name\": \"speed\",\"type\": \"int\"}\n \t\t  ]\n}"
+			}, {
+				"name": "routing_rule_geo_event",
+				"description": "The rule to filter and route for certain types of types of events",
+				"sensitive": false,
+				"value": "SELECT * FROM FLOWFILE where eventSource = 'truck_geo_event'"
+			}, {
+				"name": "s3_region",
+				"description": "The region where the bucket is located.",
+				"sensitive": false,
+				"value": "us-west-2"
+			}, {
+				"name": "aws_access_key_id",
+				"description": "AWS access key id to fetch and write objects to S3 bucket",
+				"sensitive": true
+			}, {
+				"name": "routing_rule_speed_event",
+				"description": "The rule to filter and route for certain types of types of events",
+				"sensitive": false,
+				"value": "SELECT * FROM FLOWFILE where eventSource = 'truck_speed_event'"
+			}, {
+				"name": "telemetry_geo_schema",
+				"description": "",
+				"sensitive": false,
+				"value": "{\n \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\", \"name\": \"TruckGeoEventEnriched\",\n \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},\n  \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"route\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventType\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"latitude\",\"type\": \"double\"},\n  \t\t\t{\"name\": \"longitude\",\"type\": \"double\"},\n  \t\t\t{\"name\": \"correlationId\",\"type\": \"long\"},\n\t\t\t{\"name\": \"geoAddress\",\"type\": \"string\",\"default\": \"None\"}\n \t\t  ]\n}"
+			}, {
+				"name": "filter_rule_speed_event",
+				"description": "The rule to filter speed telemetry events",
+				"sensitive": false,
+				"value": "SELECT * FROM FLOWFILE where speed > 40"
+			}, {
+				"name": "s3_dest_path_speed_event",
+				"description": "The S3 folder that certain filtered events will be written to.",
+				"sensitive": false,
+				"value": "truck-telemetry-processed/truck-speed-events"
+			}, {
+				"name": "s3_dest_path_geo_event",
+				"description": "The S3 folder that certain filtered events will be written to.",
+				"sensitive": false,
+				"value": "truck-telemetry-processed/truck-geo-events"
+			}, {
+				"name": "telemetry_raw_schema",
+				"description": "",
+				"sensitive": false,
+				"value": "{\n \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\"name\": \"TruckEvent\",\n \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},\n  \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},\n  \t\t\t{\"name\": \"route\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"eventType\",\"type\": \"string\"},\n  \t\t\t{\"name\": \"latitude\",\"type\": \"double\"},\n  \t\t\t{\"name\": \"longitude\",\"type\": \"double\"},\n  \t\t\t{\"name\": \"correlationId\",\"type\": \"long\"},\n\t\t\t{\"name\": \"speed\",\"type\": \"int\",\"default\": 0}\n \t\t  ]\n}"
+			}, {
+				"name": "s3_bucket",
+				"description": "S3 bucket where telemetry data will be processed",
+				"sensitive": false,
+				"value": "dataflowfunctionsquickstart"
+			}],
+			"inheritedParameterContexts": [],
+			"componentType": "PARAMETER_CONTEXT"
+		}
+	},
+	"flowEncodingVersion": "1.0"
+}
