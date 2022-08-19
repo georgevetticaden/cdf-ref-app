@@ -9,7 +9,7 @@
   			"DF_PRIVATE_KEY": "<<REPLACE>>",
   			"FLOW_CRN": "<<REPLACE>>",
 
-  			"aws_access_key_id": "<<REPLACE>>,
+  			"aws_access_key_id": "<<REPLACE>>",
   			"aws_access_key_password": "<<REPLACE>>",
   			"s3_bucket": "<<REPLACE>>",
   			"s3_region": "<<REPLACE>>",
