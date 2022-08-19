@@ -1,0 +1,54 @@
+  {
+      "FunctionName": "NiFi_Function_Quickstart",
+      "Description": "NiFi Function that uses the AWS S3 Lambda trigger to move telemetry data from landing zone  S3 folder into processed S3 folder",
+      "Timeout": 300,
+      "MemorySize": 4096,
+      "Environment": {
+          "Variables": {
+				"DF_ACCESS_KEY": "<<REPLACE>>",
+              	"DF_PRIVATE_KEY": "<<REPLACE>>",
+              	"FLOW_CRN": "<<REPLACE>>",
+              	
+  	    	  	"aws_access_key_id": "<<REPLACE>>,
+  	          	"aws_access_key_password": "<<REPLACE>>",
+  	          	"s3_bucket": "<<REPLACE>>",
+  	          	"s3_region": "<<REPLACE>>",
+  	          	
+  	    		"routing_rule_geo_event": "SELECT * FROM FLOWFILE where eventSource = 'truck_geo_event'",
+  	    		"routing_rule_speed_event": "SELECT * FROM FLOWFILE where eventSource = 'truck_speed_event'",
+  	    		"s3_dest_path_geo_event": "truck-telemetry-processed/truck-geo-events",
+  	    		"s3_dest_path_speed_event": "truck-telemetry-processed/truck-speed-events", 	    		
+  	    		"filter_rule_speed_event": "SELECT * FROM FLOWFILE where speed > 40",
+              	"telemetry_geo_schema": "{  \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\", \"name\": \"TruckGeoEventEnriched\",  \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},   \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},   \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},   \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},   \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},   \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},   \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},   \t\t\t{\"name\": \"route\",\"type\": \"string\"},   \t\t\t{\"name\": \"eventType\",\"type\": \"string\"},   \t\t\t{\"name\": \"latitude\",\"type\": \"double\"},   \t\t\t{\"name\": \"longitude\",\"type\": \"double\"},   \t\t\t{\"name\": \"correlationId\",\"type\": \"long\"}, \t\t\t{\"name\": \"geoAddress\",\"type\": \"string\",\"default\": \"None\"}  \t\t  ] }",
+  	   			"telemetry_raw_schema": "{  \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\",\"name\": \"TruckEvent\",  \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},   \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},   \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},   \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},   \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},   \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},   \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},   \t\t\t{\"name\": \"route\",\"type\": \"string\"},   \t\t\t{\"name\": \"eventType\",\"type\": \"string\"},   \t\t\t{\"name\": \"latitude\",\"type\": \"double\"},   \t\t\t{\"name\": \"longitude\",\"type\": \"double\"},   \t\t\t{\"name\": \"correlationId\",\"type\": \"long\"}, \t\t\t{\"name\": \"speed\",\"type\": \"int\",\"default\": 0}  \t\t  ] }",
+  				"telemetry_speed_schema": "{  \"type\": \"record\", \"namespace\": \"cloudera.cdf.csp.schema.refapp.trucking\", \"name\": \"TruckSpeedEventEnriched\",  \"fields\": [{\"name\": \"eventTime\",\"type\": \"string\"},   \t\t\t{\"name\": \"eventTimeLong\",\"type\": \"long\",\"default\": 0},   \t\t\t{\"name\": \"eventSource\",\"type\": \"string\"},   \t\t\t{\"name\": \"truckId\",\"type\": \"int\"},   \t\t\t{\"name\": \"driverId\",\"type\": \"int\"},   \t\t\t{\"name\": \"driverName\",\"type\": \"string\"},   \t\t\t{\"name\": \"routeId\",\"type\": \"int\"},   \t\t\t{\"name\": \"route\",\"type\": \"string\"}, \t\t\t{\"name\": \"speed\",\"type\": \"int\"}  \t\t  ] }"
+				  	    		
+				"NEXUS_URL":  "https://maven-central.storage-download.googleapis.com/maven2",
+				
+          }
+      },
+      
+      "Tags": {
+          "owner": "df_function_quickstart"
+      },
+
+
+      "EphemeralStorage": {
+          "Size":	5096 
+      },
+      
+      "Runtime": "java8.al2",
+      "Handler": "com.cloudera.naaf.aws.lambda.StatelessNiFiFunctionHandler::handleRequest",
+      "Publish": false,
+      "PackageType": "Zip",
+      "Architectures": [
+          "arm64"
+      ],
+      
+      "Code": {
+          "S3Bucket": "<<REPLACE>>",
+          "S3Key": "<<REPLACE>>"
+      },
+            
+      "Role": "<<REPLACE>>"
+  }
