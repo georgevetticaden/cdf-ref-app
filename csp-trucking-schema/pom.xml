@@ -14,7 +14,7 @@
 		<jersey-media-multipart.version>2.22.1</jersey-media-multipart.version>	
         <guava.version>18.0</guava.version>	
         <jackson.version>2.7.3</jackson.version>
-		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
+		<org.springframework.version>4.2.7.RELEASE</org.springframework.version>
 		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	  
 		<avro.version>1.8.2</avro.version>   
 		<java.version>8</java.version>
