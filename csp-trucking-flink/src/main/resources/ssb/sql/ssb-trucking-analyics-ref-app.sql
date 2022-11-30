@@ -1,4 +1,4 @@
-INSERT INTO alerts_speeding
+INSERT INTO alerts_speeding_drivers
 SELECT windowEnd, driverAvgSpeed.driverId, driverAvgSpeed.driverName, driverAvgSpeed.route, driverAvgSpeed.driverAvgSpeed
 FROM
 (

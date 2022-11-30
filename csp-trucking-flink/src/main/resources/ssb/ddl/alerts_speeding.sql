@@ -1,4 +1,4 @@
-CREATE TABLE `ssb`.`ssb_default`.`alerts_speeding` (
+CREATE TABLE `ssb`.`ssb_default`.`alerts_speeding_drivers` (
   `alert_time` TIMESTAMP(3),
   `driverId` BIGINT,
   `driverName` VARCHAR(2147483647),

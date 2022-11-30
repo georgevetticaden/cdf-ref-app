@@ -1,4 +1,4 @@
-CREATE TABLE `ssb`.`ssb_default`.`speed_events_json` (
+CREATE TABLE `ssb`.`Trucking Streaming IOT App`.`speed_events_json` (
   `eventTime` VARCHAR(2147483647),
   `eventTimeLong` BIGINT,
   `eventSource` VARCHAR(2147483647),
@@ -12,8 +12,8 @@ CREATE TABLE `ssb`.`ssb_default`.`speed_events_json` (
   WATERMARK FOR `eventTimestamp` AS `eventTimestamp` - INTERVAL '3' SECOND
 ) COMMENT 'speed_events_json'
 WITH (
-  'properties.bootstrap.servers' = '<<REPLACE>>',
-  'properties.sasl.jaas.config' = 'org.apache.kafka.common.security.plain.PlainLoginModule required username="<<REPLACE>>" password="<<REPLACE>>";',
+  'properties.bootstrap.servers' = '${kafka.brokers}',
+  'properties.sasl.jaas.config' = 'org.apache.kafka.common.security.plain.PlainLoginModule required username="${kafka.service.user}" password="${kafka.service.password}";',
   'properties.auto.offset.reset' = 'earliest',
   'connector' = 'kafka',
   'properties.request.timeout.ms' = '120000',
