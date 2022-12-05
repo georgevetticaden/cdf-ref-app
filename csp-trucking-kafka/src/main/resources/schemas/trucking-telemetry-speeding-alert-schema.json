@@ -1,0 +1,31 @@
+{
+  "type": "record",
+  "name": "inferredSchema",
+  "fields": [
+    {
+      "name": "alert_time",
+      "type": "string",
+      "doc": "Type inferred from '\"2022-11-29 14:03:00\"'"
+    },
+    {
+      "name": "driverId",
+      "type": "long",
+      "doc": "Type inferred from '13'"
+    },
+    {
+      "name": "driverName",
+      "type": "string",
+      "doc": "Type inferred from '\"Suresh Srinivas\"'"
+    },
+    {
+      "name": "route",
+      "type": "string",
+      "doc": "Type inferred from '\"Des Moines to Chicago\"'"
+    },
+    {
+      "name": "speed",
+      "type": "long",
+      "doc": "Type inferred from '93'"
+    }
+  ]
+}
