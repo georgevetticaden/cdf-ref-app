@@ -39,7 +39,7 @@ public class GCPMultiFileJsonEventCollector extends BaseTruckEventCollector {
 	StringBuffer eventBuffer;
 	
 	/* Required for GCP Function and not Lambda Functions */
-	private static final String rootFolderForSimulatedData = "/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
+	private static final String rootFolderForSimulatedData = "/Users/gvetticaden/df-functions-data-generator/vett-data-lake-1-oregon/vett-naaf/truck-telemetry-raw";
 
 
 	public GCPMultiFileJsonEventCollector(String fileName, EventSourceType eventSource, int numOfEventsPerFile, String bucketName) {
