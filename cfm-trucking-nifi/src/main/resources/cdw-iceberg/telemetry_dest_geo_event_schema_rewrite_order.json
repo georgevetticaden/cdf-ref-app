@@ -49,11 +49,6 @@
       "type": "long"
     },
     {
-      "name": "geoaddress",
-      "type": "string",
-      "default": "None"
-    },
-    {
       "name": "driverid",
       "type": "int"
     }
