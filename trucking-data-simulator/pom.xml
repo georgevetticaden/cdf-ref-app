@@ -17,7 +17,7 @@
         <guava.version>18.0</guava.version>	
         <jackson.version>2.13.1</jackson.version>
         <aws.kinesis.version>1.8.7</aws.kinesis.version>
-		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
+		<org.springframework.version>6.0.0</org.springframework.version>
 		<org.springframework.spring.context.support>3.2.5.RELEASE</org.springframework.spring.context.support>	 
 		<java.version>8</java.version>       
 	</properties>
